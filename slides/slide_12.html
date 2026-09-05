@@ -1,0 +1,119 @@
+<section data-transition="slide">
+    <div class="badge badge-purple" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN III — UNION-FIND (DSU)</div>
+    <h3 style="font-size: 0.78em; margin: 0 0 6px 0; color: #0f172a; font-weight: 700;">Bài Toán Kết Nối Động (Dynamic Connectivity)</h3>
+
+    <!-- Top Grid: 2 Operation Cards + SVG Dynamic Connectivity Diagram -->
+    <div style="display: grid; grid-template-columns: 1.1fr 1.2fr; gap: 10px; width: 100%; margin-top: 4px; align-items: stretch;">
+        
+        <!-- Left Column: 2 Core ADT Operations -->
+        <div style="display: flex; flex-direction: column; gap: 6px; text-align: left;">
+            <div class="glass-card" style="border-left: 4px solid #0284c7; padding: 6px 8px; background: #ffffff;">
+                <h4 style="color: #0284c7; font-size: 0.36em; font-weight: 800; margin: 0 0 2px 0;">
+                    <i class="fa-solid fa-link"></i> 1. Thao Tác <code>union(u, v)</code>
+                </h4>
+                <p style="font-size: 0.28em; color: #334155; margin: 0; line-height: 1.35;">
+                    Thêm một cạnh nối giữa $u$ và $v$. Gộp 2 tập hợp rời rạc chứa $u$ và $v$ thành một tập hợp duy nhất.
+                </p>
+                <span style="font-size: 0.25em; color: #475569; font-weight: 600; margin-top: 2px; display: block;">
+                    <i class="fa-solid fa-lightbulb" style="color: var(--accent-gold);"></i>  <strong>Thực tế:</strong> Hai người dùng bấm "Kết bạn" trên mạng xã hội.
+                </span>
+            </div>
+
+            <div class="glass-card" style="border-left: 4px solid #7c3aed; padding: 6px 8px; background: #ffffff;">
+                <h4 style="color: #6b21a8; font-size: 0.36em; font-weight: 800; margin: 0 0 2px 0;">
+                    <i class="fa-solid fa-circle-question"></i> 2. Thao Tác <code>connected(u, v)</code>
+                </h4>
+                <p style="font-size: 0.28em; color: #334155; margin: 0; line-height: 1.35;">
+                    Kiểm tra $u$ và $v$ có thuộc <strong>cùng thành phần liên thông</strong> (có đường đi bất kỳ) không? Trả về <code>true/false</code>.
+                </p>
+                <span style="font-size: 0.25em; color: #475569; font-weight: 600; margin-top: 2px; display: block;">
+                    <i class="fa-solid fa-lightbulb" style="color: var(--accent-gold);"></i>  <strong>Thực tế:</strong> Kiểm tra hai tài khoản có mối quan hệ bạn bè gián tiếp?
+                </span>
+            </div>
+        </div>
+
+        <!-- Right Column: Perfectly Encapsulated SVG Dynamic Connectivity Graphic -->
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 6px 8px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="font-size: 0.3em; font-weight: 700; color: #0f172a; display: flex; justify-content: space-between; align-items: center;">
+                <span><i class="fa-solid fa-diagram-project" style="color: #7c3aed;"></i> Sơ Đồ Thành Phần Liên Thông (Connected Components)</span>
+            </div>
+
+            <!-- ViewBox 400x135: Perfect Rounded Dashed Rectangles Encapsulating All Nodes & Text -->
+            <svg viewBox="0 0 400 135" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', sans-serif;">
+                
+                <!-- Component A Outer Dashed Box: {0, 1, 2, 4} -->
+                <rect x="15" y="6" width="190" height="116" rx="14" fill="#f3e8ff" stroke="#c084fc" stroke-width="1.8" stroke-dasharray="4,3"/>
+                <text x="110" y="24" fill="#6b21a8" font-size="7.5" font-weight="800" text-anchor="middle">Tập hợp A: {0, 1, 2, 4}</text>
+
+                <!-- Edges in Component A -->
+                <line x1="42" y1="58" x2="110" y2="58" stroke="#7c3aed" stroke-width="2.2"/>
+                <line x1="110" y1="58" x2="178" y2="58" stroke="#7c3aed" stroke-width="2.2"/>
+                <line x1="110" y1="58" x2="110" y2="98" stroke="#7c3aed" stroke-width="2.2"/>
+
+                <!-- Nodes in Component A -->
+                <circle cx="42" cy="58" r="11" fill="#7c3aed"/><text x="42" y="61.5" fill="#fff" font-size="8" font-weight="800" text-anchor="middle">0</text>
+                <circle cx="110" cy="58" r="11" fill="#7c3aed"/><text x="110" y="61.5" fill="#fff" font-size="8" font-weight="800" text-anchor="middle">1</text>
+                <circle cx="178" cy="58" r="11" fill="#7c3aed"/><text x="178" y="61.5" fill="#fff" font-size="8" font-weight="800" text-anchor="middle">2</text>
+                <circle cx="110" cy="98" r="11" fill="#7c3aed"/><text x="110" y="101.5" fill="#fff" font-size="8" font-weight="800" text-anchor="middle">4</text>
+
+                <!-- Component B Outer Dashed Box: {3, 5, 6} -->
+                <rect x="225" y="6" width="160" height="116" rx="14" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.8" stroke-dasharray="4,3"/>
+                <text x="305" y="24" fill="#0369a1" font-size="7.5" font-weight="800" text-anchor="middle">Tập hợp B: {3, 5, 6}</text>
+
+                <!-- Edges in Component B -->
+                <line x1="265" y1="75" x2="345" y2="48" stroke="#0284c7" stroke-width="2.2"/>
+                <line x1="265" y1="75" x2="345" y2="102" stroke="#0284c7" stroke-width="2.2"/>
+
+                <!-- Nodes in Component B -->
+                <circle cx="265" cy="75" r="11" fill="#0284c7"/><text x="265" y="78.5" fill="#fff" font-size="8" font-weight="800" text-anchor="middle">3</text>
+                <circle cx="345" cy="48" r="11" fill="#0284c7"/><text x="345" y="51.5" fill="#fff" font-size="8" font-weight="800" text-anchor="middle">5</text>
+                <circle cx="345" cy="102" r="11" fill="#0284c7"/><text x="345" y="105.5" fill="#fff" font-size="8" font-weight="800" text-anchor="middle">6</text>
+            </svg>
+
+            <!-- Bottom Query Result Badges -->
+            <div style="font-size: 0.26em; color: #475569; display: flex; justify-content: space-around; background: #f8fafc; border-radius: 4px; padding: 3px 6px; margin-top: 2px;">
+                <span style="color: #059669; font-weight: 700;"><i class="fa-solid fa-circle-check" style="color: #059669;"></i>  <code>connected(0, 4) == true</code></span>
+                <span style="color: #dc2626; font-weight: 700;"><i class="fa-solid fa-circle-xmark" style="color: #dc2626;"></i>  <code>connected(1, 5) == false</code></span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Comparison Table: Why Graph BFS/DFS Fails for Dynamic Connectivity -->
+    <div style="width: 100%; margin-top: 6px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.29em; text-align: left;">
+            <thead>
+                <tr style="background: #f1f5f9; border-bottom: 1px solid #cbd5e1; color: #0f172a; font-weight: 800;">
+                    <th style="padding: 4px 8px;">Phương Pháp Giải Thích</th>
+                    <th style="padding: 4px 8px;">Thời Gian <code>union(u, v)</code></th>
+                    <th style="padding: 4px 8px;">Thời Gian <code>connected(u, v)</code></th>
+                    <th style="padding: 4px 8px;">Đánh Giá Hiệu Năng Thực Tế</th>
+                </tr>
+            </thead>
+            <tbody style="color: #334155;">
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 4px 8px; font-weight: 700; color: #dc2626; background: #f8fafc;">Duyệt Đồ Thị Tĩnh (BFS / DFS)</td>
+                    <td style="padding: 4px 8px; color: #166534; font-weight: 700;">$O(1)$ (Chỉ thêm cạnh)</td>
+                    <td style="padding: 4px 8px; color: #dc2626; font-weight: 700;">$O(V + E)$ (Duyệt lại đồ thị)</td>
+                    <td style="padding: 4px 8px; color: #dc2626;"><strong>THẤT BẠI:</strong> Quá chậm khi có $10^6$ truy vấn real-time trên 2 tỷ người dùng.</td>
+                </tr>
+                <tr>
+                    <td style="padding: 4px 8px; font-weight: 700; color: #059669; background: #f8fafc;">Union-Find (DSU) Tối Ưu</td>
+                    <td style="padding: 4px 8px; color: #166534; font-weight: 700;">$O(\alpha(N)) \approx O(1)$ Gần hằng số</td>
+                    <td style="padding: 4px 8px; color: #166534; font-weight: 700;">$O(\alpha(N)) \approx O(1)$ Gần hằng số</td>
+                    <td style="padding: 4px 8px; color: #059669; font-weight: 700;"><strong>XUẤT SẮC:</strong> Xử lý hàng trăm triệu thao tác kết nối trong thời gian thực!</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bottom Full Width Summary Callout -->
+    <div style="width: 100%; margin-top: 6px; background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #ef4444; border-radius: 6px; padding: 5px 12px; font-size: 0.31em; color: #991b1b; text-align: left; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2em; color: #ef4444; flex-shrink: 0;"></i>
+        <span><strong>TẠI SAO BFS/DFS THẤT BẠI?</strong> Vì đồ thị liên tục thay đổi (Dynamic), mỗi lần gọi <code>connected</code> mà phải duyệt lại toàn bộ đồ thị $O(V+E)$ sẽ làm hệ thống sập lập tức. Union-Find sinh ra để giải quyết bài toán này trong thời gian $O(1)$!</span>
+    </div>
+
+    <aside class="notes">
+        Slide 12 khởi đầu Phần III giới thiệu bài toán Dynamic Connectivity với 2 thao tác union và connected. Giải thích lý do vì sao BFS/DFS thất bại trên đồ thị động và tại sao Union-Find là giải pháp duy nhất đạt hiệu năng O(1) thực tế.
+    </aside>
+</section>

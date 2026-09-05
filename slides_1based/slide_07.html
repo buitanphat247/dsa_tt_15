@@ -1,0 +1,34 @@
+<section data-transition="zoom">
+                <div class="badge">Bản Chất Hình Học</div>
+                <h3 style="font-size: 1.0em;">Cấu Trúc Hình Học Đặc Biệt Của Trie</h3>
+
+                <div class="callout callout-warning" style="font-size: 0.75em; text-align: center; margin-bottom: 20px;">
+                    ⚠️ <strong>BẤT NGỜ CỦA TRIE:</strong> Nút của Trie <u>KHÔNG LƯU TRỮ</u> bất kỳ ký tự hay khóa dữ liệu nào!
+                </div>
+
+                <div class="grid-3" style="font-size: 0.6em;">
+                    <div class="glass-card">
+                        <div class="node-circle">N</div>
+                        <h4 style="margin-top: 10px; color: var(--accent-cyan);">1. Nút (Node)</h4>
+                        <p style="font-size: 0.9em; color: #334155;">Điểm giao lộ kết nối. Chứa danh sách các con trỏ trỏ tới các nút con tiếp theo.</p>
+                    </div>
+
+                    <div class="glass-card">
+                        <div style="font-size: 1.35em; color: var(--accent-gold); margin: 5px 0;">── 'a' ──►</div>
+                        <h4 style="margin-top: 10px; color: var(--accent-gold);">2. Cạnh (Edge)</h4>
+                        <p style="font-size: 0.9em; color: #334155;">Ký tự chính là <strong>nhãn dán (Label)</strong> nằm trên các cạnh nối từ cha xuống con.</p>
+                    </div>
+
+                    <div class="glass-card">
+                        <div class="node-circle is-end">KEY</div>
+                        <h4 style="margin-top: 10px; color: #7c3aed;">3. Khóa (Key)</h4>
+                        <p style="font-size: 0.9em; color: #334155;">Khóa được hình thành gián tiếp qua <strong>đường đi (Path)</strong> tích lũy ký tự từ Root xuống.</p>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Đây là điểm mấu chốt dễ gây nhầm lẫn nhất: Trong cây BST, mỗi nút mang một giá trị. Nhưng trong Trie, nút hoàn toàn rỗng về mặt ký tự! Ký tự nằm trên cạnh, còn từ khóa nằm trên con đường mà chúng ta đi qua. Nhờ vậy, hàng nghìn từ bắt đầu bằng 'inter' sẽ dùng chung một đoạn đường dài 5 nút.
+                </aside>
+            </section>
+
+            <!-- SLIDE 7: End of Word Flag -->

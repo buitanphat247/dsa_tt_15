@@ -1,0 +1,108 @@
+<section data-transition="slide">
+    <!-- Top Badge -->
+    <div class="badge badge-gold" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN IV: THỰC NGHIỆM & ĐÁNH GIÁ</div>
+    <h3 style="font-size: 0.82em; margin: 0 0 6px 0; color: #0f172a; font-weight: 700;">Technical Decision Framework — Hướng Dẫn Chọn Cấu Trúc Dữ Liệu</h3>
+
+    <!-- Decision Tree Diagram Card -->
+    <div class="glass-card" style="padding: 8px 12px; background: #ffffff; margin-bottom: 8px; border-top: 3px solid #0284c7;">
+        <div style="font-size: 0.32em; font-weight: 800; color: #0f172a; margin-bottom: 4px; text-align: left;">
+            <i class="fa-solid fa-diagram-next" style="color: #0284c7; margin-right: 6px;"></i> Sơ Đồ Cây Quyết Định (Decision Flowchart):
+        </div>
+
+        <svg viewBox="0 0 720 120" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', sans-serif;">
+            <defs>
+                <marker id="arr-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                    <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0284c7" />
+                </marker>
+                <marker id="arr-grn" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                    <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669" />
+                </marker>
+                <marker id="arr-purp" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                    <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#7c3aed" />
+                </marker>
+            </defs>
+
+            <!-- Top Root Node: Primary Question -->
+            <rect x="230" y="6" width="260" height="28" rx="6" fill="#f8fafc" stroke="#d97706" stroke-width="2"/>
+            <text x="360" y="24" fill="#92400e" font-size="9" text-anchor="middle" font-weight="800">Mẫu Truy Vấn Hệ Thống Đòi Hỏi Gì?</text>
+
+            <!-- Branch Lines -->
+            <line x1="260" y1="34" x2="120" y2="60" stroke="#0284c7" stroke-width="1.8" marker-end="url(#arr-blue)"/>
+            <line x1="360" y1="34" x2="360" y2="60" stroke="#059669" stroke-width="1.8" marker-end="url(#arr-grn)"/>
+            <line x1="460" y1="34" x2="600" y2="60" stroke="#7c3aed" stroke-width="1.8" marker-end="url(#arr-purp)"/>
+
+            <!-- Level 1: Query Characteristics -->
+            <rect x="40" y="60" width="160" height="24" rx="4" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+            <text x="120" y="75" fill="#0369a1" font-size="8" text-anchor="middle" font-weight="700">Tra cứu khóa chính xác O(1)</text>
+
+            <rect x="280" y="60" width="160" height="24" rx="4" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+            <text x="360" y="75" fill="#047857" font-size="8" text-anchor="middle" font-weight="700">Gợi ý tiền tố / Chuỗi O(L)</text>
+
+            <rect x="520" y="60" width="160" height="24" rx="4" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.5"/>
+            <text x="600" y="75" fill="#6b21a8" font-size="8" text-anchor="middle" font-weight="700">Động & Đồ thị liên thông O(α)</text>
+
+            <!-- Arrows to Solution -->
+            <line x1="120" y1="84" x2="120" y2="96" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+            <line x1="360" y1="84" x2="360" y2="96" stroke="#059669" stroke-width="1.5" marker-end="url(#arr-grn)"/>
+            <line x1="600" y1="84" x2="600" y2="96" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arr-purp)"/>
+
+            <!-- Level 2: Recommended Data Structures -->
+            <rect x="40" y="96" width="160" height="22" rx="4" fill="#0284c7"/>
+            <text x="120" y="110.5" fill="#ffffff" font-size="8.5" text-anchor="middle" font-weight="800">Hash Table / BST</text>
+
+            <rect x="280" y="96" width="160" height="22" rx="4" fill="#059669"/>
+            <text x="360" y="110.5" fill="#ffffff" font-size="8.5" text-anchor="middle" font-weight="800">Trie / Radix Tree</text>
+
+            <rect x="520" y="96" width="160" height="22" rx="4" fill="#7c3aed"/>
+            <text x="600" y="110.5" fill="#ffffff" font-size="8.5" text-anchor="middle" font-weight="800">Union-Find (DSU)</text>
+        </svg>
+    </div>
+
+    <!-- 3 Detailed Option Comparison Cards -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; text-align: left;">
+        
+        <!-- Option 1: Hash Table -->
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #0284c7; border-radius: 6px; padding: 8px 10px;">
+            <div style="color: #0284c7; font-size: 0.35em; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
+                <i class="fa-solid fa-hashtag"></i> 1. Hash Table / BST
+            </div>
+            <ul style="font-size: 0.28em; color: #334155; margin: 0; padding-left: 14px; line-height: 1.4;">
+                <li><strong>Ưu điểm:</strong> Lookup $O(1)$ trung bình, cài đặt đơn giản có sẵn trong thư viện chuẩn.</li>
+                <li><strong>Hạn chế:</strong> Không tìm được chuỗi theo tiền tố (Prefix) hay gộp nhóm đồ thị.</li>
+            </ul>
+        </div>
+
+        <!-- Option 2: Trie Tree -->
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #059669; border-radius: 6px; padding: 8px 10px;">
+            <div style="color: #059669; font-size: 0.35em; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
+                <i class="fa-solid fa-tree"></i> 2. Trie (Prefix Tree)
+            </div>
+            <ul style="font-size: 0.28em; color: #334155; margin: 0; padding-left: 14px; line-height: 1.4;">
+                <li><strong>Ưu điểm:</strong> Autocomplete, IP Routing $O(L)$, tốc độ không bị ảnh hưởng bởi $N$.</li>
+                <li><strong>Hạn chế:</strong> Tiêu tốn bộ nhớ RAM (cần tối ưu bằng Array/Hash Map).</li>
+            </ul>
+        </div>
+
+        <!-- Option 3: Union-Find -->
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #7c3aed; border-radius: 8px; padding: 8px 10px;">
+            <div style="color: #7c3aed; font-size: 0.35em; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
+                <i class="fa-solid fa-diagram-project"></i> 3. Union-Find (DSU)
+            </div>
+            <ul style="font-size: 0.28em; color: #334155; margin: 0; padding-left: 14px; line-height: 1.4;">
+                <li><strong>Ưu điểm:</strong> Quản lý tập hợp liên thông $O(\alpha(N))$, chạy Kruskal MST cực nhanh.</li>
+                <li><strong>Hạn chế:</strong> Không hỗ trợ tách nhóm (*Split/Disconnect*) trừ khi dùng DSU Rollback.</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Bottom Golden Rule Banner -->
+    <div style="width: 100%; margin-top: 8px; background: #fffbeb; border: 1px solid #fde68a; border-left: 4px solid #d97706; border-radius: 6px; padding: 6px 14px; font-size: 0.34em; color: #78350f; text-align: left; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-lightbulb" style="font-size: 1.2em; color: #d97706; flex-shrink: 0;"></i>
+        <span><strong>QUY TẮC KĨ SƯ:</strong> Luôn ưu tiên Hash Table cho các bài toán Tra cứu chính xác. Chỉ nâng cấp lên Trie/DSU khi bài toán bắt buộc phải xử lý <u>Prefix Matching</u> hoặc <u>Dynamic Connectivity</u>!</span>
+    </div>
+
+    <aside class="notes">
+        Dựa trên khung ra quyết định này, một kỹ sư phần mềm chuyên nghiệp sẽ không bao giờ đưa Trie hay Union-Find vào hệ thống một cách tùy tiện. Hãy luôn phân tích mẫu truy vấn, đo đạc quy mô dữ liệu và tài nguyên RAM trước khi quyết định.
+    </aside>
+</section>

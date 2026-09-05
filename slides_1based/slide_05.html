@@ -1,0 +1,30 @@
+<section data-transition="slide">
+                <div class="badge badge-purple">Phần Cứng & Bộ Nhớ</div>
+                <h3 style="font-size: 1.0em;">Tác Động Vật Lý Lên Hardware (Memory Locality)</h3>
+
+                <div class="grid-2" style="margin-top: 15px;">
+                    <div class="glass-card" style="text-align: left; font-size: 0.6em;">
+                        <h4 style="color: #ff7979;"><i class="fa-solid fa-bug"></i> Pointer Chasing & Cache Misses</h4>
+                        <p>Các cấu trúc dựa trên con trỏ phân tán (Hash Table, BST, Node-based Trees):</p>
+                        <ul>
+                            <li>Nút nằm rải rác ngẫu nhiên trên RAM.</li>
+                            <li>CPU phải liên tục "nhảy" địa chỉ $\implies$ <strong>Hụt bộ đệm L1/L2/L3 Cache (Cache Misses)</strong> liên tục.</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card" style="text-align: left; font-size: 0.6em;">
+                        <h4 style="color: var(--accent-emerald);"><i class="fa-solid fa-microchip"></i> Continuous Array Locality</h4>
+                        <p>Cấu trúc lưu giữ trên mảng một chiều (Union-Find `parent[]`):</p>
+                        <ul>
+                            <li>Bộ nhớ cấp phát liên tục trên RAM.</li>
+                            <li>CPU nạp nguyên <strong>Cache Line (64 bytes)</strong> trước $\implies$ Tận dụng tối đa <strong>Spatial Locality</strong>, thực thi tức thì.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Trên lý thuyết tiệm cận toán học, hai giải thuật có cùng Big-O chưa chắc chạy nhanh bằng nhau trong thực tế. Union-Find sở dĩ chạy cực nhanh vì mảng parent nằm liên tục trên RAM, CPU chỉ cần 1 lần nạp Cache Line là lấy được hàng loạt phần tử, hoàn toàn loại bỏ hiện tượng hụt bộ đệm.
+                </aside>
+            </section>
+
+            <!-- SLIDE 5: Trie Autocomplete Problem -->

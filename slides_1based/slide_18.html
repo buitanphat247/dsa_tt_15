@@ -1,0 +1,36 @@
+<section data-transition="slide">
+                <div class="badge badge-gold">Sức Mạnh Toán Học</div>
+                <h3 style="font-size: 1.05em;">Hàm Ngược Ackermann $lpha(N)$</h3>
+
+                <p style="font-size: 0.6em; color: #334155;">Khi kết hợp <strong>Union by Rank</strong> + <strong>Path Compression</strong> $\implies$ Chi phí đạt <strong>$O(lpha(N))$</strong> per operation!</p>
+
+                <div style="margin-top: 15px;">
+                    <table style="font-size: 0.55em;">
+                        <thead>
+                            <tr>
+                                <th>Quy mô dữ liệu $N$</th>
+                                <th>Giá trị Hàm ngược Ackermann $lpha(N)$</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>$N = 1 \dots 3$</td><td>$lpha(N) = 1$</td></tr>
+                            <tr><td>$N = 4 \dots 7$</td><td>$lpha(N) = 2$</td></tr>
+                            <tr><td>$N = 8 \dots 2047$</td><td>$lpha(N) = 3$</td></tr>
+                            <tr style="background: rgba(247, 183, 49, 0.15); font-weight: bold;">
+                                <td style="color: var(--accent-gold);">$N = 2048 \dots 10^{80}$ (Số hạt trong toàn vũ trụ!)</td>
+                                <td style="color: var(--accent-gold); font-size: 1.05em;">$lpha(N) \le 4$</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout callout-success" style="font-size: 0.7em; text-align: center; margin-top: 10px;">
+                    ⚡ <strong>Ý NGHĨA THỰC TIỄN:</strong> Trong mọi ứng dụng thực tế, $lpha(N)$ không bao giờ vượt quá 4 $\implies$ <strong>Union-Find chạy với tốc độ HẰNG SỐ $O(1)$!</strong>
+                </div>
+
+                <aside class="notes">
+                    Inverse Ackermann alpha(N) là một trong những kết quả đẹp nhất của khoa học máy tính. Dù từ điển có chứa 1 triệu hay 1 tỷ phần tử, hay thậm chí bằng số nguyên tử trong toàn bộ vũ trụ (10^80), giá trị alpha(N) cũng không bao giờ vượt quá 4. Thao tác gộp và tìm kiếm diễn ra gần như tức thì.
+                </aside>
+            </section>
+
+            <!-- SLIDE 18: Trace Table Worked Example -->

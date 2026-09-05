@@ -1,0 +1,29 @@
+<section data-transition="slide">
+                <div class="badge badge-gold">Ứng Dụng Thực Tế</div>
+                <h3 style="font-size: 1.05em;">Union by Size, Traps & Thuật Toán Kruskal</h3>
+
+                <div class="grid-2" style="font-size: 0.58em; text-align: left;">
+                    <div class="glass-card">
+                        <h4 style="color: #ff7979;">❌ Sai Lầm Kinh Điển Chết Người</h4>
+                        <p>Gán trực tiếp cha không qua `find`:</p>
+                        <p><code style="color: #ff7979;">parent[a] = b; // SAI HOÀN TOÀN!</code></p>
+                        <p style="color: #334155;">Hậu quả: Âm thầm cắt đứt liên kết của toàn bộ cây con đang treo dưới nút $a$!</p>
+                        <p><code style="color: var(--accent-emerald);">parent[find(a)] = find(b); // ĐÚNG</code></p>
+                    </div>
+
+                    <div class="glass-card">
+                        <h4 class="text-gradient"><i class="fa-solid fa-diagram-project"></i> Thuật Toán Kruskal (MST)</h4>
+                        <p>Tìm Cây khung nhỏ nhất (Minimum Spanning Tree):</p>
+                        <ul>
+                            <li>Dùng Union-Find phát hiện chu trình siêu tốc trong $O(lpha(V))$.</li>
+                            <li>Đưa tổng chi phí thuật toán Kruskal đạt cực hạn $O(E \log E)$!</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Một sai lầm rất phổ biến khi lập trình Union-Find là gán trực tiếp parent[a] = b thay vì gọi find(a). Phép gán sai này sẽ cắt đứt toàn bộ cây con treo dưới a. Hãy nhớ luôn luôn làm việc trên nút gốc đại diện.
+                </aside>
+            </section>
+
+            <!-- SLIDE 20: Comprehensive Comparison -->

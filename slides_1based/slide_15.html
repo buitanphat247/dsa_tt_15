@@ -1,0 +1,29 @@
+<section data-transition="slide">
+                <div class="badge badge-gold">Trực Giác Thiết Kế</div>
+                <h3 style="font-size: 1.05em;">Trực Giác "Hội Nhóm & Chủ Tịch" & Sự Suy Biến</h3>
+
+                <div class="grid-2" style="font-size: 0.6em; text-align: left;">
+                    <div class="glass-card">
+                        <h4 class="text-gradient-gold"><i class="fa-solid fa-users-rectangle"></i> Mô Hình "Club & President"</h4>
+                        <ul>
+                            <li>Mỗi tập hợp liên thông = 1 Câu lạc bộ (Club).</li>
+                            <li>Nút Gốc = Chủ tịch CLB đại diện.</li>
+                            <li>`union(x, y)` = 2 CLB sáp nhập $\implies$ Chủ tịch CLB này phải quy phục dưới quyền Chủ tịch CLB kia!</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card">
+                        <h4 style="color: #ff7979;"><i class="fa-solid fa-skull-crossbones"></i> Nguy Cơ Suy Biến (Naive)</h4>
+                        <p>Nếu gộp ngây thơ không kiểm soát:</p>
+                        <div style="text-align: center; color: #ff7979; font-weight: bold; margin: 10px 0;">
+                            Cây suy biến thành Linked List $\implies$ Chi phí `find` bị kéo dài tới $O(N)$!
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Nếu hai câu lạc bộ sáp nhập mà Chủ tịch của tập hợp 100 người lại đi quy phục Chủ tịch của tập hợp 1 người, cây sẽ ngày càng dài ra. Trong trường hợp xấu nhất, cây bị duỗi thẳng thành một sợi dây, và chi phí tìm kiếm bị đẩy lên O(N).
+                </aside>
+            </section>
+
+            <!-- SLIDE 15: Optimization 1 - Union by Rank -->

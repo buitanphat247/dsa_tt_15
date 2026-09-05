@@ -1,0 +1,36 @@
+<section data-transition="slide">
+                <div class="badge">Đánh Đổi Bộ Nhớ</div>
+                <h3 style="font-size: 1.05em;">Child Container: Mảng Cố Định vs Hash Map</h3>
+
+                <div class="grid-3" style="font-size: 0.55em; margin-top: 10px;">
+                    <div class="glass-card">
+                        <h4 style="color: #ff7979;">1. Fixed Array `children[26]`</h4>
+                        <ul>
+                            <li><strong>Pros:</strong> Index `ch - 'a'` tra cứu $O(1)$ cực nhanh.</li>
+                            <li><strong>Cons:</strong> Lãng phí RAM khủng khủng (25 con trỏ `null` nếu nút có 1 con). Bất lực với UTF-8.</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card">
+                        <h4 style="color: var(--accent-cyan);">2. Hash Map `unordered_map`</h4>
+                        <ul>
+                            <li><strong>Pros:</strong> Cấp phát động, tiết kiệm RAM tối đa. Hỗ trợ tốt mọi bảng mã Unicode.</li>
+                            <li><strong>Cons:</strong> Tốn thêm chi phí tính toán hàm băm tại mỗi nút.</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card">
+                        <h4 style="color: var(--accent-emerald);">3. Sorted Vector `vector`</h4>
+                        <ul>
+                            <li><strong>Pros:</strong> Dung lượng bộ nhớ cực kỳ nhỏ gọn, Memory Locality tốt.</li>
+                            <li><strong>Cons:</strong> Tra cứu con tốn $O(\log |\Sigma|)$ bằng Binary Search.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Sự đánh đổi lớn nhất của Trie nằm ở vật chứa con. Nếu dùng mảng cố định kích thước 26, mỗi nút tốn hơn 200 bytes dù chỉ lưu 1 ký tự. Trong các ứng dụng sản phẩm thực tế, bản đồ băm hoặc mảng động luôn là lựa chọn hàng đầu để tránh làm cạn kiệt RAM.
+                </aside>
+            </section>
+
+            <!-- SLIDE 11: Best Practices & Apps -->

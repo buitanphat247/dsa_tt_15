@@ -1,0 +1,83 @@
+<section data-transition="slide">
+    <!-- Top Badge -->
+    <div class="badge badge-gold" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN III: CẤU TRÚC UNION-FIND (DSU)</div>
+    <h3 style="font-size: 0.82em; margin: 0 0 8px 0; color: #0f172a; font-weight: 700;">Bẫy Cài Đặt, Union by Size & Thuật Toán Kruskal (MST)</h3>
+
+    <!-- 2-Column Light Layout (NO DARK BOXES!) -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; text-align: left; align-items: stretch;">
+        
+        <!-- Left Column: Traps Warning + Union by Size -->
+        <div style="display: flex; flex-direction: column; gap: 8px; justify-content: space-between;">
+            
+            <!-- Trap Warning Box -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #dc2626; border-radius: 8px; padding: 10px 12px;">
+                <div style="color: #dc2626; font-size: 0.36em; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-triangle-exclamation"></i> 1. Cảnh Báo Bẫy Cài Đặt (Implementation Trap)
+                </div>
+                <div style="font-size: 0.29em; color: #334155; line-height: 1.45;">
+                    <strong style="color: #dc2626;">SAI LẦM CHẾT NGƯỜI:</strong> Gán trực tiếp cha không qua <code>find()</code>:
+                </div>
+                <div style="background: #fff1f2; border: 1px solid #fecdd3; padding: 4px 8px; border-radius: 4px; margin: 4px 0; font-family: 'Fira Code', monospace; color: #991b1b; font-size: 0.28em;">
+                    parent[a] = b; // SAI (Cắt đứt nhánh cây dưới a!)
+                </div>
+                <div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 4px 8px; border-radius: 4px; font-family: 'Fira Code', monospace; color: #047857; font-size: 0.28em;">
+                    parent[find(a)] = find(b); // ĐÚNG (Luôn gán trên gốc!)
+                </div>
+            </div>
+
+            <!-- Union by Size Light Box -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #0284c7; border-radius: 8px; padding: 10px 12px;">
+                <div style="color: #0284c7; font-size: 0.36em; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-layer-group"></i> 2. Kỹ Thuật Union by Size (Giải Pháp Thay Thế)
+                </div>
+                <div style="font-size: 0.28em; color: #334155; line-height: 1.4; margin-bottom: 4px;">
+                    Duy trì mảng <code>sz[i]</code> (số phần tử). Treo cây có <strong>size nhỏ hơn</strong> vào dưới cây có <strong>size lớn hơn</strong>.
+                </div>
+                <!-- Clean Light Code Box (NO DARK BACKGROUND!) -->
+                <div style="background: #f8fafc; border: 1px solid #cbd5e1; color: #0f172a; border-radius: 6px; padding: 6px 10px; font-family: 'Fira Code', monospace; font-size: 0.27em; line-height: 1.45;">
+                    <span style="color: #0284c7;">if</span> (sz[a] &lt; sz[b]) swap(a, b);<br>
+                    parent[b] = a;<br>
+                    sz[a] += sz[b];
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Column: Kruskal's Algorithm Detail Card -->
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #7c3aed; border-radius: 8px; padding: 10px 14px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div style="color: #7c3aed; font-size: 0.38em; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-diagram-project"></i> 3. Thuật Toán Kruskal — Tìm Cây Khung Nhỏ Nhất (MST)
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.29em; color: #334155; line-height: 1.45;">
+                    <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 4px; padding: 5px 8px;">
+                        <strong style="color: #6b21a8;">Bước 1 (Sắp Xếp):</strong> Sắp xếp danh sách $E$ cạnh theo trọng số tăng dần. Chi phí: <strong>$O(E \log E)$</strong>.
+                    </div>
+                    <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 4px; padding: 5px 8px;">
+                        <strong style="color: #6b21a8;">Bước 2 (Kiểm Tra Chu Trình):</strong> Duyệt qua từng cạnh $(u, v, w)$:
+                        <ul style="margin: 2px 0 0 0; padding-left: 14px; font-size: 0.95em;">
+                            <li>Nếu <code>find(u) != find(v)</code>: Thêm cạnh vào MST và gộp <code>union(u, v)</code>.</li>
+                            <li>Nếu <code>find(u) == find(v)</code>: Bỏ qua (Tránh tạo chu trình đóng kín!).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 4px; padding: 5px 8px; font-size: 0.28em; color: #166534; font-weight: 700; text-align: center; margin-top: 6px;">
+                <i class="fa-solid fa-bolt" style="color: #059669; margin-right: 4px;"></i> DSU giúp kiểm tra chu trình siêu tốc trong $O(\alpha(V)) \approx O(1)$!
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Mathematical Guarantee Banner -->
+    <div style="width: 100%; margin-top: 8px; background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #2563eb; border-radius: 6px; padding: 6px 14px; font-size: 0.35em; color: #1e40af; text-align: left; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-calculator" style="font-size: 1.2em; color: #2563eb; flex-shrink: 0;"></i>
+        <span><strong>TỔNG CHI PHÍ THUẬT TOÁN KRUSKAL:</strong> Nhờ DSU kiểm tra liên thông trong $O(\alpha(V)) \approx O(1)$, tổng thời gian của Kruskal đạt cực hạn <strong>$O(E \log E)$</strong> (bị khống chế duy nhất bởi bước sắp xếp cạnh)!</span>
+    </div>
+
+    <aside class="notes">
+        Một sai lầm rất phổ biến khi lập trình Union-Find là gán trực tiếp parent[a] = b thay vì gọi find(a). Phép gán sai này sẽ cắt đứt toàn bộ cây con treo dưới a. Hãy nhớ luôn luôn làm việc trên nút gốc đại diện. Ngoài ra thuật toán Kruskal ứng dụng DSU để tìm Cây khung nhỏ nhất cực kỳ hiệu quả.
+    </aside>
+</section>

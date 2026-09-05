@@ -1,0 +1,35 @@
+<section data-transition="slide">
+                <div class="badge">Worked Example</div>
+                <h3 style="font-size: 1.0em;">Bảng Mô Phỏng Vết (Trace Table) Union-Find</h3>
+
+                <div style="margin-top: 10px;">
+                    <table style="font-size: 0.48em;">
+                        <thead>
+                            <tr>
+                                <th>Bước</th>
+                                <th>Lệnh thực thi</th>
+                                <th>Mảng `parent[]` sau bước</th>
+                                <th>Mảng `rank[]`</th>
+                                <th>Nhận xét chi tiết</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>0</td><td>Init(7)</td><td>`[0, 1, 2, 3, 4, 5, 6]`</td><td>`[0, 0, 0, 0, 0, 0, 0]`</td><td>Khởi tạo 7 cây độc lập</td></tr>
+                            <tr><td>1</td><td>`union(0,1)`</td><td>`[0, 0, 2, 3, 4, 5, 6]`</td><td>`[1, 0, 0, 0, 0, 0, 0]`</td><td>Gộp 1 vào 0, rank[0]=1</td></tr>
+                            <tr><td>2</td><td>`union(1,2)`</td><td>`[0, 0, 0, 3, 4, 5, 6]`</td><td>`[1, 0, 0, 0, 0, 0, 0]`</td><td>Root(1)=0, Root(2)=2. Treo 2 dưới 0</td></tr>
+                            <tr><td>3</td><td>`union(2,3)`</td><td>`[0, 0, 0, 0, 4, 5, 6]`</td><td>`[1, 0, 0, 0, 0, 0, 0]`</td><td>Root(2)=0, Root(3)=3. Treo 3 dưới 0</td></tr>
+                            <tr style="background: rgba(0, 242, 254, 0.1);">
+                                <td>4</td><td>`connected(0,3)`</td><td>`[0, 0, 0, 0, 4, 5, 6]`</td><td>`[1, 0, 0, 0, 0, 0, 0]`</td><td>True. Path Compression nén 3 về 0</td>
+                            </tr>
+                            <tr><td>5</td><td>`union(4,5)`</td><td>`[0, 0, 0, 0, 4, 4, 6]`</td><td>`[1, 0, 0, 0, 1, 0, 0]`</td><td>Gộp 5 vào 4, rank[4]=1</td></tr>
+                            <tr><td>8</td><td>`union(3,5)`</td><td>`[0, 0, 0, 0, 0, 4, 4]`</td><td>`[2, 0, 0, 0, 1, 0, 0]`</td><td>Root(3)=0, Root(5)=4. Treo 4 dưới 0</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <aside class="notes">
+                    Bảng vết này thể hiện trọn vẹn sức mạnh của Union-Find. Hãy chú ý bước 4 và bước 9: Ngay khi hàm connected hoặc union được gọi, cơ chế nén đường đi lập tức đưa nút 3 và nút 6 về kết nối trực tiếp với gốc tối cao 0.
+                </aside>
+            </section>
+
+            <!-- SLIDE 19: Union by Size & Kruskal -->

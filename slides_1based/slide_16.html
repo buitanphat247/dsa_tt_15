@@ -1,0 +1,40 @@
+<section data-transition="slide">
+                <div class="badge">Tối Ưu Hóa 1</div>
+                <h3 style="font-size: 1.05em;">Union by Rank (Cơ Chế Phòng Ngừa)</h3>
+
+                <div class="callout callout-success" style="font-size: 0.7em; text-align: left;">
+                    🛡️ <strong>QUY TẮC GỘP:</strong> Duy trì mảng <code>rank[i]</code> (chiều cao cây). Luôn treo gốc của cây có <code>rank</code> nhỏ hơn vào dưới gốc của cây có <code>rank</code> lớn hơn!
+                </div>
+
+                <!-- Graphic comparison -->
+                <div class="glass-card" style="margin-top: 15px; padding: 15px;">
+                    <svg width="600" height="140" viewBox="0 0 600 140" style="margin: 0 auto;">
+                        <!-- Tree 1 -->
+                        <circle cx="150" cy="30" r="15" fill="#f8fafc" stroke="#00f2fe" stroke-width="2"/>
+                        <text x="150" y="34" fill="#0f172a" font-size="10" text-anchor="middle">A(r=2)</text>
+                        <line x1="150" y1="45" x2="150" y2="80" stroke="#4facfe" stroke-width="2"/>
+                        <circle cx="150" cy="95" r="12" fill="#f8fafc" stroke="#4facfe" stroke-width="2"/>
+
+                        <!-- Tree 2 -->
+                        <circle cx="300" cy="80" r="12" fill="#f8fafc" stroke="#a855f7" stroke-width="2"/>
+                        <text x="300" y="84" fill="#0f172a" font-size="9" text-anchor="middle">B(r=1)</text>
+
+                        <!-- Arrow union -->
+                        <path d="M 285 80 Q 220 50 168 35" fill="none" stroke="#00b09b" stroke-width="3" stroke-dasharray="4"/>
+                        
+                        <text x="450" y="60" fill="#00b09b" font-size="14" font-weight="bold">Cây B (Rank thấp hơn)</text>
+                        <text x="450" y="80" fill="#00b09b" font-size="14" font-weight="bold">treo dưới Cây A (Rank cao hơn)</text>
+                        <text x="450" y="105" fill="#a855f7" font-size="12">➔ Chiều cao cây A KHÔNG ĐỔI!</text>
+                    </svg>
+                </div>
+
+                <p style="font-size: 0.6em; color: var(--accent-emerald); font-weight: bold; margin-top: 15px;">
+                    📉 Kết quả: Độ cao cây luôn được khống chế ở mức $O(\log N)$!
+                </p>
+
+                <aside class="notes">
+                    Kỹ thuật Union by Rank đóng vai trò ngắt đứt sự suy biến cây. Bằng cách luôn treo cây thấp hơn dưới gốc cây cao hơn, chúng ta đảm bảo chiều cao của cây tăng chậm theo hàm logarithm, không bao giờ vượt quá log_2 N.
+                </aside>
+            </section>
+
+            <!-- SLIDE 16: Optimization 2 - Path Compression -->

@@ -1,0 +1,36 @@
+<section data-transition="slide">
+                <div class="badge">Biểu Diễn Mảng Cha</div>
+                <h3 style="font-size: 1.05em;">Disjoint-Set ADT & Biểu Diễn Bằng Mảng `parent[]`</h3>
+
+                <div class="grid-2" style="font-size: 0.6em; align-items: center;">
+                    <div class="glass-card" style="text-align: left;">
+                        <h4 style="color: var(--accent-gold);">Cấu Trúc Rừng Cây (Tree Forest)</h4>
+                        <ul>
+                            <li>Mỗi tập hợp liên thông là 1 Cây.</li>
+                            <li>Gốc đại diện ($Root$): Tự trỏ vào chính nó (`parent[r] == r`).</li>
+                            <li>Thao tác `find(x)`: Đi ngược theo các con trỏ cha cho đến khi gặp Root.</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card">
+                        <h4 style="color: var(--accent-cyan);">Quy Đổi Thành Mảng 1D</h4>
+                        <table style="font-size: 0.8em;">
+                            <tr>
+                                <th>Index $i$</th>
+                                <td>0</td><td>1</td><td>2</td><td>3</td><td>4</td>
+                            </tr>
+                            <tr>
+                                <th>`parent[i]`</th>
+                                <td>0</td><td>0</td><td>0</td><td>4</td><td>4</td>
+                            </tr>
+                        </table>
+                        <p style="font-size: 0.85em; color: #334155; margin-top: 10px;">⭐ Nút 0 và Nút 4 là 2 Chủ tịch (Root) đại diện cho 2 tập hợp!</p>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Điều kỳ diệu của Union-Find là toàn bộ cấu trúc rừng cây phức tạp được nén gọn gàng vào một mảng số nguyên parent duy nhất. Không có con trỏ, không có cấp phát bộ nhớ động, cực kỳ tinh gọn.
+                </aside>
+            </section>
+
+            <!-- SLIDE 14: Clubs & Presidents Intuition -->

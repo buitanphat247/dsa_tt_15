@@ -1,0 +1,57 @@
+<section data-transition="slide">
+                <div class="badge">Phần 2: Cây Tiền Tố (Trie)</div>
+                <h3 style="font-size: 1.0em;">Bài Toán Autocomplete & Prefix Query</h3>
+
+                <p style="font-size: 0.65em; color: #475569;">Cho từ điển gồm $N$ từ khóa. Với tiền tố $P$ (độ dài $L$), trả về $K$ từ gợi ý bắt đầu bằng $P$.</p>
+
+                <div style="margin-top: 10px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cấu trúc dữ liệu</th>
+                                <th>Tra cứu chính xác</th>
+                                <th>Tra cứu tiền tố</th>
+                                <th>Liệt kê $K$ từ gợi ý</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Unsorted Array</strong></td>
+                                <td>$O(N \cdot L)$</td>
+                                <td>$O(N \cdot L)$</td>
+                                <td>$O(N \cdot L)$</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sorted Array</strong></td>
+                                <td>$O(L \log N)$</td>
+                                <td>$O(L \log N)$</td>
+                                <td>$O(L \log N + K)$ <em>(Chèn $O(N)$)</em></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hash Table</strong></td>
+                                <td>$O(L)$ trung bình</td>
+                                <td>$O(N \cdot L)$ (Quét lại)</td>
+                                <td>Không hỗ trợ tự nhiên</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Balanced BST</strong></td>
+                                <td>$O(L \log N)$</td>
+                                <td>$O(L \log N)$</td>
+                                <td>$O(L \log N + K)$</td>
+                            </tr>
+                            <tr style="background: rgba(0, 242, 254, 0.15); font-weight: bold;">
+                                <td style="color: var(--accent-cyan);">🎯 Trie (Cây tiền tố)</td>
+                                <td style="color: var(--accent-cyan);">$O(L)$</td>
+                                <td style="color: var(--accent-cyan);">$O(L)$</td>
+                                <td style="color: var(--accent-cyan);">$O(L + K)$</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <aside class="notes">
+                    Khi gõ chữ trên điện thoại, hệ thống chỉ có chưa đầy 50ms để đưa ra gợi ý. Nếu dùng Hash Table, hệ thống phải duyệt qua tất cả hàng triệu từ trong từ điển. Duy nhất Trie giải quyết trọn vẹn cả 3 thao tác với chi phí chỉ phụ thuộc vào độ dài chuỗi L mà không hề quan tâm từ điển có 10 nghìn hay 10 triệu từ.
+                </aside>
+            </section>
+
+            <!-- SLIDE 6: Trie Geometric Structure -->

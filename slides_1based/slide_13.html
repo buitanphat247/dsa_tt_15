@@ -1,0 +1,28 @@
+<section data-transition="zoom">
+                <div class="badge badge-purple">Phần 3: Union-Find (DSU)</div>
+                <h3 style="font-size: 1.0em;">Bài Toán Kết Nối Động (Dynamic Connectivity)</h3>
+
+                <p style="font-size: 0.65em; color: #334155;">Quản lý mạng lưới $N$ thực thể độc lập với 2 thao tác real-time liên tục:</p>
+
+                <div class="grid-2" style="font-size: 0.6em; margin-top: 10px;">
+                    <div class="glass-card">
+                        <h4 style="color: var(--accent-cyan);"><i class="fa-solid fa-link"></i> `union(u, v)`</h4>
+                        <p>Thêm cạnh nối trực tiếp hoặc thiết lập liên kết giữa $u$ và $v$.</p>
+                    </div>
+
+                    <div class="glass-card">
+                        <h4 style="color: #7c3aed;"><i class="fa-solid fa-circle-question"></i> `connected(u, v)`</h4>
+                        <p>Kiểm tra $u$ và $v$ có thuộc cùng thành phần liên thông không?</p>
+                    </div>
+                </div>
+
+                <div class="callout callout-warning" style="font-size: 0.65em; margin-top: 12px;">
+                    ❌ <strong>Tại sao BFS/DFS thất bại?</strong> Mỗi lần `connected` phải duyệt lại toàn bộ đồ thị $O(V + E)$. Quá đắt đỏ khi có hàng triệu truy vấn real-time trên mạng xã hội Facebook / Zalo!
+                </div>
+
+                <aside class="notes">
+                    Hãy tưởng tượng mạng xã hội Facebook với 2 tỷ người dùng. Khi có 2 người kết bạn, làm sao để biết họ có mối quan hệ gián tiếp với nhau không? Nếu chạy BFS/DFS, hệ thống sẽ sập ngay lập tức. Chúng ta cần một cấu trúc dữ liệu chuyên biệt chỉ quản lý tập hợp liên thông mà không cần lưu lại hình dạng đồ thị.
+                </aside>
+            </section>
+
+            <!-- SLIDE 13: Disjoint-Set ADT Parent Array -->

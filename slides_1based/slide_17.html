@@ -1,0 +1,45 @@
+<section data-transition="zoom">
+                <div class="badge badge-purple">Tối Ưu Hóa 2</div>
+                <h3 style="font-size: 1.05em;">Path Compression (Cơ Chế Sửa Chữa)</h3>
+
+                <div class="grid-2" style="margin-top: 10px; align-items: center;">
+                    <div style="text-align: left;">
+                        <div class="callout" style="font-size: 0.65em;">
+                            🔨 <strong>NÉN ĐƯỜNG ĐỊ TRONG FIND:</strong> Trên đường từ $x$ đi tìm Root, cập nhật lại con trỏ `parent` của <u>tất cả các nút đi qua</u> trỏ trực tiếp về Root đại diện!
+                        </div>
+                        <pre><code class="language-cpp" data-line-numbers="">int find(int i) {
+    if (parent[i] == i)
+        return i;
+    // Phép gán đệ quy nén đường đi
+    return parent[i] = find(parent[i]);
+}</code></pre>
+                    </div>
+
+                    <div class="glass-card" style="padding: 10px;">
+                        <p style="font-size: 0.55em; color: var(--accent-cyan); font-weight: bold;">Sau khi nén: Cây bị ép phẳng tuyệt đối!</p>
+                        <svg width="280" height="160" viewBox="0 0 280 160">
+                            <!-- Root -->
+                            <circle cx="140" cy="25" r="16" fill="#7f00ff" stroke="#a855f7" stroke-width="3"/>
+                            <text x="140" y="30" fill="#0f172a" font-size="10" text-anchor="middle">Root 0</text>
+
+                            <!-- Direct children after compression -->
+                            <line x1="140" y1="41" x2="40" y2="110" stroke="#00f2fe" stroke-width="2"/>
+                            <line x1="140" y1="41" x2="100" y2="110" stroke="#00f2fe" stroke-width="2"/>
+                            <line x1="140" y1="41" x2="180" y2="110" stroke="#00f2fe" stroke-width="2"/>
+                            <line x1="140" y1="41" x2="240" y2="110" stroke="#00f2fe" stroke-width="2"/>
+
+                            <circle cx="40" cy="120" r="12" fill="#f8fafc" stroke="#00f2fe" stroke-width="2"/>
+                            <circle cx="100" cy="120" r="12" fill="#f8fafc" stroke="#00f2fe" stroke-width="2"/>
+                            <circle cx="180" cy="120" r="12" fill="#f8fafc" stroke="#00f2fe" stroke-width="2"/>
+                            <circle cx="240" cy="120" r="12" fill="#f8fafc" stroke="#00f2fe" stroke-width="2"/>
+                        </svg>
+                        <p style="font-size: 0.5em; color: #7c3aed;">Các lần find tiếp theo chỉ tốn $O(1)$!</p>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Hãy nhìn vào dòng code C++ kỳ diệu này: Chỉ bằng phép gán đệ quy parent[i] = find(parent[i]), tất cả các nút trên đường đi tìm Chủ tịch sẽ lập tức được nối thẳng trực tiếp tới vị Chủ tịch đó. Cây bị ép phẳng tuyệt đối.
+                </aside>
+            </section>
+
+            <!-- SLIDE 17: Inverse Ackermann Function -->

@@ -1,0 +1,29 @@
+<section data-transition="slide">
+                <div class="badge badge-gold">Thực Tiễn Công Nghiệp</div>
+                <h3 style="font-size: 1.05em;">Best Practices & Ứng Dụng Thực Tế</h3>
+
+                <div class="grid-2" style="font-size: 0.6em; text-align: left;">
+                    <div class="glass-card">
+                        <h4 class="text-gradient-gold"><i class="fa-solid fa-shield-halved"></i> Best Practices</h4>
+                        <ul>
+                            <li><strong>Chuẩn hóa Khóa:</strong> Chuyển về lowercase, trim space trước khi chèn.</li>
+                            <li><strong>Capping Results:</strong> Giới hạn lấy tối đa 10 gợi ý để tránh quá tải RAM khi tiền tố quá ngắn (VD: gõ mỗi chữ 'a').</li>
+                            <li><strong>Radix Tree:</strong> Dùng Cây tiền tố nén nếu từ điển có nhiều nút đơn con liên tiếp.</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card">
+                        <h4 class="text-gradient"><i class="fa-solid fa-network-wired"></i> Industrial Applications</h4>
+                        <ul>
+                            <li><strong>Predictive Keyboards:</strong> Gboard, Apple iOS Keyboard gợi ý từ ngữ thời gian thực.</li>
+                            <li><strong>Longest Prefix Match (IP Routing):</strong> Các Router mạng lõi dùng Binary Trie so khớp tiền tố IP dài nhất để chuyển tiếp gói tin hàng tỷ req/s!</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Một ứng dụng tuyệt vời khác của Trie là trong các Router mạng core internet. Mỗi gói tin IP được chuyển tiếp dựa trên việc tìm kiếm tiền tố nhị phân dài nhất trong bảng định tuyến bằng Binary Trie, xử lý hàng tỷ gói tin mỗi giây.
+                </aside>
+            </section>
+
+            <!-- SLIDE 12: Union-Find Dynamic Connectivity -->

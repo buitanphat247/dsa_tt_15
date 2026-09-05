@@ -1,0 +1,103 @@
+<section data-transition="slide">
+    <div class="badge badge-cyan" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">THỰC TIỄN CÔNG NGHIỆP</div>
+    <h3 style="font-size: 0.78em; margin: 0 0 6px 0; color: #0f172a; font-weight: 700;">Best Practices & Ứng Dụng Trie Trong Thực Tế</h3>
+
+    <!-- 4 Real-World Application Cards (Grid 2x2) -->
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; width: 100%; margin-top: 4px;">
+        
+        <!-- App 1: Gboard Autocomplete -->
+        <div class="glass-card" style="text-align: left; padding: 6px 10px; border-left: 4px solid #0284c7; background: #ffffff;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px;">
+                <h4 style="color: #0284c7; font-size: 0.36em; font-weight: 800; margin: 0;">
+                    <i class="fa-solid fa-mobile-screen-button"></i> 1. Bàn Phím Gboard / iOS Autocomplete
+                </h4>
+                <span style="font-size: 0.26em; background: #e0f2fe; color: #0369a1; padding: 1px 5px; border-radius: 4px; font-weight: 700;">Mobile Dev</span>
+            </div>
+            <p style="font-size: 0.28em; color: #334155; margin: 0; line-height: 1.35;">
+                Nạp hàng trăm ngàn từ điển vào RAM điện thoại. Gợi ý từ tiếp theo ngay lập tức ($\le 5\text{ms}$) khi người dùng gõ từng ký tự bàn phím ảo.
+            </p>
+        </div>
+
+        <!-- App 2: IDE Code Intelligence -->
+        <div class="glass-card" style="text-align: left; padding: 6px 10px; border-left: 4px solid #7c3aed; background: #ffffff;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px;">
+                <h4 style="color: #6b21a8; font-size: 0.36em; font-weight: 800; margin: 0;">
+                    <i class="fa-solid fa-code"></i> 2. IDE Autocomplete (VSCode, IntelliJ)
+                </h4>
+                <span style="font-size: 0.26em; background: #f3e8ff; color: #6b21a8; padding: 1px 5px; border-radius: 4px; font-weight: 700;">Developer Tools</span>
+            </div>
+            <p style="font-size: 0.28em; color: #334155; margin: 0; line-height: 1.35;">
+                Quản lý danh sách hàm, biến, class trong dự án. Khi gõ <code>std::v...</code>, IDE tra cứu Trie để liệt kê <code>vector</code>, <code>valarray</code>...
+            </p>
+        </div>
+
+        <!-- App 3: Network Core Router (LPM) -->
+        <div class="glass-card" style="text-align: left; padding: 6px 10px; border-left: 4px solid #059669; background: #ffffff;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px;">
+                <h4 style="color: #059669; font-size: 0.36em; font-weight: 800; margin: 0;">
+                    <i class="fa-solid fa-network-wired"></i> 3. Network IP Routing (Longest Prefix Match)
+                </h4>
+                <span style="font-size: 0.26em; background: #d1fae5; color: #047857; padding: 1px 5px; border-radius: 4px; font-weight: 700;">Networking</span>
+            </div>
+            <p style="font-size: 0.28em; color: #334155; margin: 0; line-height: 1.35;">
+                Router lõi Internet dùng <strong>Binary Trie</strong> (so khớp chuỗi nhị phân IP <code>192.168.1.0/24</code>) để định tuyến hàng tỷ gói tin/giây.
+            </p>
+        </div>
+
+        <!-- App 4: Search Engine Auto-suggest -->
+        <div class="glass-card" style="text-align: left; padding: 6px 10px; border-left: 4px solid #d97706; background: #ffffff;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px;">
+                <h4 style="color: #b45309; font-size: 0.36em; font-weight: 800; margin: 0;">
+                    <i class="fa-solid fa-magnifying-glass"></i> 4. Search Engine Auto-Suggest
+                </h4>
+                <span style="font-size: 0.26em; background: #fef3c7; color: #b45309; padding: 1px 5px; border-radius: 4px; font-weight: 700;">Web Engine</span>
+            </div>
+            <p style="font-size: 0.28em; color: #334155; margin: 0; line-height: 1.35;">
+                Kết hợp <strong>Trie + Min-Heap (Top-K)</strong> tại mỗi nút để gợi ý 10 từ khóa tìm kiếm hot nhất mà không cần duyệt sâu toàn bộ cây.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- 3 Production Best Practices (Grid 3 Columns) -->
+    <div style="width: 100%; margin-top: 6px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+        
+        <div class="glass-card" style="text-align: left; padding: 6px 8px; border-top: 3px solid #6366f1; background: #ffffff;">
+            <h5 style="color: #4f46e5; font-size: 0.33em; font-weight: 800; margin: 0 0 2px 0;">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Chuẩn Hóa Input
+            </h5>
+            <p style="font-size: 0.27em; color: #334155; margin: 0; line-height: 1.3;">
+                Luôn <code>toLowerCase()</code>, strip accents, và chuẩn hóa Unicode NFC (cho tiếng Việt) trước khi thực hiện <code>insert()</code> hay <code>search()</code>.
+            </p>
+        </div>
+
+        <div class="glass-card" style="text-align: left; padding: 6px 8px; border-top: 3px solid #ec4899; background: #ffffff;">
+            <h5 style="color: #db2777; font-size: 0.33em; font-weight: 800; margin: 0 0 2px 0;">
+                <i class="fa-solid fa-compress"></i> Radix Tree (Patricia Trie)
+            </h5>
+            <p style="font-size: 0.27em; color: #334155; margin: 0; line-height: 1.3;">
+                Gộp chuỗi các nút đơn con nối tiếp (vd: <code>a ➔ l ➔ g ➔ o</code> thành 1 nút <code>"algo"</code>), giúp tiết kiệm <strong>60%–80% RAM</strong> trong thực tế!
+            </p>
+        </div>
+
+        <div class="glass-card" style="text-align: left; padding: 6px 8px; border-top: 3px solid #10b981; background: #ffffff;">
+            <h5 style="color: #047857; font-size: 0.33em; font-weight: 800; margin: 0 0 2px 0;">
+                <i class="fa-solid fa-filter"></i> Top-K Early Capping
+            </h5>
+            <p style="font-size: 0.27em; color: #334155; margin: 0; line-height: 1.3;">
+                Lưu sẵn Top 10 kết quả có tần suất cao nhất ngay tại mỗi nút để trả về tức thì khi người dùng mới gõ 1 ký tự ngắn (tránh quá tải CPU).
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Bottom Full-Width Key Takeaway Banner -->
+    <div style="width: 100%; margin-top: 6px; background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #2563eb; border-radius: 6px; padding: 5px 12px; font-size: 0.31em; color: #1e40af; text-align: left; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-lightbulb" style="font-size: 1.2em; color: #2563eb; flex-shrink: 0;"></i>
+        <span><strong>BÀI HỌC CỐT LÕI:</strong> Trie là cấu trúc dữ liệu nền tảng cho mọi tính năng <em>Autocomplete</em> và <em>Search Auto-suggest</em>. Việc nâng cấp lên <strong>Radix Tree (Patricia Trie)</strong> là chuẩn mực bắt buộc trong các thư viện thương mại sản xuất!</span>
+    </div>
+
+    <aside class="notes">
+        Slide 11 tổng kết các ứng dụng thực tế của Trie như Gboard autocomplete, IDE auto-suggest, Router LPM và giới thiệu Radix Tree (Patricia Trie) là phiên bản nén nâng cao giúp tiết kiệm đến 80% bộ nhớ trong thực tế.
+    </aside>
+</section>

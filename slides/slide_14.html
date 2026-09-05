@@ -1,0 +1,113 @@
+<section data-transition="slide">
+    <!-- Top Badge -->
+    <div class="badge badge-gold" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN III: CẤU TRÚC UNION-FIND (DSU)</div>
+    <h3 style="font-size: 0.82em; margin: 0 0 8px 0; color: #0f172a; font-weight: 700;">Mô Hình Đại Diện Tập Hợp & Nguy Cơ Suy Biến Cấu Trúc</h3>
+
+    <!-- Main Grid 2 Columns: Representative Model vs Degenerative Danger -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; text-align: left; align-items: stretch;">
+        
+        <!-- Left: Representative Metaphor Card -->
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 8px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <h4 style="color: #0284c7; font-size: 0.38em; font-weight: 800; margin: 0 0 6px 0;">
+                    <i class="fa-solid fa-users-rectangle" style="margin-right: 4px;"></i> 1. Mô Hình Nút Gốc Đại Diện
+                </h4>
+                <ul style="font-size: 0.3em; color: #334155; line-height: 1.45; margin: 0; padding-left: 14px;">
+                    <li>Mỗi tập hợp liên thông = <strong>1 Cây Up-tree riêng biệt</strong>.</li>
+                    <li>Nút Gốc (Root) = <strong>Đại diện duy nhất</strong> của toàn tập hợp.</li>
+                    <li><code>find(x)</code>: Truy vấn <em>"Đại diện của phần tử $x$ là nút nào?"</em></li>
+                    <li><code>union(x, y)</code>: Nối nút Đại diện $x$ vào dưới quyền nút Đại diện $y$.</li>
+                </ul>
+            </div>
+
+            <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: 6px 10px; font-size: 0.28em; color: #0369a1; margin-top: 8px;">
+                <i class="fa-solid fa-lightbulb" style="color: #0284c7; margin-right: 4px;"></i> <strong>Triết lý thiết kế:</strong> Không cần ghi nhớ mọi kết nối đôi một, chỉ cần quản lý Nút Gốc Đại Diện của mỗi nhóm!
+            </div>
+        </div>
+
+        <!-- Right: Naive Union Degeneration SVG Card -->
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #dc2626; border-radius: 8px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <h4 style="color: #dc2626; font-size: 0.38em; font-weight: 800; margin: 0;">
+                        <i class="fa-solid fa-triangle-exclamation" style="margin-right: 4px;"></i> 2. Nguy Cơ Suy Biến (Naive Union)
+                    </h4>
+                    <span style="font-size: 0.26em; background: #fee2e2; color: #991b1b; padding: 2px 6px; border-radius: 4px; font-weight: 700;">Worst-Case $O(N)$</span>
+                </div>
+                <p style="font-size: 0.29em; color: #334155; margin: 0 0 6px 0; line-height: 1.4;">
+                    Nếu gộp ngây thơ không kiểm soát thứ tự (<code>parent[find(x)] = find(y)</code>):
+                </p>
+            </div>
+
+            <!-- SVG Diagram of Degenerate Tree (Linked List shape - CLEAN FONTS & NO OVERLAY!) -->
+            <svg viewBox="0 0 320 60" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', sans-serif;">
+                <defs>
+                    <marker id="arr-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#dc2626" />
+                    </marker>
+                </defs>
+
+                <!-- Horizontal Chain: 4 -> 3 -> 2 -> 1 -> 0 -->
+                <line x1="270" y1="25" x2="215" y2="25" stroke="#dc2626" stroke-width="2" marker-end="url(#arr-red)"/>
+                <line x1="200" y1="25" x2="145" y2="25" stroke="#dc2626" stroke-width="2" marker-end="url(#arr-red)"/>
+                <line x1="130" y1="25" x2="75" y2="25" stroke="#dc2626" stroke-width="2" marker-end="url(#arr-red)"/>
+                <line x1="60" y1="25" x2="32" y2="25" stroke="#dc2626" stroke-width="2" marker-end="url(#arr-red)"/>
+
+                <circle cx="278" cy="25" r="9" fill="#fee2e2" stroke="#dc2626" stroke-width="1.6"/>
+                <text x="278" y="28" fill="#991b1b" font-size="8" font-weight="800" text-anchor="middle">4</text>
+
+                <circle cx="208" cy="25" r="9" fill="#fee2e2" stroke="#dc2626" stroke-width="1.6"/>
+                <text x="208" y="28" fill="#991b1b" font-size="8" font-weight="800" text-anchor="middle">3</text>
+
+                <circle cx="138" cy="25" r="9" fill="#fee2e2" stroke="#dc2626" stroke-width="1.6"/>
+                <text x="138" y="28" fill="#991b1b" font-size="8" font-weight="800" text-anchor="middle">2</text>
+
+                <circle cx="68" cy="25" r="9" fill="#fee2e2" stroke="#dc2626" stroke-width="1.6"/>
+                <text x="68" y="28" fill="#991b1b" font-size="8" font-weight="800" text-anchor="middle">1</text>
+
+                <circle cx="20" cy="25" r="11" fill="#dc2626"/>
+                <circle cx="20" cy="25" r="7" fill="none" stroke="#fff" stroke-width="1.2"/>
+                <text x="20" y="28" fill="#fff" font-size="8" font-weight="800" text-anchor="middle">0</text>
+            </svg>
+
+            <div style="background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; padding: 6px 10px; font-size: 0.28em; color: #991b1b; margin-top: 4px;">
+                <i class="fa-solid fa-circle-xmark" style="color: #dc2626; margin-right: 4px;"></i> <strong>Hậu quả:</strong> Cây bị suy biến thành Danh sách liên kết ($H = N - 1$). Mỗi lần <code>find(x)</code> bị kéo dài $O(N)$!
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Row: 3 Flaw Consequences & Solutions (Clean 3 Columns) -->
+    <div style="width: 100%; margin-top: 10px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: left;">
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #dc2626; border-radius: 6px; padding: 8px 10px;">
+            <h5 style="color: #dc2626; font-size: 0.34em; font-weight: 800; margin: 0 0 3px 0;">
+                <i class="fa-solid fa-link-slash" style="margin-right: 4px;"></i> Hậu Quả Naive Union
+            </h5>
+            <p style="font-size: 0.28em; color: #334155; margin: 0; line-height: 1.4;">
+                Khi gộp liên tiếp theo thứ tự $0 \leftarrow 1 \leftarrow 2 \dots$, cây duỗi thẳng thành 1 chuỗi dài.
+            </p>
+        </div>
+
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #d97706; border-radius: 6px; padding: 8px 10px;">
+            <h5 style="color: #b45309; font-size: 0.34em; font-weight: 800; margin: 0 0 3px 0;">
+                <i class="fa-solid fa-clock" style="margin-right: 4px;"></i> Tốc Độ Tệ Bị Đẩy Lên $O(N)$
+            </h5>
+            <p style="font-size: 0.28em; color: #334155; margin: 0; line-height: 1.4;">
+                Mỗi lần <code>find(x)</code> phải duyệt ngược từ đáy lên đỉnh qua $N$ con trỏ, làm mất đi ưu thế DSU.
+            </p>
+        </div>
+
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #059669; border-radius: 6px; padding: 8px 10px;">
+            <h5 style="color: #047857; font-size: 0.34em; font-weight: 800; margin: 0 0 3px 0;">
+                <i class="fa-solid fa-lightbulb" style="margin-right: 4px;"></i> Giải Pháp Tối Ưu Tốc Độ
+            </h5>
+            <p style="font-size: 0.28em; color: #334155; margin: 0; line-height: 1.4;">
+                Áp dụng 2 kỹ thuật tối ưu kinh điển: <strong>Union by Rank / Size</strong> và <strong>Path Compression</strong>.
+            </p>
+        </div>
+    </div>
+
+    <aside class="notes">
+        Slide 14 giải thích mô hình đại diện tập hợp và cảnh báo nguy cơ cây bị suy biến thành Danh sách liên kết với độ phức tạp O(N) khi dùng Naive Union.
+    </aside>
+</section>

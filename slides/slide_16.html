@@ -1,0 +1,95 @@
+<section data-transition="slide">
+    <!-- Top Badge -->
+    <div class="badge badge-gold" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN III: CẤU TRÚC UNION-FIND (DSU)</div>
+    <h3 style="font-size: 0.82em; margin: 0 0 8px 0; color: #0f172a; font-weight: 700;">Tối Ưu Hóa 2: Kỹ Thuật Nén Đường Đi (Path Compression)</h3>
+
+    <!-- Main Grid 2 Columns: Code vs Visual Diagram -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; text-align: left; align-items: stretch;">
+        
+        <!-- Left: Implementation & Code Card -->
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #7c3aed; border-radius: 8px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <h4 style="color: #7c3aed; font-size: 0.38em; font-weight: 800; margin: 0 0 6px 0; display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-bolt" style="color: #7c3aed;"></i> 1. Phép Gán Đệ Quy Kỳ Diệu
+                </h4>
+                <p style="font-size: 0.29em; color: #334155; line-height: 1.45; margin: 0 0 8px 0;">
+                    Trên đường đệ quy từ $x$ đi tìm Root, cập nhật lại con trỏ <code>parent</code> của <u>tất cả các nút intermediate</u> trỏ trực tiếp về Root đại diện!
+                </p>
+
+                <!-- Clean Light Code Block -->
+                <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px 10px; font-family: 'Fira Code', monospace; font-size: 0.28em; line-height: 1.5; color: #0f172a;">
+                    <span style="color: #7c3aed; font-weight: 700;">int</span> <span style="color: #0284c7; font-weight: 700;">find</span>(<span style="color: #7c3aed; font-weight: 700;">int</span> i) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #7c3aed; font-weight: 700;">if</span> (parent[i] == i)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #7c3aed; font-weight: 700;">return</span> i;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #64748b;">// Nén đường đi: Gán trực tiếp kết quả đệ quy!</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #059669; font-weight: 800;">return parent[i] = find(parent[i]);</span><br>
+                    }
+                </div>
+            </div>
+
+            <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 4px; padding: 5px 8px; font-size: 0.27em; color: #6b21a8; font-weight: 700; margin-top: 8px;">
+                <i class="fa-solid fa-wand-magic-sparkles" style="margin-right: 4px;"></i> Chỉ cần 1 dòng mã: Tự động cập nhật toàn bộ mảng parent[]!
+            </div>
+        </div>
+
+        <!-- Right: Visual Diagram Card (Flattened Tree) -->
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 8px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <h4 style="color: #0284c7; font-size: 0.38em; font-weight: 800; margin: 0 0 4px 0; display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-sitemap" style="color: #0284c7;"></i> 2. Kết Quả: Cây Bị Ép Phẳng Tuyệt Đối
+                </h4>
+                <p style="font-size: 0.28em; color: #334155; margin: 0 0 6px 0;">
+                    Mọi nút con trên đường đi đều nối thẳng đến Gốc tối cao:
+                </p>
+
+                <!-- SVG Flat Tree Diagram -->
+                <svg viewBox="0 0 300 110" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', sans-serif;">
+                    <defs>
+                        <marker id="arr-up" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0284c7" />
+                        </marker>
+                    </defs>
+
+                    <!-- Root Node Label Above -->
+                    <text x="150" y="9" fill="#7c3aed" font-size="6.5" font-weight="800" text-anchor="middle">ROOT 0</text>
+                    <circle cx="150" cy="24" r="11" fill="#7c3aed"/>
+                    <text x="150" y="27" fill="#ffffff" font-size="7.5" font-weight="800" text-anchor="middle">0</text>
+
+                    <!-- Direct Connect Arrows from 1, 2, 3, 4 to Root 0 -->
+                    <line x1="40" y1="80" x2="137" y2="34" stroke="#0284c7" stroke-width="1.6" marker-end="url(#arr-up)"/>
+                    <line x1="110" y1="80" x2="144" y2="35" stroke="#0284c7" stroke-width="1.6" marker-end="url(#arr-up)"/>
+                    <line x1="190" y1="80" x2="156" y2="35" stroke="#0284c7" stroke-width="1.6" marker-end="url(#arr-up)"/>
+                    <line x1="260" y1="80" x2="163" y2="34" stroke="#0284c7" stroke-width="1.6" marker-end="url(#arr-up)"/>
+
+                    <!-- Child Nodes at bottom -->
+                    <circle cx="40" cy="85" r="9" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+                    <text x="40" y="88" fill="#0369a1" font-size="7.5" font-weight="800" text-anchor="middle">1</text>
+
+                    <circle cx="110" cy="85" r="9" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+                    <text x="110" y="88" fill="#0369a1" font-size="7.5" font-weight="800" text-anchor="middle">2</text>
+
+                    <circle cx="190" cy="85" r="9" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+                    <text x="190" y="88" fill="#0369a1" font-size="7.5" font-weight="800" text-anchor="middle">3</text>
+
+                    <circle cx="260" cy="85" r="9" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+                    <text x="260" y="88" fill="#0369a1" font-size="7.5" font-weight="800" text-anchor="middle">4</text>
+                </svg>
+            </div>
+
+            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 4px; padding: 5px 8px; font-size: 0.27em; color: #166534; font-weight: 700; text-align: center; margin-top: 4px;">
+                <i class="fa-solid fa-check-circle" style="color: #059669; margin-right: 4px;"></i> Các thao tác find() kế tiếp trên nhánh này chỉ tốn $O(1)$!
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Self-Healing Mechanism Banner -->
+    <div style="width: 100%; margin-top: 8px; background: #f0f9ff; border: 1px solid #bae6fd; border-left: 4px solid #0284c7; border-radius: 6px; padding: 6px 14px; font-size: 0.35em; color: #0369a1; text-align: left; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-shield-halved" style="font-size: 1.2em; color: #0284c7; flex-shrink: 0;"></i>
+        <span><strong>CƠ CHẾ TỰ SỬA CHỮA (SELF-HEALING):</strong> Mỗi lần gọi <code>find()</code> không chỉ trả về kết quả mà còn tự động "chữa lành" và ép phẳng cấu trúc cây cho các truy vấn trong tương lai!</span>
+    </div>
+
+    <aside class="notes">
+        Hãy nhìn vào dòng code C++ kỳ diệu này: Chỉ bằng phép gán đệ quy parent[i] = find(parent[i]), tất cả các nút trên đường đi tìm Chủ tịch sẽ lập tức được nối thẳng trực tiếp tới vị Chủ tịch đó. Cây bị ép phẳng tuyệt đối.
+    </aside>
+</section>

@@ -1,0 +1,34 @@
+<section data-transition="slide">
+                <div class="badge badge-purple">Cơ Chế Sinh Tử</div>
+                <h3 style="font-size: 1.0em;">Vai Trò Sinh Tử Của Cờ `is_end_of_word`</h3>
+
+                <div class="grid-2" style="margin-top: 12px;">
+                    <div class="glass-card" style="text-align: left; font-size: 0.6em;">
+                        <h4 style="color: #ff7979;"><i class="fa-solid fa-question"></i> Đặt Vấn Đề</h4>
+                        <p>Xét hai từ <code>"car"</code> và <code>"cart"</code>:</p>
+                        <ul>
+                            <li>Từ <code>"car"</code> nằm trọn làm tiền tố của từ <code>"cart"</code>.</li>
+                            <li>Nếu chỉ lưu đường đi <code>c -> a -> r -> t</code>, làm sao biết <code>"car"</code> có tồn tại trong từ điển hay không?</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card" style="text-align: left; font-size: 0.6em;">
+                        <h4 style="color: var(--accent-emerald);"><i class="fa-solid fa-flag"></i> Giải Pháp</h4>
+                        <p>Mỗi nút duy trì 1 cờ boolean <code>is_end_of_word</code>:</p>
+                        <ul>
+                            <li>Path tồn tại $\implies$ Chuỗi là <strong>Tiền tố (Prefix)</strong>.</li>
+                            <li>Path tồn tại + <code>is_end == true</code> $\implies$ Chuỗi là <strong>Từ hoàn chỉnh (Valid Key)</strong>!</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout" style="font-size: 0.7em; margin-top: 12px;">
+                    🏠 <strong>Ẩn dụ thị giác:</strong> Lối đi đến phòng là đường đi trên cây. Phải nhìn thấy <strong>tấm thảm chùi chân đặt trước cửa</strong> (<code>is_end = true</code>) mới chứng minh đây là đích đến hợp lệ!
+                </div>
+
+                <aside class="notes">
+                    Nếu không có cờ boolean is_end_of_word, khi ta lưu hai từ 'car' và 'cart', từ 'car' sẽ lập tức bị nuốt chửng và biến mất inside từ 'cart'. Cờ này giúp hệ thống phân biệt rạch ròi giữa một tiền tố đang dở dang và một từ khóa hoàn chỉnh thực sự tồn tại.
+                </aside>
+            </section>
+
+            <!-- SLIDE 8: Trie Code & Algorithms -->

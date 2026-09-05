@@ -1,0 +1,83 @@
+<section data-transition="slide">
+    <!-- Top Badge -->
+    <div class="badge badge-gold" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN III: CẤU TRÚC UNION-FIND (DSU)</div>
+    <h3 style="font-size: 0.82em; margin: 0 0 8px 0; color: #0f172a; font-weight: 700;">Bảng Mô Phỏng Vết (Trace Table) Từng Bước Thực Thi DSU</h3>
+
+    <!-- Main Trace Table -->
+    <div style="width: 100%; margin-bottom: 8px;">
+        <table style="font-size: 0.34em; margin: 0; width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; text-align: left;">
+            <thead>
+                <tr style="background: #0284c7; color: #ffffff;">
+                    <th style="padding: 6px 8px; width: 6%; text-align: center; background: #0284c7; color: #fff;">Bước</th>
+                    <th style="padding: 6px 10px; width: 18%; background: #0369a1; color: #fff;">Thao Tác Tác Động</th>
+                    <th style="padding: 6px 10px; width: 25%; background: #0284c7; color: #fff;">Mảng <code>parent[]</code> Sau Bước</th>
+                    <th style="padding: 6px 10px; width: 22%; background: #0284c7; color: #fff;">Mảng <code>rank[]</code></th>
+                    <th style="padding: 6px 10px; background: #0284c7; color: #fff;">Phân Tích Chi Tiết Mechanism</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="text-align: center; font-weight: 700; color: #64748b;">0</td>
+                    <td style="font-family: 'Fira Code', monospace; color: #0284c7; font-weight: 700;">Init(7)</td>
+                    <td style="font-family: 'Fira Code', monospace;">[0, 1, 2, 3, 4, 5, 6]</td>
+                    <td style="font-family: 'Fira Code', monospace;">[0, 0, 0, 0, 0, 0, 0]</td>
+                    <td>Khởi tạo 7 tập hợp độc lập (mỗi nút tự làm gốc của chính nó).</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; font-weight: 700; color: #64748b;">1</td>
+                    <td style="font-family: 'Fira Code', monospace; color: #0284c7; font-weight: 700;">union(0, 1)</td>
+                    <td style="font-family: 'Fira Code', monospace;">[0, 0, 2, 3, 4, 5, 6]</td>
+                    <td style="font-family: 'Fira Code', monospace;">[1, 0, 0, 0, 0, 0, 0]</td>
+                    <td>Gộp nút 1 dưới gốc 0. <code>rank[0]</code> tăng từ 0 lên 1.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; font-weight: 700; color: #64748b;">2</td>
+                    <td style="font-family: 'Fira Code', monospace; color: #0284c7; font-weight: 700;">union(1, 2)</td>
+                    <td style="font-family: 'Fira Code', monospace;">[0, 0, 0, 3, 4, 5, 6]</td>
+                    <td style="font-family: 'Fira Code', monospace;">[1, 0, 0, 0, 0, 0, 0]</td>
+                    <td><code>find(1)=0, find(2)=2</code>. Treo 2 dưới gốc 0 (Rank 0 giữ nguyên 1).</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; font-weight: 700; color: #64748b;">3</td>
+                    <td style="font-family: 'Fira Code', monospace; color: #0284c7; font-weight: 700;">union(2, 3)</td>
+                    <td style="font-family: 'Fira Code', monospace;">[0, 0, 0, 0, 4, 5, 6]</td>
+                    <td style="font-family: 'Fira Code', monospace;">[1, 0, 0, 0, 0, 0, 0]</td>
+                    <td><code>find(2)=0, find(3)=3</code>. Treo 3 dưới gốc 0.</td>
+                </tr>
+                <!-- Highlight Path Compression Row -->
+                <tr style="background: #e0f2fe;">
+                    <td style="text-align: center; font-weight: 800; color: #0369a1;">4</td>
+                    <td style="font-family: 'Fira Code', monospace; color: #0369a1; font-weight: 800;">connected(0,3)</td>
+                    <td style="font-family: 'Fira Code', monospace; font-weight: 700; color: #0369a1;">[0, 0, 0, 0, 4, 5, 6]</td>
+                    <td style="font-family: 'Fira Code', monospace;">[1, 0, 0, 0, 0, 0, 0]</td>
+                    <td style="color: #0369a1; font-weight: 700;"><i class="fa-solid fa-bolt" style="margin-right: 4px;"></i> Trả về True. Path Compression đưa nút 3 nối thẳng vào gốc 0!</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; font-weight: 700; color: #64748b;">5</td>
+                    <td style="font-family: 'Fira Code', monospace; color: #0284c7; font-weight: 700;">union(4, 5)</td>
+                    <td style="font-family: 'Fira Code', monospace;">[0, 0, 0, 0, 4, 4, 6]</td>
+                    <td style="font-family: 'Fira Code', monospace;">[1, 0, 0, 0, 1, 0, 0]</td>
+                    <td>Gộp 5 vào gốc 4. <code>rank[4]</code> tăng thành 1.</td>
+                </tr>
+                <!-- Highlight Rank Tie Row -->
+                <tr style="background: #f3e8ff;">
+                    <td style="text-align: center; font-weight: 800; color: #6b21a8;">6</td>
+                    <td style="font-family: 'Fira Code', monospace; color: #6b21a8; font-weight: 800;">union(3, 5)</td>
+                    <td style="font-family: 'Fira Code', monospace; font-weight: 700; color: #6b21a8;">[0, 0, 0, 0, 0, 4, 6]</td>
+                    <td style="font-family: 'Fira Code', monospace; font-weight: 700; color: #6b21a8;">[2, 0, 0, 0, 1, 0, 0]</td>
+                    <td style="color: #6b21a8; font-weight: 700;"><i class="fa-solid fa-layer-group" style="margin-right: 4px;"></i> <code>find(3)=0, find(5)=4</code>. Cùng Rank=1 $\implies$ Treo 4 vào 0, <code>rank[0]</code> lên 2!</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bottom Key Insight Banner -->
+    <div style="width: 100%; margin-top: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #059669; border-radius: 6px; padding: 6px 14px; font-size: 0.35em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-lightbulb" style="font-size: 1.2em; color: #059669; flex-shrink: 0;"></i>
+        <span><strong>ĐIỂM SÁNG KĨ THUẬT:</strong> Nhờ Path Compression, sau mỗi phép truy vấn <code>find()</code>, các nút trên đường đi lập tức được nối thẳng về Gốc Đại Diện 0, giúp giữ chiều cao cây luôn tiệm cận 1!</span>
+    </div>
+
+    <aside class="notes">
+        Bảng vết này thể hiện trọn vẹn sức mạnh của Union-Find. Hãy chú ý bước 4 và bước 6: Ngay khi hàm connected hoặc union được gọi, cơ chế nén đường đi lập tức đưa các nút về kết nối trực tiếp với gốc tối cao 0.
+    </aside>
+</section>

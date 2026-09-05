@@ -1,0 +1,82 @@
+<section data-transition="slide">
+    <!-- Top Badge -->
+    <div class="badge badge-gold" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN III: CẤU TRÚC UNION-FIND (DSU)</div>
+    <h3 style="font-size: 0.82em; margin: 0 0 6px 0; color: #0f172a; font-weight: 700;">Độ Phức Tạp Cực Hạn & Hàm Ngược Ackermann $\alpha(N)$</h3>
+
+    <!-- Sub-header Callout -->
+    <div style="width: 100%; background: #f0f9ff; border: 1px solid #bae6fd; border-left: 4px solid #0284c7; border-radius: 6px; padding: 6px 12px; margin-bottom: 10px; font-size: 0.34em; color: #0369a1; text-align: left;">
+        <i class="fa-solid fa-square-root-variable" style="color: #0284c7; margin-right: 6px;"></i>
+        <strong>ĐỘT PHÁ TOÁN HỌC:</strong> Khi kết hợp <u>Union by Rank</u> + <u>Path Compression</u>, chi phí mỗi thao tác <code>find()</code> và <code>union()</code> đạt <strong>$O(\alpha(N))$</strong> — tiệm cận HẰNG SỐ tuyệt đối!
+    </div>
+
+    <!-- 2-Column Asymmetric Layout -->
+    <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 12px; width: 100%; text-align: left; align-items: stretch;">
+        
+        <!-- Left Column: Math Intuition Card -->
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #7c3aed; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <h4 style="color: #7c3aed; font-size: 0.38em; font-weight: 800; margin: 0 0 6px 0; display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-infinity"></i> 1. Trực Giác Hàm $\alpha(N)$
+                </h4>
+                <div style="font-size: 0.29em; color: #334155; line-height: 1.45;">
+                    <p style="margin: 0 0 6px 0;">
+                        <strong>Hàm Ackermann $A(m, n)$:</strong> Là hàm toán học có tốc độ tăng trưởng nhanh khủng khiếp nhất (vượt xa hàm lũy thừa tầng $2^{2^{.^{.}}}$).
+                    </p>
+                    <p style="margin: 0;">
+                        <strong>Hàm ngược $\alpha(N)$:</strong> Ngược lại, là hàm tăng trưởng <strong>chậm nhất trong khoa học máy tính</strong>!
+                    </p>
+                </div>
+            </div>
+
+            <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 6px; padding: 6px 8px; font-size: 0.27em; color: #6b21a8; font-weight: 600; margin-top: 8px;">
+                <i class="fa-solid fa-atom" style="color: #7c3aed; margin-right: 4px;"></i> Để $\alpha(N) = 5$, $N$ phải lớn hơn tổng số nguyên tử trong toàn bộ vũ trụ quan sát được ($10^{80}$)!
+            </div>
+        </div>
+
+        <!-- Right Column: Practical Benchmark Growth Table -->
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <h4 style="color: #059669; font-size: 0.38em; font-weight: 800; margin: 0 0 6px 0; display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-table" style="color: #059669;"></i> 2. Bảng Tra Cứu Tốc Độ Thực Tế
+                </h4>
+                <table style="font-size: 0.32em; margin: 0; width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden;">
+                    <thead>
+                        <tr style="background: #059669; color: #ffffff;">
+                            <th style="padding: 5px 8px; background: #059669; color: #fff;">Quy Mô Dữ Liệu $N$</th>
+                            <th style="padding: 5px 8px; background: #047857; color: #fff; text-align: center;">Giá Trị $\alpha(N)$</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>$N = 1 \dots 3$</td>
+                            <td style="text-align: center; font-weight: 700;">$\alpha(N) = 1$</td>
+                        </tr>
+                        <tr>
+                            <td>$N = 4 \dots 7$</td>
+                            <td style="text-align: center; font-weight: 700;">$\alpha(N) = 2$</td>
+                        </tr>
+                        <tr>
+                            <td>$N = 8 \dots 2047$</td>
+                            <td style="text-align: center; font-weight: 700;">$\alpha(N) = 3$</td>
+                        </tr>
+                        <tr style="background: #fef3c7; color: #78350f; font-weight: 800;">
+                            <td>$N = 2048 \dots 10^{80}$ <br><span style="font-size: 0.85em; color: #b45309;">(Số nguyên tử trong toàn vũ trụ!)</span></td>
+                            <td style="text-align: center; font-size: 1.1em; color: #b45309;">$\alpha(N) \le 4$</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Full Width System Architect Guarantee Banner -->
+    <div style="width: 100%; margin-top: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #059669; border-radius: 6px; padding: 6px 14px; font-size: 0.35em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-bolt" style="font-size: 1.2em; color: #059669; flex-shrink: 0;"></i>
+        <span><strong>KẾT LUẬN HỆ THỐNG:</strong> Đối với mọi cơ sở dữ liệu trên Trái Đất, $\alpha(N)$ không bao giờ vượt quá 4. Do đó trong thực tế kỹ thuật, <strong>Union-Find hoạt động với tốc độ HẰNG SỐ $O(1)$!</strong></span>
+    </div>
+
+    <aside class="notes">
+        Inverse Ackermann alpha(N) là một trong những kết quả đẹp nhất của khoa học máy tính. Dù từ điển có chứa 1 triệu hay 1 tỷ phần tử, hay thậm chí bằng số nguyên tử trong toàn bộ vũ trụ (10^80), giá trị alpha(N) cũng không bao giờ vượt quá 4. Thao tác gộp và tìm kiếm diễn ra gần như tức thì.
+    </aside>
+</section>

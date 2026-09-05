@@ -1,0 +1,439 @@
+<section data-transition="slide" id="slide-08-section">
+    <div class="badge badge-purple" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">MÔ PHỎNG THUẬT TOÁN TƯƠNG TÁC</div>
+    <h3 style="font-size: 0.78em; margin: 0 0 6px 0; color: #0f172a; font-weight: 700;">Thuật Toán Vận Hành Trie & Mô Phỏng Tuần Tự Từng Dòng Lệnh</h3>
+
+    <!-- Step Controller Panel -->
+    <div style="width: 100%; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 6px 12px; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+        
+        <!-- Scenario Selector Buttons -->
+        <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="font-size: 0.32em; font-weight: 700; color: #475569;">Chọn bài toán:</span>
+            <button onclick="selectScenario('search_car', event)" id="btn-sc-car" class="sc-btn sc-active">search("car")</button>
+            <button onclick="selectScenario('search_ca', event)" id="btn-sc-ca" class="sc-btn">search("ca")</button>
+            <button onclick="selectScenario('insert_cart', event)" id="btn-sc-cart" class="sc-btn">insert("cart")</button>
+        </div>
+
+        <!-- Step Navigation Controls -->
+        <div style="display: flex; align-items: center; gap: 6px;">
+            <button onclick="prevStep(event)" class="ctrl-btn btn-slate" id="btn-prev-step">
+                <i class="fa-solid fa-chevron-left"></i> Lùi Lại
+            </button>
+
+            <!-- Prominent NEXT STEP Button -->
+            <button onclick="nextStep(event)" class="ctrl-btn btn-purple-primary" id="btn-next-step">
+                Bước Tiếp <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+            <button onclick="toggleAutoPlay(event)" class="ctrl-btn btn-emerald" id="btn-auto-play">
+                <i class="fa-solid fa-play" id="icon-auto-play"></i> Tự Động
+            </button>
+
+            <button onclick="resetScenario(event)" class="ctrl-btn btn-slate">
+                <i class="fa-solid fa-rotate-left"></i> Reset
+            </button>
+
+            <span id="step-indicator" style="font-size: 0.32em; font-weight: 800; color: #7c3aed; background: #f3e8ff; border: 1px solid #d8b4fe; padding: 2px 8px; border-radius: 12px; min-width: 75px; text-anchor: center;">
+                Bước 0 / 10
+            </span>
+        </div>
+    </div>
+
+    <!-- Main Grid Content: SVG Visualizer on Left, C++ Code + Line Highlight on Right -->
+    <div style="width: 100%; display: grid; grid-template-columns: 1.25fr 1fr; gap: 10px; align-items: stretch;">
+        
+        <!-- Left Column: Dynamic SVG Tree Diagram -->
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 8px 10px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="font-size: 0.32em; font-weight: 700; color: #0f172a; margin-bottom: 4px; display: flex; align-items: center; justify-content: space-between;">
+                <span style="display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-diagram-project" style="color: #0284c7;"></i>
+                    Trạng Thái Cây Trie Theo Dòng Lệnh
+                </span>
+                <span id="demo-status-badge" style="font-size: 0.85em; color: #64748b; font-weight: 600;">Sẵn sàng chạy</span>
+            </div>
+
+            <svg viewBox="0 0 420 190" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', sans-serif;">
+                <!-- Lines (Edges) -->
+                <!-- Root -> N1 ('c') -->
+                <line id="edge-c" x1="160" y1="31" x2="160" y2="54" stroke="#cbd5e1" stroke-width="2.5" />
+                <rect id="pill-c" x="160" y="42" width="16" height="16" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1" transform="translate(-8, -8)"/>
+                <text id="text-c" x="160" y="45" fill="#475569" font-size="8" font-weight="800" text-anchor="middle">'c'</text>
+
+                <!-- N1 -> N2 ('a') -->
+                <line id="edge-a" x1="160" y1="81" x2="160" y2="103" stroke="#cbd5e1" stroke-width="2.5" />
+                <rect id="pill-a" x="160" y="92" width="16" height="16" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1" transform="translate(-8, -8)"/>
+                <text id="text-a" x="160" y="95" fill="#475569" font-size="8" font-weight="800" text-anchor="middle">'a'</text>
+
+                <!-- N2 -> N3 ('r') -->
+                <line id="edge-r" x1="148" y1="126" x2="92" y2="161" stroke="#cbd5e1" stroke-width="2.5" />
+                <rect id="pill-r" x="120" y="143" width="16" height="16" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1" transform="translate(-8, -8)"/>
+                <text id="text-r" x="120" y="146" fill="#475569" font-size="8" font-weight="800" text-anchor="middle">'r'</text>
+
+                <!-- N3 -> N5 ('t') -->
+                <line id="edge-t" x1="126" y1="168" x2="212" y2="168" stroke="#cbd5e1" stroke-width="2.5" stroke-dasharray="3,3" />
+                <rect id="pill-t" x="169" y="168" width="16" height="16" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1" transform="translate(-8, -8)"/>
+                <text id="text-t" x="169" y="171" fill="#94a3b8" font-size="8" font-weight="800" text-anchor="middle">'t'</text>
+
+                <!-- Nodes -->
+                <!-- Root -->
+                <circle id="node-root" cx="160" cy="18" r="12" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+                <text x="160" y="21" fill="#0f172a" font-size="7.5" font-weight="800" text-anchor="middle">Root</text>
+
+                <!-- N1 -->
+                <circle id="node-n1" cx="160" cy="68" r="12" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+                <text id="text-node-n1" x="160" y="71" fill="#64748b" font-size="7.5" font-weight="800" text-anchor="middle">N1</text>
+
+                <!-- N2 ("ca" - NO FLAG) -->
+                <circle id="node-n2" cx="160" cy="118" r="13" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+                <text id="text-node-n2" x="160" y="121" fill="#64748b" font-size="7.5" font-weight="800" text-anchor="middle">N2</text>
+
+                <!-- N3 ("car" - WITH FLAG) -->
+                <circle id="node-n3" cx="80" cy="168" r="14" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+                <circle id="ring-n3" cx="80" cy="168" r="10" fill="none" stroke="#64748b" stroke-width="1"/>
+                <text id="text-node-n3" x="80" y="171" fill="#64748b" font-size="7.5" font-weight="800" text-anchor="middle">N3</text>
+
+                <!-- N5 ("cart" - NEW NODE) -->
+                <circle id="node-n5" cx="240" cy="168" r="14" fill="#ffffff" stroke="#cbd5e1" stroke-dasharray="2,2" stroke-width="1.5"/>
+                <text id="text-n5" x="240" y="171" fill="#cbd5e1" font-size="7.5" font-weight="800" text-anchor="middle">N5</text>
+
+                <!-- Annotations -->
+                <rect x="5" y="150" width="58" height="34" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+                <text x="34" y="163" fill="#64748b" font-size="7" font-weight="800" text-anchor="middle">N3: "car"</text>
+                <text x="34" y="174" fill="#059669" font-size="6.5" font-weight="800" text-anchor="middle">is_end=true</text>
+            </svg>
+
+            <!-- Bottom Log Box -->
+            <div id="demo-log-box" style="background: #f8fafc; border: 1px solid #cbd5e1; border-left: 4px solid #7c3aed; border-radius: 6px; padding: 6px 10px; font-size: 0.31em; color: #1e293b; text-align: left; line-height: 1.35; min-height: 38px; display: flex; align-items: center;">
+                <span>Nhấn nút <b>"Bước Tiếp <i class='fa-solid fa-chevron-right'></i>"</b> để chạy từng dòng lệnh C++.</span>
+            </div>
+        </div>
+
+        <!-- Right Column: Interactive Code Step Highlight -->
+        <div style="background: #0f172a; border-radius: 10px; padding: 8px 10px; text-align: left; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="font-size: 0.32em; font-weight: 700; color: #94a3b8; margin-bottom: 4px; display: flex; align-items: center; justify-content: space-between;">
+                <span><i class="fa-solid fa-code" style="color: #38bdf8;"></i> C++ Execution Trace</span>
+                <span id="demo-mode-name" style="color: #fde047;">Hàm: search("car")</span>
+            </div>
+
+            <div style="font-family: monospace; font-size: 0.27em; color: #f8fafc; line-height: 1.5;">
+                <div id="code-line-1" class="code-trace-line"><span style="color: #f43f5e;">bool</span> <span style="color: #38bdf8;">search</span>(string word) {</div>
+                <div id="code-line-2" class="code-trace-line">&nbsp;&nbsp;TrieNode* curr = root;</div>
+                <div id="code-line-3" class="code-trace-line">&nbsp;&nbsp;<span style="color: #f43f5e;">for</span>(<span style="color: #f43f5e;">char</span> c : word) {</div>
+                <div id="code-line-4" class="code-trace-line">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #f43f5e;">int</span> idx = c - <span style="color: #fde047;">'a'</span>;</div>
+                <div id="code-line-5" class="code-trace-line">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #f43f5e;">if</span>(!curr->children[idx])</div>
+                <div id="code-line-6" class="code-trace-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #f43f5e;">return</span> <span style="color: #fb7185;">false</span>;</div>
+                <div id="code-line-7" class="code-trace-line">&nbsp;&nbsp;&nbsp;&nbsp;curr = curr->children[idx];</div>
+                <div id="code-line-8" class="code-trace-line">&nbsp;&nbsp;}</div>
+                <div id="code-line-9" class="code-trace-line">&nbsp;&nbsp;<span style="color: #f43f5e;">return</span> curr-><span style="color: #a7f3d0; font-weight: bold;">is_end_of_word</span>;</div>
+                <div id="code-line-10" class="code-trace-line">}</div>
+            </div>
+
+            <!-- Variables Panel -->
+            <div style="background: #1e293b; border-radius: 6px; padding: 4px 8px; font-size: 0.28em; color: #94a3b8; display: flex; justify-content: space-between; align-items: center;">
+                <span>Ký tự <code>c</code>: <strong id="var-c-val" style="color: #fde047;">-</strong></span>
+                <span>Con trỏ <code>curr</code>: <strong id="var-curr-val" style="color: #38bdf8;">Root</strong></span>
+                <span>Cờ <code>is_end</code>: <strong id="var-flag-val" style="color: #f1f5f9;">-</strong></span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Embedded Custom Styling & Interactive Visualizer Script -->
+    <style>
+        .sc-btn {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            font-size: 0.3em;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            background: #f8fafc;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .sc-btn:hover { background: #e2e8f0; }
+        .sc-active { background: #7c3aed !important; color: #ffffff !important; border-color: #6d28d9 !important; }
+
+        .ctrl-btn {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            font-size: 0.3em;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .ctrl-btn:hover { transform: translateY(-1px); }
+        .btn-purple-primary { background: #7c3aed; color: #ffffff; border-color: #6d28d9; box-shadow: 0 2px 4px rgba(124, 58, 237, 0.25); }
+        .btn-purple-primary:hover { background: #6d28d9; }
+        .btn-emerald { background: #10b981; color: #ffffff; border-color: #059669; }
+        .btn-slate { background: #f1f5f9; color: #475569; border-color: #cbd5e1; }
+
+        .code-trace-line {
+            padding: 1px 6px;
+            border-radius: 4px;
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+        .code-trace-line.active-line {
+            background: #0284c7 !important;
+            color: #ffffff !important;
+            font-weight: bold;
+        }
+        .code-trace-line.active-line * {
+            color: #ffffff !important;
+        }
+    </style>
+
+    <script>
+        // Micro-Steps Definition (Strict Line-by-Line Execution)
+        const MICRO_SCENARIOS = {
+            search_car: {
+                name: 'hàm search("car")',
+                steps: [
+                    { line: 2, char: '-', curr: 'Root', flag: '-', badge: 'Dòng 2: Khởi tạo Root', log: '<b>Dòng 2:</b> Khởi tạo <code>curr = Root</code>. Bắt đầu tìm từ <code>"car"</code>.', activeNodes: ['root'] },
+                    { line: 3, char: '\'c\'', curr: 'Root', flag: '-', badge: 'Dòng 3: Vòng lặp c=\'c\'', log: '<b>Dòng 3:</b> Vòng lặp <code>for</code>: Đọc ký tự đầu tiên <code>c = \'c\'</code>.', activeNodes: ['root'], activeEdgePills: ['c'] },
+                    { line: 5, char: '\'c\'', curr: 'Root', flag: '-', badge: 'Dòng 5: Kiểm tra nhánh \'c\'', log: '<b>Dòng 5:</b> <code>if(!curr->children[\'c\'])</code> ➔ Nhánh <code>\'c\'</code> TỒN TẠI! Tiếp tục.', activeNodes: ['root'], activeEdges: ['c'] },
+                    { line: 7, char: '\'c\'', curr: 'N1 (\'c\')', flag: '-', badge: 'Dòng 7: Chuyển sang N1', log: '<b>Dòng 7:</b> <code>curr = curr->children[\'c\']</code> ➔ Chuyển <code>curr</code> tới <b>Nút N1</b>.', activeNodes: ['root', 'n1'], activeEdges: ['c'] },
+                    { line: 3, char: '\'a\'', curr: 'N1 (\'c\')', flag: '-', badge: 'Dòng 3: Vòng lặp c=\'a\'', log: '<b>Dòng 3:</b> Vòng lặp <code>for</code>: Đọc ký tự thứ hai <code>c = \'a\'</code>.', activeNodes: ['root', 'n1'], activeEdgePills: ['a'] },
+                    { line: 5, char: '\'a\'', curr: 'N1 (\'c\')', flag: '-', badge: 'Dòng 5: Kiểm tra nhánh \'a\'', log: '<b>Dòng 5:</b> <code>if(!curr->children[\'a\'])</code> ➔ Nhánh <code>\'a\'</code> TỒN TẠI! Tiếp tục.', activeNodes: ['root', 'n1'], activeEdges: ['c', 'a'] },
+                    { line: 7, char: '\'a\'', curr: 'N2 ("ca")', flag: '-', badge: 'Dòng 7: Chuyển sang N2', log: '<b>Dòng 7:</b> <code>curr = curr->children[\'a\']</code> ➔ Chuyển <code>curr</code> tới <b>Nút N2</b>.', activeNodes: ['root', 'n1', 'n2'], activeEdges: ['c', 'a'] },
+                    { line: 3, char: '\'r\'', curr: 'N2 ("ca")', flag: '-', badge: 'Dòng 3: Vòng lặp c=\'r\'', log: '<b>Dòng 3:</b> Vòng lặp <code>for</code>: Đọc ký tự thứ ba <code>c = \'r\'</code>.', activeNodes: ['root', 'n1', 'n2'], activeEdgePills: ['r'] },
+                    { line: 5, char: '\'r\'', curr: 'N2 ("ca")', flag: '-', badge: 'Dòng 5: Kiểm tra nhánh \'r\'', log: '<b>Dòng 5:</b> <code>if(!curr->children[\'r\'])</code> ➔ Nhánh <code>\'r\'</code> TỒN TẠI! Tiếp tục.', activeNodes: ['root', 'n1', 'n2'], activeEdges: ['c', 'a', 'r'] },
+                    { line: 7, char: '\'r\'', curr: 'N3 ("car")', flag: '-', badge: 'Dòng 7: Chuyển sang N3', log: '<b>Dòng 7:</b> <code>curr = curr->children[\'r\']</code> ➔ Chuyển <code>curr</code> tới <b>Nút N3</b>.', activeNodes: ['root', 'n1', 'n2', 'n3'], activeEdges: ['c', 'a', 'r'] },
+                    { line: 9, char: 'Hết từ', curr: 'N3 ("car")', flag: 'true', flagColor: '#059669', badge: '✓ KẾT QUẢ: TRUE', badgeColor: '#059669', log: '<b>Dòng 9:</b> <code>return N3->is_end_of_word</code> == <b>true</b> ➔ <strong style="color: #059669;">TÌM THẤY TỪ "CAR"!</strong>', logBorder: '#059669', activeNodes: ['root', 'n1', 'n2', 'n3'], activeEdges: ['c', 'a', 'r'], targetNode: 'n3' }
+                ]
+            },
+            search_ca: {
+                name: 'hàm search("ca")',
+                steps: [
+                    { line: 2, char: '-', curr: 'Root', flag: '-', badge: 'Dòng 2: Khởi tạo Root', log: '<b>Dòng 2:</b> Khởi tạo <code>curr = Root</code>. Bắt đầu tìm chuỗi <code>"ca"</code>.', activeNodes: ['root'] },
+                    { line: 3, char: '\'c\'', curr: 'Root', flag: '-', badge: 'Dòng 3: Vòng lặp c=\'c\'', log: '<b>Dòng 3:</b> Vòng lặp: Đọc ký tự thứ nhất <code>c = \'c\'</code>.', activeNodes: ['root'], activeEdgePills: ['c'] },
+                    { line: 5, char: '\'c\'', curr: 'Root', flag: '-', badge: 'Dòng 5: Kiểm tra nhánh \'c\'', log: '<b>Dòng 5:</b> Nhánh <code>\'c\'</code> TỒN TẠI! Tiếp tục.', activeNodes: ['root'], activeEdges: ['c'] },
+                    { line: 7, char: '\'c\'', curr: 'N1 (\'c\')', flag: '-', badge: 'Dòng 7: Chuyển sang N1', log: '<b>Dòng 7:</b> Chuyển <code>curr</code> tới <b>Nút N1</b>.', activeNodes: ['root', 'n1'], activeEdges: ['c'] },
+                    { line: 3, char: '\'a\'', curr: 'N1 (\'c\')', flag: '-', badge: 'Dòng 3: Vòng lặp c=\'a\'', log: '<b>Dòng 3:</b> Vòng lặp: Đọc ký tự thứ hai <code>c = \'a\'</code>.', activeNodes: ['root', 'n1'], activeEdgePills: ['a'] },
+                    { line: 5, char: '\'a\'', curr: 'N1 (\'c\')', flag: '-', badge: 'Dòng 5: Kiểm tra nhánh \'a\'', log: '<b>Dòng 5:</b> Nhánh <code>\'a\'</code> TỒN TẠI! Tiếp tục.', activeNodes: ['root', 'n1'], activeEdges: ['c', 'a'] },
+                    { line: 7, char: '\'a\'', curr: 'N2 ("ca")', flag: '-', badge: 'Dòng 7: Dừng tại N2', log: '<b>Dòng 7:</b> Chuyển <code>curr</code> tới <b>Nút N2</b>. Hết từ "ca"!', activeNodes: ['root', 'n1', 'n2'], activeEdges: ['c', 'a'] },
+                    { line: 9, char: 'Hết từ', curr: 'N2 ("ca")', flag: 'false', flagColor: '#dc2626', badge: '<i class="fa-solid fa-circle-xmark" style="color: #dc2626;"></i>  KẾT QUẢ: FALSE', badgeColor: '#dc2626', log: '<b>Dòng 9:</b> <code>return N2->is_end_of_word</code> == <b>false</b> ➔ <strong style="color: #dc2626;">KHÔNG PHẢI TỪ HOÀN CHỈNH!</strong>', logBorder: '#dc2626', activeNodes: ['root', 'n1', 'n2'], activeEdges: ['c', 'a'], targetNode: 'n2' }
+                ]
+            },
+            insert_cart: {
+                name: 'hàm insert("cart")',
+                steps: [
+                    { line: 2, char: '-', curr: 'Root', flag: '-', badge: 'Dòng 2: Khởi tạo Root', log: '<b>Dòng 2:</b> Khởi tạo <code>curr = Root</code>. Bắt đầu chèn từ <code>"cart"</code>.', activeNodes: ['root'] },
+                    { line: 7, char: '\'c\'', curr: 'N1 (\'c\')', flag: '-', badge: 'Dòng 7: Nhánh \'c\' có sẵn', log: '<b>Dòng 7:</b> Ký tự <code>\'c\'</code>: Nhánh đã có ➔ Chuyển tới Nút <b>N1</b>.', activeNodes: ['root', 'n1'], activeEdges: ['c'] },
+                    { line: 7, char: '\'a\'', curr: 'N2 ("ca")', flag: '-', badge: 'Dòng 7: Nhánh \'a\' có sẵn', log: '<b>Dòng 7:</b> Ký tự <code>\'a\'</code>: Nhánh đã có ➔ Chuyển tới Nút <b>N2</b>.', activeNodes: ['root', 'n1', 'n2'], activeEdges: ['c', 'a'] },
+                    { line: 7, char: '\'r\'', curr: 'N3 ("car")', flag: '-', badge: 'Dòng 7: Nhánh \'r\' có sẵn', log: '<b>Dòng 7:</b> Ký tự <code>\'r\'</code>: Nhánh đã có ➔ Chuyển tới Nút <b>N3</b>.', activeNodes: ['root', 'n1', 'n2', 'n3'], activeEdges: ['c', 'a', 'r'] },
+                    { line: 5, char: '\'t\'', curr: 'N3 ("car")', flag: '-', badge: 'Dòng 5: Nhánh \'t\' chưa có!', log: '<b>Dòng 5:</b> <code>if(!curr->children[\'t\'])</code> ➔ Chưa có nhánh! Cần tạo mới.', activeNodes: ['root', 'n1', 'n2', 'n3'], activeEdges: ['c', 'a', 'r'], activeEdgePills: ['t'] },
+                    { line: 7, char: '\'t\'', curr: 'N5 ("cart")', flag: 'true', flagColor: '#059669', badge: '✓ ĐÃ CHÈN NÚT N5', badgeColor: '#059669', log: '<b>Dòng 7 & 9:</b> Tạo Nút <b>N5</b> mới qua cạnh <code>\'t\'</code> và bật <code>N5.is_end = true</code>!', logBorder: '#059669', activeNodes: ['root', 'n1', 'n2', 'n3'], activeEdges: ['c', 'a', 'r'], newN5: true }
+                ]
+            }
+        };
+
+        let activeScenarioKey = 'search_car';
+        let stepPointer = 0;
+        let playIntervalTimer = null;
+
+        function renderMicroStep(idx) {
+            const sc = MICRO_SCENARIOS[activeScenarioKey];
+            if (!sc) return;
+
+            if (idx < 0) idx = 0;
+            if (idx >= sc.steps.length) idx = sc.steps.length - 1;
+            stepPointer = idx;
+
+            const st = sc.steps[idx];
+
+            // Reset SVG element colors
+            ['root', 'n1', 'n2', 'n3'].forEach(id => {
+                const el = document.getElementById('node-' + id);
+                const txt = document.getElementById('text-node-' + id);
+                if (el) { el.setAttribute('fill', '#ffffff'); el.setAttribute('stroke', '#64748b'); el.setAttribute('stroke-width', '2'); }
+                if (txt) { txt.setAttribute('fill', '#64748b'); }
+            });
+            const n5 = document.getElementById('node-n5');
+            if (n5) {
+                n5.setAttribute('fill', '#ffffff'); n5.setAttribute('stroke', '#cbd5e1');
+                n5.setAttribute('stroke-dasharray', '2,2'); n5.setAttribute('stroke-width', '1.5');
+            }
+            document.getElementById('text-n5').setAttribute('fill', '#cbd5e1');
+
+            ['c', 'a', 'r'].forEach(id => {
+                const edge = document.getElementById('edge-' + id);
+                const pill = document.getElementById('pill-' + id);
+                const txt = document.getElementById('text-' + id);
+                if (edge) { edge.setAttribute('stroke', '#cbd5e1'); edge.setAttribute('stroke-width', '2.5'); }
+                if (pill) { pill.setAttribute('fill', '#f1f5f9'); pill.setAttribute('stroke', '#cbd5e1'); }
+                if (txt) { txt.setAttribute('fill', '#475569'); }
+            });
+            const edgeT = document.getElementById('edge-t');
+            if (edgeT) { edgeT.setAttribute('stroke', '#cbd5e1'); edgeT.setAttribute('stroke-dasharray', '3,3'); }
+
+            // Active Nodes
+            if (st.activeNodes) {
+                st.activeNodes.forEach(nid => {
+                    const el = document.getElementById('node-' + nid);
+                    const txt = document.getElementById('text-node-' + nid);
+                    if (el) { el.setAttribute('stroke', '#0284c7'); el.setAttribute('fill', '#e0f2fe'); el.setAttribute('stroke-width', '2.5'); }
+                    if (txt) { txt.setAttribute('fill', '#0369a1'); }
+                });
+            }
+
+            // Target final node highlight
+            if (st.targetNode) {
+                const el = document.getElementById('node-' + st.targetNode);
+                const color = st.flagColor || '#059669';
+                if (el) { el.setAttribute('stroke', color); el.setAttribute('fill', color == '#059669' ? '#d1fae5' : '#fee2e2'); el.setAttribute('stroke-width', '3.5'); }
+            }
+
+            // Active Edges
+            if (st.activeEdges) {
+                st.activeEdges.forEach(eid => {
+                    const edge = document.getElementById('edge-' + eid);
+                    const pill = document.getElementById('pill-' + eid);
+                    const txt = document.getElementById('text-' + eid);
+                    if (edge) { edge.setAttribute('stroke', '#0284c7'); edge.setAttribute('stroke-width', '3'); }
+                    if (pill) { pill.setAttribute('fill', '#e0f2fe'); pill.setAttribute('stroke', '#0284c7'); }
+                    if (txt) { txt.setAttribute('fill', '#0369a1'); }
+                });
+            }
+
+            // Active Edge Pills (looking at char)
+            if (st.activeEdgePills) {
+                st.activeEdgePills.forEach(eid => {
+                    const pill = document.getElementById('pill-' + eid);
+                    const txt = document.getElementById('text-' + eid);
+                    if (pill) { pill.setAttribute('fill', '#fde047'); pill.setAttribute('stroke', '#eab308'); }
+                    if (txt) { txt.setAttribute('fill', '#854d0e'); }
+                });
+            }
+
+            // New N5 node creation
+            if (st.newN5) {
+                const edgeT = document.getElementById('edge-t');
+                if (edgeT) { edgeT.setAttribute('stroke', '#059669'); edgeT.setAttribute('stroke-dasharray', 'none'); edgeT.setAttribute('stroke-width', '3.5'); }
+                const n5 = document.getElementById('node-n5');
+                if (n5) { n5.setAttribute('fill', '#d1fae5'); n5.setAttribute('stroke', '#059669'); n5.setAttribute('stroke-dasharray', 'none'); n5.setAttribute('stroke-width', '3'); }
+                document.getElementById('text-n5').setAttribute('fill', '#047857');
+            }
+
+            // Code Line Highlight
+            for (let l = 1; l <= 10; l++) {
+                const line = document.getElementById('code-line-' + l);
+                if (line) line.classList.remove('active-line');
+            }
+            if (st.line) {
+                const activeLine = document.getElementById('code-line-' + st.line);
+                if (activeLine) activeLine.classList.add('active-line');
+            }
+
+            // Variables Panel
+            document.getElementById('var-c-val').innerText = st.char || '-';
+            document.getElementById('var-curr-val').innerText = st.curr || 'Root';
+            const flagEl = document.getElementById('var-flag-val');
+            flagEl.innerText = st.flag || '-';
+            flagEl.style.color = st.flagColor || '#f1f5f9';
+
+            // Status Badge & Log
+            const badgeEl = document.getElementById('demo-status-badge');
+            badgeEl.innerText = st.badge || 'Đang thực thi...';
+            badgeEl.style.color = st.badgeColor || '#0284c7';
+
+            const logBox = document.getElementById('demo-log-box');
+            logBox.style.borderLeftColor = st.logBorder || '#7c3aed';
+            logBox.innerHTML = '<span>' + st.log + '</span>';
+
+            // Indicator
+            document.getElementById('step-indicator').innerText = 'Bước ' + idx + ' / ' + (sc.steps.length - 1);
+        }
+
+        function selectScenario(key, evt) {
+            if (evt) evt.stopPropagation();
+            stopAutoPlay();
+            activeScenarioKey = key;
+            ['car', 'ca', 'cart'].forEach(k => {
+                const btn = document.getElementById('btn-sc-' + k);
+                if (btn) btn.classList.remove('sc-active');
+            });
+            const activeBtn = document.getElementById('btn-sc-' + key.replace('search_', '').replace('insert_', ''));
+            if (activeBtn) activeBtn.classList.add('sc-active');
+
+            document.getElementById('demo-mode-name').innerText = MICRO_SCENARIOS[key].name;
+            renderMicroStep(0);
+        }
+
+        function nextStep(evt) {
+            if (evt) evt.stopPropagation();
+            const sc = MICRO_SCENARIOS[activeScenarioKey];
+            if (stepPointer < sc.steps.length - 1) {
+                renderMicroStep(stepPointer + 1);
+            } else {
+                stopAutoPlay();
+            }
+        }
+
+        function prevStep(evt) {
+            if (evt) evt.stopPropagation();
+            stopAutoPlay();
+            if (stepPointer > 0) {
+                renderMicroStep(stepPointer - 1);
+            }
+        }
+
+        function resetScenario(evt) {
+            if (evt) evt.stopPropagation();
+            stopAutoPlay();
+            renderMicroStep(0);
+        }
+
+        function toggleAutoPlay(evt) {
+            if (evt) evt.stopPropagation();
+            if (playIntervalTimer) {
+                stopAutoPlay();
+            } else {
+                startAutoPlay();
+            }
+        }
+
+        function startAutoPlay() {
+            stopAutoPlay();
+            document.getElementById('btn-auto-play').innerHTML = '<i class="fa-solid fa-pause"></i> Tạm Dừng';
+            document.getElementById('btn-auto-play').style.background = '#e11d48';
+
+            const sc = MICRO_SCENARIOS[activeScenarioKey];
+            if (stepPointer >= sc.steps.length - 1) {
+                renderMicroStep(0);
+            }
+
+            playIntervalTimer = setInterval(() => {
+                if (stepPointer < sc.steps.length - 1) {
+                    renderMicroStep(stepPointer + 1);
+                } else {
+                    stopAutoPlay();
+                }
+            }, 1200);
+        }
+
+        function stopAutoPlay() {
+            if (playIntervalTimer) {
+                clearInterval(playIntervalTimer);
+                playIntervalTimer = null;
+            }
+            const btn = document.getElementById('btn-auto-play');
+            if (btn) {
+                btn.innerHTML = '<i class="fa-solid fa-play"></i> Tự Động';
+                btn.style.background = '#10b981';
+            }
+        }
+
+        // Initialize on load
+        setTimeout(() => { selectScenario('search_car'); }, 300);
+    </script>
+
+    <aside class="notes">
+        Slide 08 được tối ưu hóa với mô hình vi bước (Micro-steps) tuần tự 100%. Mỗi cú nhấp chuột "Bước Tiếp" làm dịch chuyển chính xác 1 dòng lệnh C++ và trạng thái tương ứng trên sơ đồ cây Trie.
+    </aside>
+</section>

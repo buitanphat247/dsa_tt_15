@@ -1,0 +1,85 @@
+<section data-transition="slide">
+    <div class="badge badge-gold" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN I: ĐẶT VẤN ĐỀ</div>
+    <h3 style="font-size: 0.78em; margin: 0 0 8px 0; color: #0f172a; font-weight: 700;">Ví Dụ Minh Họa Chi Tiết 2 Bài Toán Thực Tế Thách Thức</h3>
+
+    <div style="width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; text-align: left;">
+        
+        <!-- Problem 1: Autocomplete -->
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <!-- Clean Header -->
+                <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 5px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                    <div style="background: #e0f2fe; color: #0284c7; width: 22px; height: 22px; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 0.52em; flex-shrink: 0;">
+                        <i class="fa-solid fa-keyboard"></i>
+                    </div>
+                    <h4 style="color: #0f172a; font-size: 0.5em; margin: 0; font-weight: 700;">Bài Toán 1: Autocomplete (Gợi Ý Từ Gõ Phím)</h4>
+                </div>
+
+                <!-- Scenario -->
+                <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: 5px 8px; font-size: 0.34em; color: #0369a1; margin-bottom: 5px;">
+                    <strong>📱 Tình huống gần gũi:</strong> Bạn vừa gõ 2 chữ <code>"ch"</code> trên Google/bàn phím phone. Trong kho <strong>10 triệu từ</strong>, hệ thống phải lập tức gợi ý: <code>"chào"</code>, <code>"chơi"</code>, <code>"chạy"</code>... dưới <strong>0.01 giây</strong>!
+                </div>
+
+                <!-- Why Baseline Fails -->
+                <div style="display: flex; flex-direction: column; gap: 4px; font-size: 0.33em;">
+                    <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 6px; padding: 5px 8px;">
+                        <strong style="color: #9f1239;">Bảng Băm (Hash Table) bế tắc:</strong> Giống tra danh bạ chỉ tìm được từ chính xác. Muốn lọc tiền tố <code>"ch"</code> phải lật xem từng từ trong 10M từ $\implies$ Tốn <strong style="color: #e11d48;">$O(N \cdot L)$</strong>, làm giật lag bàn phím.
+                    </div>
+                    <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 6px; padding: 5px 8px;">
+                        <strong style="color: #9f1239;">Cây BST bế tắc:</strong> Phải so sánh từng chữ cái từ đầu $\implies$ Tốn <strong style="color: #e11d48;">$O(L \log N)$</strong> phép so sánh chuỗi đắt đỏ.
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 6px; background: #e0f2fe; border-left: 3px solid #0284c7; padding: 4px 8px; border-radius: 4px; font-size: 0.33em; color: #0369a1; font-weight: 700;">
+                <i class="fa-solid fa-lightbulb" style="color: #0284c7; margin-right: 4px;"></i>
+                <strong>Lối thoát Trie:</strong> Tìm kiếm chỉ tốn $O(L = 2)$ bước — nhanh như chớp bất kể từ điển có 10 triệu hay 10 tỷ từ!
+            </div>
+        </div>
+
+        <!-- Problem 2: Dynamic Connectivity -->
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #7c3aed; border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <!-- Clean Header -->
+                <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 5px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                    <div style="background: #f3e8ff; color: #7c3aed; width: 22px; height: 22px; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 0.52em; flex-shrink: 0;">
+                        <i class="fa-solid fa-users text-gradient-purple"></i>
+                    </div>
+                    <h4 style="color: #0f172a; font-size: 0.5em; margin: 0; font-weight: 700;">Bài Toán 2: Kiểm Tra Liên Thông Bạn Bè Real-time</h4>
+                </div>
+
+                <!-- Scenario -->
+                <div style="background: #f3e8ff; border: 1px solid #e9d5ff; border-radius: 6px; padding: 5px 8px; font-size: 0.34em; color: #6b21a8; margin-bottom: 5px;">
+                    <strong>👥 Tình huống gần gũi:</strong> Mạng Zalo / Facebook có <strong>2 tỷ người dùng</strong> (nối kết bạn liên tục). Khi A bấm xem profile X, hệ thống phải đáp ngay: <em>"A và X có quan hệ bạn gián tiếp không?"</em>
+                </div>
+
+                <!-- Why Baseline Fails -->
+                <div style="display: flex; flex-direction: column; gap: 4px; font-size: 0.33em;">
+                    <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 6px; padding: 5px 8px;">
+                        <strong style="color: #9f1239;">Duyệt Đồ Thị (BFS/DFS) bế tắc:</strong> Giống như đi hỏi từng người một trong mạng lưới 2 tỷ người $\implies$ Tốn <strong style="color: #e11d48;">$O(V + E)$</strong> cho từng cái click chuột.
+                    </div>
+                    <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 6px; padding: 5px 8px;">
+                        <strong style="color: #9f1239;">Hệ quả sập Server:</strong> Hàng triệu người dùng click cùng lúc sẽ làm sập ngay hệ thống vì đồ thị quá lớn không thể loang real-time.
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 6px; background: #f3e8ff; border-left: 3px solid #7c3aed; padding: 4px 8px; border-radius: 4px; font-size: 0.33em; color: #6b21a8; font-weight: 700;">
+                <i class="fa-solid fa-lightbulb" style="color: #7c3aed; margin-right: 4px;"></i>
+                <strong>Lối thoát DSU:</strong> Gộp nhóm & kiểm tra liên thông với tốc độ <strong>Hằng số $O(1)$</strong> cực kỳ tinh gọn!
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Banner -->
+    <div style="width: 100%; margin: 6px 0 0 0; background: #f8fafc; border: 1px solid #cbd5e1; border-left: 4px solid #059669; border-radius: 6px; padding: 5px 10px; text-align: left;">
+        <span style="font-size: 0.35em; font-weight: 700; color: #0f172a;">
+            <i class="fa-solid fa-bullseye" style="color: #059669; margin-right: 5px;"></i>
+            <span style="color: #059669;">TỔNG KẾT:</span> Trie giải quyết bài toán chuỗi tiền tố — Union-Find giải quyết bài toán liên thông tập hợp!
+        </span>
+    </div>
+
+    <aside class="notes">
+        Đây là hai bài toán thực tế vô cùng gần gũi: Gõ phím trên điện thoại và Kết bạn trên Facebook. Qua hai ví dụ này, chúng ta thấy rõ lý do tại sao các cấu trúc dữ liệu truyền thống lại bất lực khi dữ liệu bùng nổ.
+    </aside>
+</section>

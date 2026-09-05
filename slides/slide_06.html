@@ -1,0 +1,189 @@
+<section data-transition="zoom">
+    <div class="badge badge-sky" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">BẢN CHẤT HÌNH HỌC</div>
+    <h3 style="font-size: 0.78em; margin: 0 0 6px 0; color: #0f172a; font-weight: 700;">Cấu Trúc Hình Học Đặc Biệt Của Cây Trie</h3>
+
+    <!-- Top Problem Prompt Box -->
+    <div style="width: 100%; background: #f0f9ff; border: 1px solid #bae6fd; border-left: 4px solid #0284c7; border-radius: 6px; padding: 5px 12px; margin-bottom: 5px; display: flex; align-items: center; gap: 6px; font-size: 0.35em; color: #0369a1; line-height: 1.3; text-align: left;">
+        <i class="fa-solid fa-wand-magic-sparkles" style="color: #0284c7; flex-shrink: 0;"></i>
+        <span><strong>📌 BÀI TOÁN THỰC TẾ (AUTOCOMPLETE):</strong> Mô phỏng cơ chế <strong>Gợi Ý Tìm Kiếm (Search Suggestion)</strong> khi hệ thống lưu 3 từ <code>{"car", "cat", "dog"}</code> và luồng máy tính dò từng ký tự khi người dùng gõ từ <code>"car"</code>.</span>
+    </div>
+
+    <!-- Top Alert Callout -->
+    <div style="width: 100%; background: #fff1f2; border: 1px solid #fecdd3; border-left: 4px solid #e11d48; border-radius: 6px; padding: 5px 12px; margin-bottom: 5px; display: flex; align-items: center; gap: 6px; font-size: 0.33em; color: #9f1239; line-height: 1.3; text-align: left;">
+        <i class="fa-solid fa-lightbulb" style="color: #e11d48; flex-shrink: 0;"></i>
+        <span><strong>BẤT NGỜ CỐT LÕI:</strong> Nút trong Trie <u>HOÀN TOÀN RỖNG</u>. Ký tự nằm trên <strong>Cạnh (Edge)</strong>, Từ khóa được định hình bởi <strong>Đường Đi (Path)</strong>!</span>
+    </div>
+
+    <!-- Main Grid Content -->
+    <div style="width: 100%; display: grid; grid-template-columns: 1.25fr 1fr; gap: 12px; align-items: flex-start;">
+        
+        <!-- Left Column: Ultra-Beautiful Geometric SVG Graph -->
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px;">
+            <div style="font-size: 0.33em; font-weight: 700; color: #0f172a; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+                <span style="display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-diagram-project" style="color: #0284c7;"></i>
+                    Mô Hình Đồ Thị: Lưu trữ <code>"car"</code>, <code>"cat"</code>, <code>"dog"</code>
+                </span>
+                <span style="font-size: 0.8em; color: #8b5cf6; font-weight: 600; background: #f3e8ff; padding: 2px 8px; border-radius: 12px;">(Path Highlight: "car")</span>
+            </div>
+            
+            <svg viewBox="0 0 400 230" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', sans-serif;">
+                <defs>
+                    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#0ea5e9" />
+                    </marker>
+                    <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b" />
+                    </marker>
+                    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#8b5cf6" />
+                    </marker>
+                    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#10b981" />
+                    </marker>
+                </defs>
+
+                <!-- Background Highlight Band for Path "car" -->
+                <path d="M 200 25 L 120 85 L 120 145 L 70 205" stroke="#f3e8ff" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+                <!-- ================= EDGES ================= -->
+                <!-- Root -> N1 (c) -->
+                <line x1="200" y1="25" x2="120" y2="85" stroke="#0ea5e9" stroke-width="3" marker-end="url(#arrow-cyan)"/>
+                <!-- Root -> N4 (d) -->
+                <line x1="200" y1="25" x2="280" y2="85" stroke="#f59e0b" stroke-width="3" marker-end="url(#arrow-amber)"/>
+                <!-- N1 -> N2 (a) -->
+                <line x1="120" y1="85" x2="120" y2="145" stroke="#0ea5e9" stroke-width="3" marker-end="url(#arrow-cyan)"/>
+                <!-- N2 -> N3 (r) -->
+                <line x1="120" y1="145" x2="70" y2="205" stroke="#8b5cf6" stroke-width="3" marker-end="url(#arrow-purple)"/>
+                <!-- N2 -> N5 (t) -->
+                <line x1="120" y1="145" x2="170" y2="205" stroke="#10b981" stroke-width="3" marker-end="url(#arrow-emerald)"/>
+                <!-- N4 -> N6 (o) -->
+                <line x1="280" y1="85" x2="280" y2="145" stroke="#f59e0b" stroke-width="3" marker-end="url(#arrow-amber)"/>
+                <!-- N6 -> N7 (g) -->
+                <line x1="280" y1="145" x2="280" y2="205" stroke="#f59e0b" stroke-width="3" marker-end="url(#arrow-amber)"/>
+
+
+                <!-- ================= EDGE LABELS (PILLS) ================= -->
+                <!-- 'c' at (160, 55) -->
+                <rect x="160" y="55" width="18" height="18" rx="9" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.5" transform="translate(-9, -9)"/>
+                <text x="160" y="58" fill="#0284c7" font-size="8.5" font-weight="800" text-anchor="middle">'c'</text>
+
+                <!-- 'd' at (240, 55) -->
+                <rect x="240" y="55" width="18" height="18" rx="9" fill="#fef3c7" stroke="#fbbf24" stroke-width="1.5" transform="translate(-9, -9)"/>
+                <text x="240" y="58" fill="#d97706" font-size="8.5" font-weight="800" text-anchor="middle">'d'</text>
+
+                <!-- 'a' at (120, 115) -->
+                <rect x="120" y="115" width="18" height="18" rx="9" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.5" transform="translate(-9, -9)"/>
+                <text x="120" y="118" fill="#0284c7" font-size="8.5" font-weight="800" text-anchor="middle">'a'</text>
+
+                <!-- 'r' at (95, 175) -->
+                <rect x="95" y="175" width="18" height="18" rx="9" fill="#f3e8ff" stroke="#a855f7" stroke-width="1.5" transform="translate(-9, -9)"/>
+                <text x="95" y="178" fill="#7c3aed" font-size="8.5" font-weight="800" text-anchor="middle">'r'</text>
+
+                <!-- 't' at (145, 175) -->
+                <rect x="145" y="175" width="18" height="18" rx="9" fill="#d1fae5" stroke="#34d399" stroke-width="1.5" transform="translate(-9, -9)"/>
+                <text x="145" y="178" fill="#059669" font-size="8.5" font-weight="800" text-anchor="middle">'t'</text>
+
+                <!-- 'o' at (280, 115) -->
+                <rect x="280" y="115" width="18" height="18" rx="9" fill="#fef3c7" stroke="#fbbf24" stroke-width="1.5" transform="translate(-9, -9)"/>
+                <text x="280" y="118" fill="#d97706" font-size="8.5" font-weight="800" text-anchor="middle">'o'</text>
+
+                <!-- 'g' at (280, 175) -->
+                <rect x="280" y="175" width="18" height="18" rx="9" fill="#fef3c7" stroke="#fbbf24" stroke-width="1.5" transform="translate(-9, -9)"/>
+                <text x="280" y="178" fill="#d97706" font-size="8.5" font-weight="800" text-anchor="middle">'g'</text>
+
+
+                <!-- ================= NODES ================= -->
+                <!-- Root -->
+                <circle cx="200" cy="25" r="18" fill="#f8fafc" stroke="#475569" stroke-width="2.5"/>
+                <text x="200" y="28" fill="#0f172a" font-size="8" font-weight="800" text-anchor="middle">Root</text>
+
+                <!-- N1 (Empty Intersection) -->
+                <circle cx="120" cy="85" r="14" fill="#ffffff" stroke="#0ea5e9" stroke-width="3"/>
+                <text x="120" y="88" fill="#0284c7" font-size="7.5" font-weight="800" text-anchor="middle">N1</text>
+
+                <!-- N4 (Empty Intersection) -->
+                <circle cx="280" cy="85" r="14" fill="#ffffff" stroke="#f59e0b" stroke-width="3"/>
+                <text x="280" y="88" fill="#d97706" font-size="7.5" font-weight="800" text-anchor="middle">N4</text>
+
+                <!-- N2 (Empty Intersection) -->
+                <circle cx="120" cy="145" r="14" fill="#ffffff" stroke="#0ea5e9" stroke-width="3"/>
+                <text x="120" y="148" fill="#0284c7" font-size="7.5" font-weight="800" text-anchor="middle">N2</text>
+
+                <!-- N6 (Empty Intersection) -->
+                <circle cx="280" cy="145" r="14" fill="#ffffff" stroke="#f59e0b" stroke-width="3"/>
+                <text x="280" y="148" fill="#d97706" font-size="7.5" font-weight="800" text-anchor="middle">N6</text>
+
+
+                <!-- ================= END NODES (DOUBLE BORDER) ================= -->
+                <!-- N3 "car" -->
+                <circle cx="70" cy="205" r="18" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="2.5"/>
+                <circle cx="70" cy="205" r="13" fill="none" stroke="#8b5cf6" stroke-width="1.5"/>
+                <text x="70" y="208" fill="#6b21a8" font-size="8" font-weight="800" text-anchor="middle">"car"</text>
+
+                <!-- N5 "cat" -->
+                <circle cx="170" cy="205" r="18" fill="#ecfdf5" stroke="#10b981" stroke-width="2.5"/>
+                <circle cx="170" cy="205" r="13" fill="none" stroke="#10b981" stroke-width="1.5"/>
+                <text x="170" y="208" fill="#047857" font-size="8" font-weight="800" text-anchor="middle">"cat"</text>
+
+                <!-- N7 "dog" -->
+                <circle cx="280" cy="205" r="18" fill="#fef3c7" stroke="#f59e0b" stroke-width="2.5"/>
+                <circle cx="280" cy="205" r="13" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
+                <text x="280" y="208" fill="#b45309" font-size="8" font-weight="800" text-anchor="middle">"dog"</text>
+            </svg>
+        </div>
+
+        <!-- Right Column: 3 Core Geometric Insights -->
+        <div style="display: flex; flex-direction: column; gap: 8px; text-align: left;">
+            <div class="glass-card" style="border-left: 4px solid #0ea5e9; padding: 8px 10px;">
+                <h4 style="color: #0284c7; font-size: 0.44em; margin: 0 0 4px 0; font-weight: 700;">
+                    <i class="fa-solid fa-circle-dot"></i> 1. Nút (Node) = Điểm Giao
+                </h4>
+                <p style="font-size: 0.31em; color: #334155; margin: 0; line-height: 1.35;">
+                    Nút trong Trie hoàn toàn trống rỗng về mặt dữ liệu chuỗi. Nó chỉ đóng vai trò là "ngã tư" để rẻ nhánh sang các ký tự tiếp theo.
+                </p>
+            </div>
+
+            <div class="glass-card" style="border-left: 4px solid #f59e0b; padding: 8px 10px;">
+                <h4 style="color: #d97706; font-size: 0.44em; margin: 0 0 4px 0; font-weight: 700;">
+                    <i class="fa-solid fa-arrow-right-long"></i> 2. Cạnh (Edge) = Ký Tự
+                </h4>
+                <p style="font-size: 0.31em; color: #334155; margin: 0; line-height: 1.35;">
+                    Mỗi ký tự (như <code>'c'</code>, <code>'a'</code>, <code>'r'</code>) được gắn liền trên <strong>đường nối</strong> giữa nút cha và nút con. Di chuyển là ghép thêm chữ cái.
+                </p>
+            </div>
+
+            <div class="glass-card" style="border-left: 4px solid #8b5cf6; padding: 8px 10px;">
+                <h4 style="color: #6b21a8; font-size: 0.44em; margin: 0 0 4px 0; font-weight: 700;">
+                    <i class="fa-solid fa-route"></i> 3. Từ Khóa = Đường Đi
+                </h4>
+                <p style="font-size: 0.31em; color: #334155; margin: 0; line-height: 1.35;">
+                    Từ khóa <code>"car"</code> được hình thành bởi chuỗi cạnh đi từ Root $\rightarrow$ N1 $\rightarrow$ N2 $\rightarrow$ <strong>N3</strong> (nơi có cờ kết thúc <code>is_end = true</code>).
+                </p>
+            </div>
+
+            <!-- Traversal Trace Highlight Box -->
+            <div style="margin-top: 4px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: 6px 10px; font-size: 0.32em; color: #0369a1; text-align: left; line-height: 1.4;">
+                <div style="font-weight: 700; color: #0284c7; margin-bottom: 2px; display: flex; align-items: center; justify-content: space-between;">
+                    <span style="display: flex; align-items: center; gap: 4px;">
+                        <i class="fa-solid fa-shoe-prints" style="color: #8b5cf6;"></i> <strong>Luồng Tra Cứu Từ <code>"car"</code>:</strong>
+                    </span>
+                </div>
+                <div>• <strong>Bước 1:</strong> <code>Root</code> $\xrightarrow{\text{Cạnh } 'c'}$ <code>N1</code></div>
+                <div>• <strong>Bước 2:</strong> <code>N1</code> $\xrightarrow{\text{Cạnh } 'a'}$ <code>N2</code> <span style="color: #0284c7;">(Tiền tố <code>"ca"</code>)</span></div>
+                <div>• <strong>Bước 3:</strong> <code>N2</code> $\xrightarrow{\text{Cạnh } 'r'}$ <code>N3</code> <span style="color: #7c3aed; font-weight: 700;">(Khớp <code>is_end=true</code> $\implies$ HOÀN THÀNH!)</span></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Full Width Summary Banner -->
+    <div style="width: 100%; margin-top: 10px; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #059669; border-radius: 6px; padding: 6px 12px; display: flex; align-items: center; gap: 6px; font-size: 0.34em; font-weight: 700; color: #14532d; text-align: left; line-height: 1.3;">
+        <i class="fa-solid fa-share-nodes" style="color: #059669; flex-shrink: 0;"></i>
+        <span><span style="color: #059669;">LỢI THẾ CẤU TRÚC:</span> Hai từ <code>"car"</code> và <code>"cat"</code> dùng chung 100% đoạn đường <code>Root $\rightarrow$ N1 $\rightarrow$ N2</code>. Sự chia sẻ tiền tố giúp Trie nén bộ nhớ cực kỳ hiệu quả!</span>
+    </div>
+
+    <aside class="notes">
+        Slide này tập trung giải thích mô hình hình học thuần túy của Trie: Nút rỗng, Cạnh chứa ký tự, Từ khóa là đường đi. Giao diện phẳng tối giản giúp người xem không bị rối bởi code hay mảng.
+    </aside>
+</section>

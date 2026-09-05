@@ -1,0 +1,91 @@
+<section data-transition="zoom">
+    <!-- Top Badge -->
+    <div class="badge badge-gold" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN IV: THỰC NGHIỆM & ĐÁNH GIÁ</div>
+    <h3 style="font-size: 0.82em; margin: 0 0 8px 0; color: #0f172a; font-weight: 700;">Bảng Đối Sánh Chi Tiết Hiệu Năng & Chi Phí</h3>
+
+    <!-- Table 1: String & Prefix Search Comparison -->
+    <div style="width: 100%; margin-bottom: 10px;">
+        <div style="font-size: 0.34em; font-weight: 800; color: #0284c7; text-align: left; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+            <i class="fa-solid fa-tree"></i> Bảng 1: So Sánh Bài Toán Tìm Kiếm & Chuỗi (String & Prefix Search)
+        </div>
+        <table style="font-size: 0.36em; margin: 0; width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden;">
+            <thead>
+                <tr style="background: #0284c7; color: #ffffff;">
+                    <th style="padding: 6px 10px; background: #0284c7; color: #fff;">Tiêu Chí So Sánh</th>
+                    <th style="padding: 6px 10px; background: #0369a1; color: #fff;">Trie (Cây Tiền Tố)</th>
+                    <th style="padding: 6px 10px; background: #0284c7; color: #fff;">Hash Table (Bảng Băm)</th>
+                    <th style="padding: 6px 10px; background: #0284c7; color: #fff;">Balanced BST</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="font-weight: 700;">Exact Lookup</td>
+                    <td>$O(L)$ worst-case</td>
+                    <td>$O(L)$ trung bình</td>
+                    <td>$O(L \log N)$</td>
+                </tr>
+                <tr style="background: #e0f2fe;">
+                    <td style="font-weight: 800; color: #0369a1;"><i class="fa-solid fa-bolt" style="color: #0284c7; margin-right: 4px;"></i> Prefix Match</td>
+                    <td style="font-weight: 800; color: #0369a1;">$O(L)$ Siêu Tốc</td>
+                    <td>$O(N \cdot L)$ Quét Lại</td>
+                    <td>$O(L \log N)$</td>
+                </tr>
+                <tr style="background: #e0f2fe;">
+                    <td style="font-weight: 800; color: #0369a1;"><i class="fa-solid fa-list-check" style="color: #0284c7; margin-right: 4px;"></i> Autocomplete List</td>
+                    <td style="font-weight: 800; color: #0369a1;">$O(L + K)$</td>
+                    <td style="color: #dc2626; font-weight: 700;">Không hỗ trợ</td>
+                    <td>$O(L \log N + K)$</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 700;">RAM Consumption</td>
+                    <td style="color: #d97706; font-weight: 700;">Lớn nhất $O(N \cdot L \cdot |\Sigma|)$</td>
+                    <td>Thấp $O(N \cdot L)$</td>
+                    <td>Vừa phải $O(N \cdot L)$</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Table 2: Dynamic Graph Connectivity Comparison -->
+    <div style="width: 100%; margin-bottom: 8px;">
+        <div style="font-size: 0.34em; font-weight: 800; color: #7c3aed; text-align: left; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+            <i class="fa-solid fa-diagram-project"></i> Bảng 2: So Sánh Bài Toán Liên Thông Đồ Thị (Dynamic Connectivity)
+        </div>
+        <table style="font-size: 0.36em; margin: 0; width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden;">
+            <thead>
+                <tr style="background: #7c3aed; color: #ffffff;">
+                    <th style="padding: 6px 10px; background: #7c3aed; color: #fff;">Tiêu Chí Đồ Thị</th>
+                    <th style="padding: 6px 10px; background: #6b21a8; color: #fff;">Union-Find (DSU)</th>
+                    <th style="padding: 6px 10px; background: #7c3aed; color: #fff;">Duyệt Đồ Thị (BFS / DFS)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="font-weight: 700;">Phù Hợp Mô Hình</td>
+                    <td style="font-weight: 800; color: #6b21a8;">Đồ Thị Động (Dynamic Graph - Thêm Cạnh Liên Tục)</td>
+                    <td>Đồ Thị Tĩnh (Static Graph - Đã Cố Định Cạnh)</td>
+                </tr>
+                <tr style="background: #f3e8ff;">
+                    <td style="font-weight: 800; color: #6b21a8;"><i class="fa-solid fa-link" style="color: #7c3aed; margin-right: 4px;"></i> Connected Check</td>
+                    <td style="font-weight: 800; color: #6b21a8;">$O(\alpha(N)) \approx O(1)$ Siêu Tốc</td>
+                    <td style="color: #dc2626;">$O(V + E)$ Mỗi Lần Truy Vấn</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 700;">Bộ Nhớ Phụ Trợ</td>
+                    <td style="font-weight: 700; color: #059669;">$O(N)$ (Chỉ Cần Mảng 1D Nhẹ)</td>
+                    <td>$O(V + E)$ (Danh Sách Kề / Ma Trận Kề)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bottom Summary Insights Banner -->
+    <div style="width: 100%; margin-top: 6px; background: #f0f9ff; border: 1px solid #bae6fd; border-left: 4px solid #0284c7; border-radius: 6px; padding: 6px 12px; font-size: 0.34em; color: #0369a1; text-align: left; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-lightbulb" style="font-size: 1.2em; color: #0284c7; flex-shrink: 0;"></i>
+        <span><strong>NHẬN XÉT CỐT LÕI:</strong> Trie chiến thắng tuyệt đối ở bài toán Tiền Tố (Prefix Search), còn DSU thống trị ở bài toán Liên Thông Động (Dynamic Connectivity). Cả hai đều đạt hiệu năng cực hạn mà Hash Table hay BFS/DFS thông thường không thể tiệm cận!</span>
+    </div>
+
+    <aside class="notes">
+        Bảng đối sánh này tóm tắt toàn bộ bức tranh kiến trúc. Không có cấu trúc dữ liệu nào là hoàn hảo cho mọi bài toán. Trie và Union-Find sinh ra không phải để thay thế hoàn toàn Hash Table hay BFS/DFS, mà là để giải quyết xuất sắc các điểm nghẽn mà cấu trúc cũ đầu hàng.
+    </aside>
+</section>

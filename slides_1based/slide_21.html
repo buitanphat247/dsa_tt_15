@@ -1,0 +1,49 @@
+<section data-transition="zoom">
+                <div class="badge">Phần 4: So Sánh & Benchmark</div>
+                <h3 style="font-size: 1.0em;">Bảng Đối Sánh Chi Tiết Hiệu Năng</h3>
+
+                <div style="margin-top: 15px;">
+                    <table style="font-size: 0.48em;">
+                        <thead>
+                            <tr>
+                                <th>Tiêu chí so sánh</th>
+                                <th>Trie (Cây tiền tố)</th>
+                                <th>Hash Table (Bảng băm)</th>
+                                <th>Balanced BST</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Exact Lookup</td><td>$O(L)$ worst-case</td><td>$O(L)$ trung bình</td><td>$O(L \log N)$</td></tr>
+                            <tr style="background: rgba(0, 242, 254, 0.1);">
+                                <td><strong>Prefix Match</strong></td><td><strong>$O(L)$ Siêu tốc</strong></td><td>$O(N \cdot L)$ Quét lại</td><td>$O(L \log N)$</td>
+                            </tr>
+                            <tr style="background: rgba(0, 242, 254, 0.1);">
+                                <td><strong>Autocomplete List</strong></td><td><strong>$O(L + K)$</strong></td><td>Không hỗ trợ</td><td>$O(L \log N + K)$</td>
+                            </tr>
+                            <tr><td>RAM Consumption</td><td>Lớn nhất $O(N \cdot L \cdot |\Sigma|)$</td><td>Thấp $O(N \cdot L)$</td><td>Vừa phải $O(N \cdot L)$</td></tr>
+                        </tbody>
+                    </table>
+
+                    <table style="font-size: 0.48em; margin-top: 10px;">
+                        <thead>
+                            <tr>
+                                <th>Tiêu chí Đồ thị</th>
+                                <th>Union-Find (DSU)</th>
+                                <th>Duyệt đồ thị (BFS / DFS)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Phù hợp đồ thị</td><td><strong>Đồ thị động (Dynamic Graph)</strong></td><td>Đồ thị tĩnh (Static Graph)</td></tr>
+                            <tr style="background: rgba(168, 85, 247, 0.1);">
+                                <td><strong>Connected Check</strong></td><td><strong>$O(lpha(N)) pprox O(1)$</strong></td><td>$O(V + E)$ mỗi lần truy vấn</td></tr>
+                            <tr><td>Bộ nhớ phụ trợ</td><td>$O(N)$ (Mảng 1D nhẹ)</td><td>$O(V + E)$ (Danh sách kề)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <aside class="notes">
+                    Bảng đối sánh này tóm tắt toàn bộ bức tranh kiến trúc. Không có cấu trúc dữ liệu nào là hoàn hảo cho mọi bài toán. Trie và Union-Find sinh ra không phải để thay thế hoàn toàn Hash Table hay BFS/DFS, mà là để giải quyết xuất sắc các điểm nghẽn mà cấu trúc cũ đầu hàng.
+                </aside>
+            </section>
+
+            <!-- SLIDE 21: Decision Framework -->

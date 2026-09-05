@@ -1,0 +1,116 @@
+<section data-transition="slide">
+    <div class="badge badge-emerald" style="font-size: 0.38em; padding: 4px 14px; margin-bottom: 4px;">TỐI ƯU HÓA 1</div>
+    <h3 style="font-size: 0.82em; margin: 0 0 6px 0; color: #0f172a; font-weight: 700;">Union by Rank — Cơ Chế Phòng Ngừa Cây Suy Biến</h3>
+
+    <!-- Top Rules Callout -->
+    <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #059669; border-radius: 6px; padding: 6px 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; font-size: 0.39em; color: #14532d; text-align: left; line-height: 1.4;">
+        <i class="fa-solid fa-shield-halved" style="font-size: 1.25em; color: #059669; flex-shrink: 0;"></i>
+        <span><strong>QUY TẮC VÀNG:</strong> Duy trì mảng <code>rank[i]</code> (chiều cao cây). Luôn treo gốc cây có <strong>rank nhỏ hơn</strong> vào dưới gốc cây có <strong>rank lớn hơn</strong>. Chiều cao chỉ tăng thêm 1 khi 2 cây <u>cùng rank</u>!</span>
+    </div>
+
+    <!-- Main Grid: C++ Source Code Left + Modern SVG Graphic Right -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; align-items: stretch;">
+        
+        <!-- Left Column: Unified Dark Code Box + Stacked Case List -->
+        <div style="display: flex; flex-direction: column; justify-content: space-between; text-align: left; gap: 8px;">
+            
+            <!-- Seamless Modern Dark Code Box -->
+            <div style="background: #0f172a; border-radius: 8px; padding: 10px 14px; color: #f8fafc; border: 1px solid #1e293b; box-shadow: 0 4px 12px rgba(15,23,42,0.15);">
+                <div style="display: flex; justify-content: space-between; align-items: center; color: #94a3b8; font-size: 0.38em; margin-bottom: 8px; border-bottom: 1px solid #334155; padding-bottom: 6px;">
+                    <span style="font-weight: 700; color: #f8fafc;"><i class="fa-solid fa-code" style="color: #38bdf8; margin-right: 6px;"></i> C++: Union by Rank</span>
+                    <span style="background: #064e3b; color: #34d399; font-size: 0.85em; padding: 2px 8px; border-radius: 4px; font-weight: 700;">$O(\log N)$</span>
+                </div>
+                <pre style="background: transparent; box-shadow: none; margin: 0; padding: 0; overflow: visible;"><code class="language-cpp" data-trim data-noescape style="background: transparent; color: #e2e8f0; font-size: 0.78em; font-family: 'Fira Code', monospace; line-height: 1.5; padding: 0;">void unionSets(int a, int b) {
+    a = find(a); b = find(b);
+    if (a == b) return;
+    
+    // Treo cây thấp hơn dưới cây cao hơn
+    if (rank[a] < rank[b]) swap(a, b);
+    
+    parent[b] = a; 
+    if (rank[a] == rank[b]) rank[a]++;
+}</code></pre>
+            </div>
+
+            <!-- 3 Case Explanations -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #059669; border-radius: 6px; padding: 8px 12px; text-align: left;">
+                <div style="color: #0f172a; font-size: 0.38em; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-layer-group" style="color: #059669;"></i> 3 Trường Hợp Ghép Cây Chi Tiết:
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 4px; font-size: 0.35em; color: #334155; line-height: 1.35;">
+                    <div style="background: #f8fafc; padding: 3px 8px; border-radius: 4px; border-left: 3px solid #059669;">
+                        <strong style="color: #059669;">1. rank[A] &gt; rank[B]:</strong> Treo $B$ vào $A$. Rank $A$ giữ nguyên.
+                    </div>
+                    <div style="background: #f8fafc; padding: 3px 8px; border-radius: 4px; border-left: 3px solid #0284c7;">
+                        <strong style="color: #0284c7;">2. rank[A] &lt; rank[B]:</strong> Treo $A$ vào $B$. Rank $B$ giữ nguyên.
+                    </div>
+                    <div style="background: #f8fafc; padding: 3px 8px; border-radius: 4px; border-left: 3px solid #7c3aed;">
+                        <strong style="color: #7c3aed;">3. rank[A] == rank[B]:</strong> Treo $B$ vào $A$. Tăng <code>rank[A]++</code>.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Clean Non-Overlapping SVG Diagram -->
+        <div class="glass-card" style="border-left: 4px solid #059669; padding: 10px; background: #ffffff; display: flex; flex-direction: column; justify-content: space-between; text-align: left;">
+            <div style="font-size: 0.38em; font-weight: 800; color: #0f172a; margin-bottom: 4px;">
+                <i class="fa-solid fa-sitemap" style="color: #059669;"></i> Minh Họa: Treo Cây Thấp Vô Cây Cao
+            </div>
+
+            <!-- ViewBox 350x150: Spaced out perfectly so Node B1 NEVER collides with the Result Box -->
+            <svg viewBox="0 0 350 150" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', sans-serif;">
+                <defs>
+                    <marker id="arr-grn" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669" />
+                    </marker>
+                </defs>
+
+                <!-- Tree A (Left, Rank 2) -->
+                <!-- Root A -->
+                <circle cx="85" cy="25" r="13" fill="#059669"/><text x="85" y="28.5" fill="#fff" font-size="9" font-weight="800" text-anchor="middle">A</text>
+                <text x="85" y="9" fill="#047857" font-size="8" font-weight="800" text-anchor="middle">rank = 2</text>
+
+                <!-- Children of A -->
+                <line x1="85" y1="38" x2="50" y2="64" stroke="#059669" stroke-width="2"/>
+                <line x1="85" y1="38" x2="120" y2="64" stroke="#059669" stroke-width="2"/>
+                <line x1="50" y1="74" x2="50" y2="96" stroke="#059669" stroke-width="2"/>
+
+                <circle cx="50" cy="69" r="10" fill="#d1fae5" stroke="#059669" stroke-width="1.8"/><text x="50" y="72" fill="#047857" font-size="8" font-weight="800" text-anchor="middle">A1</text>
+                <circle cx="120" cy="69" r="10" fill="#d1fae5" stroke="#059669" stroke-width="1.8"/><text x="120" y="72" fill="#047857" font-size="8" font-weight="800" text-anchor="middle">A2</text>
+                <circle cx="50" cy="103" r="9" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/><text x="50" y="105.5" fill="#334155" font-size="7.5" font-weight="800" text-anchor="middle">A11</text>
+
+                <!-- Tree B (Right, Rank 1) -->
+                <!-- Root B -->
+                <circle cx="265" cy="45" r="13" fill="#0284c7"/><text x="265" y="48.5" fill="#fff" font-size="9" font-weight="800" text-anchor="middle">B</text>
+                <text x="265" y="29" fill="#0369a1" font-size="8" font-weight="800" text-anchor="middle">rank = 1</text>
+
+                <!-- Child B1 -->
+                <line x1="265" y1="58" x2="265" y2="80" stroke="#0284c7" stroke-width="2"/>
+                <circle cx="265" cy="86" r="9" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.8"/><text x="265" y="88.5" fill="#0369a1" font-size="7.5" font-weight="800" text-anchor="middle">B1</text>
+
+                <!-- Union Connection Curved Arrow: B -> A -->
+                <path d="M 250,40 Q 180,15 102,22" fill="none" stroke="#059669" stroke-width="2.5" stroke-dasharray="4,3" marker-end="url(#arr-grn)"/>
+                <text x="180" y="13" fill="#059669" font-size="8" font-weight="800" text-anchor="middle">Nối B dưới Root A</text>
+
+                <!-- Height Guarantee Box (Placed at y=118 - CLEAR OF NODE B1 AT y=86!) -->
+                <rect x="125" y="118" width="215" height="24" rx="5" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2"/>
+                <text x="232.5" y="134" fill="#166534" font-size="8" font-weight="800" text-anchor="middle">✓ Chiều cao: H = max(2, 1+1) = 2 (Không tăng!)</text>
+            </svg>
+
+            <div style="background: #f0fdf4; border-radius: 4px; padding: 4px 8px; font-size: 0.33em; color: #166534; text-align: center; font-weight: 700;">
+                <i class="fa-solid fa-tree" style="color: #059669; margin-right: 4px;"></i> Treo cây thấp (rank 1) vào dưới cây cao (rank 2) giúp giữ nguyên độ sâu của cây!
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Mathematical Guarantee Banner -->
+    <div style="width: 100%; margin-top: 8px; background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #2563eb; border-radius: 6px; padding: 6px 14px; font-size: 0.37em; color: #1e40af; text-align: left; display: flex; align-items: center; gap: 10px;">
+        <i class="fa-solid fa-calculator" style="font-size: 1.25em; color: #2563eb; flex-shrink: 0;"></i>
+        <span><strong>CHỨNG MINH TOÁN HỌC:</strong> Với kỹ thuật Union by Rank, chiều cao cây sau $N$ thao tác luôn bị khống chế tối đa $H \le \lfloor \log_2 N \rfloor$. Mọi truy vấn <code>find()</code> giảm từ $O(N)$ xuống còn <strong>$O(\log N)$</strong>!</span>
+    </div>
+
+    <aside class="notes">
+        Slide 15 trình bày kỹ thuật tối ưu Union by Rank. Bằng cách luôn treo cây có rank nhỏ hơn vào gốc cây có rank lớn hơn, chiều cao của cây luôn được khống chế ở mức O(log N).
+    </aside>
+</section>
