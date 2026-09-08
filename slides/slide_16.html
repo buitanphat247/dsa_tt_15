@@ -10,10 +10,10 @@
         <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #7c3aed; border-radius: 8px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
             <div>
                 <h4 style="color: #7c3aed; font-size: 0.38em; font-weight: 800; margin: 0 0 6px 0; display: flex; align-items: center; gap: 6px;">
-                    <i class="fa-solid fa-bolt" style="color: #7c3aed;"></i> 1. Phép Gán Đệ Quy Kỳ Diệu
+                    <i class="fa-solid fa-code" style="color: #7c3aed;"></i> 1. Cơ Chế Nén Bằng Đệ Quy
                 </h4>
                 <p style="font-size: 0.29em; color: #334155; line-height: 1.45; margin: 0 0 8px 0;">
-                    Trên đường đệ quy từ $x$ đi tìm Root, cập nhật lại con trỏ <code>parent</code> của <u>tất cả các nút intermediate</u> trỏ trực tiếp về Root đại diện!
+                    Trên đường đệ quy từ $x$ đi tìm Root, cập nhật lại con trỏ <code>parent</code> của <u>tất cả các nút trung gian</u> trỏ trực tiếp về Root đại diện!
                 </p>
 
                 <!-- Clean Light Code Block -->
@@ -36,10 +36,10 @@
         <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 8px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
             <div>
                 <h4 style="color: #0284c7; font-size: 0.38em; font-weight: 800; margin: 0 0 4px 0; display: flex; align-items: center; gap: 6px;">
-                    <i class="fa-solid fa-sitemap" style="color: #0284c7;"></i> 2. Kết Quả: Cây Bị Ép Phẳng Tuyệt Đối
+                    <i class="fa-solid fa-sitemap" style="color: #0284c7;"></i> 2. Kết Quả: Làm Phẳng Cấu Trúc Cây
                 </h4>
                 <p style="font-size: 0.28em; color: #334155; margin: 0 0 6px 0;">
-                    Mọi nút con trên đường đi đều nối thẳng đến Gốc tối cao:
+                    Mọi nút con trên đường đi đều nối thẳng đến Gốc đại diện:
                 </p>
 
                 <!-- SVG Flat Tree Diagram -->
@@ -77,19 +77,19 @@
             </div>
 
             <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 4px; padding: 5px 8px; font-size: 0.27em; color: #166534; font-weight: 700; text-align: center; margin-top: 4px;">
-                <i class="fa-solid fa-check-circle" style="color: #059669; margin-right: 4px;"></i> Các thao tác find() kế tiếp trên nhánh này chỉ tốn $O(1)$!
+                <i class="fa-solid fa-check-circle" style="color: #059669; margin-right: 4px;"></i> Các thao tác find() kế tiếp trên các nút này đạt chi phí $O(1)$!
             </div>
         </div>
 
     </div>
 
     <!-- Bottom Self-Healing Mechanism Banner -->
-    <div style="width: 100%; margin-top: 8px; background: #f0f9ff; border: 1px solid #bae6fd; border-left: 4px solid #0284c7; border-radius: 6px; padding: 6px 14px; font-size: 0.35em; color: #0369a1; text-align: left; display: flex; align-items: center; gap: 8px;">
+    <div style="width: 100%; margin-top: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #0284c7; border-radius: 6px; padding: 6px 14px; font-size: 0.35em; color: #0369a1; text-align: left; display: flex; align-items: center; gap: 8px;">
         <i class="fa-solid fa-shield-halved" style="font-size: 1.2em; color: #0284c7; flex-shrink: 0;"></i>
-        <span><strong>CƠ CHẾ TỰ SỬA CHỮA (SELF-HEALING):</strong> Mỗi lần gọi <code>find()</code> không chỉ trả về kết quả mà còn tự động "chữa lành" và ép phẳng cấu trúc cây cho các truy vấn trong tương lai!</span>
+        <span><strong>CƠ CHẾ NÉN ĐƯỜNG ĐI:</strong> Mỗi lần gọi <code>find()</code> không chỉ trả về nút gốc đại diện mà còn tự động cập nhật con trỏ cha trỏ trực tiếp về gốc, giảm chiều cao cây cho các truy vấn sau!</span>
     </div>
 
     <aside class="notes">
-        Hãy nhìn vào dòng code C++ kỳ diệu này: Chỉ bằng phép gán đệ quy parent[i] = find(parent[i]), tất cả các nút trên đường đi tìm Chủ tịch sẽ lập tức được nối thẳng trực tiếp tới vị Chủ tịch đó. Cây bị ép phẳng tuyệt đối.
+        Bằng phép gán đệ quy parent[i] = find(parent[i]), tất cả các nút trung gian trên đường đi tìm gốc được trỏ trực tiếp về nút gốc đại diện, giúp giảm mạnh chiều cao của cây.
     </aside>
 </section>

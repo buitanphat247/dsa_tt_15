@@ -95,13 +95,13 @@
                     <td style="padding: 4px 8px; font-weight: 700; color: #dc2626; background: #f8fafc;">Duyệt Đồ Thị Tĩnh (BFS / DFS)</td>
                     <td style="padding: 4px 8px; color: #166534; font-weight: 700;">$O(1)$ (Chỉ thêm cạnh)</td>
                     <td style="padding: 4px 8px; color: #dc2626; font-weight: 700;">$O(V + E)$ (Duyệt lại đồ thị)</td>
-                    <td style="padding: 4px 8px; color: #dc2626;"><strong>THẤT BẠI:</strong> Quá chậm khi có $10^6$ truy vấn real-time trên 2 tỷ người dùng.</td>
+                    <td style="padding: 4px 8px; color: #dc2626;"><strong>HẠN CHẾ:</strong> Chi phí $O(V + E)$ quá lớn khi phải xử lý số lượng truy vấn liên tục trong thời gian thực.</td>
                 </tr>
                 <tr>
                     <td style="padding: 4px 8px; font-weight: 700; color: #059669; background: #f8fafc;">Union-Find (DSU) Tối Ưu</td>
                     <td style="padding: 4px 8px; color: #166534; font-weight: 700;">$O(\alpha(N)) \approx O(1)$ Gần hằng số</td>
                     <td style="padding: 4px 8px; color: #166534; font-weight: 700;">$O(\alpha(N)) \approx O(1)$ Gần hằng số</td>
-                    <td style="padding: 4px 8px; color: #059669; font-weight: 700;"><strong>XUẤT SẮC:</strong> Xử lý hàng trăm triệu thao tác kết nối trong thời gian thực!</td>
+                    <td style="padding: 4px 8px; color: #059669; font-weight: 600;"><strong>Tối ưu kết nối liên tục:</strong> Cấu trúc mảng gọn nhẹ, locality tốt; sau khi nén đường đi, các lần <code>find()</code> tiếp theo đạt $O(1)$.</td>
                 </tr>
             </tbody>
         </table>
@@ -110,10 +110,10 @@
     <!-- Bottom Full Width Summary Callout -->
     <div style="width: 100%; margin-top: 6px; background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #ef4444; border-radius: 6px; padding: 5px 12px; font-size: 0.31em; color: #991b1b; text-align: left; display: flex; align-items: center; gap: 8px;">
         <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2em; color: #ef4444; flex-shrink: 0;"></i>
-        <span><strong>TẠI SAO BFS/DFS THẤT BẠI?</strong> Vì đồ thị liên tục thay đổi (Dynamic), mỗi lần gọi <code>connected</code> mà phải duyệt lại toàn bộ đồ thị $O(V+E)$ sẽ làm hệ thống sập lập tức. Union-Find sinh ra để giải quyết bài toán này trong thời gian $O(1)$!</span>
+        <span><strong>VÌ SAO BFS/DFS KHÔNG TỐI ƯU?</strong> Trên đồ thị biến đổi liên tục (Dynamic), mỗi truy vấn <code>connected</code> phải duyệt lại $O(V+E)$, gây tắc nghẽn nghiêm trọng khi dữ liệu tăng. Union-Find được thiết kế chuyên biệt để duy trì các thành phần liên thông với chi phí khấu hao tiệm cận $O(1)$.</span>
     </div>
 
     <aside class="notes">
-        Slide 12 khởi đầu Phần III giới thiệu bài toán Dynamic Connectivity với 2 thao tác union và connected. Giải thích lý do vì sao BFS/DFS thất bại trên đồ thị động và tại sao Union-Find là giải pháp duy nhất đạt hiệu năng O(1) thực tế.
+        Slide 12 khởi đầu Phần III giới thiệu bài toán Dynamic Connectivity với 2 thao tác union và connected. Giải thích vì sao BFS/DFS không tối ưu trên đồ thị động và tại sao Union-Find là giải pháp hiệu quả với chi phí tiệm cận O(1).
     </aside>
 </section>

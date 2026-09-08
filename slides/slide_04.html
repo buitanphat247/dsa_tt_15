@@ -58,7 +58,7 @@
                         </div>
                         <h4 style="color: #065f46; font-size: 0.44em; margin: 0; font-weight: 700;">Mảng Liên Tục (Spatial Locality)</h4>
                     </div>
-                    <span style="background: #d1fae5; color: #047857; border: 1px solid #a7f3d0; padding: 1px 5px; border-radius: 6px; font-size: 0.29em; font-weight: 700;"><i class="fa-solid fa-bolt" style="color: var(--accent-gold);"></i>  100% CACHE HIT</span>
+                    <span style="background: #d1fae5; color: #047857; border: 1px solid #a7f3d0; padding: 1px 5px; border-radius: 6px; font-size: 0.29em; font-weight: 700;"><i class="fa-solid fa-bolt" style="color: var(--accent-gold);"></i>  TỐI ƯU CACHE HIT</span>
                 </div>
 
                 <!-- Visual Simulation Diagram -->
@@ -85,8 +85,8 @@
                 <ul style="font-size: 0.32em; color: #334155; margin: 0; padding-left: 14px; line-height: 1.4;">
                     <li><strong>Cấu trúc đại diện:</strong> Union-Find (<code>parent[]</code>, <code>rank[]</code>), Flat Array.</li>
                     <li><strong>Cơ chế RAM:</strong> Cấp phát 1 khối bộ nhớ liên tục kề nhau trên RAM.</li>
-                    <li><strong>Lợi thế tốc độ:</strong> Đọc <code>arr[0]</code> nạp luôn 16 phần tử lân cận vào L1 Cache $\implies$ Các lần đọc sau trễ <strong>~1ns (gần như 0s)</strong>.</li>
-                    <li><strong>Cache Hit Ratio:</strong> Cực cao ($\approx 95\% - 99\%$).</li>
+                    <li><strong>Lợi thế tốc độ:</strong> Đọc <code>arr[0]</code> nạp luôn các phần tử lân cận trong Cache Line $\implies$ Các truy cập sau có độ trễ rất thấp (~1-2ns ở L1).</li>
+                    <li><strong>Cache Hit Ratio:</strong> Rất cao đối với các truy cập tuần tự / cục bộ.</li>
                 </ul>
             </div>
         </div>
@@ -103,6 +103,6 @@
     </div>
 
     <aside class="notes">
-        Trên lý thuyết tiệm cận, hai giải thuật cùng Big-O chưa chắc chạy nhanh bằng nhau. Union-Find chạy cực nhanh vì mảng parent nằm liên tục trên RAM, CPU chỉ cần 1 lần nạp Cache Line là lấy được hàng loạt phần tử.
+        Trên lý thuyết tiệm cận, hai giải thuật cùng Big-O chưa chắc chạy bằng nhau trong thực tế. Union-Find có lợi thế thực thi lớn vì mảng parent nằm liên tục trên RAM, tận dụng hiệu quả cơ chế nạp Cache Line của phần cứng.
     </aside>
 </section>

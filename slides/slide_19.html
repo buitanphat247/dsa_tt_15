@@ -15,7 +15,7 @@
                     <i class="fa-solid fa-triangle-exclamation"></i> 1. Cảnh Báo Bẫy Cài Đặt (Implementation Trap)
                 </div>
                 <div style="font-size: 0.29em; color: #334155; line-height: 1.45;">
-                    <strong style="color: #dc2626;">SAI LẦM CHẾT NGƯỜI:</strong> Gán trực tiếp cha không qua <code>find()</code>:
+                    <strong style="color: #dc2626;">LỖI SAI ĐIỂN HÌNH:</strong> Gán trực tiếp cha không qua <code>find()</code>:
                 </div>
                 <div style="background: #fff1f2; border: 1px solid #fecdd3; padding: 4px 8px; border-radius: 4px; margin: 4px 0; font-family: 'Fira Code', monospace; color: #991b1b; font-size: 0.28em;">
                     parent[a] = b; // SAI (Cắt đứt nhánh cây dưới a!)
@@ -65,7 +65,7 @@
             </div>
 
             <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 4px; padding: 5px 8px; font-size: 0.28em; color: #166534; font-weight: 700; text-align: center; margin-top: 6px;">
-                <i class="fa-solid fa-bolt" style="color: #059669; margin-right: 4px;"></i> DSU giúp kiểm tra chu trình siêu tốc trong $O(\alpha(V)) \approx O(1)$!
+                <i class="fa-solid fa-check-circle" style="color: #059669; margin-right: 4px;"></i> DSU hỗ trợ phát hiện chu trình trong thời gian $O(\alpha(V)) \approx O(1)$!
             </div>
         </div>
 
@@ -74,10 +74,10 @@
     <!-- Bottom Mathematical Guarantee Banner -->
     <div style="width: 100%; margin-top: 8px; background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #2563eb; border-radius: 6px; padding: 6px 14px; font-size: 0.35em; color: #1e40af; text-align: left; display: flex; align-items: center; gap: 8px;">
         <i class="fa-solid fa-calculator" style="font-size: 1.2em; color: #2563eb; flex-shrink: 0;"></i>
-        <span><strong>TỔNG CHI PHÍ THUẬT TOÁN KRUSKAL:</strong> Nhờ DSU kiểm tra liên thông trong $O(\alpha(V)) \approx O(1)$, tổng thời gian của Kruskal đạt cực hạn <strong>$O(E \log E)$</strong> (bị khống chế duy nhất bởi bước sắp xếp cạnh)!</span>
+        <span><strong>TỔNG CHI PHÍ THUẬT TOÁN KRUSKAL:</strong> Nhờ DSU kiểm tra liên thông trong $O(\alpha(V)) \approx O(1)$, tổng thời gian của Kruskal đạt <strong>$O(E \log E)$</strong> (chi phí chủ yếu phụ thuộc vào bước sắp xếp cạnh)!</span>
     </div>
 
     <aside class="notes">
-        Một sai lầm rất phổ biến khi lập trình Union-Find là gán trực tiếp parent[a] = b thay vì gọi find(a). Phép gán sai này sẽ cắt đứt toàn bộ cây con treo dưới a. Hãy nhớ luôn luôn làm việc trên nút gốc đại diện. Ngoài ra thuật toán Kruskal ứng dụng DSU để tìm Cây khung nhỏ nhất cực kỳ hiệu quả.
+        Một sai lầm rất phổ biến khi lập trình Union-Find là gán trực tiếp parent[a] = b thay vì gọi find(a). Phép gán sai này sẽ cắt đứt toàn bộ cây con treo dưới a. Lưu ý luôn thực hiện thao tác trên nút gốc đại diện. Ngoài ra thuật toán Kruskal ứng dụng DSU để tìm Cây khung nhỏ nhất cực kỳ hiệu quả.
     </aside>
 </section>

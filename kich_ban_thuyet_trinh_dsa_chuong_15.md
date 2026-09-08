@@ -100,10 +100,10 @@
 **🎙️ Lời thoại thuyết minh (Nhi):**
 > *"Để thấy rõ sự cấp thiết, hãy xem xét 2 bài toán thực tế cực kỳ phổ biến sau đây:*
 >
-> * **Bài toán thứ nhất: Gợi ý từ khi gõ phím (Autocomplete)**. Khi các bạn gõ cụm từ `'app'`, bàn phím điện thoại hay thanh tìm kiếm phải gợi ý ngay lập tức các từ như *'apple'*, *'apply'*, *'application'* từ một bộ từ điển hơn 1 triệu từ trong thời gian dưới 10 mili-giây. Dùng các cấu trúc thông thường chắc chắn sẽ gây hiện tượng đứng máy hoặc trễ giao diện!
+> * **Bài toán thứ nhất: Gợi ý từ khi gõ phím (Autocomplete)**. Khi các bạn gõ cụm từ `'app'`, bàn phím điện thoại hay thanh tìm kiếm phải gợi ý ngay lập tức các từ như *'apple'*, *'apply'*, *'application'* từ một bộ từ điển hơn 1 triệu từ trong thời gian dưới 10 mili-giây. Dùng các cấu trúc thông thường sẽ khó đáp ứng độ trễ thời gian thực khi quy mô dữ liệu lớn.
 > * **Bài toán thứ hai: Kiểm tra quan hệ liên thông bạn bè Real-time**. Trong một mạng xã hội có 100 triệu người dùng, các hành động kết bạn diễn ra liên tục từng giây. Làm thế nào để kiểm tra ngay lập tức xem hai người dùng bất kỳ có liên thông với nhau hay không mà không cần phải duyệt lại toàn bộ đồ thị bằng BFS hay DFS tốn hàng giây?*
 >
-> *Hai bài toán kinh điển này chính là đất diễn hoàn hảo cho **Trie** và **Union-Find**."*
+> *Hai bài toán kinh điển này làm nổi bật ưu thế ứng dụng của **Trie** và **Union-Find**."*
 
 ---
 
@@ -156,7 +156,7 @@
 > * **Ký hiệu:** $N$ = tổng số từ trong từ điển, $L$ = độ dài tối đa của một từ, $P$ = độ dài tiền tố đang tìm, $K$ = số lượng từ khớp với tiền tố trả về.
 > * **Nhận xét cốt lõi:**
 >   * Mảng (Array): Chèn $O(1)$ hoặc $O(N \cdot L)$ nếu có sort, nhưng Prefix Search cực chậm $O(N \cdot L)$.
->   * Hash Table: Tra cứu chính xác $O(L)$ vô địch, nhưng Prefix Search bắt buộc phải quét hết $O(N \cdot L)$.
+>   * Hash Table: Tra cứu chính xác đạt $O(L)$ trung bình, nhưng Prefix Search phải quét toàn bộ $O(N \cdot L)$.
 >   * **Trie:** Prefix Search chỉ tốn $O(P + K)$! Chỉ đi đúng $P$ bước theo độ dài tiền tố, sau đó duyệt cây con lấy $K$ từ. **Hoàn toàn độc lập với $N$ (dù từ điển có 10 triệu từ thì thời gian vẫn như 1,000 từ)!**
 
 **🎙️ Lời thoại thuyết minh (Nhi):**
@@ -164,9 +164,9 @@
 >
 > * Với **Mảng thông thường**: Tìm kiếm tiền tố mất $O(N \cdot L)$ — quy mô dữ liệu $N$ càng lớn thì hệ thống càng chậm.
 > * Với **Bảng băm (Hash Table)**: Mặc dù tra cứu từ chính xác rất nhanh $O(L)$, nhưng tìm kiếm tiền tố vẫn bị vướng mức $O(N \cdot L)$ vì không thể tận dụng cấu trúc băm cho tiền tố.
-> * Và ngôi sao của chúng ta — **Cây Trie**: Thời gian tìm kiếm tiền tố chỉ là **$O(P + K)$**, trong đó $P$ là độ dài tiền tố và $K$ là số lượng kết quả gợi ý.
+> * Trong khi đó, với **Cây Trie**: Thời gian tìm kiếm tiền tố chỉ là **$O(P + K)$**, trong đó $P$ là độ dài tiền tố và $K$ là số lượng kết quả gợi ý.
 >
-> *Điều kỳ diệu ở đây là: **Thời gian truy vấn hoàn toàn không phụ thuộc vào tổng số từ $N$ trong cơ sở dữ liệu**! Dù từ điển có 1 vạn hay 100 triệu từ, tốc độ tìm kiếm tiền tố vẫn nhanh như nhau!"*
+> *Điểm đáng chú ý ở đây là: **Thời gian truy vấn tiền tố không phụ thuộc vào tổng số từ $N$ trong cơ sở dữ liệu**! Chi phí tìm kiếm chỉ phụ thuộc vào độ dài chuỗi $L$.*"
 
 ---
 
@@ -188,7 +188,7 @@
 > * **Thứ hai, Cạnh (Edge) chính là Ký tự**: Ký tự thực chất được biểu diễn bởi chỉ số của cạnh liên kết từ nút cha trỏ tới nút con.
 > * **Thứ ba, Từ khóa là một Đường đi (Path)**: Một từ hoàn chỉnh được tạo thành bằng cách đi từ nút Gốc lần lượt qua các cạnh ký tự cho tới nút đích.
 >
-> *Nhờ mô hình này, tất cả các từ có chung phần đầu sẽ đi chung trên cùng một lộ trình, giúp triệt tiêu hoàn toàn sự dư thừa dữ liệu!"*
+> *Nhờ mô hình này, tất cả các từ có chung phần đầu sẽ đi chung trên cùng một lộ trình, giúp giảm đáng kể sự dư thừa dữ liệu tiền tố!"*
 
 ---
 
@@ -199,7 +199,7 @@
 > 🧠 **BỔ NGHĨA DÀNH CHO NGƯỜI THUYẾT TRÌNH (Hiểu bản chất):**
 > * **Tại sao cần cờ này?** Cây Trie lưu trữ rất nhiều chuỗi lồng nhau.
 >   * Ví dụ: Ta chèn từ `"caterpillar"`. Nếu người dùng tìm từ `"cat"`, ta thấy trên đường đi có các cạnh `'c' \to 'a' \to 't'`. Nhưng làm sao máy tính biết `"cat"` có phải là một từ có nghĩa trong từ điển hay chỉ là một đoạn tiền tố vô tình đi qua?
->   * **Cờ `is_end_of_word = true`** tại nút `'t'` sẽ khẳng định: *"Tại đây kết thúc một từ hợp lệ mang tên `'cat'`"*.
+>   * **Cờ `is_end_of_word = true`** tại nút `'t'` sẽ đánh dấu: *"Tại đây kết thúc một từ hợp lệ mang tên `'cat'`"*.
 > * **Phân biệt sống còn:** Nút lá hình học (Leaf - nút không có con) khác hoàn toàn với Nút kết thúc từ (End of word - nút có cờ bật, vẫn có thể có con như `'cat'` là tiền tố của `'caterpillar'`).
 
 **🎙️ Lời thoại thuyết minh (Nhi):**
@@ -210,7 +210,7 @@
 > * Nếu không có cờ `is_end_of_word`, khi người dùng tìm kiếm từ `'cat'`, hệ thống sẽ bị bối rối: Liệu `'cat'` là một từ có nghĩa độc lập trong từ điển, hay nó chỉ là một đoạn tiền tố vô nghĩa nằm bên trong từ `'caterpillar'`?
 > * Khi ta bật cờ `is_end_of_word = true` tại nút `'t'`, cây Trie sẽ xác nhận: `'cat'` là một từ hoàn chỉnh, đồng thời vẫn cho phép các nhánh con tiếp tục kéo dài tới `'caterpillar'`.
 >
-> *Nhờ cờ hiệu này, chúng ta phân biệt rạch ròi giữa khái niệm 'Nút lá hình học' và 'Từ hợp lệ', cho phép nén hàng vạn từ lồng nhau một cách an toàn tuyệt đối!"*
+> *Nhờ cờ hiệu này, chúng ta phân biệt rạch ròi giữa khái niệm 'Nút lá hình học' và 'Từ hợp lệ', cho phép nén nhiều từ lồng nhau một cách chính xác và hiệu quả!"*
 
 ---
 
@@ -264,7 +264,7 @@
 > 🧠 **BỔ NGHĨA DÀNH CHO NGƯỜI THUYẾT TRÌNH (Hiểu bản chất):**
 > * **Đây là câu hỏi phỏng vấn Big Tech & câu hỏi Thầy rất thích hỏi:** Trong `TrieNode`, nên dùng container nào để chứa con trỏ con?
 >   1. **Mảng tĩnh `Fixed Array [26]`:**
->      * *Ưu điểm:* Truy cập cực nhanh $O(1)$, cache locality hoàn hảo.
+>      * *Ưu điểm:* Truy cập cực nhanh $O(1)$, cache locality rất tốt.
 >      * *Nhược điểm:* Rất tốn RAM nếu dữ liệu thưa thớt (26 con trỏ $\times$ 8 bytes = 208 bytes/nút dù chỉ dùng 1-2 ký tự). Không mở rộng được cho bảng chữ cái Unicode (hàng ngàn ký tự).
 >   2. **Bảng băm `std::unordered_map`:**
 >      * *Ưu điểm:* Tiết kiệm RAM khi phân nhánh thưa, hỗ trợ toàn bộ bảng chữ cái Unicode/UTF-8.
@@ -276,9 +276,9 @@
 **🎙️ Lời thoại thuyết minh (Nhi):**
 > *"Một câu hỏi kỹ thuật rất sâu sắc khi lập trình Trie: **Chúng ta nên chọn cấu trúc nào để quản lý các nút con (`child container`)?** Không có câu trả lời duy nhất, mà là sự đánh đổi kỹ thuật:*
 >
-> * **Lựa chọn 1: Mảng cố định `Fixed Array [26]`**: Mang lại tốc độ truy xuất $O(1)$ tuyệt đối và thân thiện nhất với bộ nhớ đệm CPU Cache. Tuy nhiên nhược điểm là rất tốn bộ nhớ nếu cây phân nhánh thưa thớt và chỉ giới hạn trong bảng chữ cái tiếng Anh 26 ký tự.
-> * **Lựa chọn 2: Bảng băm `std::unordered_map`**: Tiết kiệm bộ nhớ tuyệt vời cho cây thưa và hỗ trợ toàn bộ tập ký tự Unicode quốc tế, nhưng bù lại phải đánh đổi chi phí tính toán hàm băm và tăng độ trễ Cache Miss.
-> * **Lựa chọn 3: Mảng co giãn `Sorted std::vector`**: Giải pháp cân bằng hoàn hảo cho các tập ký tự động kích thước vừa phải.
+> * **Lựa chọn 1: Mảng cố định `Fixed Array [26]`**: Mang lại tốc độ truy xuất $O(1)$ trực tiếp và tận dụng tốt bộ nhớ đệm CPU Cache. Tuy nhiên nhược điểm là rất tốn bộ nhớ nếu cây phân nhánh thưa thớt và chỉ giới hạn trong bảng chữ cái tiếng Anh 26 ký tự.
+> * **Lựa chọn 2: Bảng băm `std::unordered_map`**: Tiết kiệm bộ nhớ hiệu quả cho cây thưa và hỗ trợ toàn bộ tập ký tự Unicode quốc tế, nhưng bù lại phải đánh đổi chi phí tính toán hàm băm và tăng độ trễ Cache Miss.
+> * **Lựa chọn 3: Mảng co giãn `Sorted std::vector`**: Giải pháp cân bằng hợp lý cho các tập ký tự động kích thước vừa phải.
 >
 > *Tùy vào tài nguyên hệ thống và bảng chữ cái mục tiêu mà người kỹ sư sẽ lựa chọn container phù hợp."*
 
@@ -304,7 +304,7 @@
 >
 > *Đó là toàn bộ bức tranh về Cấu trúc dữ liệu Trie trong việc xử lý chuỗi và tiền tố.*
 >
-> *Tiếp theo đây, để giải quyết bài toán liên thông động và quản lý tập hợp rời rạc với tốc độ tiệm cận thời gian thực, em xin trân trọng kính mời bạn **Mai Thanh Trà** trình bày Cấu trúc dữ liệu vô cùng kỳ diệu: **Union-Find (DSU)**!"*
+> *Tiếp theo đây, để giải quyết bài toán liên thông động và quản lý tập hợp rời rạc với tốc độ tiệm cận thời gian thực, em xin trân trọng kính mời bạn **Mai Thanh Trà** trình bày Cấu trúc dữ liệu chuyên biệt: **Union-Find (DSU)**!"*
 
 ---
 
@@ -339,7 +339,7 @@
 > 1. *Thao tác `union(u, v)`: Kết nối đối tượng $u$ với $ đối tượng $v$, tức là gộp nhóm chứa $u$ và nhóm chứa $v$ lại làm một.*
 > 2. *Thao tác `connected(u, v)`: Kiểm tra xem $u$ và $v$ có đang liên thông với nhau hay không.*
 >
-> *Đây là một quan hệ tương đương mang đầy đủ tính chất Phản xạ, Đối xứng và Bắc cầu. Nếu giải bài toán này bằng các thuật toán duyệt đồ thị truyền thống như BFS hay DFS, mỗi lần truy vấn sẽ tốn chi phí $O(V + E)$. DSU ra đời với một sứ mệnh duy nhất: **Thực hiện hai thao tác trên với tốc độ tiệm cận hằng số $O(1)$!**"*
+> *Đây là một quan hệ tương đương mang đầy đủ tính chất Phản xạ, Đối xứng và Bắc cầu. Nếu giải bài toán này bằng các thuật toán duyệt đồ thị truyền thống như BFS hay DFS, mỗi lần truy vấn sẽ tốn chi phí $O(V + E)$. DSU được thiết kế để giải quyết hiệu quả bài toán này với chi phí khấu hao tiệm cận hằng số $O(1)$."*
 
 ---
 
@@ -351,16 +351,16 @@
 > * **Cấu trúc dữ liệu Up-Tree:** Mỗi tập hợp rời rạc được mô hình hóa thành một cây ngược, trong đó nút con trỏ lên nút cha (`parent`). Nút gốc (Root) tự trỏ vào chính nó (`parent[root] == root`).
 > * **Biểu diễn phẳng bằng Mảng 1D:** Không cần tạo struct phức tạp hay cấp phát con trỏ! Chỉ cần đúng một mảng số nguyên duy nhất `int parent[N]`.
 >   * Khởi tạo: Mỗi phần tử là một tập hợp độc lập $\to$ `parent[i] = i`.
->   * Thao tác `find(i)`: Lần theo `parent[i]` ngược lên cho đến khi gặp nút mà `parent[root] == root`. Nút gốc này chính là "Đại diện / Chủ tịch" của tập hợp.
+>   * Thao tác `find(i)`: Lần theo `parent[i]` ngược lên cho đến khi gặp nút mà `parent[root] == root`. Nút gốc này chính là "Phần tử đại diện" của tập hợp.
 
 **🎙️ Lời thoại thuyết minh (Trà):**
 > *"Để hiện thực hóa DSU, các nhà khoa học máy tính đã phát minh ra một mô hình cực kỳ thông minh: **Rừng cây hướng gốc (Up-Tree Forest)** và nén toàn bộ cấu trúc đó vào đúng **một mảng 1 chiều `parent[]` duy nhất**!*
 >
 > *Cơ chế hoạt động vô cùng tinh gọn:*
 > * Ban đầu, khi có $N$ phần tử độc lập, mỗi phần tử tự là gốc của chính mình: Ta khởi tạo `parent[i] = i` với mọi $i$.
-> * Khi nhiều phần tử thuộc cùng một nhóm, chúng sẽ tạo thành một cây. Trong đó, **Nút Gốc (Root)** của cây đóng vai trò là 'Người Đại Diện' duy nhất cho toàn bộ nhóm đó.
+> * Khi nhiều phần tử thuộc cùng một nhóm, chúng sẽ tạo thành một cây. Trong đó, **Nút Gốc (Root)** của cây đóng vai trò là 'Phần tử đại diện' cho toàn bộ nhóm đó.
 > * Để tìm xem phần tử $i$ thuộc nhóm nào, ta chỉ cần gọi hàm `find(i)` để leo ngược theo con trỏ `parent` lên tới đỉnh Gốc.
-> * Hai phần tử $u$ và $v$ được coi là liên thông nếu và chỉ nếu `find(u) == find(v)` — tức là chúng có chung một Người Đại Diện!*
+> * Hai phần tử $u$ và $v$ được coi là liên thông nếu và chỉ nếu `find(u) == find(v)` — tức là chúng có chung một phần tử đại diện!*
 >
 > *Một cấu trúc toàn vẹn không hề tốn thêm bất kỳ con trỏ phức tạp nào!"*
 
@@ -377,14 +377,14 @@
 > * **Kết luận:** Cần giải pháp tối ưu để khống chế chiều cao cây.
 
 **🎙️ Lời thoại thuyết minh (Trà):**
-> *"Tuy nhiên, nếu chúng ta chỉ cài đặt phép `union` một cách ngây thơ — tức là cứ tùy tiện nối gốc của cây này vào dưới gốc của cây kia — một thảm họa hiệu năng sẽ xảy ra!*
+> *"Tuy nhiên, nếu chúng ta chỉ cài đặt phép `union` một cách ngây thơ — tức là cứ tùy tiện nối gốc của cây này vào dưới gốc của cây kia — hiệu năng sẽ bị suy giảm nghiêm trọng!*
 >
 > *Hãy nhìn vào sơ đồ bên phải Slide 14:*
-> * Trong trường hợp xấu nhất, nếu các thao tác gộp diễn ra theo một chuỗi tuần tự $0-1$, rồi $1-2$, $2-3$, $3-4$, cây DSU sẽ bị **suy biến hoàn toàn thành một Danh sách liên kết thẳng đứng**!
+> * Trong trường hợp xấu nhất, nếu các thao tác gộp diễn ra theo một chuỗi tuần tự $0-1$, rồi $1-2$, $2-3$, $3-4$, cây DSU sẽ bị **suy biến thành một danh sách liên kết**!
 > * Khi đó, chiều cao của cây chạm ngưỡng tối đa $H = N - 1$.
 > * Mỗi lần thực hiện `find()`, thuật toán phải duyệt qua toàn bộ $N$ nút, khiến độ phức tạp bị **thoái hóa nghiêm trọng từ mong đợi hằng số về lại $O(N)$**!
 >
-> *Để giải quyết triệt để nguy cơ suy biến này, chúng ta có 2 kỹ thuật tối ưu hóa kinh điển: **Union by Rank** và **Path Compression**."*
+> *Để kiểm soát nguy cơ suy biến này, chúng ta có 2 kỹ thuật tối ưu hóa kinh điển: **Union by Rank** và **Path Compression**."*
 
 ---
 
@@ -407,7 +407,7 @@
 > * Khi nối cây thấp vào cây cao, chiều cao tổng thể của cây lớn hoàn toàn không bị tăng lên!
 > * Chiều cao chỉ tăng thêm đúng 1 đơn vị khi và chỉ khi ta gộp hai cây có Rank hoàn toàn bằng nhau.
 >
-> *Nhờ nguyên lý thông minh này, chiều cao tối đa của cây luôn được chặn trên ở mức $\log_2 N$. Độ phức tạp của mọi thao tác DSU được kéo giảm ngoạn mục từ $O(N)$ xuống chỉ còn **$O(\log N)$**!"*
+> *Nhờ nguyên lý thông minh này, chiều cao tối đa của cây luôn được chặn trên ở mức $\log_2 N$. Độ phức tạp của mọi thao tác DSU được giới hạn từ $O(N)$ xuống mức **$O(\log N)$**!"*
 
 ---
 
@@ -416,27 +416,27 @@
 * **Hành động trình chiếu:** Chuyển Slide 16. Nhấn mạnh dòng lệnh C++ đệ quy 1 dòng và sơ đồ biến đổi cây nhiều tầng thành cây phẳng 1 tầng.
 
 > 🧠 **BỔ NGHĨA DÀNH CHO NGƯỜI THUYẾT TRÌNH (Hiểu bản chất):**
-> * **Dòng mã đệ quy ma thuật:**  
+> * **Dòng mã đệ quy tinh gọn:**  
 >   `int find(int i) { if (parent[i] == i) return i; return parent[i] = find(parent[i]); }`
 > * **Cơ chế hoạt động:** Trong quá trình hàm `find(i)` đi từ nút $i$ lên gốc $R$, khi đệ quy quay lui trở về (Unwinding), nó gán lại con trỏ `parent` của **tất cả các nút đã đi qua trỏ trực tiếp về $R$**!
 > * **Kết quả:** Toàn bộ nhánh cây nhiều tầng bị kéo phẳng hoàn toàn thành cây 1 tầng duy nhất. Tất cả các nút con đều nối thẳng vào Gốc.
 > * **Hiệu quả:** Lần gọi `find()` đầu tiên trên nhánh có thể tốn vài bước, nhưng từ lần gọi thứ hai trở đi trên bất kỳ nút nào của nhánh đó, thời gian chỉ tốn đúng **$O(1)$**!
 
 **🎙️ Lời thoại thuyết minh (Trà):**
-> *"Nếu Union by Rank đã đưa độ phức tạp về $O(\log N)$, thì kỹ thuật thứ hai — **Path Compression (Nén đường đi)** — mới thực sự là một tuyệt tác thuật toán!*
+> *"Nếu Union by Rank đã đưa độ phức tạp về $O(\log N)$, thì kỹ thuật thứ hai — **Path Compression (Nén đường đi)** — đóng vai trò then chốt trong việc tối ưu hóa hiệu năng truy vấn!*
 >
-> *Hãy nhìn vào dòng code C++ kỳ diệu này:*
+> *Cơ chế này được cài đặt rất tinh gọn trong C++:*
 > `return parent[i] = find(parent[i]);`
 >
 > *Cơ chế hoạt động vô cùng tinh xảo: Trong quá trình đệ quy đi tìm Nút Gốc, trên đường quay lui trở về, thuật toán sẽ **bẻ thẳng toàn bộ các nút đã đi qua để nối trực tiếp vào Nút Gốc**!*
-> * Cấu trúc cây nhiều tầng ngay lập tức bị ép phẳng tuyệt đối thành cây chỉ có đúng 1 tầng duy nhất.
-> * Tất cả các thao tác `find()` kế tiếp trên các nút này sẽ chạm tới Gốc trong đúng 1 bước nhảy — đạt tốc độ **$O(1)$ tức thì**!
+> * Cấu trúc cây nhiều tầng được làm phẳng đáng kể, giảm chiều cao cây về mức tối thiểu.
+> * Tất cả các thao tác `find()` kế tiếp trên các nút này sẽ chạm tới Gốc trong đúng 1 bước nhảy — đạt chi phí **$O(1)$ trực tiếp**!
 >
 > *Đây chính là cơ chế tự tối ưu cấu trúc dữ liệu theo thời gian thực (Self-adjusting data structure)!"*
 
 ---
 
-### 📍 SLIDE 17: ĐỘ PHỨC TẠP CỰC HẠN & HÀM NGƯỢC ACKERMANN $\alpha(N)$
+### 📍 SLIDE 17: PHÂN TÍCH ĐỘ PHỨC TẠP & HÀM NGƯỢC ACKERMANN $\alpha(N)$
 * **Thời lượng:** 50 giây.
 * **Hành động trình chiếu:** Chuyển Slide 17. Chỉ vào Bảng tra cứu giá trị $N = 10^{80} \implies \alpha(N) \le 4$.
 
@@ -448,13 +448,13 @@
 >   * Vì vậy, với mọi bài toán trong thế giới thực và trên mọi siêu máy tính, **$\alpha(N) \le 4$**. Trong thực tế kỹ thuật, ta hoàn toàn coi DSU chạy với **thời gian hằng số $O(1)$**!
 
 **🎙️ Lời thoại thuyết minh (Trà):**
-> *"Khi kết hợp đồng thời cả hai kỹ thuật: Union by Rank và Path Compression, chúng ta đạt được một giới hạn lý thuyết tối thượng được nhà khoa học máy tính Robert Tarjan chứng minh vào năm 1975: **$O(\alpha(N))$** cho mỗi thao tác.*
+> *"Khi kết hợp đồng thời cả hai kỹ thuật: Union by Rank và Path Compression, chúng ta đạt được kết quả độ phức tạp kinh điển được nhà khoa học máy tính Robert Tarjan chứng minh vào năm 1975: **$O(\alpha(N))$** cho mỗi thao tác.*
 >
-> *Trong đó, $\alpha(N)$ là **Hàm ngược Ackermann** — hàm số tăng trưởng chậm nhất trong toàn bộ lịch sử toán học và khoa học máy tính!*
+> *Trong đó, $\alpha(N)$ là **Hàm ngược Ackermann** — hàm số có tốc độ tăng trưởng cực kỳ chậm trong lý thuyết độ phức tạp!*
 > * Để hàm $\alpha(N)$ đạt tới giá trị bằng 5, số lượng phần tử $N$ cần thiết phải vượt qua $10^{80}$ — tức là nhiều hơn tổng số nguyên tử trong toàn bộ vũ trụ của chúng ta!
 > * Do đó, đối với bất kỳ bài toán thực tế nào trên Trái Đất, **$\alpha(N)$ không bao giờ vượt quá 4**.
 >
-> *Nói cách khác, chúng ta có thể tự tin khẳng định: **DSU đạt hiệu năng tiệm cận hằng số $O(1)$ tuyệt đối** trong mọi hệ thống phần mềm!"*
+> *Do đó, trong thực tế kỹ thuật, chi phí khấu hao $O(\alpha(N))$ được xem là tiệm cận thời gian hằng số $O(1)$ đối với mọi quy mô dữ liệu thực tế!*"
 
 ---
 
@@ -513,12 +513,12 @@
 >   * *DSU:* Thêm cạnh $O(\alpha(V)) \approx O(1)$, Truy vấn liên thông $O(\alpha(V)) \approx O(1)$, Bộ nhớ siêu nhẹ đúng $O(V)$!
 
 **🎙️ Lời thoại thuyết minh (Trà):**
-> *"Nhìn vào Bảng đối sánh tổng hợp trên Slide 20, chúng ta thấy rõ sự áp đảo của DSU trong bài toán liên thông:*
+> *"Nhìn vào Bảng đối sánh tổng hợp trên Slide 20, chúng ta thấy rõ hiệu quả nổi bật của DSU trong bài toán liên thông:*
 > * Nếu dùng **BFS hay DFS**, mỗi thao tác truy vấn liên thông tiêu tốn $O(V + E)$ thời gian.
 > * Nếu dùng **Ma trận kề**, bộ nhớ bị lãng phí tới $O(V^2)$ và thời gian vẫn là $O(V)$.
-> * Trong khi đó, **DSU áp đảo hoàn toàn**: Thêm cạnh tốn $O(1)$, truy vấn liên thông tốn $O(1)$, và bộ nhớ chỉ tiêu tốn đúng một mảng tuyến tính $O(V)$!
+> * Trong khi đó, **DSU thể hiện ưu thế vượt trội**: Thêm cạnh tốn $O(1)$, truy vấn liên thông tốn $O(1)$, và bộ nhớ chỉ tiêu tốn đúng một mảng tuyến tính $O(V)$!
 >
-> *Đó là sức mạnh phi thường của Cấu trúc Union-Find.*
+> *Đó là ưu điểm thiết kế của Cấu trúc Union-Find.*
 >
 > *Sau đây, để đúc kết lại toàn bộ bài học, giới thiệu Khung quyết định thiết kế hệ thống và các biến thể nâng cao, em xin kính mời bạn **Huỳnh Thị Thùy Trang** tiếp tục phần thuyết trình!"*
 
@@ -550,8 +550,8 @@
 >
 > *Trên Slide 21 là Sơ đồ cây quyết định được nhóm chúng em đúc kết:*
 > * Nếu bài toán chỉ yêu cầu tra cứu từ khóa chính xác mà không quan tâm thứ tự $\to$ Hãy chọn **Hash Table** để đạt $O(1)$ đơn giản và tối ưu bộ nhớ.
-> * Nếu bài toán yêu cầu xử lý chuỗi, tìm kiếm tiền tố hoặc tự động gợi ý từ $\to$ **Trie** là giải pháp số 1 không thể thay thế.
-> * Nếu bài toán thuộc dạng quan hệ tương đương, gộp nhóm động hoặc phát hiện chu trình trên đồ thị vô hướng $\to$ Hãy chọn **Union-Find (DSU)** để đạt tốc độ tức thì $O(1)$.
+> * Nếu bài toán yêu cầu xử lý chuỗi, tìm kiếm tiền tố hoặc tự động gợi ý từ $\to$ **Trie** là giải pháp chuyên biệt rất phù hợp.
+> * Nếu bài toán thuộc dạng quan hệ tương đương, gộp nhóm động hoặc phát hiện chu trình trên đồ thị vô hướng $\to$ Hãy chọn **Union-Find (DSU)** để đạt chi phí khấu hao tiệm cận $O(1)$.
 > * Còn nếu bài toán yêu cầu tìm đường đi ngắn nhất hoặc xử lý đồ thị có hướng phức tạp $\to$ Khi đó chúng ta mới cần đến **BFS, DFS hoặc Dijkstra**."*
 
 ---
@@ -569,8 +569,8 @@
 **🎙️ Lời thoại thuyết minh (Trang):**
 > *"Từ việc nghiên cứu chuyên sâu Chương 15, nhóm chúng em xin đúc kết **3 bài học kiến trúc cốt lõi** mang tính nền tảng cho mọi kỹ sư phần mềm:*
 >
-> 1. **Thứ nhất: Mẫu Truy Vấn Quyết Định Cấu Trúc Dữ Liệu!** Không có cấu trúc dữ liệu nào là 'tốt nhất' cho mọi tình huống. Hiệu năng cao chỉ đạt được khi hình học của cấu trúc dữ liệu khớp hoàn hảo với luồng truy vấn của bài toán.
-> 2. **Thứ hai: Quy luật Đánh đổi (Trade-off) Không Thể Tránh Khỏi!** Để đạt được tốc độ tìm kiếm tiền tố siêu nhanh $O(L)$, Trie đã chấp nhận đánh đổi thêm bộ nhớ con trỏ. Kỹ sư giỏi là người biết cân bằng giữa giới hạn phần cứng và yêu cầu thời gian phản hồi của sản phẩm.
+> 1. **Thứ nhất: Mẫu Truy Vấn Quyết Định Cấu Trúc Dữ Liệu!** Không có cấu trúc dữ liệu nào là 'tốt nhất' cho mọi tình huống. Hiệu năng cao chỉ đạt được khi hình học của cấu trúc dữ liệu phù hợp chặt chẽ với luồng truy vấn của bài toán.
+> 2. **Thứ hai: Quy luật Đánh đổi (Trade-off) Không Thể Tránh Khỏi!** Để đạt được tốc độ tìm kiếm tiền tố $O(L)$, Trie đã chấp nhận đánh đổi thêm bộ nhớ con trỏ. Kỹ sư giỏi là người biết cân bằng giữa giới hạn phần cứng và yêu cầu thời gian phản hồi của sản phẩm.
 > 3. **Thứ ba: Tư duy Tối ưu Phần cứng (Hardware-awareness)!** Lý thuyết Big-O là chưa đủ. Một cấu trúc dữ liệu thực chiến phải tận dụng được CPU Cache Locality và giảm thiểu hiện tượng Pointer Chasing trên bộ nhớ RAM."*
 
 ---
@@ -604,7 +604,7 @@
 ---
 
 ### ❓ Câu hỏi 1 (Về Trie - Tối ưu bộ nhớ):
-**Giảng viên hỏi:** *"Trong cài đặt `TrieNode`, nếu ta có một tập dữ liệu văn bản tiếng Việt Unicode hoặc từ điển chứa hàng triệu từ, mảng `children[26]` sẽ không hoạt động được hoặc gây lãng phí bộ nhớ khủng khiếp. Các em sẽ giải quyết bài toán này như thế nào trong thực tế?"*
+**Giảng viên hỏi:** *"Trong cài đặt `TrieNode`, nếu ta có một tập dữ liệu văn bản tiếng Việt Unicode hoặc từ điển chứa hàng triệu từ, mảng `children[26]` sẽ không hoạt động được hoặc gây lãng phí bộ nhớ đáng kể. Các em sẽ giải quyết bài toán này như thế nào trong thực tế?"*
 
 * **Diễn giả trả lời (Nhi / Trang):**
   > *"Dạ thưa Thầy, đối với tập ký tự lớn như Unicode tiếng Việt hoặc khi dữ liệu rất thưa thớt, chúng em có 3 giải pháp kỹ thuật cụ thể:*
@@ -621,7 +621,7 @@
   > *"Dạ thưa Thầy:*
   > * *Nếu chỉ sử dụng duy nhất **Path Compression** mà không dùng Union by Rank, độ phức tạp trung bình (amortized) cho $M$ thao tác trên $N$ phần tử là **$O(M \log_{1 + M/N} N)$**, và trong trường hợp xấu nhất cho một thao tác đơn lẻ vẫn có thể chạm $O(\log N)$.*
   > * *Nếu chỉ sử dụng duy nhất **Union by Rank** mà không có Path Compression, độ phức tạp là **$O(\log N)$** trong trường hợp xấu nhất.*
-  > * *Chỉ khi **kết hợp đồng thời cả Union by Rank và Path Compression**, cấu trúc cây vừa được khống chế chiều cao cơ sở, vừa liên tục được ép phẳng sau mỗi lần truy vấn, từ đó mới đạt được giới hạn tối ưu tuyệt đối **$O(M \alpha(N))$** theo chứng minh của Tarjan ạ."*
+  > * *Chỉ khi **kết hợp đồng thời cả Union by Rank và Path Compression**, cấu trúc cây vừa được khống chế chiều cao cơ sở, vừa liên tục được ép phẳng sau mỗi lần truy vấn, từ đó mới đạt được giới hạn tối ưu **$O(M \alpha(N))$** theo chứng minh của Tarjan ạ."*
 
 ---
 
@@ -632,7 +632,7 @@
   > *"Dạ thưa Thầy, đây chính là một điểm rất tinh tế trong thiết kế giải thuật DSU:*
   > * *Để tính toán lại chính xác chiều cao của một cây sau khi nén đường đi, chúng ta buộc phải duyệt qua toàn bộ các nút con của cây đó — thao tác này sẽ tốn chi phí thời gian lên tới $O(K)$ (với $K$ là số nút trong cây).*
   > * *Nếu làm như vậy, chúng ta sẽ tự phá hủy mục tiêu tốc độ $O(1)$ của hàm `find()`.*
-  > * *Do đó, trong thuật toán DSU chuẩn, `rank` được định nghĩa là **chặn trên xấp xỉ (Upper Bound)** của chiều cao thay vì chiều cao chính xác. Việc giữ nguyên `rank` không làm ảnh hưởng đến tính đúng đắn của giải thuật mà vẫn đảm bảo thời gian chạy tối ưu tuyệt đối ạ."*
+  > * *Do đó, trong thuật toán DSU chuẩn, `rank` được định nghĩa là **chặn trên xấp xỉ (Upper Bound)** của chiều cao thay vì chiều cao chính xác. Việc giữ nguyên `rank` không làm ảnh hưởng đến tính đúng đắn của giải thuật mà vẫn đảm bảo thời gian chạy tiệm cận tối ưu ạ."*
 
 ---
 
@@ -643,7 +643,7 @@
   > *"Dạ thưa Thầy:*
   > * *Bản chất của DSU là cấu trúc dữ liệu quản lý **Quan hệ Tương đương (Equivalence Relation)** — nó chỉ trả lời được câu hỏi nhị phân: 'Hai đỉnh này có thuộc cùng một thành phần liên thông hay không?' (Yes/No Connectivity).*
   > * *DSU không lưu trữ thông tin về đường đi cụ thể, không lưu trọng số lũy kế giữa các chặng, và không duy trì hướng của đồ thị.*
-  > * *Vì vậy, đối với bài toán tìm đường đi ngắn nhất có xét trọng số cạnh, chúng ta bắt buộc phải sử dụng các thuật toán duyệt đồ thị chuyên biệt như **Dijkstra** hoặc **Bellman-Ford** ạ."*
+  > * *Vì vậy, đối với bài toán tìm đường đi ngắn nhất có xét trọng số cạnh, chúng ta cần sử dụng các thuật toán duyệt đồ thị chuyên biệt như **Dijkstra** hoặc **Bellman-Ford** ạ."*
 
 ---
 

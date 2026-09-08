@@ -78,11 +78,11 @@
 
     <!-- Bottom Full Width Highlight Banner -->
     <div style="width: 100%; margin-top: 6px; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #16a34a; border-radius: 6px; padding: 5px 12px; font-size: 0.31em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-gem" style="font-size: 1.2em; color: #16a34a; flex-shrink: 0;"></i>
-        <span><strong>ĐIỀU KỲ DIỆU CỦA DSU:</strong> Toàn bộ rừng cây phức tạp được nén gọn vào <u>một mảng số nguyên duy nhất <code>parent[]</code></u> — Không cần dùng con trỏ, không cấp phát động, đạt hiệu năng Cache Locality tuyệt đối!</span>
+        <i class="fa-solid fa-circle-check" style="font-size: 1.2em; color: #16a34a; flex-shrink: 0;"></i>
+        <span><strong>ƯU ĐIỂM BIỂU DIỄN:</strong> Các tập hợp được ánh xạ trực tiếp lên <u>mảng số nguyên <code>parent[]</code></u> — Loại bỏ con trỏ động phân tán, giúp tối ưu không gian bộ nhớ và nâng cao hiệu quả truy xuất (Cache Locality).</span>
     </div>
 
     <aside class="notes">
-        Slide 13 giải thích Disjoint-Set ADT và quy đổi rừng cây thành mảng 1D parent. Điều kỳ diệu của DSU là không dùng con trỏ hay cấp phát động.
+        Slide 13 giải thích Disjoint-Set ADT và kỹ thuật biểu diễn các tập hợp dưới dạng mảng 1D parent[]. Mô hình này loại bỏ overhead quản lý con trỏ và tối ưu hóa bộ nhớ.
     </aside>
 </section>

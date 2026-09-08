@@ -26,7 +26,7 @@
                 </tr>
                 <tr style="background: #e0f2fe;">
                     <td style="font-weight: 800; color: #0369a1;"><i class="fa-solid fa-bolt" style="color: #0284c7; margin-right: 4px;"></i> Prefix Match</td>
-                    <td style="font-weight: 800; color: #0369a1;">$O(L)$ Siêu Tốc</td>
+                    <td style="font-weight: 800; color: #0369a1;">$O(L)$ Tối ưu</td>
                     <td>$O(N \cdot L)$ Quét Lại</td>
                     <td>$O(L \log N)$</td>
                 </tr>
@@ -67,7 +67,7 @@
                 </tr>
                 <tr style="background: #f3e8ff;">
                     <td style="font-weight: 800; color: #6b21a8;"><i class="fa-solid fa-link" style="color: #7c3aed; margin-right: 4px;"></i> Connected Check</td>
-                    <td style="font-weight: 800; color: #6b21a8;">$O(\alpha(N)) \approx O(1)$ Siêu Tốc</td>
+                    <td style="font-weight: 800; color: #6b21a8;">$O(\alpha(N)) \approx O(1)$ Khấu hao</td>
                     <td style="color: #dc2626;">$O(V + E)$ Mỗi Lần Truy Vấn</td>
                 </tr>
                 <tr>
@@ -80,12 +80,12 @@
     </div>
 
     <!-- Bottom Summary Insights Banner -->
-    <div style="width: 100%; margin-top: 6px; background: #f0f9ff; border: 1px solid #bae6fd; border-left: 4px solid #0284c7; border-radius: 6px; padding: 6px 12px; font-size: 0.34em; color: #0369a1; text-align: left; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-lightbulb" style="font-size: 1.2em; color: #0284c7; flex-shrink: 0;"></i>
-        <span><strong>NHẬN XÉT CỐT LÕI:</strong> Trie chiến thắng tuyệt đối ở bài toán Tiền Tố (Prefix Search), còn DSU thống trị ở bài toán Liên Thông Động (Dynamic Connectivity). Cả hai đều đạt hiệu năng cực hạn mà Hash Table hay BFS/DFS thông thường không thể tiệm cận!</span>
+    <div style="width: 100%; margin-top: 6px; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #059669; border-radius: 6px; padding: 6px 12px; font-size: 0.34em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-circle-check" style="font-size: 1.2em; color: #059669; flex-shrink: 0;"></i>
+        <span><strong>NHẬN XÉT TỔNG KẾT:</strong> Trie thể hiện ưu thế rõ rệt ở bài toán Tiền Tố (Prefix Search), trong khi DSU đạt hiệu quả cao ở bài toán Liên Thông Động (Dynamic Connectivity). Cả hai đều giải quyết tốt các điểm nghẽn mà cấu trúc tổng quát thường gặp phải!</span>
     </div>
 
     <aside class="notes">
-        Bảng đối sánh này tóm tắt toàn bộ bức tranh kiến trúc. Không có cấu trúc dữ liệu nào là hoàn hảo cho mọi bài toán. Trie và Union-Find sinh ra không phải để thay thế hoàn toàn Hash Table hay BFS/DFS, mà là để giải quyết xuất sắc các điểm nghẽn mà cấu trúc cũ đầu hàng.
+        Bảng đối sánh này tóm tắt bức tranh kiến trúc tổng thể. Không có cấu trúc dữ liệu nào tối ưu cho mọi bài toán. Trie và Union-Find được thiết kế nhằm giải quyết hiệu quả các bài toán chuyên biệt mà các cấu trúc tổng quát gặp giới hạn về độ phức tạp.
     </aside>
 </section>

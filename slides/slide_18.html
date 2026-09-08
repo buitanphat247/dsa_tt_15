@@ -74,10 +74,10 @@
     <!-- Bottom Key Insight Banner -->
     <div style="width: 100%; margin-top: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #059669; border-radius: 6px; padding: 6px 14px; font-size: 0.35em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 8px;">
         <i class="fa-solid fa-lightbulb" style="font-size: 1.2em; color: #059669; flex-shrink: 0;"></i>
-        <span><strong>ĐIỂM SÁNG KĨ THUẬT:</strong> Nhờ Path Compression, sau mỗi phép truy vấn <code>find()</code>, các nút trên đường đi lập tức được nối thẳng về Gốc Đại Diện 0, giúp giữ chiều cao cây luôn tiệm cận 1!</span>
+        <span><strong>ĐIỂM SÁNG KĨ THUẬT:</strong> Nhờ Path Compression, sau mỗi phép truy vấn <code>find()</code>, các nút trên đường đi lập tức được nối thẳng về Gốc Đại Diện 0, giúp giảm mạnh chiều cao của cây đối với các lần truy vấn tiếp theo!</span>
     </div>
 
     <aside class="notes">
-        Bảng vết này thể hiện trọn vẹn sức mạnh của Union-Find. Hãy chú ý bước 4 và bước 6: Ngay khi hàm connected hoặc union được gọi, cơ chế nén đường đi lập tức đưa các nút về kết nối trực tiếp với gốc tối cao 0.
+        Bảng vết này minh họa chi tiết quá trình biến đổi trạng thái của mảng parent và rank trong DSU. Hãy chú ý bước 4 và bước 6: Ngay khi hàm connected hoặc union được gọi, cơ chế nén đường đi lập tức đưa các nút về kết nối trực tiếp với nút gốc đại diện 0.
     </aside>
 </section>

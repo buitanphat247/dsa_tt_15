@@ -9,8 +9,8 @@
                 <i class="fa-solid fa-tree" style="margin-right: 4px;"></i> Cấu Trúc Trie Nâng Cao
             </h4>
             <ul style="font-size: 0.3em; color: #334155; margin: 0; padding-left: 14px; line-height: 1.45;">
-                <li><strong>Radix Tree (Patricia Trie):</strong> Nén các nút đơn con thành 1 nút lưu đoạn chuỗi $\implies$ Tiết kiệm 60% RAM.</li>
-                <li><strong>Suffix Tree:</strong> Tìm kiếm chuỗi con (*Substring search*) trong $O(L)$, xương sống cho đối chiếu DNA.</li>
+                <li><strong>Radix Tree (Patricia Trie):</strong> Nén các chuỗi nút đơn thành một cạnh $\implies$ Giảm số node và tối ưu bộ nhớ.</li>
+                <li><strong>Suffix Tree:</strong> Hỗ trợ tìm kiếm chuỗi con (*Substring search*) trong $O(L)$, ứng dụng trong xử lý văn bản và sinh tin học.</li>
             </ul>
         </div>
 
@@ -19,8 +19,8 @@
                 <i class="fa-solid fa-rotate-left" style="margin-right: 4px;"></i> Cấu Trúc DSU Nâng Cao
             </h4>
             <ul style="font-size: 0.3em; color: #334155; margin: 0; padding-left: 14px; line-height: 1.45;">
-                <li><strong>DSU with Rollback:</strong> Dùng Stack lưu lịch sử thay vì Path Compression $\implies$ Undo thao tác union trong $O(\log N)$.</li>
-                <li><strong>Persistent DSU:</strong> Duy trì toàn bộ lịch sử trạng thái liên thông trong quá khứ.</li>
+                <li><strong>DSU with Rollback:</strong> Dùng Stack lưu lịch sử thay đổi thay vì Path Compression $\implies$ Hỗ trợ hoàn tác (Undo) thao tác hợp nhất.</li>
+                <li><strong>Persistent DSU:</strong> Cho phép truy vấn và duy trì các phiên bản trạng thái tập hợp trong quá khứ.</li>
             </ul>
         </div>
     </div>
@@ -46,6 +46,6 @@
     </div>
 
     <aside class="notes">
-        Để khắc phục triệt để nhược điểm tốn RAM của Trie hay tính bất khả thi khi undo trong Union-Find, các nhà khoa học đã phát triển nên Radix Tree và Persistent DSU. Nhóm chúng em xin chân thành cảm ơn Thầy Vũ Đình Bảo đã hướng dẫn và hỗ trợ nhóm hoàn thành bài nghiên cứu này. Sau đây nhóm xin nhận các câu hỏi thảo luận từ Thầy và các bạn!
+        Slide tổng kết các biến thể nâng cao mở rộng cho Trie và DSU như Radix Tree, Suffix Tree, DSU Rollback và Persistent DSU. Nhóm xin chân thành cảm ơn Thầy Vũ Đình Bảo và các bạn đã chú ý lắng nghe, sau đây nhóm xin chuyển sang phần Q&A và thảo luận!
     </aside>
 </section>

@@ -33,7 +33,7 @@
                         <strong style="color: #9f1239;"><i class="fa-solid fa-minus-circle" style="margin-right: 4px;"></i> Sự đánh đổi:</strong> Tốn thêm bộ nhớ RAM để lưu các nút con & con trỏ.
                     </div>
                     <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 6px 10px;">
-                        <strong style="color: #166534;"><i class="fa-solid fa-plus-circle" style="margin-right: 4px;"></i> Lợi ích thu được:</strong> Tốc độ tìm kiếm tiền tố $O(L)$ cực nhanh — bất kể từ điển có 10 triệu hay 10 tỷ từ!
+                        <strong style="color: #166534;"><i class="fa-solid fa-plus-circle" style="margin-right: 4px;"></i> Lợi ích thu được:</strong> Tìm kiếm tiền tố trong thời gian $O(L)$, độc lập với tổng số lượng từ $N$ trong từ điển.
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                         <strong style="color: #9f1239;"><i class="fa-solid fa-minus-circle" style="margin-right: 4px;"></i> Sự đánh đổi:</strong> Từ bỏ khả năng xóa liên kết và không liệt kê chi tiết các phần tử.
                     </div>
                     <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 6px 10px;">
-                        <strong style="color: #166534;"><i class="fa-solid fa-plus-circle" style="margin-right: 4px;"></i> Lợi ích thu được:</strong> Tốc độ gộp nhóm & kiểm tra liên thông đạt Hằng số $O(1)$ chỉ bằng mảng <code>parent[]</code>!
+                        <strong style="color: #166534;"><i class="fa-solid fa-plus-circle" style="margin-right: 4px;"></i> Lợi ích thu được:</strong> Gộp nhóm & kiểm tra liên thông tiệm cận $O(\alpha(N)) \approx O(1)$ với mảng <code>parent[]</code> gọn nhẹ.
                     </div>
                 </div>
             </div>
@@ -74,6 +74,6 @@
     </div>
 
     <aside class="notes">
-        Thay vì cố nhét mọi dữ liệu vào một cấu trúc quen thuộc, kiến trúc sư phần mềm giỏi sẽ hỏi: Truy vấn lặp lại nhiều nhất là gì? Cấu trúc chuyên biệt thu được sức mạnh bằng cách cắt bỏ tính năng dư thừa để dồn toàn bộ tài nguyên cho một truy vấn duy nhất.
+        Trong thiết kế hệ thống, việc xác định mẫu truy vấn chiếm ưu thế (dominant query pattern) là yếu tố quyết định. Cấu trúc chuyên biệt tối ưu hiệu năng bằng cách giản lược các chức năng không cần thiết để tập trung tài nguyên cho tác vụ trọng tâm.
     </aside>
 </section>

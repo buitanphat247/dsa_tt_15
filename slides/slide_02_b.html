@@ -20,17 +20,17 @@
                     </div>
 
                     <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 5px; padding: 4px 6px; font-size: 0.31em; color: #9f1239; line-height: 1.3;">
-                        <strong>Bảng Băm (Hash Table) bế tắc:</strong> Giống tra danh bạ chỉ tìm được từ chính xác. Muốn lọc tiền tố "ch" phải lật xem từng từ trong 10M từ $\implies$ Tốn <strong style="color: #ef4444;">$O(N \cdot L)$</strong>, làm giật lag bàn phím.
+                        <strong>Bảng Băm (Hash Table) kém hiệu quả:</strong> Giống tra danh bạ chỉ tìm được từ chính xác. Muốn lọc tiền tố "ch" phải lật xem từng từ trong 10M từ $\implies$ Tốn <strong style="color: #ef4444;">$O(N \cdot L)$</strong>, làm giật lag bàn phím.
                     </div>
 
                     <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 5px; padding: 4px 6px; font-size: 0.31em; color: #9f1239; line-height: 1.3;">
-                        <strong>Cây BST bế tắc:</strong> Phải so sánh từng chữ cái từ đầu $\implies$ Tốn <strong style="color: #ef4444;">$O(L \log N)$</strong> phép so sánh chuỗi đắt đỏ.
+                        <strong>Cây BST gặp hạn chế:</strong> Phải so sánh từng chữ cái từ đầu $\implies$ Tốn <strong style="color: #ef4444;">$O(L \log N)$</strong> phép so sánh chuỗi đắt đỏ.
                     </div>
                 </div>
             </div>
 
             <div style="margin-top: 5px; background: #e0f2fe; border-left: 3px solid #0284c7; padding: 4px 6px; border-radius: 4px; font-size: 0.31em; color: #0369a1; font-weight: 700;">
-                <i class="fa-solid fa-lightbulb" style="color: var(--accent-gold);"></i>  <strong>Lối thoát Trie:</strong> Tìm kiếm chỉ tốn $O(L = 2)$ bước — nhanh như chớp bất kể từ điển có 10 triệu hay 10 tỷ từ!
+                <i class="fa-solid fa-lightbulb" style="color: var(--accent-gold);"></i> <strong>Giải pháp từ Trie:</strong> Tìm kiếm tiền tố chỉ tốn $O(L)$ bước, độc lập với quy mô tổng số từ $N$ trong từ điển.
             </div>
         </div>
 
@@ -50,17 +50,17 @@
                     </div>
 
                     <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 5px; padding: 4px 6px; font-size: 0.31em; color: #9f1239; line-height: 1.3;">
-                        <strong>Duyệt Đồ Thị (BFS/DFS) bế tắc:</strong> Giống như đi hỏi từng người một trong mạng lưới 2 tỷ người $\implies$ Tốn <strong style="color: #ef4444;">$O(V + E)$</strong> cho từng cái click chuột.
+                        <strong>Duyệt Đồ Thị (BFS/DFS) chi phí cao:</strong> Giống như đi hỏi từng người một trong mạng lưới 2 tỷ người $\implies$ Tốn <strong style="color: #ef4444;">$O(V + E)$</strong> cho từng cái click chuột.
                     </div>
 
                     <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 5px; padding: 4px 6px; font-size: 0.31em; color: #9f1239; line-height: 1.3;">
-                        <strong>Hệ quả sập Server:</strong> Hàng triệu người dùng click cùng lúc sẽ làm sập ngay hệ thống vì đồ thị quá lớn không thể loang real-time.
+                        <strong>Giới hạn hiệu năng:</strong> Khi số lượng truy vấn đồng thời lớn, việc duyệt toàn bộ đồ thị $O(V+E)$ gây quá tải tài nguyên và độ trễ cao.
                     </div>
                 </div>
             </div>
 
             <div style="margin-top: 5px; background: #f3e8ff; border-left: 3px solid #7c3aed; padding: 4px 6px; border-radius: 4px; font-size: 0.31em; color: #6b21a8; font-weight: 700;">
-                <i class="fa-solid fa-lightbulb" style="color: var(--accent-gold);"></i>  <strong>Lối thoát DSU:</strong> Gộp nhóm & kiểm tra liên thông với tốc độ Hằng số $O(1)$ cực kỳ tinh gọn!
+                <i class="fa-solid fa-lightbulb" style="color: var(--accent-gold);"></i> <strong>Giải pháp DSU:</strong> Quản lý liên thông với chi phí tiệm cận hằng số $O(\alpha(N)) \approx O(1)$ gọn nhẹ!
             </div>
         </div>
 
@@ -73,6 +73,6 @@
     </div>
 
     <aside class="notes">
-        Đây là hai bài toán thực tế vô cùng gần gũi: Gõ phím trên điện thoại và Kết bạn trên Facebook. Qua hai ví dụ này, chúng ta thấy rõ lý do tại sao các cấu trúc dữ liệu truyền thống lại bất lực khi dữ liệu bùng nổ.
+        Đây là hai bài toán thực tế rất trực quan: Gợi ý từ khóa trên bàn phím và Kết bạn trên mạng xã hội. Qua hai ví dụ này, chúng ta thấy rõ giới hạn hiệu năng của các cấu trúc dữ liệu truyền thống khi dữ liệu tăng trưởng mạnh.
     </aside>
 </section>

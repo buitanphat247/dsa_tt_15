@@ -89,7 +89,7 @@
                 <i class="fa-solid fa-diagram-project"></i> 3. Union-Find (DSU)
             </div>
             <ul style="font-size: 0.28em; color: #334155; margin: 0; padding-left: 14px; line-height: 1.4;">
-                <li><strong>Ưu điểm:</strong> Quản lý tập hợp liên thông $O(\alpha(N))$, chạy Kruskal MST cực nhanh.</li>
+                <li><strong>Ưu điểm:</strong> Quản lý tập hợp liên thông $O(\alpha(N))$, tối ưu hóa cho thuật toán Kruskal MST.</li>
                 <li><strong>Hạn chế:</strong> Không hỗ trợ tách nhóm (*Split/Disconnect*) trừ khi dùng DSU Rollback.</li>
             </ul>
         </div>
@@ -99,10 +99,10 @@
     <!-- Bottom Golden Rule Banner -->
     <div style="width: 100%; margin-top: 8px; background: #fffbeb; border: 1px solid #fde68a; border-left: 4px solid #d97706; border-radius: 6px; padding: 6px 14px; font-size: 0.34em; color: #78350f; text-align: left; display: flex; align-items: center; gap: 8px;">
         <i class="fa-solid fa-lightbulb" style="font-size: 1.2em; color: #d97706; flex-shrink: 0;"></i>
-        <span><strong>QUY TẮC KĨ SƯ:</strong> Luôn ưu tiên Hash Table cho các bài toán Tra cứu chính xác. Chỉ nâng cấp lên Trie/DSU khi bài toán bắt buộc phải xử lý <u>Prefix Matching</u> hoặc <u>Dynamic Connectivity</u>!</span>
+        <span><strong>NGUYÊN TẮC THIẾT KẾ:</strong> Ưu tiên cấu trúc đơn giản như Hash Table cho các bài toán tra cứu chính xác. Cân nhắc triển khai Trie hoặc DSU khi bài toán đòi hỏi xử lý chuyên biệt về <u>Prefix Matching</u> hoặc <u>Dynamic Connectivity</u>!</span>
     </div>
 
     <aside class="notes">
-        Dựa trên khung ra quyết định này, một kỹ sư phần mềm chuyên nghiệp sẽ không bao giờ đưa Trie hay Union-Find vào hệ thống một cách tùy tiện. Hãy luôn phân tích mẫu truy vấn, đo đạc quy mô dữ liệu và tài nguyên RAM trước khi quyết định.
+        Dựa trên khung ra quyết định này, chúng ta cần cân nhắc kỹ lưỡng khi lựa chọn cấu trúc dữ liệu. Hãy phân tích mẫu truy vấn, đo đạc quy mô dữ liệu và tài nguyên bộ nhớ trước khi quyết định.
     </aside>
 </section>

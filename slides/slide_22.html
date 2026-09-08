@@ -16,14 +16,14 @@
                     "Mẫu Truy Vấn (Query Pattern) Quyết Định Cấu Trúc Dữ Liệu!"
                 </h4>
                 <p style="font-size: 0.3em; color: #334155; line-height: 1.45; margin: 0;">
-                    Không có cấu trúc dữ liệu nào là vạn năng. Sự lựa chọn hoàn hảo xuất phát từ việc thấu hiểu mô hình truy vấn đặc thù của hệ thống.
+                    Không có cấu trúc dữ liệu nào tối ưu cho mọi trường hợp. Sự lựa chọn phù hợp xuất phát từ việc thấu hiểu mô hình truy vấn đặc thù của hệ thống.
                 </p>
             </div>
 
             <!-- Light Speed Equations Sub-Box -->
             <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px 10px; margin-top: 10px;">
                 <div style="font-size: 0.3em; color: #475569; font-weight: 700; margin-bottom: 6px;">
-                    <i class="fa-solid fa-bolt" style="color: #d97706; margin-right: 5px;"></i> Tốc Độ Cực Hạn Đạt Được:
+                    <i class="fa-solid fa-chart-line" style="color: #0284c7; margin-right: 5px;"></i> Độ Phức Tạp Đạt Được:
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: center;">
                     <div style="background: #ffffff; border-radius: 4px; padding: 6px 4px; border: 1px solid #bae6fd;">
@@ -48,7 +48,7 @@
                     1. Chuyển Đổi Tư Duy (Query Pattern First)
                 </h5>
                 <p style="margin: 0; font-size: 0.3em; color: #334155; line-height: 1.4;">
-                    Hỏi <em>"Mẫu truy vấn hệ thống cần gì?"</em> (Prefix Search $\implies$ Trie, Dynamic Connectivity $\implies$ DSU) thay vì lưu dữ liệu thụ động.
+                    Xác định <em>"Mẫu truy vấn chủ đạo là gì?"</em> (Prefix Search $\implies$ Trie, Dynamic Connectivity $\implies$ DSU) thay vì lưu trữ dữ liệu theo thói quen.
                 </p>
             </div>
 
@@ -59,7 +59,7 @@
                     2. Đánh Đổi Có Ý Thức (Trade-off Mastery)
                 </h5>
                 <p style="margin: 0; font-size: 0.3em; color: #334155; line-height: 1.4;">
-                    Chấp nhận hy sinh tài nguyên RAM / tính tổng quát để đạt được hiệu năng tiệm cận hằng số tuyệt đối trên quy mô dữ liệu lớn.
+                    Chấp nhận đánh đổi tài nguyên bộ nhớ hoặc tính tổng quát để tối ưu hóa hiệu năng cho các truy vấn trọng tâm trên quy mô dữ liệu lớn.
                 </p>
             </div>
 
@@ -67,10 +67,10 @@
             <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #7c3aed; border-radius: 6px; padding: 9px 12px;">
                 <h5 style="margin: 0 0 3px 0; color: #7c3aed; font-size: 0.37em; font-weight: 800; display: flex; align-items: center;">
                     <i class="fa-solid fa-award" style="font-size: 0.9em; margin-right: 6px; color: #7c3aed;"></i>
-                    3. Tầm Vóc Software Architect
+                    3. Năng Lực Thiết Kế Hệ Thống
                 </h5>
                 <p style="margin: 0; font-size: 0.3em; color: #334155; line-height: 1.4;">
-                    Lấp đầy những khoảng trống kỹ thuật của các thư viện container chuẩn (STL / Java Collections) để làm chủ hạ tầng Backend.
+                    Lấp đầy những khoảng trống kỹ thuật của các thư viện container chuẩn (STL / Java Collections) khi đối mặt bài toán hiệu năng cao.
                 </p>
             </div>
 
@@ -80,11 +80,11 @@
 
     <!-- Bottom Full Width Summary Banner -->
     <div style="width: 100%; margin-top: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #059669; border-radius: 6px; padding: 6px 14px; font-size: 0.35em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-rocket" style="font-size: 1.1em; color: #059669; flex-shrink: 0;"></i>
-        <span><strong>TỔNG KẾT KIẾN TRÚC:</strong> Trie và Union-Find chính là vũ khí tối thượng giúp kỹ sư tối ưu hóa hiệu năng cực hạn cho các hệ thống phần mềm xử lý hàng triệu truy vấn mỗi giây!</span>
+        <i class="fa-solid fa-circle-check" style="font-size: 1.1em; color: #059669; flex-shrink: 0;"></i>
+        <span><strong>TỔNG KẾT KIẾN TRÚC:</strong> Trie và Union-Find là minh chứng cho nguyên lý thiết kế: chuyên biệt hóa cấu trúc dữ liệu theo đúng mẫu hình truy vấn để đạt hiệu năng tối ưu trên quy mô lớn!</span>
     </div>
 
     <aside class="notes">
-        Bài học lớn nhất của Chương 15 không chỉ là cách cài đặt một cây Trie hay mảng Union-Find, mà là tư duy đánh đổi trong thiết kế phần mềm. Thấu hiểu và lấp đầy khoảng trống kỹ thuật này sẽ giúp chúng ta xây dựng nên những hệ thống xử lý hàng triệu truy vấn mỗi giây với độ ổn định cao nhất.
+        Bài học lớn nhất của Chương 15 không chỉ là cách cài đặt một cây Trie hay mảng Union-Find, mà là tư duy đánh đổi trong thiết kế phần mềm. Thấu hiểu các đặc tính này sẽ giúp chúng ta xây dựng nên những hệ thống xử lý truy vấn với hiệu năng và độ ổn định cao.
     </aside>
 </section>
