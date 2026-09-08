@@ -4,7 +4,7 @@
 
                 <div class="grid-2" style="font-size: 0.6em; align-items: center;">
                     <div class="glass-card" style="text-align: left;">
-                        <h4 style="color: var(--accent-gold);">Cấu Trúc Rừng Cây (Tree Forest)</h4>
+                        <h4 style="color: var(--accent-gold);">Mô Hình Cây Hướng Gốc (Up-Tree Model)</h4>
                         <ul>
                             <li>Mỗi tập hợp liên thông là 1 Cây.</li>
                             <li>Gốc đại diện ($Root$): Tự trỏ vào chính nó (`parent[r] == r`).</li>
@@ -24,12 +24,12 @@
                                 <td>0</td><td>0</td><td>0</td><td>4</td><td>4</td>
                             </tr>
                         </table>
-                        <p style="font-size: 0.85em; color: #334155; margin-top: 10px;">⭐ Nút 0 và Nút 4 là 2 Chủ tịch (Root) đại diện cho 2 tập hợp!</p>
+                        <p style="font-size: 0.85em; color: #334155; margin-top: 10px;">Nút 0 và Nút 4 là 2 Nút Gốc (Root) đại diện cho 2 tập hợp.</p>
                     </div>
                 </div>
 
                 <aside class="notes">
-                    Điều kỳ diệu của Union-Find là toàn bộ cấu trúc rừng cây phức tạp được nén gọn gàng vào một mảng số nguyên parent duy nhất. Không có con trỏ, không có cấp phát bộ nhớ động, cực kỳ tinh gọn.
+                    Toàn bộ các tập hợp cây hướng gốc (Up-Trees) được biểu diễn gọn gàng vào một mảng số nguyên parent duy nhất. Không cần con trỏ hay cấp phát bộ nhớ động, đạt hiệu quả tối ưu về bộ nhớ.
                 </aside>
             </section>
 

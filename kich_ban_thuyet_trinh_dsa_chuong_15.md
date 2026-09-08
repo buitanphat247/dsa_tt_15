@@ -345,7 +345,7 @@
 
 ### 📍 SLIDE 13: DISJOINT-SET ADT & KỸ THUẬT BIỂU DIỄN MẢNG `parent[]`
 * **Thời lượng:** 45 giây.
-* **Hành động trình chiếu:** Chuyển Slide 13. Chỉ vào sơ đồ chuyển đổi từ Rừng cây (Forest) sang Mảng 1 chiều `parent[]`.
+* **Hành động trình chiếu:** Chuyển Slide 13. Chỉ vào sơ đồ biểu diễn các Cây Hướng Gốc (Up-Trees) trên Mảng 1 chiều `parent[]`.
 
 > 🧠 **BỔ NGHĨA DÀNH CHO NGƯỜI THUYẾT TRÌNH (Hiểu bản chất):**
 > * **Cấu trúc dữ liệu Up-Tree:** Mỗi tập hợp rời rạc được mô hình hóa thành một cây ngược, trong đó nút con trỏ lên nút cha (`parent`). Nút gốc (Root) tự trỏ vào chính nó (`parent[root] == root`).
@@ -354,7 +354,7 @@
 >   * Thao tác `find(i)`: Lần theo `parent[i]` ngược lên cho đến khi gặp nút mà `parent[root] == root`. Nút gốc này chính là "Phần tử đại diện" của tập hợp.
 
 **🎙️ Lời thoại thuyết minh (Trà):**
-> *"Để hiện thực hóa DSU, các nhà khoa học máy tính đã phát minh ra một mô hình cực kỳ thông minh: **Rừng cây hướng gốc (Up-Tree Forest)** và nén toàn bộ cấu trúc đó vào đúng **một mảng 1 chiều `parent[]` duy nhất**!*
+> *"Để hiện thực hóa DSU, các nhà khoa học máy tính đã phát triển mô hình kinh điển: **Mô hình cây hướng gốc (Up-Tree Model)** và biểu diễn toàn bộ cấu trúc đó vào đúng **một mảng 1 chiều `parent[]` duy nhất**!*
 >
 > *Cơ chế hoạt động vô cùng tinh gọn:*
 > * Ban đầu, khi có $N$ phần tử độc lập, mỗi phần tử tự là gốc của chính mình: Ta khởi tạo `parent[i] = i` với mọi $i$.
@@ -438,21 +438,21 @@
 
 ### 📍 SLIDE 17: PHÂN TÍCH ĐỘ PHỨC TẠP & HÀM NGƯỢC ACKERMANN $\alpha(N)$
 * **Thời lượng:** 50 giây.
-* **Hành động trình chiếu:** Chuyển Slide 17. Chỉ vào Bảng tra cứu giá trị $N = 10^{80} \implies \alpha(N) \le 4$.
+* **Hành động trình chiếu:** Chuyển Slide 17. Chỉ vào Bảng tra cứu giá trị $N \le 2^{64} \implies \alpha(N) \le 4$.
 
 > 🧠 **BỔ NGHĨA DÀNH CHO NGƯỜI THUYẾT TRÌNH (Hiểu bản chất):**
 > * **Định lý Tarjan (1975):** Khi kết hợp đồng thời cả *Union by Rank* và *Path Compression*, chi phí trung bình (amortized cost) cho mỗi thao tác là **$O(\alpha(N))$**, trong đó $\alpha(N)$ là **Hàm ngược Ackermann (Inverse Ackermann function)**.
 > * **Ý nghĩa thực tế của $\alpha(N)$:**
 >   * Hàm Ackermann $A(m, n)$ là một trong những hàm tăng nhanh nhất toán học. Do đó hàm ngược $\alpha(N)$ là hàm tăng **chậm nhất** từng được biết đến!
->   * Để $\alpha(N) = 5$, số phần tử $N$ phải vượt quá $2^{2^{2^{65536}}}$ — lớn hơn cả tổng số nguyên tử trong toàn bộ vũ trụ quan sát được ($10^{80}$).
+>   * Để $\alpha(N) = 5$, số phần tử $N$ phải vượt quá $2^{65536}$ — vượt xa mọi giới hạn bộ nhớ vật lý và không gian địa chỉ 64-bit.
 >   * Vì vậy, với mọi bài toán trong thế giới thực và trên mọi siêu máy tính, **$\alpha(N) \le 4$**. Trong thực tế kỹ thuật, ta hoàn toàn coi DSU chạy với **thời gian hằng số $O(1)$**!
 
 **🎙️ Lời thoại thuyết minh (Trà):**
 > *"Khi kết hợp đồng thời cả hai kỹ thuật: Union by Rank và Path Compression, chúng ta đạt được kết quả độ phức tạp kinh điển được nhà khoa học máy tính Robert Tarjan chứng minh vào năm 1975: **$O(\alpha(N))$** cho mỗi thao tác.*
 >
 > *Trong đó, $\alpha(N)$ là **Hàm ngược Ackermann** — hàm số có tốc độ tăng trưởng cực kỳ chậm trong lý thuyết độ phức tạp!*
-> * Để hàm $\alpha(N)$ đạt tới giá trị bằng 5, số lượng phần tử $N$ cần thiết phải vượt qua $10^{80}$ — tức là nhiều hơn tổng số nguyên tử trong toàn bộ vũ trụ của chúng ta!
-> * Do đó, đối với bất kỳ bài toán thực tế nào trên Trái Đất, **$\alpha(N)$ không bao giờ vượt quá 4**.
+> * Để hàm $\alpha(N)$ đạt tới giá trị bằng 5, quy mô dữ liệu $N$ phải vượt ngưỡng $2^{65536}$ — vượt xa mọi giới hạn dung lượng phần cứng và không gian địa chỉ!
+> * Do đó, trong mọi hệ thống tính toán và cơ sở dữ liệu thực tế, **$\alpha(N)$ không bao giờ vượt quá 4**.
 >
 > *Do đó, trong thực tế kỹ thuật, chi phí khấu hao $O(\alpha(N))$ được xem là tiệm cận thời gian hằng số $O(1)$ đối với mọi quy mô dữ liệu thực tế!*"
 

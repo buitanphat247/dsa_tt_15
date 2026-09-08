@@ -2177,7 +2177,7 @@
         <div class="glass-card" style="text-align: left; border-left: 4px solid #d97706; padding: 8px 10px; background: #ffffff; display: flex; flex-direction: column; justify-content: space-between;">
             <div>
                 <h4 style="color: #b45309; font-size: 0.38em; font-weight: 800; margin: 0 0 4px 0;">
-                    <i class="fa-solid fa-sitemap"></i> Cấu Trúc Rừng Cây (Forest)
+                    <i class="fa-solid fa-sitemap"></i> Mô Hình Cây Hướng Gốc (Up-Tree Model)
                 </h4>
                 <ul style="font-size: 0.29em; color: #334155; line-height: 1.4; margin: 0; padding-left: 14px;">
                     <li>Mỗi tập hợp liên thông được biểu diễn bằng <strong>1 cây hướng gốc (Up-tree)</strong>.</li>
@@ -2617,7 +2617,7 @@
             </div>
 
             <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 6px; padding: 6px 8px; font-size: 0.27em; color: #6b21a8; font-weight: 600; margin-top: 8px;">
-                <i class="fa-solid fa-atom" style="color: #7c3aed; margin-right: 4px;"></i> Để $\alpha(N) = 5$, $N$ phải lớn hơn tổng số nguyên tử trong toàn bộ vũ trụ quan sát được ($10^{80}$)!
+                <i class="fa-solid fa-microchip" style="color: #7c3aed; margin-right: 4px;"></i> Để $\alpha(N) = 5$, quy mô $N$ phải vượt ngưỡng $2^{65536}$ (vượt xa mọi giới hạn phần cứng và không gian địa chỉ vật lý)!
             </div>
         </div>
 
@@ -2648,7 +2648,7 @@
                             <td style="text-align: center; font-weight: 700;">$\alpha(N) = 3$</td>
                         </tr>
                         <tr style="background: #fef3c7; color: #78350f; font-weight: 800;">
-                            <td>$N = 2048 \dots 10^{80}$ <br><span style="font-size: 0.85em; color: #b45309;">(Kích thước vượt quy mô thực tế)</span></td>
+                            <td>$N = 2048 \dots 2^{64}$ <br><span style="font-size: 0.85em; color: #b45309;">(Vượt xa giới hạn địa chỉ 64-bit)</span></td>
                             <td style="text-align: center; font-size: 1.1em; color: #b45309;">$\alpha(N) \le 4$</td>
                         </tr>
                     </tbody>
@@ -2661,7 +2661,7 @@
     <!-- Bottom Full Width System Architect Guarantee Banner -->
     <div style="width: 100%; margin-top: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #059669; border-radius: 6px; padding: 6px 14px; font-size: 0.35em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 8px;">
         <i class="fa-solid fa-circle-check" style="font-size: 1.2em; color: #059669; flex-shrink: 0;"></i>
-        <span><strong>KẾT LUẬN THỰC TẾ:</strong> Với mọi quy mô dữ liệu thực tế ($N \le 10^{80}$), hàm $\alpha(N) \le 4$. Do đó trong kỹ thuật, chi phí khấu hao <strong>$O(\alpha(N))$ được coi là tiệm cận thời gian hằng số $O(1)$!</strong></span>
+        <span><strong>KẾT LUẬN THỰC TẾ:</strong> Với mọi quy mô dữ liệu thực tế ($N < 2^{65536}$), hàm $\alpha(N) \le 4$. Do đó trong kỹ thuật, chi phí khấu hao <strong>$O(\alpha(N))$ được coi là tiệm cận thời gian hằng số $O(1)$!</strong></span>
     </div>
 
     <aside class="notes">
