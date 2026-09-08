@@ -66,6 +66,7 @@ full_html = f"""<!DOCTYPE html>
 
         .reveal {{
             font-family: 'Be Vietnam Pro', 'Inter', sans-serif;
+            font-size: 44px !important;
             color: var(--text-color);
         }}
 
