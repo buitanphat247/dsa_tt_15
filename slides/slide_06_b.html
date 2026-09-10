@@ -2,30 +2,30 @@
     <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 600px; display: flex; flex-direction: column; justify-content: space-between;">
         
         <!-- Header -->
-        <div style="text-align: center; margin-bottom: 10px;">
-            <div class="badge" style="font-size: 0.38em; padding: 4px 16px; margin-bottom: 6px; display: inline-block;">PHẦN II: CẤU TRÚC TRIE (PREFIX TREE)</div>
-            <h2 style="font-size: 0.95em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
-                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Sơ Đồ Tuần Tự & 3 Bước Thực Thi Của Hàm <code>search(key)</code></span>
+        <div style="text-align: center; margin-bottom: 6px;">
+            <div class="badge" style="font-size: 0.40em; padding: 3px 16px; margin-bottom: 3px; display: inline-block;">PHẦN II: CẤU TRÚC TRIE (PREFIX TREE)</div>
+            <h2 style="font-size: 0.94em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.3;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 2px; padding-bottom: 2px;">3 Bước Thực Thi Của Hàm <code>search(key)</code></span>
             </h2>
         </div>
 
-        <!-- Main 2-Column Layout -->
-        <div style="width: 100%; display: grid; grid-template-columns: 1.25fr 1fr; gap: 16px; text-align: left; margin-bottom: 8px; align-items: stretch;">
+        <!-- Main Balanced Presentation Layout -->
+        <div style="width: 100%; display: grid; grid-template-columns: 1.75fr 1.25fr; gap: 14px; text-align: left; margin-bottom: 8px; align-items: stretch; flex-grow: 1;">
             
-            <!-- Left: Handcrafted High-Clarity Sequence Diagram -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #7c3aed; border-radius: 12px; padding: 12px 16px; display: flex; flex-direction: column; justify-content: space-between;">
+            <!-- LEFT PANEL: Spacious Sequence Diagram (No Clipping) -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #7c3aed; border-radius: 12px; padding: 10px 14px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
                 <div>
                     <!-- Diagram Header -->
                     <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
-                        <span style="font-size: 0.35em; font-weight: 700; color: #0f172a; display: flex; align-items: center; gap: 6px;">
+                        <span style="font-size: 0.42em; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 8px;">
                             <i class="fa-solid fa-code-branch" style="color: #7c3aed;"></i>
                             Mô Phỏng Quá Trình Tìm Từ: <code>search("car")</code>
                         </span>
-                        <span style="font-size: 0.29em; color: #6b21a8; font-weight: 700; background: #f3e8ff; border: 1px solid #e9d5ff; padding: 2px 8px; border-radius: 6px;">Độ dài: $L = 3$ ký tự</span>
+                        <span style="font-size: 0.33em; color: #6b21a8; font-weight: 700; background: #f3e8ff; border: 1px solid #e9d5ff; padding: 2px 10px; border-radius: 6px;">Độ dài: $L = 3$ ký tự</span>
                     </div>
 
-                    <!-- Clean Spacious SVG Sequence Diagram -->
-                    <svg viewBox="0 0 500 275" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', 'Inter', sans-serif;">
+                    <!-- Clean Spacious 650x275 SVG Sequence Diagram -->
+                    <svg viewBox="0 0 650 275" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', 'Inter', sans-serif;">
                         <defs>
                             <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                                 <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#7c3aed"/>
@@ -39,96 +39,96 @@
                         </defs>
 
                         <!-- Vertical Lifelines -->
-                        <line x1="50" y1="36" x2="50" y2="265" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 3"/>
-                        <line x1="150" y1="36" x2="150" y2="265" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 3"/>
-                        <line x1="250" y1="36" x2="250" y2="265" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 3"/>
-                        <line x1="350" y1="36" x2="350" y2="265" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 3"/>
-                        <line x1="445" y1="36" x2="445" y2="265" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 3"/>
+                        <line x1="45" y1="36" x2="45" y2="265" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 3"/>
+                        <line x1="165" y1="36" x2="165" y2="265" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 3"/>
+                        <line x1="285" y1="36" x2="285" y2="265" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 3"/>
+                        <line x1="405" y1="36" x2="405" y2="265" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 3"/>
+                        <line x1="535" y1="36" x2="535" y2="265" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 3"/>
 
                         <!-- Header Actor Badges -->
-                        <rect x="15" y="8" width="70" height="24" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1.2" filter="url(#shadow-card)"/>
-                        <text x="50" y="24" fill="#ffffff" font-size="9.5" font-weight="700" text-anchor="middle">Caller</text>
+                        <rect x="12" y="8" width="66" height="26" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1.2" filter="url(#shadow-card)"/>
+                        <text x="45" y="25" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">Caller</text>
 
-                        <rect x="115" y="8" width="70" height="24" rx="6" fill="#f8fafc" stroke="#0284c7" stroke-width="1.5" filter="url(#shadow-card)"/>
-                        <text x="150" y="24" fill="#0284c7" font-size="9.5" font-weight="700" text-anchor="middle">Root (ε)</text>
+                        <rect x="132" y="8" width="66" height="26" rx="6" fill="#f8fafc" stroke="#0284c7" stroke-width="1.5" filter="url(#shadow-card)"/>
+                        <text x="165" y="25" fill="#0284c7" font-size="11" font-weight="700" text-anchor="middle">Root (ε)</text>
 
-                        <rect x="215" y="8" width="70" height="24" rx="6" fill="#f8fafc" stroke="#0284c7" stroke-width="1.5" filter="url(#shadow-card)"/>
-                        <text x="250" y="24" fill="#0284c7" font-size="9.5" font-weight="700" text-anchor="middle">N1 ('c')</text>
+                        <rect x="252" y="8" width="66" height="26" rx="6" fill="#f8fafc" stroke="#0284c7" stroke-width="1.5" filter="url(#shadow-card)"/>
+                        <text x="285" y="25" fill="#0284c7" font-size="11" font-weight="700" text-anchor="middle">N1 ('c')</text>
 
-                        <rect x="315" y="8" width="70" height="24" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.8" filter="url(#shadow-card)"/>
-                        <text x="350" y="24" fill="#0369a1" font-size="9.5" font-weight="800" text-anchor="middle">N2 ('ca')</text>
+                        <rect x="372" y="8" width="66" height="26" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.8" filter="url(#shadow-card)"/>
+                        <text x="405" y="25" fill="#0369a1" font-size="11" font-weight="800" text-anchor="middle">N2 ('ca')</text>
 
-                        <rect x="410" y="8" width="70" height="24" rx="6" fill="#ecfdf5" stroke="#059669" stroke-width="1.8" filter="url(#shadow-card)"/>
-                        <text x="445" y="24" fill="#065f46" font-size="9.5" font-weight="800" text-anchor="middle">Leaf ('car')</text>
+                        <rect x="502" y="8" width="66" height="26" rx="6" fill="#ecfdf5" stroke="#059669" stroke-width="1.8" filter="url(#shadow-card)"/>
+                        <text x="535" y="25" fill="#065f46" font-size="11" font-weight="800" text-anchor="middle">Leaf ('car')</text>
 
                         <!-- Step 1: Caller -> Root -->
-                        <rect x="58" y="44" width="84" height="16" rx="4" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1"/>
-                        <text x="100" y="56" fill="#7c3aed" font-size="8.5" font-weight="800" text-anchor="middle">1. search("car")</text>
-                        <line x1="50" y1="68" x2="142" y2="68" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-purple)"/>
+                        <rect x="65" y="44" width="85" height="18" rx="4" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1"/>
+                        <text x="107" y="57" fill="#7c3aed" font-size="9.5" font-weight="800" text-anchor="middle">1. search("car")</text>
+                        <line x1="45" y1="68" x2="157" y2="68" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-purple)"/>
 
                         <!-- Step 2: Root -> N1 ('c') -->
-                        <rect x="158" y="86" width="84" height="16" rx="4" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1"/>
-                        <text x="200" y="98" fill="#7c3aed" font-size="8.5" font-weight="800" text-anchor="middle">2. Đọc 'c' &rarr; N1</text>
-                        <line x1="150" y1="110" x2="242" y2="110" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-purple)"/>
+                        <rect x="185" y="86" width="85" height="18" rx="4" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1"/>
+                        <text x="227" y="99" fill="#7c3aed" font-size="9.5" font-weight="800" text-anchor="middle">2. Đọc 'c' ➔ N1</text>
+                        <line x1="165" y1="110" x2="277" y2="110" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-purple)"/>
 
                         <!-- Step 3: N1 -> N2 ('a') -->
-                        <rect x="258" y="128" width="84" height="16" rx="4" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1"/>
-                        <text x="300" y="140" fill="#7c3aed" font-size="8.5" font-weight="800" text-anchor="middle">3. Đọc 'a' &rarr; N2</text>
-                        <line x1="250" y1="152" x2="342" y2="152" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-purple)"/>
+                        <rect x="305" y="128" width="85" height="18" rx="4" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1"/>
+                        <text x="347" y="141" fill="#7c3aed" font-size="9.5" font-weight="800" text-anchor="middle">3. Đọc 'a' ➔ N2</text>
+                        <line x1="285" y1="152" x2="397" y2="152" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-purple)"/>
 
                         <!-- Step 4: N2 -> Leaf ('r') -->
-                        <rect x="358" y="170" width="80" height="16" rx="4" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1"/>
-                        <text x="398" y="182" fill="#7c3aed" font-size="8.5" font-weight="800" text-anchor="middle">4. Đọc 'r' &rarr; Leaf</text>
-                        <line x1="350" y1="194" x2="437" y2="194" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-purple)"/>
+                        <rect x="425" y="170" width="85" height="18" rx="4" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1"/>
+                        <text x="467" y="183" fill="#7c3aed" font-size="9.5" font-weight="800" text-anchor="middle">4. Đọc 'r' ➔ Leaf</text>
+                        <line x1="405" y1="194" x2="527" y2="194" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-purple)"/>
 
-                        <!-- Step 5: Verification Box at Leaf -->
-                        <rect x="392" y="206" width="105" height="18" rx="5" fill="#ecfdf5" stroke="#059669" stroke-width="1.4"/>
-                        <text x="445" y="219" fill="#065f46" font-size="8.5" font-weight="800" text-anchor="middle">is_end == true [✓]</text>
+                        <!-- Step 5: Verification Box at Leaf (Fully Visible, Generous Padding) -->
+                        <rect x="470" y="206" width="130" height="22" rx="5" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+                        <text x="535" y="221" fill="#065f46" font-size="10" font-weight="800" text-anchor="middle">is_end == true [✓]</text>
 
                         <!-- Step 6: Return TRUE Message -->
-                        <line x1="445" y1="248" x2="58" y2="248" stroke="#059669" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-green)"/>
-                        <rect x="180" y="238" width="140" height="20" rx="6" fill="#ffffff" stroke="#059669" stroke-width="1.5" filter="url(#shadow-card)"/>
-                        <text x="250" y="252" fill="#065f46" font-size="9" font-weight="800" text-anchor="middle">5. Return TRUE (Khóa Hợp Lệ)</text>
+                        <line x1="535" y1="248" x2="53" y2="248" stroke="#059669" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-green)"/>
+                        <rect x="175" y="236" width="210" height="24" rx="6" fill="#ffffff" stroke="#059669" stroke-width="1.5" filter="url(#shadow-card)"/>
+                        <text x="280" y="252" fill="#065f46" font-size="10.5" font-weight="800" text-anchor="middle">5. Return TRUE (Khóa Hợp Lệ)</text>
                     </svg>
                 </div>
 
                 <!-- Diagram Legend -->
-                <div style="border-top: 1px solid #f1f5f9; padding-top: 4px; font-size: 0.29em; color: #475569; display: flex; justify-content: space-between;">
+                <div style="border-top: 1px solid #e2e8f0; padding-top: 6px; font-size: 0.35em; color: #475569; display: flex; justify-content: space-between;">
                     <span><strong style="color: #7c3aed;">Caller:</strong> Lệnh gọi từ ứng dụng</span>
-                    <span><strong style="color: #0284c7;">1, 2, 3, 4:</strong> Đi theo từng chữ cái</span>
+                    <span><strong style="color: #0284c7;">1, 2, 3, 4:</strong> Đi tuần tự theo chữ cái</span>
                     <span><strong style="color: #059669;">Return TRUE:</strong> Đúng $L=3$ bước</span>
                 </div>
             </div>
 
-            <!-- Right: 3 Clear Presenter-Friendly Steps -->
-            <div style="display: flex; flex-direction: column; gap: 8px; justify-content: space-between;">
+            <!-- RIGHT PANEL: 3 Height-Balanced Full-Stretching Cards -->
+            <div style="display: flex; flex-direction: column; gap: 10px; justify-content: space-between; height: 100%;">
                 
-                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #7c3aed; border-radius: 8px; padding: 10px 14px;">
-                    <h4 style="color: #6b21a8; font-size: 0.40em; margin: 0 0 4px 0; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 5px solid #7c3aed; border-radius: 10px; padding: 12px 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                    <h4 style="color: #6b21a8; font-size: 0.46em; margin: 0 0 5px 0; font-weight: 800; display: flex; align-items: center; gap: 8px;">
                         <i class="fa-solid fa-shoe-prints"></i> Bước 1: Đi Theo Từng Chữ Cái
                     </h4>
-                    <p style="font-size: 0.33em; color: #0f172a; margin: 0; line-height: 1.45;">
-                        Đọc chữ cái nào thì đi theo con trỏ tương ứng (<code>'c' &rarr; 'a' &rarr; 'r'</code>). Nếu gặp con trỏ rỗng (<code>nullptr</code>), kết luận từ không tồn tại và <strong>dừng ngay lập tức</strong> mà không cần tìm tiếp.
+                    <p style="font-size: 0.38em; color: #0f172a; margin: 0; line-height: 1.45;">
+                        Đọc chữ cái nào thì đi theo con trỏ tương ứng (<code>'c' &rarr; 'a' &rarr; 'r'</code>). Nếu gặp <code>nullptr</code> thì dừng ngay (từ không tồn tại).
                     </p>
                 </div>
 
-                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #059669; border-radius: 8px; padding: 10px 14px;">
-                    <h4 style="color: #059669; font-size: 0.40em; margin: 0 0 4px 0; font-weight: 700; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-circle-check"></i> Bước 2: Chạm Đích & Kiểm Tra Cờ is_end
+                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 5px solid #059669; border-radius: 10px; padding: 12px 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                    <h4 style="color: #059669; font-size: 0.46em; margin: 0 0 5px 0; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-circle-check"></i> Bước 2: Kiểm Tra Cờ is_end
                     </h4>
-                    <p style="font-size: 0.33em; color: #0f172a; margin: 0; line-height: 1.45;">
-                        Khi đi hết $L$ chữ cái đến nút cuối, máy tính kiểm tra cờ <code>is_end</code>:
-                        <br>&bull; Nếu <code>is_end == true</code> $\implies$ Trả về <strong>TRUE</strong> (Tìm thấy từ).
-                        <br>&bull; Nếu <code>is_end == false</code> $\implies$ Trả về <strong>FALSE</strong> (Chỉ là tiền tố dở dang).
+                    <p style="font-size: 0.38em; color: #0f172a; margin: 0; line-height: 1.45;">
+                        Chạm đích cuối cùng, kiểm tra cờ <code>is_end</code>:
+                        <br>&bull; Nếu <code>true</code> $\implies$ Trả về <strong>TRUE</strong> (Tìm thấy từ).
+                        <br>&bull; Nếu <code>false</code> $\implies$ Trả về <strong>FALSE</strong> (Chỉ là tiền tố).
                     </p>
                 </div>
 
-                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #0284c7; border-radius: 8px; padding: 10px 14px;">
-                    <h4 style="color: #0284c7; font-size: 0.40em; margin: 0 0 4px 0; font-weight: 700; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-gauge-high"></i> Bước 3: Độc Lập Với Kích Thước Từ Điển
+                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 5px solid #0284c7; border-radius: 10px; padding: 12px 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                    <h4 style="color: #0284c7; font-size: 0.46em; margin: 0 0 5px 0; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-gauge-high"></i> Bước 3: Đúng $O(L)$ Bước
                     </h4>
-                    <p style="font-size: 0.33em; color: #0f172a; margin: 0; line-height: 1.45;">
-                        Tìm từ dài 3 ký tự (<code>"car"</code>) chỉ tốn đúng <strong>3 bước ($O(L)$)</strong>. Dù từ điển có 10 từ hay 1 tỷ từ ($N$), thời gian tìm kiếm vẫn nhanh như nhau.
+                    <p style="font-size: 0.38em; color: #0f172a; margin: 0; line-height: 1.45;">
+                        Tìm từ dài 3 ký tự (<code>"car"</code>) chỉ tốn đúng <strong>3 bước ($O(L)$)</strong>. Dù từ điển có 1 tỷ từ ($N$), tốc độ vẫn nhanh như nhau.
                     </p>
                 </div>
 
@@ -137,7 +137,7 @@
         </div>
 
         <!-- Bottom Takeaway Banner -->
-        <div style="width: 100%; background: #eff6ff; border: 1px solid #bfdbfe; border-left: 5px solid #2563eb; border-radius: 8px; padding: 8px 16px; display: flex; align-items: center; gap: 10px; font-size: 0.35em; font-weight: 600; color: #1e3a8a; text-align: left; line-height: 1.45;">
+        <div style="width: 100%; background: #eff6ff; border: 1px solid #bfdbfe; border-left: 6px solid #2563eb; border-radius: 8px; padding: 8px 16px; display: flex; align-items: center; gap: 10px; font-size: 0.38em; font-weight: 600; color: #1e3a8a; text-align: left; line-height: 1.45;">
             <i class="fa-solid fa-lightbulb" style="color: #2563eb; font-size: 1.25em; flex-shrink: 0;"></i>
             <span><strong style="color: #1d4ed8; text-transform: uppercase;">TÓM TẮT THUẬT TOÁN:</strong> Đi theo từng chữ cái $\to$ Chạm đích kiểm tra cờ <code>is_end</code> $\to$ Tốn đúng $L$ bước là xong ($O(L)$), hoàn toàn không bị ảnh hưởng khi dữ liệu từ điển phình to.</span>
         </div>

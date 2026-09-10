@@ -2,214 +2,175 @@
     <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 600px; display: flex; flex-direction: column; justify-content: space-between;">
         
         <!-- Header -->
-        <div style="text-align: center; margin-bottom: 8px;">
-            <div class="badge" style="font-size: 0.38em; padding: 4px 16px; margin-bottom: 4px; display: inline-block;">PHẦN II: CẤU TRÚC TRIE (PREFIX TREE)</div>
-            <h2 style="font-size: 0.95em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
-                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Vai Trò Của Cờ <code>is_end_of_word</code> Trong Cây Trie</span>
+        <div style="text-align: center; margin-bottom: 6px;">
+            <div class="badge" style="font-size: 0.40em; padding: 3px 16px; margin-bottom: 3px; display: inline-block;">PHẦN II: CẤU TRÚC TRIE (PREFIX TREE)</div>
+            <h2 style="font-size: 0.94em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.3;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 2px; padding-bottom: 2px;">Vai Trò Quyết Định Của Cờ <code>is_end_of_word</code></span>
             </h2>
         </div>
 
-        <!-- Top Highlight Alert Callout -->
-        <div style="width: 100%; background: #fff1f2; border: 1px solid #fecdd3; border-left: 5px solid #e11d48; border-radius: 8px; padding: 6px 14px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 0.35em; color: #9f1239; line-height: 1.4; text-align: left;">
-            <i class="fa-solid fa-triangle-exclamation" style="color: #e11d48; font-size: 1.2em; flex-shrink: 0;"></i>
-            <span><strong>NGỘ NHẬN PHỔ BIẾN:</strong> Cờ <code>is_end_of_word</code> <u>KHÔNG PHẢI</u> là cờ báo Nút Lá (Leaf Node)! Một nút nằm ở giữa cây vẫn là một từ hoàn chỉnh nếu bật cờ này!</span>
-        </div>
-
-        <!-- Main 2-Column Grid -->
-        <div style="width: 100%; display: grid; grid-template-columns: 1.22fr 1fr; gap: 16px; align-items: stretch; text-align: left; margin-bottom: 8px;">
+        <!-- Main Balanced Presentation Layout (Matching Slide 06_b) -->
+        <div style="width: 100%; display: grid; grid-template-columns: 1.75fr 1.25fr; gap: 14px; align-items: stretch; margin-bottom: 8px; flex-grow: 1;">
             
-            <!-- Left Column: Crystal Clear Trie Diagram -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #7c3aed; border-radius: 12px; padding: 10px 14px; display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                    <div style="font-size: 0.34em; font-weight: 700; color: #0f172a; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 5px;">
-                        <span style="display: flex; align-items: center; gap: 6px;">
-                            <i class="fa-solid fa-diagram-project" style="color: #7c3aed;"></i>
-                            Sơ Đồ Phân Biệt: <code>"ca"</code> (Tiền tố) vs <code>"car"</code> (Từ giữa) vs <code>"cart"</code> (Từ lá)
-                        </span>
-                        <span style="font-size: 0.85em; color: #6b21a8; font-weight: 700; background: #f3e8ff; border: 1px solid #e9d5ff; padding: 2px 6px; border-radius: 4px;">Ví dụ trực quan</span>
-                    </div>
-
-                    <svg viewBox="0 0 540 240" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', 'Inter', sans-serif;">
-                        <defs>
-                            <marker id="arrow-blue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0284c7" />
-                            </marker>
-                            <marker id="arrow-purple" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#7c3aed" />
-                            </marker>
-                            <marker id="arrow-emerald" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669" />
-                            </marker>
-                            <filter id="shadow-node" x="-20%" y="-20%" width="140%" height="140%">
-                                <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#0f172a" flood-opacity="0.1"/>
-                            </filter>
-                        </defs>
-
-                        <!-- Background Guidelines / Flow -->
-                        <!-- Root (40, 110) -> N1 (130, 110) -->
-                        <line x1="62" y1="110" x2="110" y2="110" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
-                        <rect x="76" y="99" width="20" height="16" rx="4" fill="#e0f2fe" stroke="#bae6fd" stroke-width="1"/>
-                        <text x="86" y="111" fill="#0369a1" font-size="9" font-weight="800" text-anchor="middle">'c'</text>
-
-                        <!-- N1 (130, 110) -> N2 (225, 110) -->
-                        <line x1="152" y1="110" x2="205" y2="110" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow-blue)"/>
-                        <rect x="168" y="99" width="20" height="16" rx="4" fill="#e0f2fe" stroke="#bae6fd" stroke-width="1"/>
-                        <text x="178" y="111" fill="#0369a1" font-size="9" font-weight="800" text-anchor="middle">'a'</text>
-
-                        <!-- N2 (225, 110) -> N3 (340, 65) -->
-                        <path d="M 245 100 Q 285 65 318 65" fill="none" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-purple)"/>
-                        <rect x="270" y="65" width="20" height="16" rx="4" fill="#f3e8ff" stroke="#e9d5ff" stroke-width="1"/>
-                        <text x="280" y="77" fill="#7c3aed" font-size="9" font-weight="800" text-anchor="middle">'r'</text>
-
-                        <!-- N3 (340, 65) -> N4 (460, 65) -->
-                        <line x1="362" y1="65" x2="438" y2="65" stroke="#059669" stroke-width="2" marker-end="url(#arrow-emerald)"/>
-                        <rect x="390" y="54" width="20" height="16" rx="4" fill="#d1fae5" stroke="#a7f3d0" stroke-width="1"/>
-                        <text x="400" y="66" fill="#047857" font-size="9" font-weight="800" text-anchor="middle">'t'</text>
-
-                        <!-- N2 (225, 110) -> N5 (355, 175) -->
-                        <path d="M 245 120 Q 290 175 333 175" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#arrow-emerald)"/>
-                        <rect x="275" y="152" width="20" height="16" rx="4" fill="#d1fae5" stroke="#a7f3d0" stroke-width="1"/>
-                        <text x="285" y="164" fill="#047857" font-size="9" font-weight="800" text-anchor="middle">'p'</text>
-
-                        <!-- NODES -->
-                        <!-- Root -->
-                        <circle cx="40" cy="110" r="18" fill="#f8fafc" stroke="#475569" stroke-width="2" filter="url(#shadow-node)"/>
-                        <text x="40" y="114" fill="#0f172a" font-size="9" font-weight="800" text-anchor="middle">Root</text>
-
-                        <!-- N1 -->
-                        <circle cx="130" cy="110" r="18" fill="#ffffff" stroke="#0284c7" stroke-width="2" filter="url(#shadow-node)"/>
-                        <text x="130" y="114" fill="#0284c7" font-size="9.5" font-weight="800" text-anchor="middle">N1</text>
-
-                        <!-- N2 ("ca" - PREFIX ONLY) -->
-                        <circle cx="225" cy="110" r="19" fill="#fff7ed" stroke="#ea580c" stroke-width="2.2" filter="url(#shadow-node)"/>
-                        <text x="225" y="114" fill="#c2410c" font-size="9.5" font-weight="800" text-anchor="middle">N2</text>
-                        
-                        <!-- Badge for N2 -->
-                        <rect x="175" y="140" width="100" height="34" rx="6" fill="#fff7ed" stroke="#fdba74" stroke-width="1.2"/>
-                        <text x="225" y="153" fill="#c2410c" font-size="8" font-weight="800" text-anchor="middle">"ca" (Tiền tố)</text>
-                        <text x="225" y="165" fill="#ea580c" font-size="7.2" font-weight="700" text-anchor="middle">is_end = false ❌</text>
-
-                        <!-- N3 ("car" - MIDDLE NODE & VALID WORD) -->
-                        <circle cx="340" cy="65" r="20" fill="#f3e8ff" stroke="#7c3aed" stroke-width="2.5" filter="url(#shadow-node)"/>
-                        <circle cx="340" cy="65" r="15" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
-                        <text x="340" y="69" fill="#6b21a8" font-size="9.5" font-weight="800" text-anchor="middle">N3</text>
-
-                        <!-- Badge for N3 -->
-                        <rect x="290" y="6" width="105" height="34" rx="6" fill="#f3e8ff" stroke="#c084fc" stroke-width="1.2"/>
-                        <text x="342" y="19" fill="#6b21a8" font-size="8" font-weight="800" text-anchor="middle">"car" (NÚT GIỮA)</text>
-                        <text x="342" y="31" fill="#7c3aed" font-size="7.2" font-weight="700" text-anchor="middle">is_end = true ✅</text>
-
-                        <!-- N4 ("cart" - LEAF NODE & VALID WORD) -->
-                        <circle cx="460" cy="65" r="20" fill="#ecfdf5" stroke="#059669" stroke-width="2.5" filter="url(#shadow-node)"/>
-                        <circle cx="460" cy="65" r="15" fill="none" stroke="#059669" stroke-width="1.5"/>
-                        <text x="460" y="69" fill="#047857" font-size="9.5" font-weight="800" text-anchor="middle">N4</text>
-
-                        <!-- Badge for N4 -->
-                        <rect x="410" y="6" width="105" height="34" rx="6" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.2"/>
-                        <text x="462" y="19" fill="#047857" font-size="8" font-weight="800" text-anchor="middle">"cart" (NÚT LÁ)</text>
-                        <text x="462" y="31" fill="#059669" font-size="7.2" font-weight="700" text-anchor="middle">is_end = true ✅</text>
-
-                        <!-- N5 ("cap" - LEAF NODE & VALID WORD) -->
-                        <circle cx="355" cy="175" r="20" fill="#ecfdf5" stroke="#059669" stroke-width="2.5" filter="url(#shadow-node)"/>
-                        <circle cx="355" cy="175" r="15" fill="none" stroke="#059669" stroke-width="1.5"/>
-                        <text x="355" y="179" fill="#047857" font-size="9.5" font-weight="800" text-anchor="middle">N5</text>
-
-                        <!-- Badge for N5 -->
-                        <rect x="390" y="160" width="115" height="34" rx="6" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.2"/>
-                        <text x="447" y="173" fill="#047857" font-size="8" font-weight="800" text-anchor="middle">"cap" (NÚT LÁ)</text>
-                        <text x="447" y="185" fill="#059669" font-size="7.2" font-weight="700" text-anchor="middle">is_end = true ✅</text>
-                    </svg>
-                </div>
-
-                <!-- Bottom Helper in Left Column -->
-                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 5px 10px; font-size: 0.31em; color: #475569; display: flex; justify-content: space-between; align-items: center;">
-                    <span><strong style="color: #0f172a;">Quy ước đồ họa:</strong> Vòng tròn kép = Nút có cờ <code>is_end = true</code></span>
-                    <span style="color: #7c3aed; font-weight: 700;">Từ khóa hoàn chỉnh</span>
-                </div>
-            </div>
-
-            <!-- Right Column: 3 Structured Presenter-Friendly Explanations -->
-            <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 8px;">
+            <!-- LEFT PANEL: Ultra-Spacious SVG Diagram -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #7c3aed; border-radius: 12px; padding: 10px 14px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
                 
-                <!-- Card 1: Clarify Leaf vs Word -->
-                <div style="background: #ffffff; border: 1px solid #fecdd3; border-left: 4px solid #ef4444; border-radius: 8px; padding: 8px 12px; text-align: left;">
-                    <div style="font-size: 0.34em; font-weight: 700; color: #dc2626; margin-bottom: 2px; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-circle-xmark"></i>
-                        1. Phân Biệt "Nút Lá" vs "Từ Hoàn Chỉnh"
-                    </div>
-                    <p style="font-size: 0.31em; color: #0f172a; margin: 0; line-height: 1.35;">
-                        Nút <code>N3</code> (<code>"car"</code>) nằm ở <strong>giữa cây</strong> (vẫn có nút con <code>"t"</code>), nhưng bản thân <code>"car"</code> vẫn là một từ độc lập nhờ bật cờ <code>is_end = true</code>.
-                    </p>
+                <!-- Panel Header -->
+                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; margin-bottom: 4px;">
+                    <span style="font-size: 0.42em; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-sitemap" style="color: #7c3aed;"></i> Sơ Đồ 3 Trạng Thái Nút Trong Trie
+                    </span>
+                    <span style="font-size: 0.33em; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; padding: 2px 10px; border-radius: 4px; font-weight: 800;">
+                        Vòng đôi = Từ hoàn chỉnh hợp lệ
+                    </span>
                 </div>
 
-                <!-- Card 2: High Contrast Comparison Table -->
-                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #7c3aed; border-radius: 8px; padding: 8px 10px; text-align: left;">
-                    <div style="font-size: 0.33em; font-weight: 700; color: #0f172a; margin-bottom: 5px; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-code-compare" style="color: #7c3aed;"></i>
-                        2. So Sánh Hành Vi Của 2 Hàm Tra Cứu
-                    </div>
-                    <table style="width: 100%; border-collapse: collapse; font-size: 0.29em; color: #0f172a; line-height: 1.3;">
-                        <thead>
-                            <tr style="background: #f1f5f9; color: #0f172a; font-weight: 800;">
-                                <th style="padding: 4px 6px; border: 1px solid #cbd5e1; width: 32%;">Hàm Tra Cứu</th>
-                                <th style="padding: 4px 6px; border: 1px solid #cbd5e1;">Kiểm Tra Cờ <code>is_end</code>?</th>
-                                <th style="padding: 4px 6px; border: 1px solid #cbd5e1; width: 33%;">Ví dụ với <code>"ca"</code></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="padding: 4px 6px; border: 1px solid #cbd5e1; font-weight: 700; color: #0284c7;">
-                                    <code>startsWith(p)</code>
-                                </td>
-                                <td style="padding: 4px 6px; border: 1px solid #cbd5e1;">
-                                    <strong>KHÔNG CẦN:</strong> Chỉ cần tồn tại đường đi.
-                                </td>
-                                <td style="padding: 4px 6px; border: 1px solid #cbd5e1; font-weight: 700; color: #059669;">
-                                    <code>startsWith("ca")</code> ➔ <span style="background: #dcfce7; padding: 1px 4px; border-radius: 3px;">TRUE</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 4px 6px; border: 1px solid #cbd5e1; font-weight: 700; color: #7c3aed;">
-                                    <code>search(word)</code>
-                                </td>
-                                <td style="padding: 4px 6px; border: 1px solid #cbd5e1;">
-                                    <strong>BẮT BUỘC:</strong> Nút kết thúc phải có <code>is_end = true</code>.
-                                </td>
-                                <td style="padding: 4px 6px; border: 1px solid #cbd5e1; font-weight: 700; color: #dc2626;">
-                                    <code>search("ca")</code> ➔ <span style="background: #fee2e2; padding: 1px 4px; border-radius: 3px;">FALSE</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <!-- High-Resolution Wide 650x215 SVG Diagram -->
+                <svg viewBox="0 0 650 215" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', 'Inter', sans-serif;">
+                    <defs>
+                        <marker id="arr-b" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0284c7" />
+                        </marker>
+                        <marker id="arr-p" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#7c3aed" />
+                        </marker>
+                        <marker id="arr-g" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669" />
+                        </marker>
+                        <filter id="node-shad" x="-20%" y="-20%" width="140%" height="140%">
+                            <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#0f172a" flood-opacity="0.12"/>
+                        </filter>
+                    </defs>
+
+                    <!-- Edges & Edge Badges -->
+                    <!-- Root -> N1 ('c') -->
+                    <line x1="58" y1="105" x2="125" y2="105" stroke="#0284c7" stroke-width="2.5" marker-end="url(#arr-b)"/>
+                    <rect x="78" y="93" width="26" height="20" rx="4" fill="#ffffff" stroke="#0284c7" stroke-width="1.3"/>
+                    <text x="91" y="108" fill="#0284c7" font-size="12" font-weight="800" text-anchor="middle">'c'</text>
+
+                    <!-- N1 -> N2 ('a') -->
+                    <line x1="172" y1="105" x2="238" y2="105" stroke="#0284c7" stroke-width="2.5" marker-end="url(#arr-b)"/>
+                    <rect x="193" y="93" width="26" height="20" rx="4" fill="#ffffff" stroke="#0284c7" stroke-width="1.3"/>
+                    <text x="206" y="108" fill="#0284c7" font-size="12" font-weight="800" text-anchor="middle">'a'</text>
+
+                    <!-- N2 -> N3 ('r') -->
+                    <path d="M 284 95 Q 340 55 388 55" fill="none" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#arr-p)"/>
+                    <rect x="322" y="55" width="26" height="20" rx="4" fill="#ffffff" stroke="#7c3aed" stroke-width="1.3"/>
+                    <text x="335" y="70" fill="#7c3aed" font-size="12" font-weight="800" text-anchor="middle">'r'</text>
+
+                    <!-- N3 -> N4 ('t') -->
+                    <line x1="438" y1="55" x2="540" y2="55" stroke="#059669" stroke-width="2.5" marker-end="url(#arr-g)"/>
+                    <rect x="477" y="43" width="26" height="20" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1.3"/>
+                    <text x="490" y="58" fill="#059669" font-size="12" font-weight="800" text-anchor="middle">'t'</text>
+
+                    <!-- N2 -> N5 ('p') -->
+                    <path d="M 284 115 Q 350 165 425 165" fill="none" stroke="#059669" stroke-width="2.5" marker-end="url(#arr-g)"/>
+                    <rect x="345" y="145" width="26" height="20" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1.3"/>
+                    <text x="358" y="160" fill="#059669" font-size="12" font-weight="800" text-anchor="middle">'p'</text>
+
+                    <!-- NODES -->
+                    <!-- Root -->
+                    <circle cx="36" cy="105" r="22" fill="#0f172a" stroke="#334155" stroke-width="1.5" filter="url(#node-shad)"/>
+                    <text x="36" y="110" fill="#ffffff" font-size="11" font-weight="800" text-anchor="middle">Root</text>
+
+                    <!-- N1 ('c') -->
+                    <circle cx="150" cy="105" r="22" fill="#ffffff" stroke="#0284c7" stroke-width="2.5" filter="url(#node-shad)"/>
+                    <text x="150" y="110.5" fill="#0284c7" font-size="12.5" font-weight="800" text-anchor="middle">"c"</text>
+
+                    <!-- N2 ("ca" - TIỀN TỐ) -->
+                    <circle cx="262" cy="105" r="24" fill="#fff7ed" stroke="#ea580c" stroke-width="2.5" filter="url(#node-shad)"/>
+                    <text x="262" y="110.5" fill="#c2410c" font-size="13" font-weight="800" text-anchor="middle">"ca"</text>
+                    
+                    <!-- Status Box for N2 -->
+                    <rect x="195" y="152" width="134" height="34" rx="6" fill="#fff7ed" stroke="#ea580c" stroke-width="1.3"/>
+                    <text x="262" y="166" fill="#c2410c" font-size="9.5" font-weight="800" text-anchor="middle">Chỉ là Tiền Tố</text>
+                    <text x="262" y="179" fill="#dc2626" font-size="9.5" font-weight="800" text-anchor="middle">is_end = false ✗</text>
+
+                    <!-- N3 ("car" - NÚT GIỮA VẪN LÀ TỪ) -->
+                    <circle cx="415" cy="55" r="25" fill="#f3e8ff" stroke="#7c3aed" stroke-width="3" filter="url(#node-shad)"/>
+                    <circle cx="415" cy="55" r="18" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+                    <text x="415" y="60.5" fill="#6b21a8" font-size="13" font-weight="800" text-anchor="middle">"car"</text>
+                    <!-- Status Box for N3 -->
+                    <rect x="352" y="5" width="128" height="30" rx="6" fill="#f3e8ff" stroke="#7c3aed" stroke-width="1.3"/>
+                    <text x="416" y="17" fill="#6b21a8" font-size="9.5" font-weight="800" text-anchor="middle">Nút Giữa (Có Con)</text>
+                    <text x="416" y="28" fill="#059669" font-size="9.5" font-weight="800" text-anchor="middle">is_end = true ✓</text>
+
+                    <!-- N4 ("cart" - NÚT LÁ) -->
+                    <circle cx="565" cy="55" r="25" fill="#ecfdf5" stroke="#059669" stroke-width="3" filter="url(#node-shad)"/>
+                    <circle cx="565" cy="55" r="18" fill="none" stroke="#059669" stroke-width="1.5"/>
+                    <text x="565" y="60.5" fill="#047857" font-size="13" font-weight="800" text-anchor="middle">"cart"</text>
+                    <!-- Status Box for N4 -->
+                    <rect x="502" y="5" width="128" height="30" rx="6" fill="#ecfdf5" stroke="#059669" stroke-width="1.3"/>
+                    <text x="566" y="17" fill="#047857" font-size="9.5" font-weight="800" text-anchor="middle">Nút Lá Cuối Cùng</text>
+                    <text x="566" y="28" fill="#059669" font-size="9.5" font-weight="800" text-anchor="middle">is_end = true ✓</text>
+
+                    <!-- N5 ("cap" - NÚT LÁ) -->
+                    <circle cx="455" cy="165" r="25" fill="#ecfdf5" stroke="#059669" stroke-width="3" filter="url(#node-shad)"/>
+                    <circle cx="455" cy="165" r="18" fill="none" stroke="#059669" stroke-width="1.5"/>
+                    <text x="455" y="170.5" fill="#047857" font-size="13" font-weight="800" text-anchor="middle">"cap"</text>
+                    <!-- Status Box for N5 -->
+                    <rect x="505" y="150" width="134" height="32" rx="6" fill="#ecfdf5" stroke="#059669" stroke-width="1.3"/>
+                    <text x="572" y="163" fill="#047857" font-size="9.5" font-weight="800" text-anchor="middle">Nút Lá Cuối Cùng</text>
+                    <text x="572" y="175" fill="#059669" font-size="9.5" font-weight="800" text-anchor="middle">is_end = true ✓</text>
+                </svg>
+
+                <!-- Footnote Note -->
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 5px 12px; font-size: 0.35em; color: #475569; display: flex; justify-content: space-between;">
+                    <span><strong style="color: #0f172a;">Quy tắc trực quan:</strong> Vòng tròn kép = Từ hoàn chỉnh hợp lệ</span>
+                    <span style="color: #7c3aed; font-weight: 700;">Tất cả dùng chung tiền tố "ca"</span>
                 </div>
 
-                <!-- Card 3: Prefix Sharing Benefit -->
-                <div style="background: #ffffff; border: 1px solid #bbf7d0; border-left: 4px solid #059669; border-radius: 8px; padding: 8px 12px; text-align: left;">
-                    <div style="font-size: 0.34em; font-weight: 700; color: #047857; margin-bottom: 2px; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-brain"></i>
-                        3. Lợi Ích Nén Tiền Tố (Prefix Sharing)
+            </div>
+
+            <!-- RIGHT PANEL: 2 Height-Balanced Full-Stretching Cards -->
+            <div style="display: flex; flex-direction: column; gap: 12px; justify-content: space-between; height: 100%;">
+                
+                <!-- Principle 1: Not Just a Leaf Node -->
+                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 5px solid #7c3aed; border-radius: 10px; padding: 14px 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size: 0.46em; font-weight: 800; color: #6b21a8; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-lightbulb"></i> 1. Từ Nằm Giữa Vẫn Hợp Lệ
                     </div>
-                    <p style="font-size: 0.31em; color: #0f172a; margin: 0; line-height: 1.35;">
-                        Nhờ cờ <code>is_end</code>, các từ là tiền tố của nhau (<code>"car"</code>, <code>"cart"</code>, <code>"cap"</code>) <strong>dùng chung 100% đường đi</strong> <code>c → a</code> mà không bị nhân bản bộ nhớ.
+                    <p style="font-size: 0.38em; color: #0f172a; margin: 0 0 8px 0; line-height: 1.45;">
+                        Cờ <code>is_end</code> <strong>không phải nút lá</strong>. Nút <code>"car"</code> nằm ở giữa cây (vẫn có con <code>'t'</code> nối thành <code>"cart"</code>), nhưng bản thân <code>"car"</code> vẫn là từ hợp lệ vì có <code>is_end = true</code>.
                     </p>
+                    <div style="background: #f3e8ff; border: 1px solid #e9d5ff; border-radius: 6px; padding: 4px 10px; font-size: 0.33em; color: #6b21a8; font-weight: 700;">
+                        ✓ Cho phép nhiều từ lồng nhau chia sẻ tiền tố
+                    </div>
+                </div>
+
+                <!-- Principle 2: Distinguish search() vs startsWith() -->
+                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 5px solid #0284c7; border-radius: 10px; padding: 14px 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size: 0.46em; font-weight: 800; color: #0284c7; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-code-compare"></i> 2. Phân Biệt 2 Hàm Tra Cứu
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.36em; color: #0f172a; line-height: 1.42;">
+                        <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: 6px 10px;">
+                            <strong>• <code>startsWith("ca")</code> ➔ <span style="color: #059669; font-weight: 800;">TRUE</span>:</strong> Chỉ cần có đường đi <code>c → a</code>.
+                        </div>
+                        <div style="background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; padding: 6px 10px;">
+                            <strong>• <code>search("ca")</code> ➔ <span style="color: #dc2626; font-weight: 800;">FALSE</span>:</strong> Đi hết đường thấy <code>is_end = false</code> (chỉ là tiền tố).
+                        </div>
+                    </div>
                 </div>
 
             </div>
 
         </div>
 
-        <!-- Bottom Takeaway Banner -->
-        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 5px solid #059669; border-radius: 8px; padding: 6px 14px; display: flex; align-items: center; gap: 8px; font-size: 0.35em; font-weight: 700; color: #14532d; text-align: left; line-height: 1.35;">
-            <i class="fa-solid fa-circle-check" style="color: #059669; font-size: 1.2em; flex-shrink: 0;"></i>
-            <span><span style="color: #059669;">KẾT LUẬN CHO BÀI THUYẾT TRÌNH:</span> Cờ <code>is_end_of_word</code> đóng vai trò như một "trạm dừng có biển báo": chạm trạm có cờ = tìm thấy từ hoàn chỉnh; chạm trạm không cờ = chỉ mới là tiền tố!</span>
+        <!-- Presenter Punchline Banner -->
+        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 6px solid #059669; border-radius: 8px; padding: 8px 16px; display: flex; align-items: center; gap: 10px; font-size: 0.38em; font-weight: 700; color: #14532d; text-align: left; line-height: 1.45;">
+            <i class="fa-solid fa-circle-check" style="color: #059669; font-size: 1.25em; flex-shrink: 0;"></i>
+            <span><strong style="color: #059669; text-transform: uppercase;">ẨN DỤ THUYẾT TRÌNH DỄ NHỚ:</strong> Cờ <code>is_end_of_word</code> như một <em>"Trạm Dừng Có Biển Báo"</em>: Đi đến trạm có biển báo = Tìm thấy một từ hoàn chỉnh; Trạm không có biển báo = Chỉ là đường đi tiền tố!</span>
         </div>
-
-        <!-- Presenter Speaker Notes -->
-        <aside class="notes">
-            1. Điểm nhấn thuyết trình: Nhấn mạnh ngộ nhận phổ biến nhất là nhầm "is_end_of_word" với "nút lá". Hãy chỉ vào nút N3 ("car"): N3 nằm ở giữa cây, vẫn có con "t", nhưng bản thân "car" đã là 1 từ hợp lệ vì có cờ is_end = true.
-            2. So sánh 2 hàm: Khi gọi startsWith("ca"), ta chỉ cần tìm thấy đường đi c->a là trả về TRUE ngay. Nhưng khi gọi search("ca"), ta tới nút N2 thấy is_end = false nên trả về FALSE.
-            3. Tối ưu bộ nhớ: Nhờ cơ chế này, Trie lưu được hàng triệu từ lồng nhau mà không cần nhân bản các ký tự chung.
-        </aside>
 
     </div>
+
+    <aside class="notes">
+        Kính thưa Thầy và các bạn, cách nhớ và trình bày cờ is_end_of_word cực kỳ đơn giản qua 2 ý chính:
+        1. Ý 1 - Phân biệt từ giữa cây: Cờ is_end KHÔNG PHẢI là nút lá. Nút "car" nằm ở giữa cây (vẫn trỏ tiếp sang nút 't' để tạo thành "cart"), nhưng bản thân "car" vẫn là một từ hoàn chỉnh có nghĩa vì cờ is_end = true.
+        2. Ý 2 - So sánh search() và startsWith():
+           - Khi gọi startsWith("ca"): Máy tính chỉ cần thấy có đường đi c->a là trả về TRUE ngay.
+           - Khi gọi search("ca"): Máy tính đi tới nút "ca", thấy cờ is_end = false nên trả về FALSE (vì từ điển chỉ có "car", "cart", "cap" chứ không chứa từ "ca").
+        3. Kết luận: Cờ is_end_of_word chính là chiếc "biển báo trạm dừng" giúp Trie lưu trữ được hàng triệu từ lồng nhau mà không sợ nhầm lẫn giữa tiền tố và từ hoàn chỉnh.
+    </aside>
 </section>

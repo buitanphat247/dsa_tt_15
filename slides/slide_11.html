@@ -3,117 +3,159 @@
         
         <!-- Header -->
         <div style="text-align: center; margin-bottom: 6px;">
-            <div class="badge" style="font-size: 0.38em; padding: 4px 16px; margin-bottom: 4px; display: inline-block;">PHẦN II: CẤU TRÚC TRIE (PREFIX TREE)</div>
-            <h2 style="font-size: 0.88em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+            <div class="badge" style="font-size: 0.44em; padding: 4px 18px; margin-bottom: 2px; display: inline-block;">PHẦN II: CẤU TRÚC TRIE (PREFIX TREE)</div>
+            <h2 style="font-size: 1.05em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.25;">
                 <span class="text-gradient" style="display: inline-block; padding-top: 2px; padding-bottom: 2px;">
-                    Ứng Dụng Thực Tiễn<br>Kỹ Thuật Tối Ưu Trie Trong Công Nghiệp
+                    Ứng Dụng Thực Tế Của Trie<br>Và Kỹ Thuật Tối Ưu Hệ Thống
                 </span>
             </h2>
         </div>
 
-        <!-- Section 1: 4 Industrial Applications (Grid 2x2) -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; margin-bottom: 6px;">
+        <!-- Main 2-Column Dashboard Layout -->
+        <div style="display: grid; grid-template-columns: 1.18fr 1fr; gap: 16px; width: 100%; align-items: stretch; margin-bottom: 8px; flex-grow: 1;">
             
-            <!-- App 1: Mobile Keyboard -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #0284c7; border-radius: 8px; padding: 10px 14px; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-                    <h4 style="color: #0f172a; font-size: 0.38em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-mobile-screen-button" style="color: #0284c7;"></i> 1. Bàn Phím Di Động (Gboard / iOS Keyboard)
-                    </h4>
-                    <span style="font-size: 0.27em; background: #f1f5f9; color: #0284c7; border: 1px solid #bae6fd; padding: 2px 6px; border-radius: 4px; font-weight: 700;">Mobile Apps</span>
+            <!-- LEFT PANEL: 4 Real-world Applications (Large & Crisp) -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
+                
+                <!-- Sub Header -->
+                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; margin-bottom: 10px;">
+                    <span style="font-size: 0.48em; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-cubes-stacked" style="color: #0284c7;"></i> 4 Ứng Dụng Thực Tế Tiêu Biểu
+                    </span>
+                    <span style="font-size: 0.36em; background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; padding: 2px 10px; border-radius: 4px; font-weight: 700;">
+                        Thực Tiễn Sản Phẩm
+                    </span>
                 </div>
-                <p style="font-size: 0.30em; color: #0f172a; margin: 0; line-height: 1.45;">
-                    Trie là cấu trúc phù hợp cho Prefix Search, cho phép truy xuất gợi ý nhanh trên thiết bị với mục tiêu phản hồi ở mức vài mili-giây (tùy thiết bị và giải thuật triển khai).
-                </p>
-            </div>
 
-            <!-- App 2: IDE Code Intelligence -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #7c3aed; border-radius: 8px; padding: 10px 14px; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-                    <h4 style="color: #0f172a; font-size: 0.38em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-code" style="color: #7c3aed;"></i> 2. IDE Code Completion (VSCode, IntelliJ)
-                    </h4>
-                    <span style="font-size: 0.27em; background: #f1f5f9; color: #6b21a8; border: 1px solid #e9d5ff; padding: 2px 6px; border-radius: 4px; font-weight: 700;">Developer Tools</span>
+                <!-- 2x2 Grid of Application Cards -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex: 1;">
+                    
+                    <!-- App 1: Mobile Keyboard -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0284c7; border-radius: 8px; padding: 10px 12px; text-align: left; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                            <h4 style="color: #0f172a; font-size: 0.45em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 6px;">
+                                <i class="fa-solid fa-mobile-screen-button" style="color: #0284c7;"></i> Bàn Phím Di Động
+                            </h4>
+                            <span style="font-size: 0.33em; background: #ffffff; color: #0369a1; border: 1px solid #cbd5e1; padding: 1px 7px; border-radius: 4px; font-weight: 700;">Gboard / iOS</span>
+                        </div>
+                        <p style="font-size: 0.41em; color: #0f172a; margin: 0; line-height: 1.45;">
+                            Truy xuất từ gợi ý siêu nhanh với phản hồi chỉ vài mili-giây ngay trên thiết bị bộ nhớ giới hạn.
+                        </p>
+                    </div>
+
+                    <!-- App 2: IDE Code Completion -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #7c3aed; border-radius: 8px; padding: 10px 12px; text-align: left; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                            <h4 style="color: #0f172a; font-size: 0.45em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 6px;">
+                                <i class="fa-solid fa-code" style="color: #7c3aed;"></i> Gợi Ý Code (IDE)
+                            </h4>
+                            <span style="font-size: 0.33em; background: #ffffff; color: #6b21a8; border: 1px solid #cbd5e1; padding: 1px 7px; border-radius: 4px; font-weight: 700;">VSCode / IntelliJ</span>
+                        </div>
+                        <p style="font-size: 0.41em; color: #0f172a; margin: 0; line-height: 1.45;">
+                            Tự động tìm kiếm tiền tố danh sách hàm, biến, cú pháp lệnh cực nhanh khi lập trình viên gõ phím.
+                        </p>
+                    </div>
+
+                    <!-- App 3: IP Router LPM -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #059669; border-radius: 8px; padding: 10px 12px; text-align: left; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                            <h4 style="color: #0f172a; font-size: 0.45em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 6px;">
+                                <i class="fa-solid fa-network-wired" style="color: #059669;"></i> Định Tuyến IP Router
+                            </h4>
+                            <span style="font-size: 0.33em; background: #ffffff; color: #047857; border: 1px solid #cbd5e1; padding: 1px 7px; border-radius: 4px; font-weight: 700;">Binary Trie</span>
+                        </div>
+                        <p style="font-size: 0.41em; color: #0f172a; margin: 0; line-height: 1.45;">
+                            Dùng <strong>Binary Trie</strong> <code>{0, 1}</code> khớp tiền tố IP dài nhất (LPM) cho hàng triệu gói tin mỗi giây trên Internet.
+                        </p>
+                    </div>
+
+                    <!-- App 4: Search Suggestion -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #ea580c; border-radius: 8px; padding: 10px 12px; text-align: left; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                            <h4 style="color: #0f172a; font-size: 0.45em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 6px;">
+                                <i class="fa-solid fa-magnifying-glass" style="color: #ea580c;"></i> Search Auto-Suggest
+                            </h4>
+                            <span style="font-size: 0.33em; background: #ffffff; color: #c2410c; border: 1px solid #cbd5e1; padding: 1px 7px; border-radius: 4px; font-weight: 700;">Google / Bing</span>
+                        </div>
+                        <p style="font-size: 0.41em; color: #0f172a; margin: 0; line-height: 1.45;">
+                            Gợi ý tức thì 5–10 từ khóa tìm kiếm phổ biến nhất khi người dùng mới gõ một vài ký tự đầu.
+                        </p>
+                    </div>
+
                 </div>
-                <p style="font-size: 0.30em; color: #0f172a; margin: 0; line-height: 1.45;">
-                    Trie đóng vai trò cấu trúc nền tảng hỗ trợ Prefix Search trong hệ thống Code Completion (gợi ý nhanh danh sách hàm, biến, class khi người dùng gõ tiền tố).
-                </p>
+
             </div>
 
-            <!-- App 3: Network Core Router (LPM) -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #059669; border-radius: 8px; padding: 10px 14px; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-                    <h4 style="color: #0f172a; font-size: 0.38em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-network-wired" style="color: #059669;"></i> 3. Định Tuyến IP Router (Longest Prefix Match)
-                    </h4>
-                    <span style="font-size: 0.27em; background: #f1f5f9; color: #047857; border: 1px solid #a7f3d0; padding: 2px 6px; border-radius: 4px; font-weight: 700;">Networking</span>
+            <!-- RIGHT PANEL: 3 Optimization Best Practices (Height-Balanced & Large) -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #8b5cf6; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
+                
+                <!-- Sub Header -->
+                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; margin-bottom: 10px;">
+                    <span style="font-size: 0.48em; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-sliders" style="color: #8b5cf6;"></i> 3 Kỹ Thuật Tối Ưu Khi Triển Khai
+                    </span>
+                    <span style="font-size: 0.36em; background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe; padding: 2px 10px; border-radius: 4px; font-weight: 700;">
+                        Best Practices
+                    </span>
                 </div>
-                <p style="font-size: 0.30em; color: #0f172a; margin: 0; line-height: 1.45;">
-                    Router lõi Internet dùng <strong>Binary Trie</strong> (tập ký tự bit <code>{0, 1}</code>) để khớp tiền tố địa chỉ IP dài nhất (LPM) cho hàng triệu gói tin/giây.
-                </p>
-            </div>
 
-            <!-- App 4: Search Engine Auto-suggest -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #ea580c; border-radius: 8px; padding: 10px 14px; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-                    <h4 style="color: #0f172a; font-size: 0.38em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-magnifying-glass" style="color: #ea580c;"></i> 4. Công Cụ Tìm Kiếm (Search Auto-Suggest)
-                    </h4>
-                    <span style="font-size: 0.27em; background: #f1f5f9; color: #c2410c; border: 1px solid #fdba74; padding: 2px 6px; border-radius: 4px; font-weight: 700;">Web Engines</span>
+                <!-- 3 Stacked Optimization Cards (Full-Height Stretched) -->
+                <div style="display: flex; flex-direction: column; gap: 10px; flex: 1; justify-content: space-between;">
+                    
+                    <!-- Practice 1: Normalization -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #6366f1; border-radius: 8px; padding: 9px 12px; text-align: left; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                        <h5 style="color: #4338ca; font-size: 0.44em; font-weight: 800; margin: 0 0 3px 0; display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> 1. Chuẩn Hóa Dữ Liệu Đầu Vào
+                        </h5>
+                        <p style="font-size: 0.39em; color: #0f172a; margin: 0; line-height: 1.42;">
+                            Chuẩn hóa Unicode NFC, chuyển chữ thường (lowercase) và xử lý ký tự đặc biệt trước khi chèn vào cây để đồng bộ tiền tố.
+                        </p>
+                    </div>
+
+                    <!-- Practice 2: Radix Tree Compression -->
+                    <div style="background: #fdf2f8; border: 1px solid #fbcfe8; border-left: 4px solid #ec4899; border-radius: 8px; padding: 9px 12px; text-align: left; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                        <h5 style="color: #be185d; font-size: 0.44em; font-weight: 800; margin: 0 0 3px 0; display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-compress"></i> 2. Radix Tree (Nén Chuỗi Nút Đơn)
+                        </h5>
+                        <p style="font-size: 0.39em; color: #0f172a; margin: 0; line-height: 1.42;">
+                            Gộp các chuỗi nút đơn không phân nhánh thành 1 cạnh dài (ví dụ: gộp <code>i → n → g</code> thành <code>"ing"</code>), giúp giảm <strong>$50 - 70\%$ số node</strong>.
+                        </p>
+                    </div>
+
+                    <!-- Practice 3: Top-K Early Capping -->
+                    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #10b981; border-radius: 8px; padding: 9px 12px; text-align: left; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                        <h5 style="color: #047857; font-size: 0.44em; font-weight: 800; margin: 0 0 3px 0; display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-bolt"></i> 3. Lưu Trước Top-K (Early Caching)
+                        </h5>
+                        <p style="font-size: 0.39em; color: #0f172a; margin: 0; line-height: 1.42;">
+                            Lưu sẵn danh sách Top 5–10 từ phổ biến nhất ngay tại nút tiền tố để trả về kết quả đạt tốc độ <strong>$O(1)$</strong> tức thì.
+                        </p>
+                    </div>
+
                 </div>
-                <p style="font-size: 0.30em; color: #0f172a; margin: 0; line-height: 1.45;">
-                    Kết hợp <strong>Trie + Min-Heap (Top-K)</strong> lưu sẵn tại mỗi nút để gợi ý 5-10 từ khóa tìm kiếm phổ biến nhất mà không cần duyệt sâu toàn bộ cây.
-                </p>
-            </div>
 
-        </div>
-
-        <!-- Section 2: 3 Production Best Practices (Grid 3 Columns) -->
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: 100%; margin-bottom: 6px;">
-            
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #6366f1; border-radius: 8px; padding: 10px 12px; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-                <h5 style="color: #0f172a; font-size: 0.35em; font-weight: 800; margin: 0 0 4px 0; display: flex; align-items: center; gap: 6px;">
-                    <i class="fa-solid fa-wand-magic-sparkles" style="color: #6366f1;"></i> 1. Chuẩn Hóa Dữ Liệu Đầu Vào
-                </h5>
-                <p style="font-size: 0.29em; color: #0f172a; margin: 0; line-height: 1.45;">
-                    Chuẩn hóa Input tùy yêu cầu: chuẩn hóa Unicode NFC, chữ hoa/thường; chỉ loại bỏ dấu khi nghiệp vụ tìm kiếm cho phép (tránh làm sai lệch nghĩa).
-                </p>
-            </div>
-
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #ec4899; border-radius: 8px; padding: 10px 12px; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-                <h5 style="color: #0f172a; font-size: 0.35em; font-weight: 800; margin: 0 0 4px 0; display: flex; align-items: center; gap: 6px;">
-                    <i class="fa-solid fa-compress" style="color: #ec4899;"></i> 2. Radix Tree (Patricia Trie)
-                </h5>
-                <p style="font-size: 0.29em; color: #0f172a; margin: 0; line-height: 1.45;">
-                    Nén các chuỗi nút đơn thành một cạnh chứa chuỗi ký tự con (ví dụ: gộp <code>i → n → g</code> thành 1 cạnh <code>"ing"</code>), giảm $50-70\%$ số node.
-                </p>
-            </div>
-
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #10b981; border-radius: 8px; padding: 10px 12px; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-                <h5 style="color: #0f172a; font-size: 0.35em; font-weight: 800; margin: 0 0 4px 0; display: flex; align-items: center; gap: 6px;">
-                    <i class="fa-solid fa-filter" style="color: #10b981;"></i> 3. Top-K Early Capping
-                </h5>
-                <p style="font-size: 0.29em; color: #0f172a; margin: 0; line-height: 1.45;">
-                    Lưu sẵn danh sách Top 10 kết quả có tần suất cao nhất tại mỗi nút để trả về kết quả $O(1)$ ngay khi người dùng mới gõ 1-2 ký tự ngắn.
-                </p>
             </div>
 
         </div>
 
         <!-- Presenter Key Takeaway Banner -->
-        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 5px solid #059669; border-radius: 8px; padding: 8px 16px; font-size: 0.33em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 10px; line-height: 1.4;">
-            <i class="fa-solid fa-circle-check" style="font-size: 1.2em; color: #059669; flex-shrink: 0;"></i>
-            <span><strong style="color: #059669; text-transform: uppercase;">TỔNG KẾT THỰC TIỄN:</strong> Trie là cấu trúc dữ liệu nền tảng cho mọi hệ thống tìm kiếm tiền tố. Trong môi trường công nghiệp quy mô lớn, kỹ thuật nén <strong>Radix Tree</strong> và lưu trước <strong>Top-K</strong> là hai chìa khóa vàng để đạt hiệu năng tối ưu.</span>
+        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 5px solid #059669; border-radius: 8px; padding: 10px 18px; font-size: 0.42em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 12px; line-height: 1.45;">
+            <i class="fa-solid fa-circle-check" style="font-size: 1.3em; color: #059669; flex-shrink: 0;"></i>
+            <span><strong style="color: #059669; text-transform: uppercase;">ĐÚC KẾT THỰC TIỄN:</strong> Trie là nền tảng của mọi hệ thống gợi ý tiền tố. Trong thực tế, việc kết hợp <strong>Radix Tree (Nén nhánh)</strong> và <strong>Top-K Caching</strong> là hai giải pháp cốt lõi để tối ưu bộ nhớ RAM và đạt tốc độ phản hồi tức thì $O(1)$.</span>
         </div>
 
     </div>
 
     <aside class="notes">
-        Kính thưa Thầy và các bạn, ở slide này chúng ta tìm hiểu cách cây Trie được ứng dụng thực tế trong các hệ thống lớn:
-        1. 4 Ứng dụng tiêu biểu: Bàn phím di động (Gboard), tính năng gợi ý code trong IDE, bộ định tuyến IP Router (Longest Prefix Match), và gợi ý tìm kiếm Search Engine.
-        2. 3 Kỹ thuật tối ưu sản xuất (Best Practices):
-           - Chuẩn hóa chuỗi trước khi chèn (tùy nghiệp vụ, chuẩn hóa NFC và chữ hoa/thường).
-           - Nén nút đơn bằng Radix Tree (Patricia Trie) để tiết kiệm 50-70% bộ nhớ.
-           - Top-K Early Capping: Lưu sẵn các từ khóa hot nhất ngay tại nút tiền tố để trả về O(1) tức thì.
+        Kính thưa Thầy và các bạn, ở slide này chúng ta tìm hiểu cách cây Trie được ứng dụng và tối ưu trong các hệ thống thực tế:
+        1. 4 Ứng dụng tiêu biểu:
+           - Bàn phím di động (Gboard/iOS): Gợi ý từ nhanh với bộ nhớ tiết kiệm.
+           - IDE Code Completion (VSCode/IntelliJ): Tự động hoàn thành mã nguồn theo tiền tố.
+           - Định tuyến Router IP: Dùng Binary Trie để khớp tiền tố IP dài nhất (Longest Prefix Match - LPM).
+           - Search Auto-Suggest: Gợi ý từ khóa tìm kiếm phổ biến tức thì.
+        2. 3 Kỹ thuật tối ưu khi triển khai (Best Practices):
+           - Chuẩn hóa chuỗi đầu vào (NFC Unicode, lowercase).
+           - Nén nút đơn với Radix Tree (Patricia Trie) để tiết kiệm 50-70% số node RAM.
+           - Lưu trước Top-K tại mỗi nút để trả về kết quả O(1) ngay khi người dùng gõ vài ký tự đầu.
     </aside>
 </section>

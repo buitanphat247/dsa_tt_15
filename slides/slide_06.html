@@ -2,30 +2,30 @@
     <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 600px; display: flex; flex-direction: column; justify-content: space-between;">
         
         <!-- Header -->
-        <div style="text-align: center; margin-bottom: 8px;">
-            <div class="badge" style="font-size: 0.38em; padding: 4px 16px; margin-bottom: 4px; display: inline-block;">PHẦN II: CẤU TRÚC TRIE (PREFIX TREE)</div>
-            <h2 style="font-size: 0.95em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
-                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Bản Chất Cấu Trúc & 3 Đặc Điểm Cốt Lõi Của Cây Trie</span>
+        <div style="text-align: center; margin-bottom: 6px;">
+            <div class="badge" style="font-size: 0.40em; padding: 3px 16px; margin-bottom: 3px; display: inline-block;">PHẦN II: CẤU TRÚC TRIE (PREFIX TREE)</div>
+            <h2 style="font-size: 0.94em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.3;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 2px; padding-bottom: 2px;">Bản Chất Cấu Trúc<br>3 Đặc Điểm Cốt Lõi Của Cây Trie</span>
             </h2>
         </div>
 
-        <!-- Main 2-Column Layout -->
-        <div style="width: 100%; display: grid; grid-template-columns: 1.25fr 1fr; gap: 16px; text-align: left; margin-bottom: 8px; align-items: stretch;">
+        <!-- Main 70/30 Presentation Layout -->
+        <div style="width: 100%; display: grid; grid-template-columns: 2.2fr 1fr; gap: 14px; text-align: left; margin-bottom: 8px; align-items: stretch; flex-grow: 1;">
             
-            <!-- Left: Handcrafted CS Textbook Graph Diagram (Spacious Horizontal Layout) -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 12px; padding: 10px 14px; display: flex; flex-direction: column; justify-content: space-between;">
+            <!-- Left: Handcrafted CS Textbook Graph Diagram (70% Width, Ultra-Spacious 680x225) -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #0284c7; border-radius: 12px; padding: 10px 16px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
                 <div>
                     <!-- Header -->
-                    <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 5px; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
-                        <span style="font-size: 0.34em; font-weight: 700; color: #0f172a; display: flex; align-items: center; gap: 6px;">
+                    <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                        <span style="font-size: 0.42em; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 8px;">
                             <i class="fa-solid fa-diagram-project" style="color: #0284c7;"></i>
                             Sơ Đồ Cây Trie Lưu 3 Từ: <code>{"car", "cat", "dog"}</code>
                         </span>
-                        <span style="font-size: 0.29em; color: #0369a1; font-weight: 700; background: #e0f2fe; border: 1px solid #bae6fd; padding: 2px 8px; border-radius: 6px;">Bảng chữ cái: $\Sigma$</span>
+                        <span style="font-size: 0.33em; color: #0369a1; font-weight: 700; background: #e0f2fe; border: 1px solid #bae6fd; padding: 2px 10px; border-radius: 6px;">Bảng chữ cái: $\Sigma$</span>
                     </div>
 
-                    <!-- Spacious Horizontal SVG Diagram (ViewBox 500x250) -->
-                    <svg viewBox="0 0 500 250" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', 'Inter', sans-serif;">
+                    <!-- Spacious Horizontal SVG Diagram (ViewBox 680x225) -->
+                    <svg viewBox="0 0 680 225" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', 'Inter', sans-serif;">
                         <defs>
                             <!-- Markers -->
                             <marker id="arr-blue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
@@ -38,141 +38,141 @@
                                 <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
                             </marker>
                             <filter id="shadow-clean" x="-10%" y="-10%" width="120%" height="120%">
-                                <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#0f172a" flood-opacity="0.08"/>
+                                <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#0f172a" flood-opacity="0.1"/>
                             </filter>
                         </defs>
 
-                        <!-- LCP Shared Prefix Bounding Box (Horizontal Enclosure) -->
-                        <rect x="118" y="15" width="185" height="118" rx="8" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.4" stroke-dasharray="4 3"/>
-                        <rect x="126" y="21" width="112" height="15" rx="3" fill="#e0f2fe"/>
-                        <text x="182" y="32" fill="#0369a1" font-size="8.5" font-weight="800" text-anchor="middle">Tiền tố chung: "ca"</text>
+                        <!-- LCP Shared Prefix Bounding Box -->
+                        <rect x="150" y="10" width="240" height="116" rx="8" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="4 3"/>
+                        <rect x="160" y="16" width="130" height="18" rx="4" fill="#e0f2fe"/>
+                        <text x="225" y="28.5" fill="#0369a1" font-size="10" font-weight="800" text-anchor="middle">Tiền tố chung: "ca"</text>
 
                         <!-- Directed Edges -->
                         <!-- Root -> q1 ('c') -->
-                        <path d="M 72 120 Q 95 72 125 72" fill="none" stroke="#0284c7" stroke-width="2.2" marker-end="url(#arr-blue)"/>
+                        <path d="M 82 108 Q 120 68 170 68" fill="none" stroke="#0284c7" stroke-width="2.5" marker-end="url(#arr-blue)"/>
                         
                         <!-- Root -> q3 ('d') -->
-                        <path d="M 72 138 Q 95 195 125 195" fill="none" stroke="#64748b" stroke-width="2.2" marker-end="url(#arr-gray)"/>
+                        <path d="M 82 122 Q 120 175 170 175" fill="none" stroke="#64748b" stroke-width="2.5" marker-end="url(#arr-gray)"/>
 
                         <!-- q1 -> q2 ('a') -->
-                        <line x1="156" y1="72" x2="242" y2="72" stroke="#0284c7" stroke-width="2.2" marker-end="url(#arr-blue)"/>
+                        <line x1="210" y1="68" x2="320" y2="68" stroke="#0284c7" stroke-width="2.5" marker-end="url(#arr-blue)"/>
 
                         <!-- q2 -> "car" ('r') -->
-                        <path d="M 276 65 Q 315 45 366 45" fill="none" stroke="#059669" stroke-width="2.2" marker-end="url(#arr-green)"/>
+                        <path d="M 360 60 Q 420 42 495 42" fill="none" stroke="#059669" stroke-width="2.5" marker-end="url(#arr-green)"/>
 
                         <!-- q2 -> "cat" ('t') -->
-                        <path d="M 276 79 Q 315 102 366 102" fill="none" stroke="#059669" stroke-width="2.2" marker-end="url(#arr-green)"/>
+                        <path d="M 360 76 Q 420 96 495 96" fill="none" stroke="#059669" stroke-width="2.5" marker-end="url(#arr-green)"/>
 
                         <!-- q3 -> q4 ('o') -->
-                        <line x1="156" y1="195" x2="242" y2="195" stroke="#64748b" stroke-width="2.2" marker-end="url(#arr-gray)"/>
+                        <line x1="210" y1="175" x2="320" y2="175" stroke="#64748b" stroke-width="2.5" marker-end="url(#arr-gray)"/>
 
                         <!-- q4 -> "dog" ('g') -->
-                        <line x1="276" y1="195" x2="366" y2="195" stroke="#059669" stroke-width="2.2" marker-end="url(#arr-green)"/>
+                        <line x1="360" y1="175" x2="495" y2="175" stroke="#059669" stroke-width="2.5" marker-end="url(#arr-green)"/>
 
                         <!-- Edge Character Label Pills -->
                         <!-- 'c' -->
-                        <rect x="88" y="80" width="18" height="15" rx="4" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" filter="url(#shadow-clean)"/>
-                        <text x="97" y="91" fill="#0284c7" font-size="9.5" font-weight="800" text-anchor="middle">'c'</text>
+                        <rect x="114" y="68" width="24" height="20" rx="4" fill="#ffffff" stroke="#0284c7" stroke-width="1.3" filter="url(#shadow-clean)"/>
+                        <text x="126" y="83" fill="#0284c7" font-size="12" font-weight="800" text-anchor="middle">'c'</text>
 
                         <!-- 'd' -->
-                        <rect x="88" y="162" width="18" height="15" rx="4" fill="#ffffff" stroke="#64748b" stroke-width="1.2" filter="url(#shadow-clean)"/>
-                        <text x="97" y="173" fill="#334155" font-size="9.5" font-weight="800" text-anchor="middle">'d'</text>
+                        <rect x="114" y="142" width="24" height="20" rx="4" fill="#ffffff" stroke="#64748b" stroke-width="1.3" filter="url(#shadow-clean)"/>
+                        <text x="126" y="157" fill="#334155" font-size="12" font-weight="800" text-anchor="middle">'d'</text>
 
                         <!-- 'a' -->
-                        <rect x="190" y="64" width="18" height="15" rx="4" fill="#ffffff" stroke="#0284c7" stroke-width="1.2" filter="url(#shadow-clean)"/>
-                        <text x="199" y="75" fill="#0284c7" font-size="9.5" font-weight="800" text-anchor="middle">'a'</text>
+                        <rect x="252" y="56" width="24" height="20" rx="4" fill="#ffffff" stroke="#0284c7" stroke-width="1.3" filter="url(#shadow-clean)"/>
+                        <text x="264" y="71" fill="#0284c7" font-size="12" font-weight="800" text-anchor="middle">'a'</text>
 
                         <!-- 'r' -->
-                        <rect x="312" y="42" width="18" height="15" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1.2" filter="url(#shadow-clean)"/>
-                        <text x="321" y="53" fill="#047857" font-size="9.5" font-weight="800" text-anchor="middle">'r'</text>
+                        <rect x="420" y="32" width="24" height="20" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1.3" filter="url(#shadow-clean)"/>
+                        <text x="432" y="47" fill="#047857" font-size="12" font-weight="800" text-anchor="middle">'r'</text>
 
                         <!-- 't' -->
-                        <rect x="312" y="87" width="18" height="15" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1.2" filter="url(#shadow-clean)"/>
-                        <text x="321" y="98" fill="#047857" font-size="9.5" font-weight="800" text-anchor="middle">'t'</text>
+                        <rect x="420" y="82" width="24" height="20" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1.3" filter="url(#shadow-clean)"/>
+                        <text x="432" y="97" fill="#047857" font-size="12" font-weight="800" text-anchor="middle">'t'</text>
 
                         <!-- 'o' -->
-                        <rect x="190" y="187" width="18" height="15" rx="4" fill="#ffffff" stroke="#64748b" stroke-width="1.2" filter="url(#shadow-clean)"/>
-                        <text x="199" y="198" fill="#334155" font-size="9.5" font-weight="800" text-anchor="middle">'o'</text>
+                        <rect x="252" y="163" width="24" height="20" rx="4" fill="#ffffff" stroke="#64748b" stroke-width="1.3" filter="url(#shadow-clean)"/>
+                        <text x="264" y="178" fill="#334155" font-size="12" font-weight="800" text-anchor="middle">'o'</text>
 
                         <!-- 'g' -->
-                        <rect x="312" y="187" width="18" height="15" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1.2" filter="url(#shadow-clean)"/>
-                        <text x="321" y="198" fill="#047857" font-size="9.5" font-weight="800" text-anchor="middle">'g'</text>
+                        <rect x="420" y="163" width="24" height="20" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1.3" filter="url(#shadow-clean)"/>
+                        <text x="432" y="178" fill="#047857" font-size="12" font-weight="800" text-anchor="middle">'g'</text>
 
                         <!-- NODES -->
                         <!-- Root Node -->
-                        <rect x="10" y="116" width="66" height="26" rx="13" fill="#0f172a" stroke="#334155" stroke-width="1.5" filter="url(#shadow-clean)"/>
-                        <text x="43" y="133" fill="#ffffff" font-size="9.5" font-weight="800" text-anchor="middle">Root (ε)</text>
+                        <rect x="8" y="100" width="76" height="30" rx="15" fill="#0f172a" stroke="#334155" stroke-width="1.5" filter="url(#shadow-clean)"/>
+                        <text x="46" y="119" fill="#ffffff" font-size="11.5" font-weight="800" text-anchor="middle">Root (ε)</text>
 
                         <!-- Node q1 (State q1 - 'c') -->
-                        <circle cx="142" cy="72" r="14" fill="#ffffff" stroke="#0284c7" stroke-width="2" filter="url(#shadow-clean)"/>
-                        <text x="142" y="76" fill="#0284c7" font-size="9.5" font-weight="800" text-anchor="middle">q1</text>
-                        <text x="142" y="98" fill="#64748b" font-size="8.5" font-weight="700" text-anchor="middle">[c]</text>
+                        <circle cx="190" cy="68" r="18" fill="#ffffff" stroke="#0284c7" stroke-width="2.5" filter="url(#shadow-clean)"/>
+                        <text x="190" y="73" fill="#0284c7" font-size="12" font-weight="800" text-anchor="middle">q1</text>
+                        <text x="190" y="99" fill="#64748b" font-size="10" font-weight="700" text-anchor="middle">[c]</text>
 
                         <!-- Node q2 (State q2 - 'ca') -->
-                        <circle cx="260" cy="72" r="15" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5" filter="url(#shadow-clean)"/>
-                        <text x="260" y="76" fill="#0369a1" font-size="9.5" font-weight="800" text-anchor="middle">q2</text>
-                        <text x="260" y="98" fill="#0369a1" font-size="8.5" font-weight="800" text-anchor="middle">[ca]</text>
+                        <circle cx="340" cy="68" r="19" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.8" filter="url(#shadow-clean)"/>
+                        <text x="340" y="73" fill="#0369a1" font-size="12" font-weight="800" text-anchor="middle">q2</text>
+                        <text x="340" y="99" fill="#0369a1" font-size="10" font-weight="800" text-anchor="middle">[ca]</text>
 
                         <!-- Node q3 (State q3 - 'd') -->
-                        <circle cx="142" cy="195" r="14" fill="#ffffff" stroke="#64748b" stroke-width="2" filter="url(#shadow-clean)"/>
-                        <text x="142" y="199" fill="#334155" font-size="9.5" font-weight="800" text-anchor="middle">q3</text>
-                        <text x="142" y="221" fill="#64748b" font-size="8.5" font-weight="700" text-anchor="middle">[d]</text>
+                        <circle cx="190" cy="175" r="18" fill="#ffffff" stroke="#64748b" stroke-width="2.5" filter="url(#shadow-clean)"/>
+                        <text x="190" y="180" fill="#334155" font-size="12" font-weight="800" text-anchor="middle">q3</text>
+                        <text x="190" y="206" fill="#64748b" font-size="10" font-weight="700" text-anchor="middle">[d]</text>
 
                         <!-- Node q4 (State q4 - 'do') -->
-                        <circle cx="260" cy="195" r="14" fill="#ffffff" stroke="#64748b" stroke-width="2" filter="url(#shadow-clean)"/>
-                        <text x="260" y="199" fill="#334155" font-size="9.5" font-weight="800" text-anchor="middle">q4</text>
-                        <text x="260" y="221" fill="#64748b" font-size="8.5" font-weight="700" text-anchor="middle">[do]</text>
+                        <circle cx="340" cy="175" r="18" fill="#ffffff" stroke="#64748b" stroke-width="2.5" filter="url(#shadow-clean)"/>
+                        <text x="340" y="180" fill="#334155" font-size="12" font-weight="800" text-anchor="middle">q4</text>
+                        <text x="340" y="206" fill="#64748b" font-size="10" font-weight="700" text-anchor="middle">[do]</text>
 
                         <!-- Terminal Nodes (Green Badges with checkmarks) -->
                         <!-- "car" -->
-                        <rect x="375" y="31" width="105" height="28" rx="7" fill="#ecfdf5" stroke="#059669" stroke-width="2" filter="url(#shadow-clean)"/>
-                        <text x="427" y="49" fill="#065f46" font-size="10" font-weight="800" text-anchor="middle">"car" (is_end) ✓</text>
+                        <rect x="510" y="26" width="145" height="32" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="2" filter="url(#shadow-clean)"/>
+                        <text x="582" y="47" fill="#065f46" font-size="12" font-weight="800" text-anchor="middle">"car" (is_end) ✓</text>
 
                         <!-- "cat" -->
-                        <rect x="375" y="88" width="105" height="28" rx="7" fill="#ecfdf5" stroke="#059669" stroke-width="2" filter="url(#shadow-clean)"/>
-                        <text x="427" y="106" fill="#065f46" font-size="10" font-weight="800" text-anchor="middle">"cat" (is_end) ✓</text>
+                        <rect x="510" y="80" width="145" height="32" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="2" filter="url(#shadow-clean)"/>
+                        <text x="582" y="101" fill="#065f46" font-size="12" font-weight="800" text-anchor="middle">"cat" (is_end) ✓</text>
 
                         <!-- "dog" -->
-                        <rect x="375" y="181" width="105" height="28" rx="7" fill="#ecfdf5" stroke="#059669" stroke-width="2" filter="url(#shadow-clean)"/>
-                        <text x="427" y="199" fill="#065f46" font-size="10" font-weight="800" text-anchor="middle">"dog" (is_end) ✓</text>
+                        <rect x="510" y="159" width="145" height="32" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="2" filter="url(#shadow-clean)"/>
+                        <text x="582" y="180" fill="#065f46" font-size="12" font-weight="800" text-anchor="middle">"dog" (is_end) ✓</text>
                     </svg>
                 </div>
 
                 <!-- Subtitle Legend -->
-                <div style="border-top: 1px solid #f1f5f9; padding-top: 4px; font-size: 0.29em; color: #475569; display: flex; justify-content: space-between;">
+                <div style="border-top: 1px solid #e2e8f0; padding-top: 4px; font-size: 0.34em; color: #475569; display: flex; justify-content: space-between;">
                     <span><strong style="color: #0f172a;">Root (ε):</strong> Nút gốc rỗng</span>
                     <span><strong style="color: #0284c7;">q1, q2:</strong> Trạng thái trung gian</span>
                     <span><strong style="color: #059669;">[✓]:</strong> Từ hoàn chỉnh (is_end = true)</span>
                 </div>
             </div>
 
-            <!-- Right: 3 Core Presenter-Friendly Points -->
+            <!-- Right: 3 Core Presenter-Friendly Points (30% Width) -->
             <div style="display: flex; flex-direction: column; gap: 8px; justify-content: space-between;">
                 
-                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #0284c7; border-radius: 8px; padding: 10px 14px;">
-                    <h4 style="color: #0284c7; font-size: 0.40em; margin: 0 0 4px 0; font-weight: 700; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-circle-dot"></i> 1. Ký Tự Nằm Trên Cạnh, Không Nằm Trong Nút
+                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 5px solid #0284c7; border-radius: 8px; padding: 10px 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                    <h4 style="color: #0284c7; font-size: 0.42em; margin: 0 0 4px 0; font-weight: 800; display: flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-circle-dot"></i> 1. Ký Tự Nằm Trên Cạnh
                     </h4>
-                    <p style="font-size: 0.33em; color: #0f172a; margin: 0; line-height: 1.45;">
-                        Nút không lưu chữ cái. Cạnh nối mới là nơi gắn nhãn ký tự (<code>'c'</code>, <code>'a'</code>, <code>'r'</code>). Bên trong mỗi nút chỉ chứa mảng con trỏ sang nút con và một cờ boolean <code>is_end</code>.
+                    <p style="font-size: 0.34em; color: #0f172a; margin: 0; line-height: 1.42;">
+                        Nút không lưu ký tự. Cạnh nối mới là nơi gắn nhãn (<code>'c'</code>, <code>'a'</code>, <code>'r'</code>). Nút chỉ chứa con trỏ &amp; cờ <code>is_end</code>.
                     </p>
                 </div>
 
-                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #475569; border-radius: 8px; padding: 10px 14px;">
-                    <h4 style="color: #0f172a; font-size: 0.40em; margin: 0 0 4px 0; font-weight: 700; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-arrow-right-long" style="color: #0284c7;"></i> 2. Duyệt 1 Chiều, Không Bao Giờ Quay Lui
+                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 5px solid #475569; border-radius: 8px; padding: 10px 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                    <h4 style="color: #0f172a; font-size: 0.42em; margin: 0 0 4px 0; font-weight: 800; display: flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-arrow-right-long" style="color: #0284c7;"></i> 2. Duyệt 1 Chiều $O(L)$
                     </h4>
-                    <p style="font-size: 0.33em; color: #0f172a; margin: 0; line-height: 1.45;">
-                        Từ một nút, ứng với mỗi ký tự chỉ có <strong>đúng 1 con trỏ duy nhất</strong>. Máy tính chỉ cần đi thẳng từ Gốc sang Đích trong $O(L)$ bước mà không bao giờ bị lạc hay phải thử sai.
+                    <p style="font-size: 0.34em; color: #0f172a; margin: 0; line-height: 1.42;">
+                        Mỗi ký tự có đúng <strong>1 con trỏ duy nhất</strong>. Đi thẳng từ Gốc sang Đích đúng $L$ bước, không bao giờ quay lui hay thử sai.
                     </p>
                 </div>
 
-                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #059669; border-radius: 8px; padding: 10px 14px;">
-                    <h4 style="color: #059669; font-size: 0.40em; margin: 0 0 4px 0; font-weight: 700; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-flag-checkered"></i> 3. Cờ is_end Xác Nhận Từ Hoàn Chỉnh
+                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 5px solid #059669; border-radius: 8px; padding: 10px 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                    <h4 style="color: #059669; font-size: 0.42em; margin: 0 0 4px 0; font-weight: 800; display: flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-flag-checkered"></i> 3. Cờ is_end Xác Nhận Từ
                     </h4>
-                    <p style="font-size: 0.33em; color: #0f172a; margin: 0; line-height: 1.45;">
-                        Nút <code>q2</code> là tiền tố <code>"ca"</code> nhưng không phải từ (<code>is_end = false</code>). Nút <code>"car"</code> và <code>"cat"</code> là từ có nghĩa nên được bật cờ <code>is_end = true</code> (Màu xanh lá).
+                    <p style="font-size: 0.34em; color: #0f172a; margin: 0; line-height: 1.42;">
+                        Nút <code>q2</code> là tiền tố <code>"ca"</code> (<code>is_end = false</code>). Nút <code>"car"</code> và <code>"cat"</code> có nghĩa nên bật <code>is_end = true</code> (Màu xanh).
                     </p>
                 </div>
 
@@ -181,8 +181,8 @@
         </div>
 
         <!-- Bottom Prefix Sharing Insight Banner -->
-        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 5px solid #059669; border-radius: 8px; padding: 8px 16px; display: flex; align-items: center; gap: 10px; font-size: 0.35em; font-weight: 600; color: #065f46; text-align: left; line-height: 1.45;">
-            <i class="fa-solid fa-share-nodes" style="color: #059669; font-size: 1.2em; flex-shrink: 0;"></i>
+        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 6px solid #059669; border-radius: 8px; padding: 8px 16px; display: flex; align-items: center; gap: 12px; font-size: 0.38em; font-weight: 600; color: #065f46; text-align: left; line-height: 1.45;">
+            <i class="fa-solid fa-share-nodes" style="color: #059669; font-size: 1.25em; flex-shrink: 0;"></i>
             <span><strong style="color: #047857; text-transform: uppercase;">Ý NGHĨA QUAN TRỌNG (GOM TIỀN TỐ CHUNG):</strong> Hai từ <code>"car"</code> và <code>"cat"</code> có chung tiền tố <code>"ca"</code> nên được gom chung vào 1 nhánh nhớ ($\text{Root} \to q_1 \to q_2$), giúp tiết kiệm bộ nhớ và tìm kiếm cực nhanh.</span>
         </div>
 

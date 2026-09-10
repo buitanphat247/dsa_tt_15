@@ -3,77 +3,85 @@
         
         <!-- Header -->
         <div style="text-align: center; margin-bottom: 8px;">
-            <div class="badge" style="font-size: 0.36em; padding: 4px 16px; margin-bottom: 10px; display: inline-block;">CHƯƠNG TRÌNH NỘI DUNG</div>
-            <h2 style="font-size: 0.95em; margin: 0; color: #0f172a; font-weight: 700; line-height: 1.4;">
-                <span class="text-gradient" style="display: inline-block; padding-top: 6px; padding-bottom: 4px;">MỤC LỤC CHUYÊN ĐỀ CHI TIẾT</span>
+            <div class="badge" style="font-size: 0.42em; padding: 5px 20px; margin-bottom: 6px; display: inline-block;">CHƯƠNG TRÌNH NỘI DUNG</div>
+            <h2 style="font-size: 1.05em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">MỤC LỤC CHUYÊN ĐỀ CHI TIẾT</span>
             </h2>
         </div>
 
         <!-- 4-Box Grid -->
-        <div style="width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: left; margin-bottom: 8px;">
+        <div style="width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: left; margin-bottom: 8px; flex-grow: 1;">
             
             <!-- Box 01 -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #e11d48; border-radius: 12px; padding: 12px 18px;">
-                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; margin-bottom: 8px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 0.72em; font-weight: 800; color: #e11d48;">01</span>
-                        <h4 style="font-size: 0.48em; margin: 0; color: #0f172a; font-weight: 700;">PHẦN I: ĐẶT VẤN ĐỀ & GIỚI HẠN</h4>
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #e11d48; border-radius: 12px; padding: 14px 18px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; margin-bottom: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 0.85em; font-weight: 800; color: #e11d48;">01</span>
+                            <h4 style="font-size: 0.52em; margin: 0; color: #0f172a; font-weight: 800;">PHẦN I: ĐẶT VẤN ĐỀ &amp; GIỚI HẠN</h4>
+                        </div>
+                        <span style="background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; padding: 3px 12px; border-radius: 12px; font-size: 0.36em; font-weight: 700; white-space: nowrap;">BÀI TOÁN ĐẶT RA</span>
                     </div>
-                    <span style="background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; padding: 3px 10px; border-radius: 12px; font-size: 0.33em; font-weight: 700; white-space: nowrap;">BÀI TOÁN ĐẶT RA</span>
+                    <ul style="font-size: 0.40em; color: #334155; margin: 0; padding-left: 18px; line-height: 1.55;">
+                        <li>Giới hạn lý thuyết của BST $O(\log N)$ &amp; Hash Table $O(N \cdot L)$ khi quy mô dữ liệu tăng trưởng.</li>
+                        <li>Mô hình hóa hai bài toán cốt lõi: <em>Prefix Matching</em> &amp; <em>Dynamic Connectivity</em>.</li>
+                        <li>Nguyên lý thiết kế <em>Query Pattern First</em> &amp; Tác động của kiến trúc bộ nhớ đệm (CPU Cache).</li>
+                    </ul>
                 </div>
-                <ul style="font-size: 0.36em; color: #334155; margin: 0; padding-left: 16px; line-height: 1.55;">
-                    <li>Giới hạn lý thuyết của BST $O(\log N)$ & Hash Table $O(N \cdot L)$ khi quy mô dữ liệu tăng trưởng</li>
-                    <li>Mô hình hóa hai bài toán: <em>Prefix Matching</em> & <em>Dynamic Connectivity</em></li>
-                    <li>Nguyên lý thiết kế <em>Query Pattern First</em> & Tác động của kiến trúc bộ nhớ đệm (CPU Cache)</li>
-                </ul>
             </div>
 
             <!-- Box 02 -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 12px; padding: 12px 18px;">
-                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; margin-bottom: 8px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 0.72em; font-weight: 800; color: #0284c7;">02</span>
-                        <h4 style="font-size: 0.48em; margin: 0; color: #0f172a; font-weight: 700;">PHẦN II: CẤU TRÚC TRIE (PREFIX TREE)</h4>
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #0284c7; border-radius: 12px; padding: 14px 18px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; margin-bottom: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 0.85em; font-weight: 800; color: #0284c7;">02</span>
+                            <h4 style="font-size: 0.52em; margin: 0; color: #0f172a; font-weight: 800;">PHẦN II: CẤU TRÚC TRIE (PREFIX TREE)</h4>
+                        </div>
+                        <span style="background: #f0f9ff; color: #0284c7; border: 1px solid #bae6fd; padding: 3px 12px; border-radius: 12px; font-size: 0.36em; font-weight: 700; white-space: nowrap;">GIẢI PHÁP 1: TRIE</span>
                     </div>
-                    <span style="background: #f0f9ff; color: #0284c7; border: 1px solid #bae6fd; padding: 3px 10px; border-radius: 12px; font-size: 0.33em; font-weight: 700; white-space: nowrap;">GIẢI PHÁP 1: TRIE</span>
+                    <ul style="font-size: 0.40em; color: #334155; margin: 0; padding-left: 18px; line-height: 1.55;">
+                        <li>Mô hình hình học nút &amp; vai trò định danh từ của cờ <code>is_end_of_word</code>.</li>
+                        <li>Thuật toán nạp $O(L)$ &amp; Cơ chế truy vấn tiền tố độc lập quy mô dữ liệu $O(L + K)$.</li>
+                        <li>Phân tích đánh đổi Child Container (Array vs Hash Map vs Vector) &amp; Ứng dụng IP Routing.</li>
+                    </ul>
                 </div>
-                <ul style="font-size: 0.36em; color: #334155; margin: 0; padding-left: 16px; line-height: 1.55;">
-                    <li>Mô hình hình học nút & vai trò định danh từ của cờ <code>is_end_of_word</code></li>
-                    <li>Thuật toán nạp $O(L)$ & Cơ chế truy vấn tiền tố độc lập quy mô dữ liệu $O(L + K)$</li>
-                    <li>Phân tích đánh đổi Child Container (Array vs Hash Map vs Vector) & Ứng dụng IP Routing</li>
-                </ul>
             </div>
 
             <!-- Box 03 -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #7c3aed; border-radius: 12px; padding: 12px 18px;">
-                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; margin-bottom: 8px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 0.72em; font-weight: 800; color: #7c3aed;">03</span>
-                        <h4 style="font-size: 0.48em; margin: 0; color: #0f172a; font-weight: 700;">PHẦN III: CẤU TRÚC UNION-FIND (DSU)</h4>
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #7c3aed; border-radius: 12px; padding: 14px 18px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; margin-bottom: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 0.85em; font-weight: 800; color: #7c3aed;">03</span>
+                            <h4 style="font-size: 0.52em; margin: 0; color: #0f172a; font-weight: 800;">PHẦN III: CẤU TRÚC UNION-FIND (DSU)</h4>
+                        </div>
+                        <span style="background: #f3e8ff; color: #6b21a8; border: 1px solid #e9d5ff; padding: 3px 12px; border-radius: 12px; font-size: 0.36em; font-weight: 700; white-space: nowrap;">GIẢI PHÁP 2: DSU</span>
                     </div>
-                    <span style="background: #f3e8ff; color: #6b21a8; border: 1px solid #e9d5ff; padding: 3px 10px; border-radius: 12px; font-size: 0.33em; font-weight: 700; white-space: nowrap;">GIẢI PHÁP 2: DSU</span>
+                    <ul style="font-size: 0.40em; color: #334155; margin: 0; padding-left: 18px; line-height: 1.55;">
+                        <li>Mô hình rừng cây hướng gốc (Up-tree) biểu diễn trên mảng phẳng <code>parent[]</code>.</li>
+                        <li>Tối ưu hóa kép: <em>Union by Rank</em> giới hạn độ cao &amp; <em>Path Compression</em> làm phẳng cây.</li>
+                        <li>Chứng minh chi phí khấu hao $O(\alpha(N))$ tiệm cận hằng số &amp; Ứng dụng MST Kruskal.</li>
+                    </ul>
                 </div>
-                <ul style="font-size: 0.36em; color: #334155; margin: 0; padding-left: 16px; line-height: 1.55;">
-                    <li>Mô hình rừng cây hướng gốc (Up-tree) biểu diễn trên mảng phẳng <code>parent[]</code></li>
-                    <li>Tối ưu hóa kép: <em>Union by Rank</em> giới hạn độ cao & <em>Path Compression</em> làm phẳng cây</li>
-                    <li>Chứng minh chi phí khấu hao $O(\alpha(N))$ tiệm cận hằng số & Ứng dụng MST Kruskal</li>
-                </ul>
             </div>
 
             <!-- Box 04 -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 12px; padding: 12px 18px;">
-                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; margin-bottom: 8px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 0.72em; font-weight: 800; color: #059669;">04</span>
-                        <h4 style="font-size: 0.48em; margin: 0; color: #0f172a; font-weight: 700;">PHẦN IV: TỔNG KẾT & QUYẾT ĐỊNH THIẾT KẾ</h4>
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #059669; border-radius: 12px; padding: 14px 18px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; margin-bottom: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 0.85em; font-weight: 800; color: #059669;">04</span>
+                            <h4 style="font-size: 0.52em; margin: 0; color: #0f172a; font-weight: 800;">PHẦN IV: TỔNG KẾT &amp; QUYẾT ĐỊNH THIẾT KẾ</h4>
+                        </div>
+                        <span style="background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; padding: 3px 12px; border-radius: 12px; font-size: 0.36em; font-weight: 700; white-space: nowrap;">TỔNG KẾT</span>
                     </div>
-                    <span style="background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; padding: 3px 10px; border-radius: 12px; font-size: 0.33em; font-weight: 700; white-space: nowrap;">TỔNG KẾT</span>
+                    <ul style="font-size: 0.40em; color: #334155; margin: 0; padding-left: 18px; line-height: 1.55;">
+                        <li>Bảng đối sánh tổng hợp các tiêu chí độ phức tạp, bộ nhớ và tính cục bộ Cache.</li>
+                        <li>Khung hướng dẫn ra quyết định (Decision Matrix) lựa chọn cấu trúc dữ liệu theo bài toán.</li>
+                        <li>Tổng kết các nguyên lý thiết kế cấu trúc dữ liệu chuyên biệt trong kỹ thuật phần mềm.</li>
+                    </ul>
                 </div>
-                <ul style="font-size: 0.36em; color: #334155; margin: 0; padding-left: 16px; line-height: 1.55;">
-                    <li>Bảng đối sánh tổng hợp các tiêu chí độ phức tạp, bộ nhớ và tính cục bộ Cache</li>
-                    <li>Khung hướng dẫn ra quyết định (Decision Matrix) lựa chọn cấu trúc dữ liệu theo bài toán</li>
-                    <li>Tổng kết các nguyên lý thiết kế cấu trúc dữ liệu chuyên biệt trong kỹ thuật phần mềm</li>
-                </ul>
             </div>
 
         </div>

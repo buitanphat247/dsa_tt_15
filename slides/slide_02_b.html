@@ -2,94 +2,94 @@
     <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 600px; display: flex; flex-direction: column; justify-content: space-between;">
         
         <!-- Header -->
-        <div style="text-align: center; margin-bottom: 10px;">
-            <div class="badge badge-gold" style="font-size: 0.38em; padding: 4px 16px; margin-bottom: 8px; display: inline-block;">PHẦN I: ĐẶT VẤN ĐỀ</div>
-            <h2 style="font-size: 0.95em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.4;">
-                <span class="text-gradient" style="display: inline-block; padding-top: 6px; padding-bottom: 4px;">Phân Tích Chi Tiết Hai Bài Toán Truy Vấn Đặc Thù</span>
+        <div style="text-align: center; margin-bottom: 8px;">
+            <div class="badge badge-gold" style="font-size: 0.42em; padding: 4px 18px; margin-bottom: 6px; display: inline-block;">PHẦN I: ĐẶT VẤN ĐỀ</div>
+            <h2 style="font-size: 1.05em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Phân Tích Chi Tiết Hai Bài Toán Truy Vấn Đặc Thù</span>
             </h2>
         </div>
 
         <!-- Main Grid Layout -->
-        <div style="width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; text-align: left; margin-bottom: 12px; align-items: stretch;">
+        <div style="width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: left; margin-bottom: 10px; align-items: stretch; flex-grow: 1;">
             
             <!-- Problem 1: Prefix Query & Trie -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #0284c7; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #0284c7; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
                 <div>
                     <!-- Header -->
                     <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
                         <div style="display: flex; align-items: center; gap: 8px;">
-                            <div style="background: #e0f2fe; color: #0284c7; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.58em; flex-shrink: 0;">
+                            <div style="background: #e0f2fe; color: #0284c7; width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.65em; flex-shrink: 0;">
                                 <i class="fa-solid fa-font"></i>
                             </div>
-                            <h4 style="color: #0f172a; font-size: 0.48em; margin: 0; font-weight: 700;">Bài Toán 1: Truy Vấn Tiền Tố (Prefix Search)</h4>
+                            <h4 style="color: #0f172a; font-size: 0.52em; margin: 0; font-weight: 800;">Bài Toán 1: Truy Vấn Tiền Tố (Prefix Search)</h4>
                         </div>
-                        <span style="background: #f0f9ff; color: #0284c7; border: 1px solid #bae6fd; padding: 3px 8px; border-radius: 8px; font-size: 0.32em; font-weight: 700;">DỮ LIỆU CHUỖI</span>
+                        <span style="background: #f0f9ff; color: #0284c7; border: 1px solid #bae6fd; padding: 3px 10px; border-radius: 8px; font-size: 0.36em; font-weight: 700;">DỮ LIỆU CHUỖI</span>
                     </div>
 
                     <!-- Problem Context -->
-                    <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 8px 12px; font-size: 0.34em; color: #0369a1; line-height: 1.45; margin-bottom: 10px;">
+                    <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 9px 14px; font-size: 0.39em; color: #0369a1; line-height: 1.5; margin-bottom: 10px;">
                         <strong style="color: #0284c7;"><i class="fa-solid fa-database" style="margin-right: 4px;"></i> Mô hình hóa:</strong> Tập từ điển $S$ gồm $N$ chuỗi độ dài trung bình $L$. Cần tìm các chuỗi bắt đầu bằng tiền tố $P$ ($|P| = L$).
                     </div>
 
                     <!-- Baseline Limitations -->
                     <div style="display: flex; flex-direction: column; gap: 8px;">
-                        <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 8px; padding: 8px 12px; font-size: 0.33em; line-height: 1.45; color: #0f172a;">
+                        <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 8px; padding: 9px 14px; font-size: 0.38em; line-height: 1.5; color: #0f172a;">
                             <strong style="color: #9f1239;">• Bảng băm (Hash Table) kém hiệu quả:</strong> Không hỗ trợ truy vấn tiền tố trực tiếp $\implies$ Phải quét toàn bộ $N$ từ trong từ điển $\implies O(N \cdot L)$.
                         </div>
-                        <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 8px; padding: 8px 12px; font-size: 0.33em; line-height: 1.45; color: #0f172a;">
+                        <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 8px; padding: 9px 14px; font-size: 0.38em; line-height: 1.5; color: #0f172a;">
                             <strong style="color: #9f1239;">• Cây BST gặp hạn chế:</strong> Cần $O(\log N)$ phép so sánh chuỗi; mỗi phép so sánh tốn $O(L) \implies$ Tổng chi phí $O(L \log N)$.
                         </div>
                     </div>
                 </div>
 
                 <!-- Solution Callout -->
-                <div style="margin-top: 12px; background: #e0f2fe; border-left: 4px solid #0284c7; padding: 8px 12px; border-radius: 6px; font-size: 0.34em; color: #0369a1; font-weight: 600; line-height: 1.4;">
-                    <i class="fa-solid fa-circle-check" style="color: #0284c7; font-size: 1.1em; margin-right: 4px;"></i>
-                    <span><strong>Giải pháp Trie:</strong> Tìm nút tương ứng với tiền tố trong $O(L)$, không phụ thuộc trực tiếp vào quy mô $N$ (Nếu xuất $K$ kết quả gợi ý, chi phí đạt $O(L + K)$).</span>
+                <div style="margin-top: 10px; background: #e0f2fe; border-left: 5px solid #0284c7; padding: 9px 14px; border-radius: 6px; font-size: 0.39em; color: #0369a1; font-weight: 700; line-height: 1.45;">
+                    <i class="fa-solid fa-circle-check" style="color: #0284c7; font-size: 1.15em; margin-right: 6px;"></i>
+                    <span><strong>Giải pháp Trie:</strong> Tìm nút tiền tố trong $O(L)$, độc lập với quy mô $N$ (Xuất $K$ gợi ý tốn $O(L + K)$).</span>
                 </div>
             </div>
 
             <!-- Problem 2: Dynamic Connectivity & DSU -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #7c3aed; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #7c3aed; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
                 <div>
                     <!-- Header -->
                     <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
                         <div style="display: flex; align-items: center; gap: 8px;">
-                            <div style="background: #f3e8ff; color: #7c3aed; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.58em; flex-shrink: 0;">
+                            <div style="background: #f3e8ff; color: #7c3aed; width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.65em; flex-shrink: 0;">
                                 <i class="fa-solid fa-diagram-project"></i>
                             </div>
-                            <h4 style="color: #0f172a; font-size: 0.48em; margin: 0; font-weight: 700;">Bài Toán 2: Liên Thông Động (Dynamic Connectivity)</h4>
+                            <h4 style="color: #0f172a; font-size: 0.52em; margin: 0; font-weight: 800;">Bài Toán 2: Liên Thông Động (Dynamic Connectivity)</h4>
                         </div>
-                        <span style="background: #f3e8ff; color: #7c3aed; border: 1px solid #e9d5ff; padding: 3px 8px; border-radius: 8px; font-size: 0.32em; font-weight: 700;">TẬP HỢP ĐỒ THỊ</span>
+                        <span style="background: #f3e8ff; color: #7c3aed; border: 1px solid #e9d5ff; padding: 3px 10px; border-radius: 8px; font-size: 0.36em; font-weight: 700;">TẬP HỢP ĐỒ THỊ</span>
                     </div>
 
                     <!-- Problem Context -->
-                    <div style="background: #fdf4ff; border: 1px solid #f5d0fe; border-radius: 8px; padding: 8px 12px; font-size: 0.34em; color: #701a75; line-height: 1.45; margin-bottom: 10px;">
-                        <strong style="color: #7c3aed;"><i class="fa-solid fa-circle-nodes" style="margin-right: 4px;"></i> Mô hình hóa:</strong> Đồ thị động $G = (V, E)$. Các cạnh được bổ sung liên tục; cần thực hiện thao tác kiểm tra $\text{Connected}(u, v)$ đồng thời với tần suất cao.
+                    <div style="background: #fdf4ff; border: 1px solid #f5d0fe; border-radius: 8px; padding: 9px 14px; font-size: 0.39em; color: #701a75; line-height: 1.5; margin-bottom: 10px;">
+                        <strong style="color: #7c3aed;"><i class="fa-solid fa-circle-nodes" style="margin-right: 4px;"></i> Mô hình hóa:</strong> Đồ thị động $G = (V, E)$. Cạnh thêm liên tục; cần kiểm tra $\text{Connected}(u, v)$ đồng thời với tần suất rất cao.
                     </div>
 
                     <!-- Baseline Limitations -->
                     <div style="display: flex; flex-direction: column; gap: 8px;">
-                        <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 8px; padding: 8px 12px; font-size: 0.33em; line-height: 1.45; color: #0f172a;">
+                        <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 8px; padding: 9px 14px; font-size: 0.38em; line-height: 1.5; color: #0f172a;">
                             <strong style="color: #9f1239;">• Duyệt Đồ Thị (BFS / DFS) chi phí cao:</strong> Kiểm tra liên thông bằng cách duyệt đồ thị tốn $O(V + E)$ cho mỗi truy vấn.
                         </div>
-                        <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 8px; padding: 8px 12px; font-size: 0.33em; line-height: 1.45; color: #0f172a;">
-                            <strong style="color: #9f1239;">• Giới hạn hiệu năng:</strong> Khi kích thước đồ thị và số truy vấn đồng thời tăng cao, chi phí $O(V + E)$ trở thành nút thắt cổ chai (bottleneck).
+                        <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 8px; padding: 9px 14px; font-size: 0.38em; line-height: 1.5; color: #0f172a;">
+                            <strong style="color: #9f1239;">• Giới hạn hiệu năng:</strong> Khi đồ thị lớn và số truy vấn tăng cao, chi phí $O(V + E)$ trở thành nút thắt cổ chai (bottleneck).
                         </div>
                     </div>
                 </div>
 
                 <!-- Solution Callout -->
-                <div style="margin-top: 12px; background: #f3e8ff; border-left: 4px solid #7c3aed; padding: 8px 12px; border-radius: 6px; font-size: 0.34em; color: #6b21a8; font-weight: 600; line-height: 1.4;">
-                    <i class="fa-solid fa-circle-check" style="color: #7c3aed; font-size: 1.1em; margin-right: 4px;"></i>
+                <div style="margin-top: 10px; background: #f3e8ff; border-left: 5px solid #7c3aed; padding: 9px 14px; border-radius: 6px; font-size: 0.39em; color: #6b21a8; font-weight: 700; line-height: 1.45;">
+                    <i class="fa-solid fa-circle-check" style="color: #7c3aed; font-size: 1.15em; margin-right: 6px;"></i>
                     <span><strong>Giải pháp DSU:</strong> Với <em>Path Compression + Union by Rank</em>, mỗi thao tác đạt độ phức tạp khấu hao $O(\alpha(V)) \approx O(1)$.</span>
                 </div>
             </div>
         </div>
 
         <!-- Bottom Full Banner -->
-        <div style="width: 100%; background: #eff6ff; border: 1px solid #bfdbfe; border-left: 5px solid #2563eb; border-radius: 8px; padding: 10px 16px; display: flex; align-items: center; gap: 10px; font-size: 0.36em; font-weight: 600; color: #1e3a8a; text-align: left; line-height: 1.45;">
-            <i class="fa-solid fa-circle-nodes" style="color: #2563eb; font-size: 1.25em; flex-shrink: 0;"></i>
+        <div style="width: 100%; background: #eff6ff; border: 1px solid #bfdbfe; border-left: 6px solid #2563eb; border-radius: 8px; padding: 10px 18px; display: flex; align-items: center; gap: 12px; font-size: 0.40em; font-weight: 600; color: #1e3a8a; text-align: left; line-height: 1.5;">
+            <i class="fa-solid fa-circle-nodes" style="color: #2563eb; font-size: 1.3em; flex-shrink: 0;"></i>
             <span><strong style="color: #1d4ed8; text-transform: uppercase;">TỔNG KẾT THUẬT TOÁN:</strong> <em>Trie</em> tối ưu hóa truy vấn tiền tố trong $O(L)$ — <em>Union-Find (DSU)</em> tối ưu hóa liên thông động trong $O(\alpha(V))$. Khi bài toán có mẫu truy vấn đặc thù, cấu trúc dữ liệu chuyên biệt mang lại hiệu năng vượt trội.</span>
         </div>
 
