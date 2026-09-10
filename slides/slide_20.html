@@ -10,83 +10,85 @@
         </div>
 
         <!-- 2-Column Spacious Balanced Layout -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; width: 100%; align-items: stretch; flex-grow: 1; margin-bottom: 10px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; align-items: stretch; flex-grow: 1; margin-bottom: 8px;">
             
             <!-- Cột 1: Bài toán Tìm Kiếm & Chuỗi (String & Prefix) -->
-            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 12px; padding: 12px 14px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
                 <div>
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.48em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
                             <i class="fa-solid fa-tree" style="color: #0284c7;"></i> Bài Toán Xử Lý Chuỗi & Tiền Tố
                         </h4>
-                        <span style="font-size: 0.33em; color: #0369a1; font-weight: 700; background: #f0f9ff; border: 1px solid #bae6fd; padding: 2px 8px; border-radius: 4px;">Hash Table vs Trie</span>
+                        <span style="font-size: 0.36em; color: #0369a1; font-weight: 700; background: #f0f9ff; border: 1px solid #bae6fd; padding: 2px 10px; border-radius: 4px;">Hash Table vs Trie</span>
                     </div>
 
                     <!-- Comparison Rows -->
-                    <div style="display: flex; flex-direction: column; gap: 8px;">
-                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #0284c7; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
-                            <strong style="color: #0f172a;">Tra cứu chính xác (Exact Lookup):</strong>
-                            <br>• <em>Hash Table:</em> Chi phí trung bình $\mathcal{O}(L)$, phụ thuộc chất lượng hàm băm.
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0284c7; border-radius: 8px; padding: 9px 12px; font-size: 0.40em; color: #1e293b; line-height: 1.45;">
+                            <strong style="color: #0284c7; font-size: 1.05em; display: block; margin-bottom: 2px;">Tra cứu chính xác (Exact Lookup):</strong>
+                            • <em>Hash Table:</em> Chi phí trung bình $\mathcal{O}(L)$, phụ thuộc chất lượng hàm băm.
                             <br>• <em>Trie:</em> Chi phí ổn định $\mathcal{O}(L)$, không bị ảnh hưởng bởi va chạm.
                         </div>
 
-                        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-left: 3px solid #2563eb; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #1e40af; line-height: 1.45;">
-                            <strong style="color: #1e3a8a;">Tìm kiếm tiền tố & Gợi ý (Prefix / Autocomplete):</strong>
-                            <br>• <em>Hash Table:</em> Phải duyệt quét toàn bộ dữ liệu $\mathcal{O}(N \cdot L)$.
+                        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #2563eb; border-radius: 8px; padding: 9px 12px; font-size: 0.40em; color: #1e40af; line-height: 1.45;">
+                            <strong style="color: #1e3a8a; font-size: 1.05em; display: block; margin-bottom: 2px;">Tìm kiếm tiền tố & Gợi ý (Prefix / Autocomplete):</strong>
+                            • <em>Hash Table:</em> Phải duyệt quét toàn bộ dữ liệu $\mathcal{O}(N \cdot L)$.
                             <br>• <em>Trie:</em> Chỉ tốn $\mathcal{O}(L)$ để tiếp cận nhánh và $\mathcal{O}(K)$ để lấy kết quả.
                         </div>
 
-                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #d97706; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
-                            <strong style="color: #0f172a;">Đánh đổi tài nguyên:</strong> Trie tiêu hao nhiều bộ nhớ RAM hơn để đổi lại thời gian phản hồi tức thì cho người dùng.
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #d97706; border-radius: 8px; padding: 9px 12px; font-size: 0.40em; color: #1e293b; line-height: 1.45;">
+                            <strong style="color: #d97706; font-size: 1.05em; display: block; margin-bottom: 2px;">Đánh đổi tài nguyên:</strong>
+                            Trie tiêu hao nhiều bộ nhớ RAM hơn để đổi lại thời gian phản hồi tức thì cho người dùng.
                         </div>
                     </div>
                 </div>
 
-                <div style="font-size: 0.33em; color: #0284c7; border-top: 1px solid #e2e8f0; padding-top: 6px; font-weight: 600;">
-                    <i class="fa-solid fa-arrow-right" style="margin-right: 4px;"></i> Phù hợp nhất cho: Thanh tìm kiếm (Search Bar), Bộ định tuyến mạng.
+                <div style="font-size: 0.38em; color: #0284c7; border-top: 1px solid #e2e8f0; padding-top: 8px; font-weight: 700;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 5px;"></i> Phù hợp nhất cho: Thanh tìm kiếm (Search Bar), Bộ định tuyến mạng.
                 </div>
             </div>
 
             <!-- Cột 2: Bài toán Liên Thông Đồ Thị (Dynamic Connectivity) -->
-            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #7c3aed; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #7c3aed; border-radius: 12px; padding: 12px 14px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
                 <div>
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.48em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
                             <i class="fa-solid fa-diagram-project" style="color: #7c3aed;"></i> Bài Toán Liên Thông Đồ Thị Động
                         </h4>
-                        <span style="font-size: 0.33em; color: #6b21a8; font-weight: 700; background: #faf5ff; border: 1px solid #e9d5ff; padding: 2px 8px; border-radius: 4px;">BFS/DFS vs DSU</span>
+                        <span style="font-size: 0.36em; color: #6b21a8; font-weight: 700; background: #faf5ff; border: 1px solid #e9d5ff; padding: 2px 10px; border-radius: 4px;">BFS/DFS vs DSU</span>
                     </div>
 
                     <!-- Comparison Rows -->
-                    <div style="display: flex; flex-direction: column; gap: 8px;">
-                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #7c3aed; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
-                            <strong style="color: #0f172a;">Đặc thù bài toán ứng dụng:</strong>
-                            <br>• <em>BFS / DFS:</em> Phù hợp đồ thị tĩnh (đã cố định toàn bộ các cạnh).
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #7c3aed; border-radius: 8px; padding: 9px 12px; font-size: 0.40em; color: #1e293b; line-height: 1.45;">
+                            <strong style="color: #7c3aed; font-size: 1.05em; display: block; margin-bottom: 2px;">Đặc thù bài toán ứng dụng:</strong>
+                            • <em>BFS / DFS:</em> Phù hợp đồ thị tĩnh (đã cố định toàn bộ các cạnh).
                             <br>• <em>Union-Find (DSU):</em> Tối ưu cho đồ thị động (các cạnh liên tục được bổ sung).
                         </div>
 
-                        <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-left: 3px solid #9333ea; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #581c87; line-height: 1.45;">
-                            <strong style="color: #3b0764;">Truy vấn kiểm tra liên thông (Connected Check):</strong>
-                            <br>• <em>BFS / DFS:</em> Duyệt lại đồ thị mỗi lần kiểm tra, chi phí $\mathcal{O}(V + E)$.
+                        <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-left: 4px solid #9333ea; border-radius: 8px; padding: 9px 12px; font-size: 0.40em; color: #581c87; line-height: 1.45;">
+                            <strong style="color: #6b21a8; font-size: 1.05em; display: block; margin-bottom: 2px;">Truy vấn kiểm tra liên thông (Connected Check):</strong>
+                            • <em>BFS / DFS:</em> Duyệt lại đồ thị mỗi lần kiểm tra, chi phí $\mathcal{O}(V + E)$.
                             <br>• <em>Union-Find (DSU):</em> Chỉ tốn thời gian tiệm cận $\mathcal{O}(1)$ khấu hao.
                         </div>
 
-                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #059669; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
-                            <strong style="color: #0f172a;">Bộ nhớ phụ trợ:</strong> DSU chỉ cần duy trì mảng 1D phẳng $\mathcal{O}(V)$, nhẹ hơn đáng kể so với danh sách kề $\mathcal{O}(V + E)$.
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #059669; border-radius: 8px; padding: 9px 12px; font-size: 0.40em; color: #1e293b; line-height: 1.45;">
+                            <strong style="color: #059669; font-size: 1.05em; display: block; margin-bottom: 2px;">Bộ nhớ phụ trợ:</strong>
+                            DSU chỉ cần duy trì mảng 1D phẳng $\mathcal{O}(V)$, nhẹ hơn đáng kể so với danh sách kề $\mathcal{O}(V + E)$.
                         </div>
                     </div>
                 </div>
 
-                <div style="font-size: 0.33em; color: #7c3aed; border-top: 1px solid #e2e8f0; padding-top: 6px; font-weight: 600;">
-                    <i class="fa-solid fa-arrow-right" style="margin-right: 4px;"></i> Phù hợp nhất cho: Thuật toán Kruskal (MST), Phân cụm mạng xã hội.
+                <div style="font-size: 0.38em; color: #7c3aed; border-top: 1px solid #e2e8f0; padding-top: 8px; font-weight: 700;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 5px;"></i> Phù hợp nhất cho: Thuật toán Kruskal (MST), Phân cụm mạng xã hội.
                 </div>
             </div>
 
         </div>
 
         <!-- Cohesive Bottom Banner -->
-        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 5px solid #059669; border-radius: 8px; padding: 10px 16px; font-size: 0.37em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 12px;">
-            <i class="fa-solid fa-circle-check" style="font-size: 1.25em; color: #059669; flex-shrink: 0;"></i>
+        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 5px solid #059669; border-radius: 8px; padding: 10px 18px; font-size: 0.42em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 12px; line-height: 1.45;">
+            <i class="fa-solid fa-circle-check" style="font-size: 1.3em; color: #059669; flex-shrink: 0;"></i>
             <span><strong>TỔNG KẾT:</strong> Các cấu trúc dữ liệu chuyên biệt (Trie, DSU) giải quyết hiệu quả các bài toán đặc thù mà cấu trúc tổng quát thường gặp giới hạn về chi phí tính toán hoặc độ trễ phản hồi.</span>
         </div>
 
