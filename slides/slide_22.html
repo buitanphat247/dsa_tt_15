@@ -1,90 +1,71 @@
-<section data-transition="slide">
-    <!-- Top Badge -->
-    <div class="badge badge-gold" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN V: TỔNG KẾT & BÀI HỌC KIẾN TRÚC</div>
-    <h3 style="font-size: 0.82em; margin: 0 0 8px 0; color: #0f172a; font-weight: 700;">Bài Học Cốt Lõi Về Kiến Trúc Hệ Thống</h3>
-
-    <!-- Asymmetric 2-Column Light Architectural Layout -->
-    <div style="display: grid; grid-template-columns: 1fr 1.25fr; gap: 12px; width: 100%; align-items: stretch;">
+<section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 590px; display: flex; flex-direction: column; justify-content: space-between;">
         
-        <!-- Left Column: Bright Light Hero Card (Clean White & Blue Tint) -->
-        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 8px; padding: 12px 14px; text-align: left; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-                <div style="font-size: 0.33em; color: #0284c7; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px;">
-                    <i class="fa-solid fa-compass-drafting" style="margin-right: 5px;"></i> Triết Lý Thiết Kế System Design
-                </div>
-                <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0 0 6px 0; line-height: 1.35;">
-                    "Mẫu Truy Vấn (Query Pattern) Quyết Định Cấu Trúc Dữ Liệu!"
-                </h4>
-                <p style="font-size: 0.3em; color: #334155; line-height: 1.45; margin: 0;">
-                    Không có cấu trúc dữ liệu nào tối ưu cho mọi trường hợp. Sự lựa chọn phù hợp xuất phát từ việc thấu hiểu mô hình truy vấn đặc thù của hệ thống.
-                </p>
-            </div>
-
-            <!-- Light Speed Equations Sub-Box -->
-            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px 10px; margin-top: 10px;">
-                <div style="font-size: 0.3em; color: #475569; font-weight: 700; margin-bottom: 6px;">
-                    <i class="fa-solid fa-chart-line" style="color: #0284c7; margin-right: 5px;"></i> Độ Phức Tạp Đạt Được:
-                </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: center;">
-                    <div style="background: #ffffff; border-radius: 4px; padding: 6px 4px; border: 1px solid #bae6fd;">
-                        <span style="font-size: 0.28em; color: #0284c7; display: block; font-weight: 700;">Trie Prefix</span>
-                        <strong style="font-size: 0.4em; color: #059669;">$O(L)$</strong>
-                    </div>
-                    <div style="background: #ffffff; border-radius: 4px; padding: 6px 4px; border: 1px solid #ddd6fe;">
-                        <span style="font-size: 0.28em; color: #7c3aed; display: block; font-weight: 700;">DSU Connect</span>
-                        <strong style="font-size: 0.4em; color: #059669;">$O(\alpha(N))$</strong>
-                    </div>
-                </div>
-            </div>
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 12px;">
+            <div class="badge" style="font-size: 0.42em; padding: 4px 18px; margin-bottom: 4px; display: inline-block;">PHẦN V — TỔNG KẾT & BÀI HỌC KIẾN TRÚC</div>
+            <h2 style="font-size: 0.94em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Bài Học Cốt Lõi Về Thiết Kế Hệ Thống</span>
+            </h2>
         </div>
 
-        <!-- Right Column: 3 Clean Horizontal Stacked Architectural Cards (Small Discreet Inline Icons) -->
-        <div style="display: flex; flex-direction: column; gap: 8px; text-align: left; justify-content: space-between;">
+        <!-- 3 Horizontal Stretched Takeaway Cards -->
+        <div style="display: flex; flex-direction: column; gap: 12px; width: 100%; justify-content: space-between; flex-grow: 1; margin-bottom: 10px;">
             
-            <!-- Layer 1 -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #0284c7; border-radius: 6px; padding: 9px 12px;">
-                <h5 style="margin: 0 0 3px 0; color: #0284c7; font-size: 0.37em; font-weight: 800; display: flex; align-items: center;">
-                    <i class="fa-solid fa-brain" style="font-size: 0.9em; margin-right: 6px; color: #0284c7;"></i>
-                    1. Chuyển Đổi Tư Duy (Query Pattern First)
-                </h5>
-                <p style="margin: 0; font-size: 0.3em; color: #334155; line-height: 1.4;">
-                    Xác định <em>"Mẫu truy vấn chủ đạo là gì?"</em> (Prefix Search $\implies$ Trie, Dynamic Connectivity $\implies$ DSU) thay vì lưu trữ dữ liệu theo thói quen.
+            <!-- Lesson 1 -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 5px solid #0284c7; border-radius: 10px; padding: 14px 18px; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                    <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-compass-drafting" style="color: #0284c7;"></i> 1. Lấy Mẫu Truy Vấn Làm Trung Tâm (Query-Driven Design)
+                    </h4>
+                    <span style="font-size: 0.32em; color: #0369a1; background: #f0f9ff; border: 1px solid #bae6fd; padding: 2px 8px; border-radius: 4px; font-weight: 700;">Tư Duy Thiết Kế</span>
+                </div>
+                <p style="font-size: 0.35em; color: #334155; line-height: 1.5; margin: 0;">
+                    Không lựa chọn cấu trúc dữ liệu theo thói quen hay sự quen thuộc. Cấu trúc lưu trữ cần được định hình trực tiếp bởi <strong>mẫu truy vấn chủ đạo</strong> và <strong>tần suất sử dụng thực tế</strong> của hệ thống (như tìm kiếm tiền tố hay kiểm tra liên thông đồ thị).
                 </p>
             </div>
 
-            <!-- Layer 2 -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #d97706; border-radius: 6px; padding: 9px 12px;">
-                <h5 style="margin: 0 0 3px 0; color: #b45309; font-size: 0.37em; font-weight: 800; display: flex; align-items: center;">
-                    <i class="fa-solid fa-scale-balanced" style="font-size: 0.9em; margin-right: 6px; color: #d97706;"></i>
-                    2. Đánh Đổi Có Ý Thức (Trade-off Mastery)
-                </h5>
-                <p style="margin: 0; font-size: 0.3em; color: #334155; line-height: 1.4;">
-                    Chấp nhận đánh đổi tài nguyên bộ nhớ hoặc tính tổng quát để tối ưu hóa hiệu năng cho các truy vấn trọng tâm trên quy mô dữ liệu lớn.
+            <!-- Lesson 2 -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 5px solid #d97706; border-radius: 10px; padding: 14px 18px; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                    <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-scale-balanced" style="color: #d97706;"></i> 2. Cân Bằng Đánh Đổi Tài Nguyên (Resource Trade-off)
+                    </h4>
+                    <span style="font-size: 0.32em; color: #92400e; background: #fefce8; border: 1px solid #fef08a; padding: 2px 8px; border-radius: 4px; font-weight: 700;">Đánh Đổi Kỹ Thuật</span>
+                </div>
+                <p style="font-size: 0.35em; color: #334155; line-height: 1.5; margin: 0;">
+                    Mỗi giải pháp đều có sự thỏa hiệp. Việc chấp nhận tiêu hao thêm bộ nhớ RAM (như cấu trúc Trie) để giảm độ trễ phản hồi cho hàng triệu người dùng xuống dưới vài mili-giây là một quyết định kỹ thuật hoàn toàn hợp lý trong các hệ thống quy mô lớn.
                 </p>
             </div>
 
-            <!-- Layer 3 -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #7c3aed; border-radius: 6px; padding: 9px 12px;">
-                <h5 style="margin: 0 0 3px 0; color: #7c3aed; font-size: 0.37em; font-weight: 800; display: flex; align-items: center;">
-                    <i class="fa-solid fa-award" style="font-size: 0.9em; margin-right: 6px; color: #7c3aed;"></i>
-                    3. Năng Lực Thiết Kế Hệ Thống
-                </h5>
-                <p style="margin: 0; font-size: 0.3em; color: #334155; line-height: 1.4;">
-                    Lấp đầy những khoảng trống kỹ thuật của các thư viện container chuẩn (STL / Java Collections) khi đối mặt bài toán hiệu năng cao.
+            <!-- Lesson 3 -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 5px solid #059669; border-radius: 10px; padding: 14px 18px; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                    <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-microchip" style="color: #059669;"></i> 3. Tối Ưu Hóa Thân Thiện Với Phần Cứng (Hardware-Aware)
+                    </h4>
+                    <span style="font-size: 0.32em; color: #065f46; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 2px 8px; border-radius: 4px; font-weight: 700;">Hiệu Năng Vật Lý</span>
+                </div>
+                <p style="font-size: 0.35em; color: #334155; line-height: 1.5; margin: 0;">
+                    Giải thuật tốt cần đồng hành cùng phần cứng phù hợp. Những cấu trúc dữ liệu phẳng hóa trên mảng một chiều liên tục (như mảng <code>parent[]</code> của DSU) tận dụng tối đa <strong>CPU Cache Locality</strong>, cho tốc độ xử lý nhanh hơn đáng kể so với việc cấp phát con trỏ rời rạc.
                 </p>
             </div>
 
         </div>
 
-    </div>
+        <!-- Cohesive Bottom Banner -->
+        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 5px solid #059669; border-radius: 8px; padding: 10px 16px; font-size: 0.37em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 12px;">
+            <i class="fa-solid fa-graduation-cap" style="font-size: 1.25em; color: #059669; flex-shrink: 0;"></i>
+            <span><strong>THÔNG ĐIỆP BÁO CÁO:</strong> Hiểu rõ bản chất giải thuật và đặc tính phần cứng là nền tảng cốt lõi để các kỹ sư phần mềm xây dựng nên những hệ thống có hiệu năng cao và mở rộng bền vững.</span>
+        </div>
 
-    <!-- Bottom Full Width Summary Banner -->
-    <div style="width: 100%; margin-top: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #059669; border-radius: 6px; padding: 6px 14px; font-size: 0.35em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-circle-check" style="font-size: 1.1em; color: #059669; flex-shrink: 0;"></i>
-        <span><strong>TỔNG KẾT KIẾN TRÚC:</strong> Trie và Union-Find là minh chứng cho nguyên lý thiết kế: chuyên biệt hóa cấu trúc dữ liệu theo đúng mẫu hình truy vấn để đạt hiệu năng tối ưu trên quy mô lớn!</span>
     </div>
 
     <aside class="notes">
-        Bài học lớn nhất của Chương 15 không chỉ là cách cài đặt một cây Trie hay mảng Union-Find, mà là tư duy đánh đổi trong thiết kế phần mềm. Thấu hiểu các đặc tính này sẽ giúp chúng ta xây dựng nên những hệ thống xử lý truy vấn với hiệu năng và độ ổn định cao.
+        Kính thưa Thầy và các bạn, ở Slide 22, em xin đại diện nhóm đúc kết 3 bài học kỹ thuật quan trọng nhất của chuyên đề:
+        1. Bài học thứ nhất: Xuất phát từ mẫu truy vấn. Đừng chọn cấu trúc dữ liệu theo thói quen, hãy nhìn vào dạng truy vấn thường xuyên nhất của hệ thống.
+        2. Bài học thứ hai: Làm chủ sự đánh đổi. Trong các hệ thống lớn, việc đầu tư thêm bộ nhớ để lấy tốc độ phản hồi tức thì cho người dùng là đánh đổi hoàn toàn xứng đáng.
+        3. Bài học thứ ba: Tối ưu phần cứng. Các cấu trúc dữ liệu phẳng trên mảng như DSU tận dụng tối đa CPU Cache, mang lại tốc độ vượt bậc so với cấu trúc con trỏ phân tán.
+        Đó chính là tư duy cốt lõi để xây dựng các hệ thống hiệu năng cao.
     </aside>
 </section>

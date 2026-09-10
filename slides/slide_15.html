@@ -1,125 +1,109 @@
 <section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
-    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 600px; display: flex; flex-direction: column; justify-content: space-between;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 590px; display: flex; flex-direction: column; justify-content: space-between;">
         
         <!-- Header -->
-        <div style="text-align: center; margin-bottom: 6px;">
-            <div class="badge" style="font-size: 0.44em; padding: 5px 18px; margin-bottom: 4px; display: inline-block;">PHẦN III — CẤU TRÚC UNION-FIND (DSU)</div>
-            <h2 style="font-size: 0.92em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
-                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Kỹ Thuật Tối Ưu 1: Union by Rank (Gộp Theo Độ Cao Cây)</span>
+        <div style="text-align: center; margin-bottom: 12px;">
+            <div class="badge" style="font-size: 0.42em; padding: 4px 18px; margin-bottom: 4px; display: inline-block;">PHẦN III — CẤU TRÚC UNION-FIND (DSU)</div>
+            <h2 style="font-size: 0.94em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Kỹ Thuật 1: Union by Rank</span>
             </h2>
         </div>
 
-        <!-- Top Rules Callout -->
-        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-left: 6px solid #059669; border-radius: 8px; padding: 10px 18px; text-align: left; font-size: 0.38em; color: #0f172a; line-height: 1.5; margin-bottom: 8px;">
-            <strong style="color: #059669; text-transform: uppercase;"><i class="fa-solid fa-shield-halved" style="margin-right: 8px;"></i> Quy Tắc Vàng:</strong> Duy trì mảng <code>rank[i]</code> (chiều cao xấp xỉ của cây). Luôn treo gốc cây có <strong>rank nhỏ hơn</strong> vào dưới gốc cây có <strong>rank lớn hơn</strong>. Chiều cao của cây chỉ tăng thêm 1 khi 2 cây <u>cùng rank</u>!
-        </div>
-
-        <!-- Main Grid: C++ Source Code Left + Modern SVG Graphic Right -->
-        <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 14px; width: 100%; margin-bottom: 8px; align-items: stretch; flex-grow: 1;">
+        <!-- 2-Column Balanced Layout: CODE (Left) & THEORY (Right) -->
+        <div style="display: grid; grid-template-columns: 1.05fr 1.15fr; gap: 18px; width: 100%; align-items: stretch; flex-grow: 1; margin-bottom: 10px;">
             
-            <!-- Left Column: Unified Dark Code Box + Stacked Case List -->
-            <div style="display: flex; flex-direction: column; justify-content: space-between; text-align: left; gap: 8px;">
-                
-                <!-- Seamless Modern Dark Code Box -->
-                <div style="background: #0f172a; border-radius: 8px; padding: 10px 14px; color: #f8fafc; border: 1px solid #1e293b; box-shadow: 0 4px 12px rgba(15,23,42,0.15);">
-                    <div style="display: flex; justify-content: space-between; align-items: center; color: #94a3b8; font-size: 0.38em; margin-bottom: 8px; border-bottom: 1px solid #334155; padding-bottom: 6px;">
-                        <span style="font-weight: 700; color: #f8fafc;"><i class="fa-solid fa-code" style="color: #38bdf8; margin-right: 6px;"></i> C++: Union by Rank</span>
-                        <span style="background: #064e3b; color: #34d399; font-size: 0.85em; padding: 2px 8px; border-radius: 4px; font-weight: 700;">$O(\log N)$</span>
+            <!-- Cột 1: Cài Đặt Code C++ (Code Implementation) -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-code" style="color: #0284c7;"></i> Cài Đặt C++ (Implementation)
+                        </h4>
+                        <span style="font-size: 0.33em; color: #0284c7; font-weight: 700; background: #eff6ff; border: 1px solid #bfdbfe; padding: 2px 8px; border-radius: 4px;">C++ Code</span>
                     </div>
-                    <pre style="background: transparent; box-shadow: none; margin: 0; padding: 0; overflow: visible;"><code class="language-cpp" data-trim data-noescape style="background: transparent; color: #e2e8f0; font-size: 0.78em; font-family: 'Fira Code', monospace; line-height: 1.5; padding: 0;">void unionSets(int a, int b) {
-    a = find(a); b = find(b);
-    if (a == b) return;
-    
-    // Treo cây thấp hơn dưới cây cao hơn
-    if (rank[a] < rank[b]) swap(a, b);
-    
-    parent[b] = a; 
-    if (rank[a] == rank[b]) rank[a]++;
+
+                    <!-- Clean Code Snippet without any scrollbars -->
+                    <div style="background: #0f172a; border-radius: 8px; padding: 12px 14px; margin-bottom: 12px; border: 1px solid #1e293b;">
+                        <pre style="background: transparent; box-shadow: none; margin: 0; padding: 0; overflow: visible;"><code class="language-cpp" data-trim data-noescape style="background: transparent; color: #f8fafc; font-size: 0.74em; font-family: 'Fira Code', monospace; line-height: 1.45; padding: 0;">void unionByRank(int u, int v) {
+    int rootU = find(u);
+    int rootV = find(v);
+    if (rootU == rootV) return;
+
+    if (rank[rootU] < rank[rootV]) {
+        parent[rootU] = rootV;
+    } else if (rank[rootU] > rank[rootV]) {
+        parent[rootV] = rootU;
+    } else {
+        parent[rootV] = rootU;
+        rank[rootU]++; // Tăng rank khi 2 cây bằng nhau
+    }
 }</code></pre>
+                    </div>
+
+                    <!-- Code Note -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #0284c7; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                        <strong style="color: #0f172a;">Khởi tạo ban đầu:</strong> Mảng <code>parent[i] = i</code> và mảng <code>rank[i] = 0</code> với mọi $i \in \{0, \dots, N-1\}$.
+                    </div>
                 </div>
 
-                <!-- 3 Case Explanations -->
-                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 8px; padding: 10px 14px; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-                    <div style="color: #0f172a; font-size: 0.38em; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-layer-group" style="color: #059669;"></i> 3 Trường Hợp Ghép Cây Cụ Thể:
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.35em; color: #0f172a; line-height: 1.4;">
-                        <div style="background: #f8fafc; padding: 4px 8px; border-radius: 4px; border-left: 3px solid #059669;">
-                            <strong style="color: #059669;">1. rank[A] &gt; rank[B]:</strong> Treo $B$ vào $A$. Rank $A$ giữ nguyên.
-                        </div>
-                        <div style="background: #f8fafc; padding: 4px 8px; border-radius: 4px; border-left: 3px solid #0284c7;">
-                            <strong style="color: #0284c7;">2. rank[A] &lt; rank[B]:</strong> Treo $A$ vào $B$. Rank $B$ giữ nguyên.
-                        </div>
-                        <div style="background: #f8fafc; padding: 4px 8px; border-radius: 4px; border-left: 3px solid #7c3aed;">
-                            <strong style="color: #7c3aed;">3. rank[A] == rank[B]:</strong> Treo $B$ vào $A$. Tăng <code>rank[A]++</code> lên 1.
-                        </div>
-                    </div>
+                <div style="font-size: 0.33em; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 6px;">
+                    <i class="fa-solid fa-check" style="color: #059669; margin-right: 4px;"></i> Thuật toán chạy trong thời gian $O(1)$ tại bước gộp sau khi có Root.
                 </div>
             </div>
 
-            <!-- Right Column: Clean Non-Overlapping SVG Diagram -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between; text-align: left; box-shadow: 0 2px 5px rgba(0,0,0,0.03);">
-                <div style="font-size: 0.40em; font-weight: 800; color: #0f172a; margin-bottom: 4px;">
-                    <i class="fa-solid fa-sitemap" style="color: #059669; margin-right: 6px;"></i> Minh Họa: Treo Cây Thấp Vô Dưới Cây Cao
+            <!-- Cột 2: Lý Thuyết Giải Thuật (Algorithm Theory) -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-book-open" style="color: #059669;"></i> Lý Thuyết Giải Thuật (Theory)
+                        </h4>
+                        <span style="font-size: 0.33em; color: #065f46; font-weight: 700; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 2px 8px; border-radius: 4px;">Heuristic</span>
+                    </div>
+
+                    <!-- 3 Theoretical Pillars -->
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
+                        <!-- Pillar 1: Definition of Rank -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #059669; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">1. Khái niệm Rank:</strong> <code>rank[u]</code> là cận trên của chiều cao cây (Upper Bound of Tree Height) tại gốc $u$.
+                        </div>
+
+                        <!-- Pillar 2: Core Invariant -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #0284c7; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">2. Nguyên lý gộp:</strong> Luôn gán gốc của cây có rank nhỏ hơn làm con của cây có rank lớn hơn. Chiều cao chỉ tăng $+1$ khi hai cây có cùng rank.
+                        </div>
+
+                        <!-- Pillar 3: Mathematical Proof -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #7c3aed; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">3. Định lý chặn chiều cao:</strong> Một cây có rank $k$ cần tối thiểu $2^k$ nút để hình thành $\implies 2^k \le N \implies \mathbf{H \le \lfloor \log_2 N \rfloor}$.
+                        </div>
+                    </div>
                 </div>
 
-                <!-- SVG Graphic -->
-                <svg viewBox="0 0 350 140" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', sans-serif;">
-                    <defs>
-                        <marker id="arr-grn" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
-                            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669" />
-                        </marker>
-                    </defs>
-
-                    <!-- Tree A (Left, Rank 2) -->
-                    <circle cx="85" cy="25" r="13" fill="#059669"/><text x="85" y="28.5" fill="#fff" font-size="9" font-weight="800" text-anchor="middle">A</text>
-                    <text x="85" y="9" fill="#047857" font-size="8" font-weight="800" text-anchor="middle">rank = 2</text>
-
-                    <!-- Children of A -->
-                    <line x1="85" y1="38" x2="50" y2="64" stroke="#059669" stroke-width="2"/>
-                    <line x1="85" y1="38" x2="120" y2="64" stroke="#059669" stroke-width="2"/>
-                    <line x1="50" y1="74" x2="50" y2="94" stroke="#059669" stroke-width="2"/>
-
-                    <circle cx="50" cy="69" r="10" fill="#d1fae5" stroke="#059669" stroke-width="1.8"/><text x="50" y="72" fill="#047857" font-size="8" font-weight="800" text-anchor="middle">A1</text>
-                    <circle cx="120" cy="69" r="10" fill="#d1fae5" stroke="#059669" stroke-width="1.8"/><text x="120" y="72" fill="#047857" font-size="8" font-weight="800" text-anchor="middle">A2</text>
-                    <circle cx="50" cy="101" r="9" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/><text x="50" y="103.5" fill="#334155" font-size="7.5" font-weight="800" text-anchor="middle">A11</text>
-
-                    <!-- Tree B (Right, Rank 1) -->
-                    <circle cx="265" cy="45" r="13" fill="#0284c7"/><text x="265" y="48.5" fill="#fff" font-size="9" font-weight="800" text-anchor="middle">B</text>
-                    <text x="265" y="29" fill="#0369a1" font-size="8" font-weight="800" text-anchor="middle">rank = 1</text>
-
-                    <!-- Child B1 -->
-                    <line x1="265" y1="58" x2="265" y2="78" stroke="#0284c7" stroke-width="2"/>
-                    <circle cx="265" cy="84" r="9" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.8"/><text x="265" y="86.5" fill="#0369a1" font-size="7.5" font-weight="800" text-anchor="middle">B1</text>
-
-                    <!-- Union Connection Curved Arrow: B -> A -->
-                    <path d="M 250,40 Q 180,15 102,22" fill="none" stroke="#059669" stroke-width="2.5" stroke-dasharray="4,3" marker-end="url(#arr-grn)"/>
-                    <text x="180" y="13" fill="#059669" font-size="8" font-weight="800" text-anchor="middle">Nối B dưới Root A</text>
-
-                    <!-- Height Guarantee Box -->
-                    <rect x="110" y="112" width="230" height="24" rx="5" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2"/>
-                    <text x="225" y="128" fill="#166534" font-size="8" font-weight="800" text-anchor="middle">✓ Chiều cao: H = max(2, 1+1) = 2 (Không tăng!)</text>
-                </svg>
-
-                <div style="background: #f0fdf4; border-radius: 6px; padding: 6px 8px; font-size: 0.33em; color: #166534; text-align: center; font-weight: 700; border: 1px solid #bbf7d0;">
-                    <i class="fa-solid fa-tree" style="color: #059669; margin-right: 6px;"></i> Treo cây thấp (rank 1) vào dưới cây cao (rank 2) giúp giữ nguyên độ sâu của cây!
+                <!-- Complexity Summary Box -->
+                <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; padding: 8px 12px; font-size: 0.35em; color: #065f46; display: flex; align-items: center; justify-content: space-between;">
+                    <span><i class="fa-solid fa-chart-line" style="margin-right: 6px;"></i> Độ phức tạp thao tác:</span>
+                    <strong style="font-size: 1.15em;">$\mathcal{O}(\log N)$</strong>
                 </div>
             </div>
 
         </div>
 
-        <!-- Bottom Mathematical Guarantee Banner -->
-        <div style="width: 100%; background: #eff6ff; border: 1px solid #bfdbfe; border-left: 6px solid #2563eb; border-radius: 8px; padding: 10px 18px; font-size: 0.38em; color: #1e40af; text-align: left; display: flex; align-items: center; gap: 12px; line-height: 1.45;">
-            <i class="fa-solid fa-calculator" style="font-size: 1.25em; color: #2563eb; flex-shrink: 0;"></i>
-            <span><strong>ĐÁNH GIÁ ĐỘ PHỨC TẠP:</strong> Với kỹ thuật Union by Rank, chiều cao cây sau $N$ thao tác được chặn cứng ở mức $H \le \lfloor \log_2 N \rfloor$. Nhờ đó, chi phí tìm kiếm <code>find()</code> giảm mạnh từ $O(N)$ xuống còn <strong>$O(\log N)$</strong>!</span>
+        <!-- Cohesive Bottom Transition -->
+        <div style="width: 100%; background: #eff6ff; border: 1px solid #bfdbfe; border-left: 5px solid #2563eb; border-radius: 8px; padding: 10px 16px; font-size: 0.37em; color: #1e40af; text-align: left; display: flex; align-items: center; gap: 12px;">
+            <i class="fa-solid fa-arrow-right-long" style="font-size: 1.25em; color: #2563eb; flex-shrink: 0;"></i>
+            <span><strong>ĐỊNH HƯỚNG TỐI ƯU TIẾP THEO:</strong> Union by Rank đảm bảo chiều cao cây không quá $\mathcal{O}(\log N)$. Để đạt tốc độ <strong>tiệm cận hằng số $\mathcal{O}(1)$</strong>, giải thuật sẽ kết hợp thêm <strong>Path Compression</strong> (Slide 16).</span>
         </div>
 
     </div>
 
     <aside class="notes">
-        Kính thưa Thầy và các bạn, ở Slide 15, chúng ta tìm hiểu Kỹ thuật tối ưu 1: Union by Rank:
-        1. Quy tắc cốt lõi: Luôn duy trì mảng rank[] lưu chiều cao của từng cây. Khi gộp, cây thấp hơn (rank nhỏ hơn) bắt buộc phải được treo dưới gốc của cây cao hơn (rank lớn hơn).
-        2. Nhìn vào hình minh họa: Cây B có rank = 1 được nối dưới Cây A có rank = 2. Chiều cao tổng thể vẫn là 2, không hề bị tăng lên.
-        3. Kết quả lý thuyết: Chiều cao cây luôn được đảm bảo H <= log2(N). Chi phí find() giảm triệt để từ O(N) xuống O(log N).
+        Kính thưa Thầy và các bạn, ở Slide 15, chúng ta tìm hiểu Kỹ thuật 1: Union by Rank:
+        1. Về cài đặt code: Hàm unionByRank nhận 2 đỉnh u và v, tìm 2 gốc rootU và rootV. Nếu rank của rootU nhỏ hơn rootV, ta gán parent[rootU] = rootV; ngược lại gán parent[rootV] = rootU. Chỉ khi 2 cây cùng rank, ta mới gán và tăng rank lên 1.
+        2. Về lý thuyết giải thuật:
+           - Rank là cận trên của chiều cao cây, khởi tạo bằng 0.
+           - Quy tắc: Luôn gắn cây rank nhỏ vào cây rank lớn, nhờ đó chiều cao cây lớn không bị thay đổi.
+           - Định lý toán học: Một cây có rank k cần ít nhất 2^k nút để tạo thành. Vì vậy với N phần tử, chiều cao cây luôn bị chặn ở mức log2(N).
+        3. Kết quả: Độ phức tạp thao tác find() giảm từ O(N) xuống O(log N). Để tiến tới tiệm cận O(1), ta sẽ kết hợp thêm Path Compression ở slide tiếp theo.
     </aside>
 </section>

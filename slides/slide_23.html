@@ -1,51 +1,62 @@
-<section data-transition="zoom">
-    <!-- Top Badge -->
-    <div class="badge badge-gold" style="font-size: 0.38em; padding: 4px 14px; margin-bottom: 6px;">KẾT THÚC BÁO CÁO & PHÁT TRIỂN NÂNG CAO</div>
-    
-    <!-- Top Grid: Advanced Extensions Summary -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; text-align: left; margin-top: 4px;">
-        <div class="glass-card" style="border-top: 3px solid #0284c7; padding: 10px 14px; background: #ffffff;">
-            <h4 style="color: #0284c7; font-size: 0.38em; font-weight: 800; margin: 0 0 4px 0;">
-                <i class="fa-solid fa-tree" style="margin-right: 4px;"></i> Cấu Trúc Trie Nâng Cao
-            </h4>
-            <ul style="font-size: 0.3em; color: #334155; margin: 0; padding-left: 14px; line-height: 1.45;">
-                <li><strong>Radix Tree (Patricia Trie):</strong> Nén các chuỗi nút đơn thành một cạnh $\implies$ Giảm số node và tối ưu bộ nhớ.</li>
-                <li><strong>Suffix Tree:</strong> Hỗ trợ tìm kiếm chuỗi con (*Substring search*) trong $O(L)$, ứng dụng trong xử lý văn bản và sinh tin học.</li>
-            </ul>
-        </div>
-
-        <div class="glass-card" style="border-top: 3px solid #7c3aed; padding: 10px 14px; background: #ffffff;">
-            <h4 style="color: #7c3aed; font-size: 0.38em; font-weight: 800; margin: 0 0 4px 0;">
-                <i class="fa-solid fa-rotate-left" style="margin-right: 4px;"></i> Cấu Trúc DSU Nâng Cao
-            </h4>
-            <ul style="font-size: 0.3em; color: #334155; margin: 0; padding-left: 14px; line-height: 1.45;">
-                <li><strong>DSU with Rollback:</strong> Dùng Stack lưu lịch sử thay đổi thay vì Path Compression $\implies$ Hỗ trợ hoàn tác (Undo) thao tác hợp nhất.</li>
-                <li><strong>Persistent DSU:</strong> Cho phép truy vấn và duy trì các phiên bản trạng thái tập hợp trong quá khứ.</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Middle Hero Thank You Section (Generous Padding & Line-Height so 'CẢM' NEVER clips!) -->
-    <div style="margin: 16px 0 12px 0; background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%); border: 2px solid #bae6fd; border-radius: 12px; padding: 22px 24px 18px 24px; box-shadow: 0 4px 16px rgba(2,132,199,0.08);">
-        <h2 style="font-size: 1.15em; margin: 0 0 10px 0; font-weight: 800; line-height: 1.45; padding-top: 4px;">
-            <span class="text-gradient" style="background: linear-gradient(135deg, #dc2626 0%, #d97706 50%, #2563eb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; padding: 4px 0;">
-                CẢM ƠN THẦY VÀ CÁC BẠN ĐÃ LẮNG NGHE!
-            </span>
-        </h2>
+<section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 590px; display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
         
-        <div style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; color: #ffffff; padding: 5px 18px; border-radius: 20px; font-size: 0.36em; font-weight: 700; margin-top: 4px;">
-            <i class="fa-solid fa-comments" style="font-size: 1.1em; color: #7dd3fc;"></i>
-            <span>Q&A SESSION — SẴN SÀNG GIẢI ĐÁP MỌI CÂU HỎI THẢO LUẬN</span>
+        <!-- Top Badge -->
+        <div style="text-align: center; margin-top: 6px;">
+            <div class="badge" style="font-size: 0.44em; padding: 5px 22px; display: inline-block;">KẾT THÚC BÁO CÁO CHUYÊN ĐỀ</div>
         </div>
-    </div>
+        
+        <!-- Main Grand Hero Thank You & Q&A Card -->
+        <div style="width: 100%; max-width: 1100px; background: linear-gradient(135deg, #ffffff 0%, #f0fdfa 50%, #eff6ff 100%); border: 2px solid #93c5fd; border-radius: 18px; padding: 36px 40px; text-align: center; box-shadow: 0 8px 24px rgba(37,99,235,0.08); display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 14px; margin: 10px 0;">
+            
+            <div style="font-size: 0.44em; font-weight: 700; color: #0284c7; text-transform: uppercase; letter-spacing: 1px;">
+                Chuyên Đề: Cấu Trúc Dữ Liệu Chuyên Biệt — Trie & Union-Find (DSU)
+            </div>
 
-    <!-- Bottom Gratitude Callout -->
-    <div style="width: 100%; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 12px; font-size: 0.33em; color: #475569; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;">
-        <i class="fa-solid fa-heart" style="color: #ef4444; font-size: 1.1em;"></i>
-        <span>Trân trọng cảm ơn <strong>GVHD: Thầy Vũ Đình Bảo (T-Bao)</strong> đã tận tình hướng dẫn nhóm hoàn thành chuyên đề này!</span>
+            <h2 style="font-size: 1.55em; margin: 4px 0; font-weight: 900; line-height: 1.35; letter-spacing: 0.5px;">
+                <span class="text-gradient" style="background: linear-gradient(135deg, #dc2626 0%, #ea580c 40%, #2563eb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; padding: 4px 0;">
+                    CẢM ƠN THẦY VÀ<br>CÁC BẠN ĐÃ LẮNG NGHE!
+                </span>
+            </h2>
+            
+            <p style="font-size: 0.44em; color: #475569; margin: 0; font-weight: 500;">
+                Phần trình bày chuyên đề của Nhóm 15 đến đây là kết thúc.
+            </p>
+
+            <div style="display: inline-flex; align-items: center; gap: 14px; background: linear-gradient(135deg, #0284c7 0%, #1d4ed8 100%); color: #ffffff; padding: 12px 36px; border-radius: 9999px; font-size: 0.48em; font-weight: 800; box-shadow: 0 4px 16px rgba(2,132,199,0.3); margin-top: 6px;">
+                <i class="fa-solid fa-comments" style="font-size: 1.2em; color: #bae6fd;"></i>
+                <span>PHIÊN THẢO LUẬN & HỎI ĐÁP (Q&A SESSION)</span>
+            </div>
+
+            <div style="font-size: 0.38em; color: #64748b; font-style: italic; margin-top: 4px;">
+                Nhóm rất mong nhận được những góp ý, nhận xét và câu hỏi thảo luận từ Thầy cùng các bạn!
+            </div>
+        </div>
+
+        <!-- Bottom Presenters Bar -->
+        <div style="display: flex; justify-content: center; gap: 16px; width: 100%; max-width: 1100px; margin-bottom: 6px;">
+            <div style="flex: 1; background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #0284c7; border-radius: 8px; padding: 8px 14px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                <div style="font-size: 0.32em; color: #0284c7; font-weight: 800;"><i class="fa-solid fa-crown" style="margin-right: 4px;"></i> Trưởng Nhóm</div>
+                <div style="font-size: 0.38em; font-weight: 700; color: #0f172a; margin-top: 2px;">Huỳnh Thị Thùy Trang</div>
+                <div style="font-size: 0.3em; color: #64748b;">MSSV: 25110371</div>
+            </div>
+
+            <div style="flex: 1; background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #7c3aed; border-radius: 8px; padding: 8px 14px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                <div style="font-size: 0.32em; color: #7c3aed; font-weight: 800;"><i class="fa-solid fa-user" style="margin-right: 4px;"></i> Thành Viên</div>
+                <div style="font-size: 0.38em; font-weight: 700; color: #0f172a; margin-top: 2px;">Lê Thị Tuyết Nhi</div>
+                <div style="font-size: 0.3em; color: #64748b;">MSSV: 25110283</div>
+            </div>
+
+            <div style="flex: 1; background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #059669; border-radius: 8px; padding: 8px 14px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                <div style="font-size: 0.32em; color: #059669; font-weight: 800;"><i class="fa-solid fa-user" style="margin-right: 4px;"></i> Thành Viên</div>
+                <div style="font-size: 0.38em; font-weight: 700; color: #0f172a; margin-top: 2px;">Mai Thanh Trà</div>
+                <div style="font-size: 0.3em; color: #64748b;">MSSV: 25110372</div>
+            </div>
+        </div>
+
     </div>
 
     <aside class="notes">
-        Slide tổng kết các biến thể nâng cao mở rộng cho Trie và DSU như Radix Tree, Suffix Tree, DSU Rollback và Persistent DSU. Nhóm xin chân thành cảm ơn Thầy Vũ Đình Bảo và các bạn đã chú ý lắng nghe, sau đây nhóm xin chuyển sang phần Q&A và thảo luận!
+        Kính thưa Thầy và các bạn, bài báo cáo chuyên đề Chương 15 của Nhóm 15 đến đây xin phép được khép lại. Nhóm xin chân thành cảm ơn Thầy và các bạn đã chú ý lắng nghe, sau đây nhóm xin chuyển sang phiên Q&A thảo luận!
     </aside>
 </section>

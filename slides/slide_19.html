@@ -1,83 +1,99 @@
-<section data-transition="slide">
-    <!-- Top Badge -->
-    <div class="badge badge-gold" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN III: CẤU TRÚC UNION-FIND (DSU)</div>
-    <h3 style="font-size: 0.82em; margin: 0 0 8px 0; color: #0f172a; font-weight: 700;">Bẫy Cài Đặt, Union by Size & Thuật Toán Kruskal (MST)</h3>
-
-    <!-- 2-Column Light Layout (NO DARK BOXES!) -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; text-align: left; align-items: stretch;">
+<section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 590px; display: flex; flex-direction: column; justify-content: space-between;">
         
-        <!-- Left Column: Traps Warning + Union by Size -->
-        <div style="display: flex; flex-direction: column; gap: 8px; justify-content: space-between;">
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 12px;">
+            <div class="badge" style="font-size: 0.42em; padding: 4px 18px; margin-bottom: 4px; display: inline-block;">PHẦN III — CẤU TRÚC UNION-FIND (DSU)</div>
+            <h2 style="font-size: 0.94em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Ứng Dụng Kinh Điển: Thuật Toán Kruskal (MST)</span>
+            </h2>
+        </div>
+
+        <!-- 2-Column Balanced Layout: ALGORITHM LOGIC (Left) & COMPLEXITY BREAKDOWN (Right) -->
+        <div style="display: grid; grid-template-columns: 1.05fr 1.15fr; gap: 18px; width: 100%; align-items: stretch; flex-grow: 1; margin-bottom: 10px;">
             
-            <!-- Trap Warning Box -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #dc2626; border-radius: 8px; padding: 10px 12px;">
-                <div style="color: #dc2626; font-size: 0.36em; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
-                    <i class="fa-solid fa-triangle-exclamation"></i> 1. Cảnh Báo Bẫy Cài Đặt (Implementation Trap)
+            <!-- Cột 1: Nguyên Lý Giải Thuật & Vai Trò DSU -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-sitemap" style="color: #0284c7;"></i> Nguyên Lý Giải Thuật (Principles)
+                        </h4>
+                        <span style="font-size: 0.33em; color: #0369a1; font-weight: 700; background: #f0f9ff; border: 1px solid #bae6fd; padding: 2px 8px; border-radius: 4px;">Greedy Strategy</span>
+                    </div>
+
+                    <!-- 3 Academic Concept Blocks -->
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #0284c7; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">1. Bài toán Cây khung nhỏ nhất (MST):</strong> Tìm tập hợp gồm đúng $V - 1$ cạnh kết nối toàn bộ $V$ đỉnh sao cho <strong>tổng trọng số là nhỏ nhất</strong> và <strong>không tạo chu trình</strong>.
+                        </div>
+
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #7c3aed; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">2. Chiến lược Tham lam (Greedy Choice):</strong> Lần lượt duyệt qua các cạnh theo thứ tự trọng số từ nhỏ nhất đến lớn nhất để xem xét nạp vào cây khung.
+                        </div>
+
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #059669; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">3. Vai trò cốt lõi của DSU (Phát hiện chu trình):</strong>
+                            <br>• Nếu hai đỉnh $u, v$ có <code>find(u) == find(v)</code>: Bỏ qua (Đã liên thông $\to$ Tạo chu trình kín).
+                            <br>• Nếu <code>find(u) != find(v)</code>: Kết nạp cạnh vào MST và hợp nhất hai cây bằng <code>union(u, v)</code>.
+                        </div>
+                    </div>
                 </div>
-                <div style="font-size: 0.29em; color: #334155; line-height: 1.45;">
-                    <strong style="color: #dc2626;">LỖI SAI ĐIỂN HÌNH:</strong> Gán trực tiếp cha không qua <code>find()</code>:
-                </div>
-                <div style="background: #fff1f2; border: 1px solid #fecdd3; padding: 4px 8px; border-radius: 4px; margin: 4px 0; font-family: 'Fira Code', monospace; color: #991b1b; font-size: 0.28em;">
-                    parent[a] = b; // SAI (Cắt đứt nhánh cây dưới a!)
-                </div>
-                <div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 4px 8px; border-radius: 4px; font-family: 'Fira Code', monospace; color: #047857; font-size: 0.28em;">
-                    parent[find(a)] = find(b); // ĐÚNG (Luôn gán trên gốc!)
+
+                <!-- Theory Note -->
+                <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: 8px 10px; font-size: 0.33em; color: #0369a1; line-height: 1.45;">
+                    <i class="fa-solid fa-shield-halved" style="color: #0284c7; margin-right: 6px;"></i> <strong>Đảm bảo tính phi chu trình:</strong> Nhờ cơ chế gộp tập hợp rời rạc, DSU bảo toàn cấu trúc cây tại mọi bước lặp.
                 </div>
             </div>
 
-            <!-- Union by Size Light Box -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #0284c7; border-radius: 8px; padding: 10px 12px;">
-                <div style="color: #0284c7; font-size: 0.36em; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
-                    <i class="fa-solid fa-layer-group"></i> 2. Kỹ Thuật Union by Size (Giải Pháp Thay Thế)
+            <!-- Cột 2: Phân Tích Độ Phức Tạp & Hiệu Năng Toàn Cục -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-chart-pie" style="color: #059669;"></i> Phân Tích Độ Phức Tạp (Complexity)
+                        </h4>
+                        <span style="font-size: 0.33em; color: #065f46; font-weight: 700; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 2px 8px; border-radius: 4px;">Two-Phase Analysis</span>
+                    </div>
+
+                    <!-- 2 Phases Breakdown -->
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #d97706; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">Pha 1 — Sắp xếp danh sách cạnh:</strong> Sắp xếp toàn bộ $E$ cạnh theo thứ tự trọng số tăng dần, tốn chi phí <strong>$\mathcal{O}(E \log E)$</strong>.
+                        </div>
+
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #059669; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">Pha 2 — Duyệt & Hợp nhất DSU:</strong> Thực hiện tối đa $2E$ lần truy vấn <code>find()</code> và $V - 1$ lần gộp <code>union()</code>, chi phí đạt <strong>$\mathcal{O}(E \cdot \alpha(V))$</strong>.
+                        </div>
+
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #7c3aed; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">Phân tích điểm nghẽn (Bottleneck):</strong> Vì $\alpha(V) \le 4$, chi phí pha 2 gần như tuyến tính $\approx \mathcal{O}(E)$. Điểm nghẽn thuật toán hoàn toàn nằm ở <strong>Pha sắp xếp cạnh</strong>.
+                        </div>
+                    </div>
                 </div>
-                <div style="font-size: 0.28em; color: #334155; line-height: 1.4; margin-bottom: 4px;">
-                    Duy trì mảng <code>sz[i]</code> (số phần tử). Treo cây có <strong>size nhỏ hơn</strong> vào dưới cây có <strong>size lớn hơn</strong>.
-                </div>
-                <!-- Clean Light Code Box (NO DARK BACKGROUND!) -->
-                <div style="background: #f8fafc; border: 1px solid #cbd5e1; color: #0f172a; border-radius: 6px; padding: 6px 10px; font-family: 'Fira Code', monospace; font-size: 0.27em; line-height: 1.45;">
-                    <span style="color: #0284c7;">if</span> (sz[a] &lt; sz[b]) swap(a, b);<br>
-                    parent[b] = a;<br>
-                    sz[a] += sz[b];
+
+                <!-- Complexity Summary Pill -->
+                <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; padding: 8px 12px; font-size: 0.35em; color: #065f46; display: flex; align-items: center; justify-content: space-between;">
+                    <span><i class="fa-solid fa-calculator" style="margin-right: 6px;"></i> Tổng độ phức tạp thuật toán:</span>
+                    <strong style="font-size: 1.15em;">$\mathcal{O}(E \log E) \equiv \mathcal{O}(E \log V)$</strong>
                 </div>
             </div>
 
         </div>
 
-        <!-- Right Column: Kruskal's Algorithm Detail Card -->
-        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #7c3aed; border-radius: 8px; padding: 10px 14px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-                <div style="color: #7c3aed; font-size: 0.38em; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-                    <i class="fa-solid fa-diagram-project"></i> 3. Thuật Toán Kruskal — Tìm Cây Khung Nhỏ Nhất (MST)
-                </div>
-
-                <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.29em; color: #334155; line-height: 1.45;">
-                    <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 4px; padding: 5px 8px;">
-                        <strong style="color: #6b21a8;">Bước 1 (Sắp Xếp):</strong> Sắp xếp danh sách $E$ cạnh theo trọng số tăng dần. Chi phí: <strong>$O(E \log E)$</strong>.
-                    </div>
-                    <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 4px; padding: 5px 8px;">
-                        <strong style="color: #6b21a8;">Bước 2 (Kiểm Tra Chu Trình):</strong> Duyệt qua từng cạnh $(u, v, w)$:
-                        <ul style="margin: 2px 0 0 0; padding-left: 14px; font-size: 0.95em;">
-                            <li>Nếu <code>find(u) != find(v)</code>: Thêm cạnh vào MST và gộp <code>union(u, v)</code>.</li>
-                            <li>Nếu <code>find(u) == find(v)</code>: Bỏ qua (Tránh tạo chu trình đóng kín!).</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 4px; padding: 5px 8px; font-size: 0.28em; color: #166534; font-weight: 700; text-align: center; margin-top: 6px;">
-                <i class="fa-solid fa-check-circle" style="color: #059669; margin-right: 4px;"></i> DSU hỗ trợ phát hiện chu trình trong thời gian $O(\alpha(V)) \approx O(1)$!
-            </div>
+        <!-- Cohesive Bottom Banner -->
+        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 5px solid #059669; border-radius: 8px; padding: 10px 16px; font-size: 0.37em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 12px;">
+            <i class="fa-solid fa-circle-check" style="font-size: 1.25em; color: #059669; flex-shrink: 0;"></i>
+            <span><strong>Ý NGHĨA KỸ THUẬT:</strong> Nhờ DSU hỗ trợ kiểm tra liên thông trong thời gian $\mathcal{O}(\alpha(V))$, thuật toán Kruskal loại bỏ hoàn toàn thao tác duyệt đồ thị tốn kém, trở thành lựa chọn tối ưu hàng đầu cho các bài toán đồ thị thưa.</span>
         </div>
 
-    </div>
-
-    <!-- Bottom Mathematical Guarantee Banner -->
-    <div style="width: 100%; margin-top: 8px; background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #2563eb; border-radius: 6px; padding: 6px 14px; font-size: 0.35em; color: #1e40af; text-align: left; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-calculator" style="font-size: 1.2em; color: #2563eb; flex-shrink: 0;"></i>
-        <span><strong>TỔNG CHI PHÍ THUẬT TOÁN KRUSKAL:</strong> Nhờ DSU kiểm tra liên thông trong $O(\alpha(V)) \approx O(1)$, tổng thời gian của Kruskal đạt <strong>$O(E \log E)$</strong> (chi phí chủ yếu phụ thuộc vào bước sắp xếp cạnh)!</span>
     </div>
 
     <aside class="notes">
-        Một sai lầm rất phổ biến khi lập trình Union-Find là gán trực tiếp parent[a] = b thay vì gọi find(a). Phép gán sai này sẽ cắt đứt toàn bộ cây con treo dưới a. Lưu ý luôn thực hiện thao tác trên nút gốc đại diện. Ngoài ra thuật toán Kruskal ứng dụng DSU để tìm Cây khung nhỏ nhất cực kỳ hiệu quả.
+        Kính thưa Thầy và các bạn, ở Slide 19, chúng ta đến với ứng dụng kinh điển nhất của DSU: Thuật toán Kruskal tìm Cây khung nhỏ nhất:
+        1. Về nguyên lý giải thuật: Kruskal áp dụng chiến lược tham lam, ưu tiên chọn cạnh có trọng số nhỏ nhất. Thách thức lớn nhất là kiểm tra xem cạnh mới có tạo chu trình hay không.
+        2. DSU giải quyết trọn vẹn thách thức này: Chỉ cần gọi find(u) và find(v). Nếu khác gốc, ta nạp cạnh vào cây khung và gộp lại bằng union(u, v).
+        3. Về phân tích độ phức tạp: Thuật toán gồm 2 pha. Pha 1 sắp xếp cạnh tốn O(E log E). Pha 2 duyệt và kiểm tra bằng DSU chỉ tốn O(E * alpha(V)) gần như tuyến tính.
+        4. Kết luận: Điểm nghẽn duy nhất là bước sắp xếp. DSU giúp thao tác phát hiện chu trình đạt hiệu năng tức thời, cực kỳ tối ưu trên đồ thị thưa.
     </aside>
 </section>

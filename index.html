@@ -2681,1139 +2681,1111 @@
 
 <!-- ==================== SLIDE_13.HTML ==================== -->
 <section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
-    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 600px; display: flex; flex-direction: column; justify-content: space-between;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 580px; display: flex; flex-direction: column; justify-content: space-between;">
         
         <!-- Header -->
-        <div style="text-align: center; margin-bottom: 8px;">
-            <div class="badge" style="font-size: 0.40em; padding: 4px 18px; margin-bottom: 4px; display: inline-block;">PHẦN III: DISJOINT-SET UNION (DSU)</div>
-            <h2 style="font-size: 0.94em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
-                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Disjoint-Set Forest: Biểu Diễn Mảng Cha<br>(Parent-Pointer Representation)</span>
+        <div style="text-align: center; margin-bottom: 12px;">
+            <div class="badge" style="font-size: 0.42em; padding: 4px 18px; margin-bottom: 4px; display: inline-block;">PHẦN III — CẤU TRÚC UNION-FIND (DISJOINT-SET UNION)</div>
+            <h2 style="font-size: 0.92em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Disjoint-Set Forest: Biểu Diễn Mảng Cha (Parent-Pointer)</span>
             </h2>
         </div>
 
-        <!-- Cohesive 2-Column Layout (Unified & Seamless) -->
-        <div style="display: grid; grid-template-columns: 1.05fr 1.25fr; gap: 16px; width: 100%; margin-bottom: 10px; align-items: stretch; flex-grow: 1;">
+        <!-- 2-Column Main Content (Ultra-Clean & Streamlined) -->
+        <div style="display: grid; grid-template-columns: 1fr 1.25fr; gap: 18px; width: 100%; align-items: stretch; flex-grow: 1;">
             
-            <!-- Column 1: Theoretical Foundation & Formal Operations -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 10px; padding: 14px 16px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+            <!-- Column 1: Nguyên lý & Thao tác cốt lõi (Tối giản chữ, tập trung ý chính) -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
                 <div>
-                    <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0 0 10px 0; display: flex; align-items: center; gap: 8px;">
-                        <i class="fa-solid fa-book-bookmark" style="color: #0284c7;"></i> Nguyên Lý Disjoint-Set Forest (CLRS)
+                    <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-sitemap" style="color: #0284c7;"></i> Mô Hình Cây Hướng Gốc (Up-Tree)
                     </h4>
 
-                    <!-- Concept 1: Set Partition -->
-                    <div style="margin-bottom: 10px;">
-                        <div style="font-size: 0.36em; font-weight: 700; color: #0f172a; margin-bottom: 2px;">
-                            1. Phân Hoạch Tập Hợp &amp; Phần Tử Đại Diện (Set Partition &amp; Canonical Root)
+                    <!-- 3 Quy tắc biểu diễn cốt lõi -->
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;">
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0284c7; border-radius: 6px; padding: 8px 12px; font-size: 0.38em; color: #0f172a;">
+                            <strong>Nút con:</strong> Trỏ lên cha trực tiếp $\to$ <code>parent[u] = v</code>
                         </div>
-                        <div style="font-size: 0.33em; color: #334155; line-height: 1.45;">
-                            Tập vũ trụ $U = \{0, 1, \dots, N-1\}$ được phân rã thành các <strong>lớp tương đương rời rạc</strong> ($S_i \cap S_j = \emptyset$). Mỗi tập con $S_i$ được định danh bởi duy nhất một <strong>Phần tử đại diện (Canonical Representative / Root)</strong>.
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #059669; border-radius: 6px; padding: 8px 12px; font-size: 0.38em; color: #0f172a;">
+                            <strong>Nút gốc (Root):</strong> Tự trỏ chính nó $\to$ <strong style="color: #059669;"><code>parent[r] == r</code></strong>
+                            <div style="font-size: 0.9em; color: #64748b; margin-top: 2px;">(Đóng vai trò là <strong>Đại diện duy nhất</strong> của nhóm)</div>
+                        </div>
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #7c3aed; border-radius: 6px; padding: 8px 12px; font-size: 0.38em; color: #0f172a;">
+                            <strong>Khởi tạo:</strong> Mỗi nút tự là 1 nhóm $\to$ <code>parent[i] = i</code>
                         </div>
                     </div>
 
-                    <!-- Concept 2: Parent Pointers -->
-                    <div style="margin-bottom: 10px;">
-                        <div style="font-size: 0.36em; font-weight: 700; color: #0f172a; margin-bottom: 2px;">
-                            2. Biểu Diễn Con Trỏ Cha (Parent-Pointer Invariant)
+                    <!-- 2 Thao tác cốt lõi -->
+                    <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; font-size: 0.37em; color: #0f172a; line-height: 1.6;">
+                        <div style="font-weight: 800; color: #0f172a; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-gears" style="color: #0284c7;"></i> 2 Thao Tác Cốt Lõi:
                         </div>
-                        <ul style="font-size: 0.33em; color: #334155; margin: 0; padding-left: 14px; line-height: 1.45;">
-                            <li><strong>Nút Gốc (Root Node):</strong> Điểm bất động đại số $\iff \mathbf{\text{parent}[r] == r}$.</li>
-                            <li><strong>Nút Con (Descendant):</strong> Lưu chỉ số nút cha trực tiếp $\mathbf{\text{parent}[u] = v}$ ($v \in U$).</li>
-                        </ul>
-                    </div>
-
-                    <!-- Concept 3: Operations -->
-                    <div>
-                        <div style="font-size: 0.36em; font-weight: 700; color: #0f172a; margin-bottom: 2px;">
-                            3. Hai Phép Toán ADT Cốt Lõi (Core ADT Operations)
-                        </div>
-                        <div style="font-size: 0.33em; color: #334155; line-height: 1.45;">
-                            • $\mathbf{\text{Find}(u)}$: Truy vết ngược chuỗi con trỏ cha để tìm Root đại diện của $u$.<br>
-                            • $\mathbf{\text{Union}(u, v)}$: Hợp nhất hai lớp tương đương: $\mathbf{\text{parent}[\text{Find}(u)] = \text{Find}(v)}$.<br>
-                            • <strong>Truy vấn tương đương (Equivalence Query):</strong> $u \sim v \iff \mathbf{\text{Find}(u) == \text{Find}(v)}$.
-                        </div>
+                        <div>• <strong style="color: #0284c7;">Find(u):</strong> Leo ngược chuỗi cha tìm nút Root đại diện.</div>
+                        <div>• <strong style="color: #059669;">Union(u, v):</strong> Gán <code>parent[Find(u)] = Find(v)</code> để gộp nhóm.</div>
                     </div>
                 </div>
 
-                <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: 6px 10px; font-size: 0.32em; color: #0369a1; font-weight: 700;">
-                    <i class="fa-solid fa-shield-halved" style="margin-right: 4px;"></i> <strong>Tính chất bất biến:</strong> Cấu trúc luôn là Đồ thị có hướng phi chu trình (DAG) hội tụ về Root.
+                <!-- Truy vấn liên thông -->
+                <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 8px 12px; font-size: 0.37em; color: #1d4ed8; text-align: center; font-weight: 700; margin-top: 10px;">
+                    Kiểm tra liên thông: $u \sim v \iff \mathbf{\text{Find}(u) == \text{Find}(v)}$
                 </div>
             </div>
 
             <!-- Column 2: Memory Mapping & Visual Disjoint-Set Forest -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 10px; padding: 14px 16px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
                 <div>
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
                         <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
-                            <i class="fa-solid fa-network-wired" style="color: #059669;"></i> Ánh Xạ Mảng 1D <code>parent[]</code> $\longleftrightarrow$ Disjoint-Set Forest
+                            <i class="fa-solid fa-table" style="color: #059669;"></i> Biểu Diễn Mảng 1D <code>parent[]</code>
                         </h4>
-                        <span style="font-size: 0.31em; color: #059669; font-weight: 700; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 2px 8px; border-radius: 4px;">Không Gian $\Theta(N)$</span>
+                        <span style="font-size: 0.33em; color: #059669; font-weight: 700; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 2px 10px; border-radius: 4px;">Bộ Nhớ $\Theta(N)$</span>
                     </div>
 
                     <!-- Array Table -->
-                    <table style="width: 100%; border-collapse: collapse; font-size: 0.34em; text-align: center; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; margin-bottom: 8px; color: #0f172a;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.39em; text-align: center; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; margin-bottom: 10px; color: #0f172a;">
                         <thead>
-                            <tr style="background: #f1f5f9; color: #0f172a; font-weight: 800;">
-                                <th style="padding: 6px 8px; background: #e2e8f0; width: 22%;">Phần Tử $u \in U$</th>
-                                <th style="padding: 6px 8px; border-left: 1px solid #cbd5e1;">0</th>
-                                <th style="padding: 6px 8px; border-left: 1px solid #cbd5e1;">1</th>
-                                <th style="padding: 6px 8px; border-left: 1px solid #cbd5e1;">2</th>
-                                <th style="padding: 6px 8px; border-left: 1px solid #cbd5e1;">3</th>
-                                <th style="padding: 6px 8px; border-left: 1px solid #cbd5e1;">4</th>
+                            <tr style="background: #f1f5f9; font-weight: 800;">
+                                <th style="padding: 8px 10px; background: #e2e8f0; width: 24%;">Chỉ số $u$</th>
+                                <th style="padding: 8px 10px; border-left: 1px solid #cbd5e1;">0</th>
+                                <th style="padding: 8px 10px; border-left: 1px solid #cbd5e1;">1</th>
+                                <th style="padding: 8px 10px; border-left: 1px solid #cbd5e1;">2</th>
+                                <th style="padding: 8px 10px; border-left: 1px solid #cbd5e1;">3</th>
+                                <th style="padding: 8px 10px; border-left: 1px solid #cbd5e1;">4</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr style="font-weight: 700;">
-                                <th style="padding: 6px 8px; background: #f8fafc; border-top: 1px solid #cbd5e1;"><code>parent[u]</code></th>
-                                <td style="padding: 6px 8px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1; background: #ecfdf5; color: #065f46; font-weight: 800;">0 (Root)</td>
-                                <td style="padding: 6px 8px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1;">0</td>
-                                <td style="padding: 6px 8px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1;">0</td>
-                                <td style="padding: 6px 8px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1;">4</td>
-                                <td style="padding: 6px 8px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1; background: #eff6ff; color: #1e40af; font-weight: 800;">4 (Root)</td>
+                                <th style="padding: 8px 10px; background: #f8fafc; border-top: 1px solid #cbd5e1;"><code>parent[u]</code></th>
+                                <td style="padding: 8px 10px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1; background: #ecfdf5; color: #065f46; font-weight: 800;">0 (Root)</td>
+                                <td style="padding: 8px 10px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1; color: #065f46;">0</td>
+                                <td style="padding: 8px 10px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1; color: #065f46;">0</td>
+                                <td style="padding: 8px 10px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1; color: #1e40af;">4</td>
+                                <td style="padding: 8px 10px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1; background: #eff6ff; color: #1e40af; font-weight: 800;">4 (Root)</td>
                             </tr>
                         </tbody>
                     </table>
 
                     <!-- Up-Tree SVG Graphic -->
-                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 6px 12px; margin-bottom: 6px;">
-                        <svg viewBox="0 0 320 72" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', sans-serif;">
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 12px; margin-bottom: 10px;">
+                        <svg viewBox="0 0 320 80" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', sans-serif;">
                             <defs>
-                                <marker id="m-grn-13" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                                <marker id="m-grn-13" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
                                     <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
                                 </marker>
-                                <marker id="m-blu-13" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                                <marker id="m-blu-13" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
                                     <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0284c7"/>
                                 </marker>
                             </defs>
 
                             <!-- Sub-Tree 1 (Root 0) -->
-                            <rect x="15" y="4" width="130" height="64" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1" stroke-dasharray="3 3"/>
-                            <text x="80" y="14" fill="#065f46" font-size="6.5" font-weight="800" text-anchor="middle">Lớp tương đương $S_1 = \{0, 1, 2\}$ (Root = 0)</text>
+                            <rect x="10" y="4" width="140" height="72" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1.2" stroke-dasharray="3 3"/>
+                            <text x="80" y="15" fill="#065f46" font-size="7.5" font-weight="800" text-anchor="middle">Nhóm S₁ = {0, 1, 2} (Root = 0)</text>
                             
                             <!-- Root 0 -->
-                            <circle cx="80" cy="28" r="9" fill="#059669"/>
-                            <text x="80" y="31" fill="#ffffff" font-size="7.5" font-weight="800" text-anchor="middle">0</text>
-                            <!-- Child 1 & 2 -->
-                            <line x1="45" y1="53" x2="71" y2="35" stroke="#059669" stroke-width="1.6" marker-end="url(#m-grn-13)"/>
-                            <line x1="115" y1="53" x2="89" y2="35" stroke="#059669" stroke-width="1.6" marker-end="url(#m-grn-13)"/>
-                            <circle cx="45" cy="55" r="7" fill="#ffffff" stroke="#059669" stroke-width="1.4"/>
-                            <text x="45" y="57.5" fill="#0f172a" font-size="6.5" font-weight="800" text-anchor="middle">1</text>
-                            <circle cx="115" cy="55" r="7" fill="#ffffff" stroke="#059669" stroke-width="1.4"/>
-                            <text x="115" y="57.5" fill="#0f172a" font-size="6.5" font-weight="800" text-anchor="middle">2</text>
+                            <circle cx="80" cy="32" r="10" fill="#059669"/>
+                            <text x="80" y="35.5" fill="#ffffff" font-size="9" font-weight="800" text-anchor="middle">0</text>
+                            
+                            <!-- Child 1 & 2 pointing UP to Root 0 -->
+                            <line x1="45" y1="58" x2="70" y2="40" stroke="#059669" stroke-width="1.8" marker-end="url(#m-grn-13)"/>
+                            <line x1="115" y1="58" x2="90" y2="40" stroke="#059669" stroke-width="1.8" marker-end="url(#m-grn-13)"/>
+                            
+                            <circle cx="45" cy="62" r="8" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+                            <text x="45" y="65" fill="#0f172a" font-size="7.5" font-weight="800" text-anchor="middle">1</text>
+                            <circle cx="115" cy="62" r="8" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+                            <text x="115" y="65" fill="#0f172a" font-size="7.5" font-weight="800" text-anchor="middle">2</text>
 
                             <!-- Sub-Tree 2 (Root 4) -->
-                            <rect x="175" y="4" width="130" height="64" rx="6" fill="#f0f9ff" stroke="#7dd3fc" stroke-width="1" stroke-dasharray="3 3"/>
-                            <text x="240" y="14" fill="#0369a1" font-size="6.5" font-weight="800" text-anchor="middle">Lớp tương đương $S_2 = \{3, 4\}$ (Root = 4)</text>
+                            <rect x="170" y="4" width="140" height="72" rx="6" fill="#f0f9ff" stroke="#7dd3fc" stroke-width="1.2" stroke-dasharray="3 3"/>
+                            <text x="240" y="15" fill="#0369a1" font-size="7.5" font-weight="800" text-anchor="middle">Nhóm S₂ = {3, 4} (Root = 4)</text>
                             
                             <!-- Root 4 -->
-                            <circle cx="240" cy="28" r="9" fill="#0284c7"/>
-                            <text x="240" y="31" fill="#ffffff" font-size="7.5" font-weight="800" text-anchor="middle">4</text>
-                            <!-- Child 3 -->
-                            <line x1="240" y1="51" x2="240" y2="39" stroke="#0284c7" stroke-width="1.6" marker-end="url(#m-blu-13)"/>
-                            <circle cx="240" cy="55" r="7" fill="#ffffff" stroke="#0284c7" stroke-width="1.4"/>
-                            <text x="240" y="57.5" fill="#0f172a" font-size="6.5" font-weight="800" text-anchor="middle">3</text>
+                            <circle cx="240" cy="32" r="10" fill="#0284c7"/>
+                            <text x="240" y="35.5" fill="#ffffff" font-size="9" font-weight="800" text-anchor="middle">4</text>
+                            
+                            <!-- Child 3 pointing UP to Root 4 -->
+                            <line x1="240" y1="56" x2="240" y2="44" stroke="#0284c7" stroke-width="1.8" marker-end="url(#m-blu-13)"/>
+                            <circle cx="240" cy="62" r="8" fill="#ffffff" stroke="#0284c7" stroke-width="1.6"/>
+                            <text x="240" y="65" fill="#0f172a" font-size="7.5" font-weight="800" text-anchor="middle">3</text>
                         </svg>
                     </div>
 
-                    <!-- Structured Equivalence Result Block -->
-                    <div style="display: flex; justify-content: space-around; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 4px 8px; font-size: 0.32em; color: #0f172a; margin-bottom: 6px;">
-                        <div>$\text{Find}(1) = \text{Find}(2) = 0 \implies 1, 2 \in S_1$</div>
+                    <!-- Query Result -->
+                    <div style="display: flex; justify-content: space-around; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 7px 12px; font-size: 0.36em; color: #0f172a;">
+                        <div><strong style="color: #059669;">Find(1) == Find(2) == 0</strong> $\implies$ Cùng nhóm $S_1$</div>
                         <div style="color: #cbd5e1; font-weight: bold;">|</div>
-                        <div>$\text{Find}(3) = 4 \implies 3 \in S_2 \ (1 \not\sim 3)$</div>
+                        <div><strong style="color: #0284c7;">Find(3) == 4</strong> $\implies$ Khác nhóm $S_2$</div>
                     </div>
                 </div>
 
-                <div style="font-size: 0.31em; color: #0f172a; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 10px;">
-                    <strong>Tối ưu phần cứng:</strong> Mảng nguyên liên tục khai thác triệt để <strong>CPU Spatial Locality</strong>, loại bỏ hoàn toàn overhead con trỏ động (<code>Node*</code>) và phân mảnh bộ nhớ heap.
+                <!-- Hardware Advantage Pill (Súc tích, 1 dòng) -->
+                <div style="font-size: 0.34em; color: #065f46; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; padding: 7px 12px; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px;">
+                    <i class="fa-solid fa-bolt" style="color: #059669;"></i>
+                    <span><strong>Ưu thế phần cứng:</strong> Mảng liên tục khai thác tối đa <strong>CPU Spatial Locality</strong>, không tốn con trỏ động <code>Node*</code>.</span>
                 </div>
             </div>
 
         </div>
 
-        <!-- Cohesive Bottom Summary -->
-        <div style="width: 100%; background: #f8fafc; border: 1px solid #cbd5e1; border-left: 5px solid #2563eb; border-radius: 8px; padding: 8px 16px; font-size: 0.36em; color: #0f172a; text-align: left; display: flex; align-items: center; gap: 12px; line-height: 1.45;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 1.3em; color: #2563eb; flex-shrink: 0;"></i>
-            <span><strong>TỔNG KẾT MÔ HÌNH:</strong> Biểu diễn <strong>Disjoint-Set Forest</strong> ánh xạ bài toán kết nối động thành <strong>so sánh hai số nguyên đại diện</strong> ($\text{Find}(u) == \text{Find}(v)$), cho phép thực thi trực tiếp trên mảng <code>parent[]</code> với hiệu năng vượt trội.</span>
-        </div>
-
     </div>
 
     <aside class="notes">
-        Kính thưa Thầy và các bạn, đây là slide nền tảng về cấu trúc Disjoint-Set Forest theo chuẩn giáo trình thuật toán CLRS:
-        1. Về mặt lý thuyết:
-           - Ta phân hoạch tập hợp vũ trụ thành các lớp tương đương rời rạc. Mỗi tập con được định danh bởi một Canonical Representative (Root).
-           - Cấu trúc sử dụng cơ chế con trỏ cha (Parent Pointers): Mỗi nút con lưu chỉ số nút cha trực tiếp, riêng nút gốc là điểm bất động đại số tự trỏ vào chính nó: parent[r] == r.
-           - Hai phép toán ADT cốt lõi: Find(u) để truy vết nút gốc đại diện, và Union(u, v) để hợp nhất hai lớp tương đương bằng cách gán parent[Find(u)] = Find(v). Hai phần tử thuộc cùng tập khi và chỉ khi Find(u) == Find(v).
-        2. Biểu diễn trực quan trên mảng 1D parent[]:
-           - Thay vì dùng con trỏ động Node*, toàn bộ rừng cây được nén phẳng vào một mảng số nguyên 1 chiều parent[].
-           - Ví dụ trên bảng: Lớp tương đương S1 gồm các phần tử {0, 1, 2} có gốc là 0, Lớp tương đương S2 gồm {3, 4} có gốc là 4.
-           - Việc sử dụng mảng phẳng liên tục mang lại độ phức tạp không gian tối ưu Theta(N) và tận dụng tối đa CPU Spatial Locality.
+        Kính thưa Thầy và các bạn, đây là slide nền tảng về cấu trúc Disjoint-Set Forest trên mảng 1D:
+        1. Mô hình Up-Tree:
+           - Nút con trỏ ngược lên nút cha: parent[u] = v.
+           - Nút gốc (Root) tự trỏ vào chính nó: parent[r] == r, đóng vai trò là Phần tử đại diện cho cả nhóm.
+           - Ban đầu: Mỗi nút tự là 1 nhóm độc lập: parent[i] = i.
+        2. Hai thao tác cốt lõi:
+           - Find(u): Lần theo chuỗi cha để tìm nút Root đại diện.
+           - Union(u, v): Gán parent[Find(u)] = Find(v) để hợp nhất 2 nhóm.
+           - Kiểm tra liên thông: Hai phần tử thuộc cùng nhóm khi và chỉ khi Find(u) == Find(v).
+        3. Biểu diễn trực quan trên mảng 1D parent[]:
+           - Nhóm S1 {0, 1, 2} có gốc là 0; Nhóm S2 {3, 4} có gốc là 4.
+           - Cấu trúc mảng liên tục giúp tối ưu không gian Theta(N) và tăng tốc độ đọc nhờ CPU Spatial Locality.
     </aside>
 </section>
 
 <!-- ==================== SLIDE_14.HTML ==================== -->
 <section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
-    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 600px; display: flex; flex-direction: column; justify-content: space-between;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 590px; display: flex; flex-direction: column; justify-content: space-between;">
         
         <!-- Header -->
-        <div style="text-align: center; margin-bottom: 6px;">
-            <div class="badge" style="font-size: 0.44em; padding: 5px 18px; margin-bottom: 4px; display: inline-block;">PHẦN III — CẤU TRÚC UNION-FIND (DSU)</div>
+        <div style="text-align: center; margin-bottom: 12px;">
+            <div class="badge" style="font-size: 0.42em; padding: 4px 18px; margin-bottom: 4px; display: inline-block;">PHẦN III — CẤU TRÚC UNION-FIND (DISJOINT-SET UNION)</div>
             <h2 style="font-size: 0.92em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
-                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Cơ Chế Gộp Ngây Thơ (Naive Union) & Nguy Cơ Suy Biến $O(N)$</span>
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Cài Đặt Cơ Bản (Naive Linking) & Hiện Tượng Suy Biến Cây</span>
             </h2>
         </div>
 
-        <!-- Problem Callout -->
-        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-left: 6px solid #dc2626; border-radius: 8px; padding: 10px 18px; text-align: left; font-size: 0.38em; color: #0f172a; line-height: 1.5; margin-bottom: 8px;">
-            <strong style="color: #dc2626; text-transform: uppercase;"><i class="fa-solid fa-triangle-exclamation" style="margin-right: 8px;"></i> Lỗ Hổng Thiết Kế:</strong> Nếu thực hiện gộp 2 nhóm một cách "mù quáng" mà không kiểm soát chiều cao hay kích thước cây, cấu trúc sẽ bị <strong>duỗi thẳng thành một Danh sách liên kết dài</strong>, phá hủy hoàn toàn tốc độ $O(1)$ của DSU!
-        </div>
-
-        <!-- Middle Section: Naive Union Code (Left) vs Degenerate Chain Diagram (Right) -->
-        <div style="display: grid; grid-template-columns: 1.1fr 1.25fr; gap: 14px; width: 100%; margin-bottom: 8px; align-items: stretch; flex-grow: 1;">
+        <!-- 2-Column Academic Grid -->
+        <div style="display: grid; grid-template-columns: 1fr 1.15fr; gap: 18px; width: 100%; align-items: stretch; flex-grow: 1; margin-bottom: 10px;">
             
-            <!-- Left Column: Naive Union Code & Mechanism -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #0284c7; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between; text-align: left; box-shadow: 0 2px 5px rgba(0,0,0,0.03);">
+            <!-- Column 1: Thuật toán Naive Quick-Union -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
                 <div>
-                    <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0 0 8px 0; display: flex; align-items: center; gap: 8px;">
-                        <i class="fa-solid fa-code" style="color: #0284c7;"></i> Hàm <code>naive_union(u, v)</code>
-                    </h4>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-code" style="color: #0284c7;"></i> Cài Đặt Cơ Bản: Gán Gốc Tùy Ý
+                        </h4>
+                        <span style="font-size: 0.33em; color: #0284c7; font-weight: 700; background: #eff6ff; border: 1px solid #bfdbfe; padding: 2px 8px; border-radius: 4px;">Naive Quick-Union</span>
+                    </div>
 
-                    <!-- Code Snippet -->
-                    <pre style="background: #0f172a; border-radius: 6px; padding: 10px 12px; margin: 0 0 8px 0; font-size: 0.35em; line-height: 1.45; color: #f8fafc; font-family: 'Fira Code', monospace; overflow-x: auto;"><code><span style="color: #38bdf8;">void</span> <span style="color: #4ade80;">naive_union</span>(<span style="color: #38bdf8;">int</span> u, <span style="color: #38bdf8;">int</span> v) {
-    <span style="color: #38bdf8;">int</span> root_u = <span style="color: #f59e0b;">find</span>(u);
-    <span style="color: #38bdf8;">int</span> root_v = <span style="color: #f59e0b;">find</span>(v);
-    <span style="color: #f43f5e;">if</span> (root_u != root_v) {
-        parent[root_u] = root_v; <span style="color: #94a3b8;">// Gộp mù quáng</span>
+                    <!-- Clean Code Box -->
+                    <div style="background: #0f172a; border-radius: 8px; padding: 10px 14px; margin-bottom: 12px; border: 1px solid #1e293b;">
+                        <pre style="background: transparent; box-shadow: none; margin: 0; padding: 0; overflow: visible;"><code class="language-cpp" data-trim data-noescape style="background: transparent; color: #f8fafc; font-size: 0.76em; font-family: 'Fira Code', monospace; line-height: 1.5; padding: 0;">void unionSets(int u, int v) {
+    int rootU = find(u);
+    int rootV = find(v);
+    if (rootU != rootV) {
+        parent[rootU] = rootV; // Gán gốc trực tiếp
     }
 }</code></pre>
+                    </div>
 
-                    <div style="font-size: 0.35em; color: #0f172a; line-height: 1.45;">
-                        <strong style="color: #0284c7;">Bản chất:</strong> Luôn ép gốc cây $u$ làm con của gốc cây $v$ mà không kiểm tra cây nào cao hơn hay nhiều phần tử hơn.
+                    <!-- Core Academic Breakdown (Trong sáng, chuẩn thuật ngữ DSA) -->
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 8px 10px; border-radius: 4px; font-size: 0.36em; color: #334155; line-height: 1.5;">
+                            <strong style="color: #0f172a;">Cơ chế gộp:</strong> Chỉ đơn thuần gán <code>parent[rootU] = rootV</code>. Bản thân thao tác gán chỉ tốn thời gian hằng số $O(1)$.
+                        </div>
+                        <div style="background: #fef2f2; border-left: 3px solid #dc2626; padding: 8px 10px; border-radius: 4px; font-size: 0.36em; color: #991b1b; line-height: 1.5;">
+                            <strong>Nguyên nhân sai lầm:</strong> Hoàn toàn <strong>không có cơ chế cân bằng</strong>. Thuật toán không so sánh xem cây nào cao hơn hay cây nào nhiều nút hơn trước khi gộp.
+                        </div>
                     </div>
                 </div>
 
-                <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 6px 10px; font-size: 0.33em; color: #991b1b; margin-top: 6px;">
-                    <i class="fa-solid fa-circle-xmark" style="color: #dc2626; margin-right: 6px;"></i> <strong>Hậu quả:</strong> Cây ngày càng sâu sau mỗi lần gộp liên tiếp.
+                <div style="font-size: 0.34em; color: #475569; border-top: 1px solid #e2e8f0; padding-top: 8px;">
+                    <i class="fa-solid fa-circle-exclamation" style="color: #ea580c; margin-right: 4px;"></i> Cây nào làm cha phụ thuộc hoàn toàn vào thứ tự tham số truyền vào <code>(u, v)</code>.
                 </div>
             </div>
 
-            <!-- Right Column: Worst-Case Chain Degeneration Visualization -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #dc2626; border-radius: 10px; padding: 12px 16px; display: flex; flex-direction: column; justify-content: space-between; text-align: left; box-shadow: 0 2px 5px rgba(0,0,0,0.03);">
+            <!-- Column 2: Hiện tượng Suy biến Cây (Worst-case) -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #dc2626; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
                 <div>
-                    <div style="font-size: 0.40em; font-weight: 800; color: #0f172a; display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                        <span><i class="fa-solid fa-link-slash" style="color: #dc2626; margin-right: 6px;"></i> Chuỗi Suy Biến Thành Danh Sách Liên Kết</span>
-                        <span style="font-size: 0.85em; background: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 4px; font-weight: 700;">Worst-Case $O(N)$</span>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-link-slash" style="color: #dc2626;"></i> Cây Bị Suy Biến (Skewed Tree)
+                        </h4>
+                        <span style="font-size: 0.33em; color: #991b1b; font-weight: 700; background: #fee2e2; border: 1px solid #fecaca; padding: 2px 8px; border-radius: 4px;">Chiều cao tối đa: $H = N - 1$</span>
                     </div>
 
-                    <p style="font-size: 0.34em; color: #0f172a; margin: 0 0 6px 0; line-height: 1.4;">
-                        Khi thực hiện chuỗi gộp liên tiếp: <code>union(1, 0)</code>, <code>union(2, 1)</code>, <code>union(3, 2)</code>, <code>union(4, 3)</code>...
-                    </p>
+                    <div style="font-size: 0.35em; color: #475569; margin-bottom: 8px;">
+                        Kịch bản xấu nhất: Khi thực hiện chuỗi gộp nối tiếp tuần tự $1 \to 0, 2 \to 1, 3 \to 2, 4 \to 3$...
+                    </div>
 
-                    <!-- Horizontal Chain SVG -->
-                    <svg viewBox="0 0 380 70" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', sans-serif;">
-                        <defs>
-                            <marker id="arr-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
-                                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#dc2626" />
-                            </marker>
-                        </defs>
+                    <!-- SVG Graphic of Skewed Tree -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
+                        <svg viewBox="0 0 360 62" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', sans-serif;">
+                            <defs>
+                                <marker id="arr-deg-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse">
+                                    <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#dc2626" />
+                                </marker>
+                            </defs>
 
-                        <!-- Arrows from 4 to 3, 3 to 2, 2 to 1, 1 to 0 -->
-                        <line x1="320" y1="32" x2="265" y2="32" stroke="#dc2626" stroke-width="2.2" marker-end="url(#arr-red)"/>
-                        <line x1="240" y1="32" x2="185" y2="32" stroke="#dc2626" stroke-width="2.2" marker-end="url(#arr-red)"/>
-                        <line x1="160" y1="32" x2="105" y2="32" stroke="#dc2626" stroke-width="2.2" marker-end="url(#arr-red)"/>
-                        <line x1="80" y1="32" x2="42" y2="32" stroke="#dc2626" stroke-width="2.2" marker-end="url(#arr-red)"/>
+                            <!-- Directed edges: 4 -> 3 -> 2 -> 1 -> 0 -->
+                            <line x1="300" y1="28" x2="252" y2="28" stroke="#dc2626" stroke-width="2" marker-end="url(#arr-deg-red)"/>
+                            <line x1="228" y1="28" x2="180" y2="28" stroke="#dc2626" stroke-width="2" marker-end="url(#arr-deg-red)"/>
+                            <line x1="156" y1="28" x2="108" y2="28" stroke="#dc2626" stroke-width="2" marker-end="url(#arr-deg-red)"/>
+                            <line x1="84" y1="28" x2="44" y2="28" stroke="#dc2626" stroke-width="2" marker-end="url(#arr-deg-red)"/>
 
-                        <!-- Nodes -->
-                        <circle cx="330" cy="32" r="11" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8"/>
-                        <text x="330" y="36" fill="#991b1b" font-size="9" font-weight="800" text-anchor="middle">4</text>
+                            <!-- Node 4 -->
+                            <circle cx="312" cy="28" r="11" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8"/>
+                            <text x="312" y="32" fill="#991b1b" font-size="9" font-weight="800" text-anchor="middle">4</text>
 
-                        <circle cx="250" cy="32" r="11" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8"/>
-                        <text x="250" y="36" fill="#991b1b" font-size="9" font-weight="800" text-anchor="middle">3</text>
+                            <!-- Node 3 -->
+                            <circle cx="240" cy="28" r="11" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8"/>
+                            <text x="240" y="32" fill="#991b1b" font-size="9" font-weight="800" text-anchor="middle">3</text>
 
-                        <circle cx="170" cy="32" r="11" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8"/>
-                        <text x="170" y="36" fill="#991b1b" font-size="9" font-weight="800" text-anchor="middle">2</text>
+                            <!-- Node 2 -->
+                            <circle cx="168" cy="28" r="11" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8"/>
+                            <text x="168" y="32" fill="#991b1b" font-size="9" font-weight="800" text-anchor="middle">2</text>
 
-                        <circle cx="90" cy="32" r="11" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8"/>
-                        <text x="90" y="36" fill="#991b1b" font-size="9" font-weight="800" text-anchor="middle">1</text>
+                            <!-- Node 1 -->
+                            <circle cx="96" cy="28" r="11" fill="#fee2e2" stroke="#dc2626" stroke-width="1.8"/>
+                            <text x="96" y="32" fill="#991b1b" font-size="9" font-weight="800" text-anchor="middle">1</text>
 
-                        <!-- Root Node 0 (Green Root) -->
-                        <circle cx="30" cy="32" r="12" fill="#059669"/>
-                        <text x="30" y="36" fill="#fff" font-size="9" font-weight="800" text-anchor="middle">0</text>
-                        <text x="30" y="58" fill="#065f46" font-size="7.5" font-weight="800" text-anchor="middle">(Root)</text>
-                    </svg>
+                            <!-- Root 0 -->
+                            <circle cx="30" cy="28" r="12" fill="#059669"/>
+                            <text x="30" y="32" fill="#ffffff" font-size="9" font-weight="800" text-anchor="middle">0</text>
+                            <text x="30" y="49" fill="#065f46" font-size="7" font-weight="800" text-anchor="middle">Root</text>
+                        </svg>
+                    </div>
+
+                    <!-- Complexity Impact Cards -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px 10px; font-size: 0.35em; color: #0f172a;">
+                            <span style="color: #64748b;">Thời gian <code>find(u)</code>:</span><br>
+                            <strong style="color: #dc2626; font-size: 1.1em;">$O(N)$</strong> (Quét tuần tự qua $N$ nút)
+                        </div>
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px 10px; font-size: 0.35em; color: #0f172a;">
+                            <span style="color: #64748b;">Chuỗi $M$ thao tác:</span><br>
+                            <strong style="color: #dc2626; font-size: 1.1em;">$O(M \cdot N)$</strong> (Nguy cơ quá thời gian - TLE)
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Worst Case Math Callout -->
-                <div style="background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; padding: 6px 10px; font-size: 0.33em; color: #991b1b; line-height: 1.45;">
-                    <strong>Phân tích:</strong> Chiều cao cây đạt cực đại $H = N - 1$. Truy vấn <code>find(4)</code> phải nhảy qua $4$ con trỏ liên tiếp $\implies$ Thời gian chạy suy biến thành <strong>$O(N)$</strong> thay vì $O(1)$!
+                <div style="font-size: 0.33em; color: #991b1b; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; padding: 6px 10px; margin-top: 8px;">
+                    <strong>Hậu quả:</strong> Cây mất hoàn toàn ưu thế phân nhánh, tốc độ tra cứu bị thoái hóa tương tự như Danh sách liên kết.
                 </div>
             </div>
 
         </div>
 
-        <!-- Bottom Solution Gateway Banner -->
-        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 6px solid #059669; border-radius: 8px; padding: 10px 18px; font-size: 0.38em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 12px; line-height: 1.45;">
-            <i class="fa-solid fa-lightbulb" style="font-size: 1.25em; color: #059669; flex-shrink: 0;"></i>
-            <span><strong style="color: #059669; text-transform: uppercase;">GIẢI PHÁP ĐỘT PHÁ:</strong> Để triệt tiêu nguy cơ suy biến, ta cần kết hợp 2 kỹ thuật tối ưu kinh điển: <strong>Union by Rank / Size</strong> (Gộp có chiến lược theo độ cao/kích thước) và <strong>Path Compression</strong> (Nén đường đi phẳng hóa cây)!</span>
+        <!-- Cohesive Bottom Transition (Dẫn dắt sang 2 giải thuật tối ưu) -->
+        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 5px solid #059669; border-radius: 8px; padding: 10px 16px; font-size: 0.37em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 12px;">
+            <i class="fa-solid fa-compass" style="font-size: 1.25em; color: #059669; flex-shrink: 0;"></i>
+            <span><strong>ĐỊNH HƯỚNG TỐI ƯU HÓA:</strong> Cần áp dụng chiến lược cân bằng: khống chế chiều cao cây ở mức $O(\log N)$ bằng <strong>Union by Rank</strong> (Slide 15) và làm phẳng cây về tiệm cận $O(1)$ bằng <strong>Path Compression</strong> (Slide 16).</span>
         </div>
 
     </div>
 
     <aside class="notes">
-        Kính thưa Thầy và các bạn, ở Slide 14, chúng ta đặt ra vấn đề: "Tại sao gộp ngây thơ (Naive Union) lại nguy hiểm?"
-        1. Cơ chế Naive Union: Khi gộp u và v, ta chỉ đơn giản gán parent[root_u] = root_v mà không quan tâm cây nào cao hơn hay cây nào nhiều phần tử hơn.
-        2. Kịch bản tồi tệ nhất (Worst-Case): Nếu ta gộp liên tiếp 1 vào 0, 2 vào 1, 3 vào 2, 4 vào 3... Toàn bộ cây sẽ duỗi thẳng thành một chuỗi Danh sách liên kết với chiều cao H = N - 1.
-        3. Hậu quả: Hàm find() lúc này phải duyệt qua N con trỏ, kéo độ phức tạp lên O(N).
-        4. Dẫn dắt: Để giải quyết bài toán này, chúng ta cần 2 kỹ thuật tối ưu: Union by Rank (Slide 15) và Path Compression (Slide 16).
+        Kính thưa Thầy và các bạn, ở Slide 14, chúng ta cùng phân tích hạn chế của cách gộp cơ bản (Naive Quick-Union):
+        1. Về cơ chế: Hàm unionSets thông thường chỉ thực hiện phép gán con trỏ parent của gốc này vào gốc kia trong thời gian O(1).
+        2. Điểm yếu cốt tử: Thuật toán hoàn toàn thiếu chiến lược cân bằng, không so sánh chiều cao hay số lượng nút của hai cây trước khi gộp.
+        3. Phân tích trường hợp xấu nhất: Nếu liên tục gộp theo thứ tự nối tiếp 1 vào 0, 2 vào 1, 3 vào 2... cây sẽ bị duỗi thẳng thành một Danh sách liên kết với chiều cao cực đại H = N - 1.
+        4. Hậu quả: Thao tác find() mất tính chất phân nhánh logarit, buộc phải quét tuần tự qua N nút, kéo thời gian chạy của cả chuỗi thao tác lên O(M * N).
+        5. Để khắc phục, chúng ta cần 2 giải thuật tối ưu: Union by Rank để khống chế chiều cao cây ở Slide 15, và Path Compression để nén phẳng cây ở Slide 16.
     </aside>
 </section>
 
 <!-- ==================== SLIDE_15.HTML ==================== -->
 <section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
-    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 600px; display: flex; flex-direction: column; justify-content: space-between;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 590px; display: flex; flex-direction: column; justify-content: space-between;">
         
         <!-- Header -->
-        <div style="text-align: center; margin-bottom: 6px;">
-            <div class="badge" style="font-size: 0.44em; padding: 5px 18px; margin-bottom: 4px; display: inline-block;">PHẦN III — CẤU TRÚC UNION-FIND (DSU)</div>
-            <h2 style="font-size: 0.92em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
-                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Kỹ Thuật Tối Ưu 1: Union by Rank (Gộp Theo Độ Cao Cây)</span>
+        <div style="text-align: center; margin-bottom: 12px;">
+            <div class="badge" style="font-size: 0.42em; padding: 4px 18px; margin-bottom: 4px; display: inline-block;">PHẦN III — CẤU TRÚC UNION-FIND (DSU)</div>
+            <h2 style="font-size: 0.94em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Kỹ Thuật 1: Union by Rank</span>
             </h2>
         </div>
 
-        <!-- Top Rules Callout -->
-        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-left: 6px solid #059669; border-radius: 8px; padding: 10px 18px; text-align: left; font-size: 0.38em; color: #0f172a; line-height: 1.5; margin-bottom: 8px;">
-            <strong style="color: #059669; text-transform: uppercase;"><i class="fa-solid fa-shield-halved" style="margin-right: 8px;"></i> Quy Tắc Vàng:</strong> Duy trì mảng <code>rank[i]</code> (chiều cao xấp xỉ của cây). Luôn treo gốc cây có <strong>rank nhỏ hơn</strong> vào dưới gốc cây có <strong>rank lớn hơn</strong>. Chiều cao của cây chỉ tăng thêm 1 khi 2 cây <u>cùng rank</u>!
-        </div>
-
-        <!-- Main Grid: C++ Source Code Left + Modern SVG Graphic Right -->
-        <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 14px; width: 100%; margin-bottom: 8px; align-items: stretch; flex-grow: 1;">
+        <!-- 2-Column Balanced Layout: CODE (Left) & THEORY (Right) -->
+        <div style="display: grid; grid-template-columns: 1.05fr 1.15fr; gap: 18px; width: 100%; align-items: stretch; flex-grow: 1; margin-bottom: 10px;">
             
-            <!-- Left Column: Unified Dark Code Box + Stacked Case List -->
-            <div style="display: flex; flex-direction: column; justify-content: space-between; text-align: left; gap: 8px;">
-                
-                <!-- Seamless Modern Dark Code Box -->
-                <div style="background: #0f172a; border-radius: 8px; padding: 10px 14px; color: #f8fafc; border: 1px solid #1e293b; box-shadow: 0 4px 12px rgba(15,23,42,0.15);">
-                    <div style="display: flex; justify-content: space-between; align-items: center; color: #94a3b8; font-size: 0.38em; margin-bottom: 8px; border-bottom: 1px solid #334155; padding-bottom: 6px;">
-                        <span style="font-weight: 700; color: #f8fafc;"><i class="fa-solid fa-code" style="color: #38bdf8; margin-right: 6px;"></i> C++: Union by Rank</span>
-                        <span style="background: #064e3b; color: #34d399; font-size: 0.85em; padding: 2px 8px; border-radius: 4px; font-weight: 700;">$O(\log N)$</span>
+            <!-- Cột 1: Cài Đặt Code C++ (Code Implementation) -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-code" style="color: #0284c7;"></i> Cài Đặt C++ (Implementation)
+                        </h4>
+                        <span style="font-size: 0.33em; color: #0284c7; font-weight: 700; background: #eff6ff; border: 1px solid #bfdbfe; padding: 2px 8px; border-radius: 4px;">C++ Code</span>
                     </div>
-                    <pre style="background: transparent; box-shadow: none; margin: 0; padding: 0; overflow: visible;"><code class="language-cpp" data-trim data-noescape style="background: transparent; color: #e2e8f0; font-size: 0.78em; font-family: 'Fira Code', monospace; line-height: 1.5; padding: 0;">void unionSets(int a, int b) {
-    a = find(a); b = find(b);
-    if (a == b) return;
-    
-    // Treo cây thấp hơn dưới cây cao hơn
-    if (rank[a] < rank[b]) swap(a, b);
-    
-    parent[b] = a; 
-    if (rank[a] == rank[b]) rank[a]++;
+
+                    <!-- Clean Code Snippet without any scrollbars -->
+                    <div style="background: #0f172a; border-radius: 8px; padding: 12px 14px; margin-bottom: 12px; border: 1px solid #1e293b;">
+                        <pre style="background: transparent; box-shadow: none; margin: 0; padding: 0; overflow: visible;"><code class="language-cpp" data-trim data-noescape style="background: transparent; color: #f8fafc; font-size: 0.74em; font-family: 'Fira Code', monospace; line-height: 1.45; padding: 0;">void unionByRank(int u, int v) {
+    int rootU = find(u);
+    int rootV = find(v);
+    if (rootU == rootV) return;
+
+    if (rank[rootU] < rank[rootV]) {
+        parent[rootU] = rootV;
+    } else if (rank[rootU] > rank[rootV]) {
+        parent[rootV] = rootU;
+    } else {
+        parent[rootV] = rootU;
+        rank[rootU]++; // Tăng rank khi 2 cây bằng nhau
+    }
 }</code></pre>
+                    </div>
+
+                    <!-- Code Note -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #0284c7; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                        <strong style="color: #0f172a;">Khởi tạo ban đầu:</strong> Mảng <code>parent[i] = i</code> và mảng <code>rank[i] = 0</code> với mọi $i \in \{0, \dots, N-1\}$.
+                    </div>
                 </div>
 
-                <!-- 3 Case Explanations -->
-                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 8px; padding: 10px 14px; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-                    <div style="color: #0f172a; font-size: 0.38em; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-layer-group" style="color: #059669;"></i> 3 Trường Hợp Ghép Cây Cụ Thể:
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.35em; color: #0f172a; line-height: 1.4;">
-                        <div style="background: #f8fafc; padding: 4px 8px; border-radius: 4px; border-left: 3px solid #059669;">
-                            <strong style="color: #059669;">1. rank[A] &gt; rank[B]:</strong> Treo $B$ vào $A$. Rank $A$ giữ nguyên.
-                        </div>
-                        <div style="background: #f8fafc; padding: 4px 8px; border-radius: 4px; border-left: 3px solid #0284c7;">
-                            <strong style="color: #0284c7;">2. rank[A] &lt; rank[B]:</strong> Treo $A$ vào $B$. Rank $B$ giữ nguyên.
-                        </div>
-                        <div style="background: #f8fafc; padding: 4px 8px; border-radius: 4px; border-left: 3px solid #7c3aed;">
-                            <strong style="color: #7c3aed;">3. rank[A] == rank[B]:</strong> Treo $B$ vào $A$. Tăng <code>rank[A]++</code> lên 1.
-                        </div>
-                    </div>
+                <div style="font-size: 0.33em; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 6px;">
+                    <i class="fa-solid fa-check" style="color: #059669; margin-right: 4px;"></i> Thuật toán chạy trong thời gian $O(1)$ tại bước gộp sau khi có Root.
                 </div>
             </div>
 
-            <!-- Right Column: Clean Non-Overlapping SVG Diagram -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between; text-align: left; box-shadow: 0 2px 5px rgba(0,0,0,0.03);">
-                <div style="font-size: 0.40em; font-weight: 800; color: #0f172a; margin-bottom: 4px;">
-                    <i class="fa-solid fa-sitemap" style="color: #059669; margin-right: 6px;"></i> Minh Họa: Treo Cây Thấp Vô Dưới Cây Cao
+            <!-- Cột 2: Lý Thuyết Giải Thuật (Algorithm Theory) -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-book-open" style="color: #059669;"></i> Lý Thuyết Giải Thuật (Theory)
+                        </h4>
+                        <span style="font-size: 0.33em; color: #065f46; font-weight: 700; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 2px 8px; border-radius: 4px;">Heuristic</span>
+                    </div>
+
+                    <!-- 3 Theoretical Pillars -->
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
+                        <!-- Pillar 1: Definition of Rank -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #059669; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">1. Khái niệm Rank:</strong> <code>rank[u]</code> là cận trên của chiều cao cây (Upper Bound of Tree Height) tại gốc $u$.
+                        </div>
+
+                        <!-- Pillar 2: Core Invariant -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #0284c7; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">2. Nguyên lý gộp:</strong> Luôn gán gốc của cây có rank nhỏ hơn làm con của cây có rank lớn hơn. Chiều cao chỉ tăng $+1$ khi hai cây có cùng rank.
+                        </div>
+
+                        <!-- Pillar 3: Mathematical Proof -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #7c3aed; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">3. Định lý chặn chiều cao:</strong> Một cây có rank $k$ cần tối thiểu $2^k$ nút để hình thành $\implies 2^k \le N \implies \mathbf{H \le \lfloor \log_2 N \rfloor}$.
+                        </div>
+                    </div>
                 </div>
 
-                <!-- SVG Graphic -->
-                <svg viewBox="0 0 350 140" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', sans-serif;">
-                    <defs>
-                        <marker id="arr-grn" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
-                            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669" />
-                        </marker>
-                    </defs>
-
-                    <!-- Tree A (Left, Rank 2) -->
-                    <circle cx="85" cy="25" r="13" fill="#059669"/><text x="85" y="28.5" fill="#fff" font-size="9" font-weight="800" text-anchor="middle">A</text>
-                    <text x="85" y="9" fill="#047857" font-size="8" font-weight="800" text-anchor="middle">rank = 2</text>
-
-                    <!-- Children of A -->
-                    <line x1="85" y1="38" x2="50" y2="64" stroke="#059669" stroke-width="2"/>
-                    <line x1="85" y1="38" x2="120" y2="64" stroke="#059669" stroke-width="2"/>
-                    <line x1="50" y1="74" x2="50" y2="94" stroke="#059669" stroke-width="2"/>
-
-                    <circle cx="50" cy="69" r="10" fill="#d1fae5" stroke="#059669" stroke-width="1.8"/><text x="50" y="72" fill="#047857" font-size="8" font-weight="800" text-anchor="middle">A1</text>
-                    <circle cx="120" cy="69" r="10" fill="#d1fae5" stroke="#059669" stroke-width="1.8"/><text x="120" y="72" fill="#047857" font-size="8" font-weight="800" text-anchor="middle">A2</text>
-                    <circle cx="50" cy="101" r="9" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/><text x="50" y="103.5" fill="#334155" font-size="7.5" font-weight="800" text-anchor="middle">A11</text>
-
-                    <!-- Tree B (Right, Rank 1) -->
-                    <circle cx="265" cy="45" r="13" fill="#0284c7"/><text x="265" y="48.5" fill="#fff" font-size="9" font-weight="800" text-anchor="middle">B</text>
-                    <text x="265" y="29" fill="#0369a1" font-size="8" font-weight="800" text-anchor="middle">rank = 1</text>
-
-                    <!-- Child B1 -->
-                    <line x1="265" y1="58" x2="265" y2="78" stroke="#0284c7" stroke-width="2"/>
-                    <circle cx="265" cy="84" r="9" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.8"/><text x="265" y="86.5" fill="#0369a1" font-size="7.5" font-weight="800" text-anchor="middle">B1</text>
-
-                    <!-- Union Connection Curved Arrow: B -> A -->
-                    <path d="M 250,40 Q 180,15 102,22" fill="none" stroke="#059669" stroke-width="2.5" stroke-dasharray="4,3" marker-end="url(#arr-grn)"/>
-                    <text x="180" y="13" fill="#059669" font-size="8" font-weight="800" text-anchor="middle">Nối B dưới Root A</text>
-
-                    <!-- Height Guarantee Box -->
-                    <rect x="110" y="112" width="230" height="24" rx="5" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2"/>
-                    <text x="225" y="128" fill="#166534" font-size="8" font-weight="800" text-anchor="middle">✓ Chiều cao: H = max(2, 1+1) = 2 (Không tăng!)</text>
-                </svg>
-
-                <div style="background: #f0fdf4; border-radius: 6px; padding: 6px 8px; font-size: 0.33em; color: #166534; text-align: center; font-weight: 700; border: 1px solid #bbf7d0;">
-                    <i class="fa-solid fa-tree" style="color: #059669; margin-right: 6px;"></i> Treo cây thấp (rank 1) vào dưới cây cao (rank 2) giúp giữ nguyên độ sâu của cây!
+                <!-- Complexity Summary Box -->
+                <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; padding: 8px 12px; font-size: 0.35em; color: #065f46; display: flex; align-items: center; justify-content: space-between;">
+                    <span><i class="fa-solid fa-chart-line" style="margin-right: 6px;"></i> Độ phức tạp thao tác:</span>
+                    <strong style="font-size: 1.15em;">$\mathcal{O}(\log N)$</strong>
                 </div>
             </div>
 
         </div>
 
-        <!-- Bottom Mathematical Guarantee Banner -->
-        <div style="width: 100%; background: #eff6ff; border: 1px solid #bfdbfe; border-left: 6px solid #2563eb; border-radius: 8px; padding: 10px 18px; font-size: 0.38em; color: #1e40af; text-align: left; display: flex; align-items: center; gap: 12px; line-height: 1.45;">
-            <i class="fa-solid fa-calculator" style="font-size: 1.25em; color: #2563eb; flex-shrink: 0;"></i>
-            <span><strong>ĐÁNH GIÁ ĐỘ PHỨC TẠP:</strong> Với kỹ thuật Union by Rank, chiều cao cây sau $N$ thao tác được chặn cứng ở mức $H \le \lfloor \log_2 N \rfloor$. Nhờ đó, chi phí tìm kiếm <code>find()</code> giảm mạnh từ $O(N)$ xuống còn <strong>$O(\log N)$</strong>!</span>
+        <!-- Cohesive Bottom Transition -->
+        <div style="width: 100%; background: #eff6ff; border: 1px solid #bfdbfe; border-left: 5px solid #2563eb; border-radius: 8px; padding: 10px 16px; font-size: 0.37em; color: #1e40af; text-align: left; display: flex; align-items: center; gap: 12px;">
+            <i class="fa-solid fa-arrow-right-long" style="font-size: 1.25em; color: #2563eb; flex-shrink: 0;"></i>
+            <span><strong>ĐỊNH HƯỚNG TỐI ƯU TIẾP THEO:</strong> Union by Rank đảm bảo chiều cao cây không quá $\mathcal{O}(\log N)$. Để đạt tốc độ <strong>tiệm cận hằng số $\mathcal{O}(1)$</strong>, giải thuật sẽ kết hợp thêm <strong>Path Compression</strong> (Slide 16).</span>
         </div>
 
     </div>
 
     <aside class="notes">
-        Kính thưa Thầy và các bạn, ở Slide 15, chúng ta tìm hiểu Kỹ thuật tối ưu 1: Union by Rank:
-        1. Quy tắc cốt lõi: Luôn duy trì mảng rank[] lưu chiều cao của từng cây. Khi gộp, cây thấp hơn (rank nhỏ hơn) bắt buộc phải được treo dưới gốc của cây cao hơn (rank lớn hơn).
-        2. Nhìn vào hình minh họa: Cây B có rank = 1 được nối dưới Cây A có rank = 2. Chiều cao tổng thể vẫn là 2, không hề bị tăng lên.
-        3. Kết quả lý thuyết: Chiều cao cây luôn được đảm bảo H <= log2(N). Chi phí find() giảm triệt để từ O(N) xuống O(log N).
+        Kính thưa Thầy và các bạn, ở Slide 15, chúng ta tìm hiểu Kỹ thuật 1: Union by Rank:
+        1. Về cài đặt code: Hàm unionByRank nhận 2 đỉnh u và v, tìm 2 gốc rootU và rootV. Nếu rank của rootU nhỏ hơn rootV, ta gán parent[rootU] = rootV; ngược lại gán parent[rootV] = rootU. Chỉ khi 2 cây cùng rank, ta mới gán và tăng rank lên 1.
+        2. Về lý thuyết giải thuật:
+           - Rank là cận trên của chiều cao cây, khởi tạo bằng 0.
+           - Quy tắc: Luôn gắn cây rank nhỏ vào cây rank lớn, nhờ đó chiều cao cây lớn không bị thay đổi.
+           - Định lý toán học: Một cây có rank k cần ít nhất 2^k nút để tạo thành. Vì vậy với N phần tử, chiều cao cây luôn bị chặn ở mức log2(N).
+        3. Kết quả: Độ phức tạp thao tác find() giảm từ O(N) xuống O(log N). Để tiến tới tiệm cận O(1), ta sẽ kết hợp thêm Path Compression ở slide tiếp theo.
     </aside>
 </section>
 
 <!-- ==================== SLIDE_16.HTML ==================== -->
 <section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
-    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 600px; display: flex; flex-direction: column; justify-content: space-between;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 590px; display: flex; flex-direction: column; justify-content: space-between;">
         
         <!-- Header -->
-        <div style="text-align: center; margin-bottom: 6px;">
-            <div class="badge" style="font-size: 0.44em; padding: 5px 18px; margin-bottom: 4px; display: inline-block;">PHẦN III — CẤU TRÚC UNION-FIND (DSU)</div>
-            <h2 style="font-size: 0.92em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
-                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Kỹ Thuật Tối Ưu 2: Nén Đường Đi (Path Compression)</span>
+        <div style="text-align: center; margin-bottom: 12px;">
+            <div class="badge" style="font-size: 0.42em; padding: 4px 18px; margin-bottom: 4px; display: inline-block;">PHẦN III — CẤU TRÚC UNION-FIND (DSU)</div>
+            <h2 style="font-size: 0.94em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Kỹ Thuật 2: Path Compression</span>
             </h2>
         </div>
 
-        <!-- Top Concept Callout -->
-        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-left: 6px solid #7c3aed; border-radius: 8px; padding: 10px 18px; text-align: left; font-size: 0.38em; color: #0f172a; line-height: 1.5; margin-bottom: 8px;">
-            <strong style="color: #6b21a8; text-transform: uppercase;"><i class="fa-solid fa-wand-magic-sparkles" style="margin-right: 8px;"></i> Cơ Chế Tự Tối Ưu (Self-Healing):</strong> Trong quá trình đệ quy đi tìm Nút Gốc, thuật toán đồng thời <strong>cập nhật lại con trỏ <code>parent</code> của tất cả các nút trung gian trỏ thẳng về Gốc</strong>, làm phẳng cấu trúc cây tức thì!
-        </div>
-
-        <!-- Middle Section: Recursive Code (Left) vs Before/After Diagram (Right) -->
-        <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 14px; width: 100%; margin-bottom: 8px; align-items: stretch; flex-grow: 1;">
+        <!-- 2-Column Balanced Layout: CODE (Left) & THEORY (Right) -->
+        <div style="display: grid; grid-template-columns: 1.05fr 1.15fr; gap: 18px; width: 100%; align-items: stretch; flex-grow: 1; margin-bottom: 10px;">
             
-            <!-- Left Column: Implementation & Logic -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #7c3aed; border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between; text-align: left; box-shadow: 0 2px 5px rgba(0,0,0,0.03);">
+            <!-- Cột 1: Cài Đặt Code C++ (Code Implementation) -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #7c3aed; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
                 <div>
-                    <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0 0 8px 0; display: flex; align-items: center; gap: 8px;">
-                        <i class="fa-solid fa-code" style="color: #7c3aed;"></i> Hàm <code>find(i)</code> Với 1 Dòng Đệ Quy
-                    </h4>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-code" style="color: #7c3aed;"></i> Cài Đặt C++ (Implementation)
+                        </h4>
+                        <span style="font-size: 0.33em; color: #6b21a8; font-weight: 700; background: #faf5ff; border: 1px solid #e9d5ff; padding: 2px 8px; border-radius: 4px;">1 Dòng Đệ Quy</span>
+                    </div>
 
-                    <!-- Code Snippet -->
-                    <pre style="background: #0f172a; border-radius: 6px; padding: 10px 12px; margin: 0 0 8px 0; font-size: 0.35em; line-height: 1.45; color: #f8fafc; font-family: 'Fira Code', monospace; overflow-x: auto;"><code><span style="color: #38bdf8;">int</span> <span style="color: #f59e0b;">find</span>(<span style="color: #38bdf8;">int</span> i) {
-    <span style="color: #f43f5e;">if</span> (parent[i] == i) 
-        <span style="color: #f43f5e;">return</span> i;
-    
-    <span style="color: #94a3b8;">// Nén đường đi: Gán trực tiếp kết quả đệ quy!</span>
-    <span style="color: #4ade80; font-weight: 800;">return parent[i] = find(parent[i]);</span>
+                    <!-- Clean Code Snippet without any scrollbars -->
+                    <div style="background: #0f172a; border-radius: 8px; padding: 12px 14px; margin-bottom: 12px; border: 1px solid #1e293b;">
+                        <pre style="background: transparent; box-shadow: none; margin: 0; padding: 0; overflow: visible;"><code class="language-cpp" data-trim data-noescape style="background: transparent; color: #f8fafc; font-size: 0.76em; font-family: 'Fira Code', monospace; line-height: 1.45; padding: 0;">int find(int i) {
+    if (parent[i] == i)
+        return i;
+
+    // Nén đường đi: Gán trực tiếp kết quả tìm gốc
+    return parent[i] = find(parent[i]);
 }</code></pre>
+                    </div>
 
-                    <div style="font-size: 0.35em; color: #0f172a; line-height: 1.45;">
-                        <strong style="color: #7c3aed;">2 Giai đoạn thực thi:</strong><br>
-                        1. <em>Lần ngược lên:</em> Tìm ra Nút Gốc đại diện.<br>
-                        2. <em>Quay lui gán lại:</em> Ép từng nút trên đường đi trỏ thẳng vào Gốc!
+                    <!-- Two-pass Recursion Breakdown -->
+                    <div style="display: flex; flex-direction: column; gap: 6px;">
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #7c3aed; border-radius: 4px; padding: 7px 10px; font-size: 0.34em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">Pha 1 (Lần ngược):</strong> Duyệt ngược theo chuỗi cha để tìm Nút Gốc đại diện (khi <code>parent[i] == i</code>).
+                        </div>
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #0284c7; border-radius: 4px; padding: 7px 10px; font-size: 0.34em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">Pha 2 (Quay lui & Gán):</strong> Khi đệ quy mở cuộn, kết quả Gốc được gán trực tiếp cho <code>parent[i]</code> của từng nút trên đường đi.
+                        </div>
                     </div>
                 </div>
 
-                <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 6px; padding: 6px 10px; font-size: 0.33em; color: #6b21a8; font-weight: 700; margin-top: 6px;">
-                    <i class="fa-solid fa-bolt" style="color: #7c3aed; margin-right: 6px;"></i> Chi phí nén: $0$ thao tác phụ — tích hợp tự nhiên vào lệnh gọi <code>find()</code>!
+                <div style="font-size: 0.33em; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 6px;">
+                    <i class="fa-solid fa-bolt" style="color: #7c3aed; margin-right: 4px;"></i> Chi phí nén: $0$ thao tác phụ — tích hợp tự nhiên vào luồng đệ quy <code>find()</code>.
                 </div>
             </div>
 
-            <!-- Right Column: Before vs After Tree Flattening Diagram -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #0284c7; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between; text-align: left; box-shadow: 0 2px 5px rgba(0,0,0,0.03);">
-                <div style="font-size: 0.40em; font-weight: 800; color: #0f172a; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center;">
-                    <span><i class="fa-solid fa-sitemap" style="color: #0284c7; margin-right: 6px;"></i> Trước vs Sau Khi Gọi <code>find(4)</code></span>
-                    <span style="font-size: 0.85em; background: #f0fdf4; color: #166534; padding: 2px 8px; border-radius: 4px; font-weight: 700;">Cây Làm Phẳng</span>
+            <!-- Cột 2: Lý Thuyết Giải Thuật (Algorithm Theory) -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-book-open" style="color: #0284c7;"></i> Lý Thuyết Giải Thuật (Theory)
+                        </h4>
+                        <span style="font-size: 0.33em; color: #0369a1; font-weight: 700; background: #f0f9ff; border: 1px solid #bae6fd; padding: 2px 8px; border-radius: 4px;">Heuristic</span>
+                    </div>
+
+                    <!-- 3 Theoretical Pillars -->
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
+                        <!-- Pillar 1: Tree Flattening -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #0284c7; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">1. Cơ chế làm phẳng (Tree Flattening):</strong> Toàn bộ các nút trung gian trên đường duyệt được nối thẳng vào Gốc $\implies$ Chiều cao của nhánh cây tức thì giảm về $1$.
+                        </div>
+
+                        <!-- Pillar 2: Self-Adjusting Property -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #7c3aed; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">2. Tính chất tự thích nghi (Self-Adjusting):</strong> Cấu trúc dữ liệu tự động tái cân bằng và tối ưu chính nó ngay trong lúc đọc dữ liệu (Read-time Optimization) mà không cần cấu trúc phụ.
+                        </div>
+
+                        <!-- Pillar 3: Amortized Analysis -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #059669; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">3. Phân tích khấu hao (Amortized Cost):</strong> Lần truy vấn đầu tiên có thể tốn $\mathcal{O}(H)$, nhưng tất cả các lần gọi <code>find()</code> tiếp theo trên các nút đó đạt thời gian tức thì $\mathbf{\mathcal{O}(1)}$.
+                        </div>
+                    </div>
                 </div>
 
-                <!-- SVG Before vs After Comparison -->
-                <svg viewBox="0 0 360 135" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', sans-serif;">
-                    <defs>
-                        <marker id="arr-blue-flat" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
-                            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0284c7" />
-                        </marker>
-                        <marker id="arr-purple-flat" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
-                            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#7c3aed" />
-                        </marker>
-                    </defs>
-
-                    <!-- Left: Before (Chain) -->
-                    <text x="65" y="14" fill="#64748b" font-size="7.5" font-weight="800" text-anchor="middle">Trước khi nén (Dây xích sâu)</text>
-                    <circle cx="65" cy="28" r="9" fill="#059669"/><text x="65" y="31" fill="#fff" font-size="7.5" font-weight="800" text-anchor="middle">0</text>
-                    <line x1="65" y1="50" x2="65" y2="39" stroke="#dc2626" stroke-width="1.6" marker-end="url(#arr-purple-flat)"/>
-                    <circle cx="65" cy="54" r="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.4"/><text x="65" y="56.5" fill="#991b1b" font-size="7" font-weight="800" text-anchor="middle">1</text>
-                    <line x1="65" y1="75" x2="65" y2="64" stroke="#dc2626" stroke-width="1.6" marker-end="url(#arr-purple-flat)"/>
-                    <circle cx="65" cy="79" r="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.4"/><text x="65" y="81.5" fill="#991b1b" font-size="7" font-weight="800" text-anchor="middle">2</text>
-                    <line x1="65" y1="100" x2="65" y2="89" stroke="#dc2626" stroke-width="1.6" marker-end="url(#arr-purple-flat)"/>
-                    <circle cx="65" cy="104" r="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.4"/><text x="65" y="106.5" fill="#991b1b" font-size="7" font-weight="800" text-anchor="middle">4</text>
-
-                    <!-- Transition Arrow in Middle -->
-                    <path d="M 115,65 L 145,65" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#arr-purple-flat)"/>
-                    <text x="130" y="56" fill="#7c3aed" font-size="7" font-weight="800" text-anchor="middle">find(4)</text>
-
-                    <!-- Right: After (Flat Tree) -->
-                    <text x="255" y="14" fill="#0284c7" font-size="7.5" font-weight="800" text-anchor="middle">Sau khi nén (Chiều cao H = 1)</text>
-                    <circle cx="255" cy="28" r="11" fill="#059669"/><text x="255" y="31.5" fill="#fff" font-size="8.5" font-weight="800" text-anchor="middle">0</text>
-                    <text x="255" y="44" fill="#065f46" font-size="6.5" font-weight="800" text-anchor="middle">(Root)</text>
-
-                    <!-- All direct arrows to Root 0 -->
-                    <line x1="190" y1="92" x2="242" y2="38" stroke="#0284c7" stroke-width="1.8" marker-end="url(#arr-blue-flat)"/>
-                    <line x1="235" y1="92" x2="251" y2="40" stroke="#0284c7" stroke-width="1.8" marker-end="url(#arr-blue-flat)"/>
-                    <line x1="275" y1="92" x2="259" y2="40" stroke="#0284c7" stroke-width="1.8" marker-end="url(#arr-blue-flat)"/>
-                    <line x1="320" y1="92" x2="268" y2="38" stroke="#0284c7" stroke-width="1.8" marker-end="url(#arr-blue-flat)"/>
-
-                    <circle cx="190" cy="98" r="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.4"/><text x="190" y="100.5" fill="#0369a1" font-size="7" font-weight="800" text-anchor="middle">1</text>
-                    <circle cx="235" cy="98" r="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.4"/><text x="235" y="100.5" fill="#0369a1" font-size="7" font-weight="800" text-anchor="middle">2</text>
-                    <circle cx="275" cy="98" r="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.4"/><text x="275" y="100.5" fill="#0369a1" font-size="7" font-weight="800" text-anchor="middle">3</text>
-                    <circle cx="320" cy="98" r="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.4"/><text x="320" y="100.5" fill="#0369a1" font-size="7" font-weight="800" text-anchor="middle">4</text>
-                </svg>
-
-                <div style="background: #f0fdf4; border-radius: 6px; padding: 5px 8px; font-size: 0.33em; color: #166534; text-align: center; font-weight: 700; border: 1px solid #bbf7d0;">
-                    <i class="fa-solid fa-bolt" style="color: #16a34a; margin-right: 6px;"></i> Tất cả các lần gọi <code>find()</code> tiếp theo trên các nút 1, 2, 3, 4 đạt tốc độ $O(1)$!
+                <!-- Complexity Summary Box -->
+                <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: 8px 12px; font-size: 0.35em; color: #0369a1; display: flex; align-items: center; justify-content: space-between;">
+                    <span><i class="fa-solid fa-chart-line" style="margin-right: 6px;"></i> Độ phức tạp khấu hao độc lập:</span>
+                    <strong style="font-size: 1.15em;">$\mathcal{O}(\log N)$</strong>
                 </div>
             </div>
 
         </div>
 
-        <!-- Bottom Performance Banner -->
-        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 6px solid #059669; border-radius: 8px; padding: 10px 18px; font-size: 0.38em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 12px; line-height: 1.45;">
+        <!-- Cohesive Bottom Banner -->
+        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 5px solid #059669; border-radius: 8px; padding: 10px 16px; font-size: 0.37em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 12px;">
             <i class="fa-solid fa-circle-check" style="font-size: 1.25em; color: #059669; flex-shrink: 0;"></i>
-            <span><strong>SỰ KẾT HỢP HOÀN HẢO:</strong> Khi phối hợp cả <strong>Union by Rank</strong> và <strong>Path Compression</strong>, thời gian khấu hao trung bình cho mỗi thao tác đạt <strong>$O(\alpha(N))$</strong> — tiệm cận $O(1)$ tuyệt đối!</span>
+            <span><strong>TỔNG KẾT:</strong> Sự kết hợp giữa <strong>Union by Rank</strong> và <strong>Path Compression</strong> giúp mọi thao tác trên DSU đạt hiệu năng tối ưu, <strong>tiệm cận $\mathcal{O}(1)$</strong>.</span>
         </div>
 
     </div>
 
     <aside class="notes">
-        Kính thưa Thầy và các bạn, ở Slide 16, chúng ta đến với Kỹ thuật tối ưu số 2: Path Compression (Nén đường đi):
-        1. Cơ chế đệ quy: Chỉ bằng 1 dòng code return parent[i] = find(parent[i]), hàm find() vừa tìm gốc, vừa tự động cập nhật mảng parent[].
-        2. Nhìn vào sơ đồ Trước vs Sau: Trước khi gọi find(4), cây là một chuỗi dây xích dài. Ngay sau khi gọi find(4), tất cả các nút 1, 2, 4 lập tức được gắn thẳng vào Gốc 0.
-        3. Kết luận: Lần truy vấn sau vào bất kỳ nút nào chỉ tốn đúng 1 bước O(1). Khi kết hợp với Union by Rank, toàn bộ cấu trúc DSU đạt thời gian khấu hao vi diệu O(alpha(N)).
+        Kính thưa Thầy và các bạn, ở Slide 16, chúng ta đến với Kỹ thuật 2: Path Compression:
+        1. Về cài đặt code: Chỉ bằng một biểu thức đệ quy duy nhất `return parent[i] = find(parent[i])`, giải thuật thực hiện qua 2 pha:
+           - Pha lần ngược: Tìm nút gốc thỏa mãn điều kiện parent[i] == i.
+           - Pha quay lui: Khi đệ quy mở cuộn, kết quả gốc được gán trực tiếp cho parent[i] của từng nút trên đường đi.
+        2. Về lý thuyết giải thuật:
+           - Làm phẳng cây (Tree Flattening): Chiều cao toàn bộ nhánh cây giảm tức thì về 1, các nút trung gian đều trỏ thẳng vào Gốc.
+           - Tính tự thích nghi (Self-Adjusting): Cây tự tối ưu cấu trúc ngay trong quá trình đọc dữ liệu mà không tốn chi phí phụ.
+           - Chi phí khấu hao: Sau lần gọi đầu tiên, mọi truy vấn find() tiếp theo trên các nút này đều đạt thời gian tức thì O(1).
+        3. Kết luận: Sự kết hợp giữa Union by Rank và Path Compression giúp mọi thao tác trên DSU đạt hiệu năng tối ưu, tiệm cận O(1).
     </aside>
 </section>
 
 <!-- ==================== SLIDE_17.HTML ==================== -->
-<section data-transition="slide">
-    <!-- Top Badge -->
-    <div class="badge badge-gold" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN III: CẤU TRÚC UNION-FIND (DSU)</div>
-    <h3 style="font-size: 0.82em; margin: 0 0 6px 0; color: #0f172a; font-weight: 700;">Phân Tích Độ Phức Tạp & Hàm Ngược Ackermann $\alpha(N)$</h3>
-
-    <!-- Sub-header Callout -->
-    <div style="width: 100%; background: #f0f9ff; border: 1px solid #bae6fd; border-left: 4px solid #0284c7; border-radius: 6px; padding: 6px 12px; margin-bottom: 10px; font-size: 0.34em; color: #0369a1; text-align: left;">
-        <i class="fa-solid fa-square-root-variable" style="color: #0284c7; margin-right: 6px;"></i>
-        <strong>KẾT QUẢ ĐỘ PHỨC TẠP:</strong> Khi kết hợp <u>Union by Rank</u> + <u>Path Compression</u>, chi phí khấu hao mỗi thao tác <code>find()</code> và <code>union()</code> đạt <strong>$O(\alpha(N))$</strong> — tiệm cận thời gian hằng số!
-    </div>
-
-    <!-- 2-Column Asymmetric Layout -->
-    <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 12px; width: 100%; text-align: left; align-items: stretch;">
+<section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 590px; display: flex; flex-direction: column; justify-content: space-between;">
         
-        <!-- Left Column: Math Intuition Card -->
-        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #7c3aed; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-                <h4 style="color: #7c3aed; font-size: 0.38em; font-weight: 800; margin: 0 0 6px 0; display: flex; align-items: center; gap: 6px;">
-                    <i class="fa-solid fa-infinity"></i> 1. Trực Giác Hàm $\alpha(N)$
-                </h4>
-                <div style="font-size: 0.29em; color: #334155; line-height: 1.45;">
-                    <p style="margin: 0 0 6px 0;">
-                        <strong>Hàm Ackermann $A(m, n)$:</strong> Là hàm toán học có tốc độ tăng trưởng cực kỳ nhanh (vượt xa hàm lũy thừa tầng $2^{2^{.^{.}}}$).
-                    </p>
-                    <p style="margin: 0;">
-                        <strong>Hàm ngược $\alpha(N)$:</strong> Ngược lại, là hàm có tốc độ tăng trưởng cực kỳ chậm trong lý thuyết độ phức tạp!
-                    </p>
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 12px;">
+            <div class="badge" style="font-size: 0.42em; padding: 4px 18px; margin-bottom: 4px; display: inline-block;">PHẦN III — CẤU TRÚC UNION-FIND (DSU)</div>
+            <h2 style="font-size: 0.94em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Độ Phức Tạp & Hàm Ngược Ackermann $\alpha(N)$</span>
+            </h2>
+        </div>
+
+        <!-- 2-Column Balanced Layout: MATHEMATICAL THEORY (Left) & BENCHMARK TABLE (Right) -->
+        <div style="display: grid; grid-template-columns: 1.05fr 1.15fr; gap: 18px; width: 100%; align-items: stretch; flex-grow: 1; margin-bottom: 10px;">
+            
+            <!-- Cột 1: Bản Chất Toán Học (Mathematical Foundation) -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #7c3aed; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-calculator" style="color: #7c3aed;"></i> Bản Chất Toán Học (Theory)
+                        </h4>
+                        <span style="font-size: 0.33em; color: #6b21a8; font-weight: 700; background: #faf5ff; border: 1px solid #e9d5ff; padding: 2px 8px; border-radius: 4px;">Định Lý Tarjan (1975)</span>
+                    </div>
+
+                    <!-- 3 Logical Concept Blocks -->
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #7c3aed; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">1. Định lý Tarjan (1975):</strong> Khi kết hợp đồng thời <em>Union by Rank</em> và <em>Path Compression</em>, chi phí khấu hao cho mỗi thao tác đạt <strong>$\mathcal{O}(\alpha(N))$</strong>.
+                        </div>
+
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #0284c7; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">2. Hàm Ackermann $A(m, n)$ :</strong> Là hàm toán học có tốc độ tăng trưởng rất nhanh (vượt xa các hàm đa thức và hàm mũ thông thường).
+                        </div>
+
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #059669; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">3. Hàm ngược $\alpha(N)$ :</strong> Có tốc độ tăng trưởng <strong>cực kỳ chậm</strong> trong khoa học máy tính — giá trị gần như không đổi khi $N$ tăng quy mô.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deep Context Note -->
+                <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 6px; padding: 8px 10px; font-size: 0.33em; color: #6b21a8; line-height: 1.45;">
+                    <i class="fa-solid fa-atom" style="color: #7c3aed; margin-right: 6px;"></i> Để $\alpha(N) = 5$, quy mô $N$ cần đạt tới $2^{65536}$ — một ngưỡng vượt quá các giới hạn tính toán thực tế.
                 </div>
             </div>
 
-            <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 6px; padding: 6px 8px; font-size: 0.27em; color: #6b21a8; font-weight: 600; margin-top: 8px;">
-                <i class="fa-solid fa-microchip" style="color: #7c3aed; margin-right: 4px;"></i> Để $\alpha(N) = 5$, quy mô $N$ phải vượt ngưỡng $2^{65536}$ (vượt xa mọi giới hạn phần cứng và không gian địa chỉ vật lý)!
+            <!-- Cột 2: Bảng Tra Cứu Tốc Độ Thực Tế (Benchmark Values) -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-table-list" style="color: #059669;"></i> Tra Cứu Thực Tế (Benchmark Values)
+                        </h4>
+                        <span style="font-size: 0.33em; color: #065f46; font-weight: 700; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 2px 8px; border-radius: 4px;">Thực Nghiệm</span>
+                    </div>
+
+                    <!-- Clean Modern Table -->
+                    <div style="overflow: hidden; border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 10px;">
+                        <table style="font-size: 0.35em; margin: 0; width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: #0f172a; color: #ffffff;">
+                                    <th style="padding: 7px 10px; text-align: left; border-bottom: 2px solid #1e293b;">Quy Mô Dữ Liệu $N$</th>
+                                    <th style="padding: 7px 10px; text-align: center; border-bottom: 2px solid #1e293b;">Giá Trị $\alpha(N)$</th>
+                                    <th style="padding: 7px 10px; text-align: right; border-bottom: 2px solid #1e293b;">Đánh Giá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: #ffffff; border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 6px 10px; font-weight: 600; color: #0f172a;">$N = 1 \dots 3$</td>
+                                    <td style="padding: 6px 10px; text-align: center; font-weight: 700; color: #059669;">$\alpha(N) = 1$</td>
+                                    <td style="padding: 6px 10px; text-align: right; color: #64748b;">Tức thì</td>
+                                </tr>
+                                <tr style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 6px 10px; font-weight: 600; color: #0f172a;">$N = 4 \dots 7$</td>
+                                    <td style="padding: 6px 10px; text-align: center; font-weight: 700; color: #059669;">$\alpha(N) = 2$</td>
+                                    <td style="padding: 6px 10px; text-align: right; color: #64748b;">Tức thì</td>
+                                </tr>
+                                <tr style="background: #ffffff; border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 6px 10px; font-weight: 600; color: #0f172a;">$N = 8 \dots 2047$</td>
+                                    <td style="padding: 6px 10px; text-align: center; font-weight: 700; color: #059669;">$\alpha(N) = 3$</td>
+                                    <td style="padding: 6px 10px; text-align: right; color: #64748b;">Tối ưu cao</td>
+                                </tr>
+                                <tr style="background: #fefce8; border-bottom: none;">
+                                    <td style="padding: 7px 10px; font-weight: 700; color: #854d0e;">
+                                        $N = 2048 \dots 2^{64}$<br>
+                                        <span style="font-size: 0.85em; color: #a16207; font-weight: 500;">(Vượt ngưỡng địa chỉ 64-bit)</span>
+                                    </td>
+                                    <td style="padding: 7px 10px; text-align: center; font-size: 1.15em; font-weight: 800; color: #854d0e;">$\alpha(N) \le 4$</td>
+                                    <td style="padding: 7px 10px; text-align: right; font-weight: 700; color: #854d0e;">Thực tế ứng dụng</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Bound Pill -->
+                <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; padding: 8px 12px; font-size: 0.35em; color: #065f46; display: flex; align-items: center; justify-content: space-between;">
+                    <span><i class="fa-solid fa-gauge-high" style="margin-right: 6px;"></i> Giới hạn thực tế:</span>
+                    <strong style="font-size: 1.15em;">$\alpha(N) \le 4$ trong phần lớn bài toán</strong>
+                </div>
             </div>
+
         </div>
 
-        <!-- Right Column: Practical Benchmark Growth Table -->
-        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-                <h4 style="color: #059669; font-size: 0.38em; font-weight: 800; margin: 0 0 6px 0; display: flex; align-items: center; gap: 6px;">
-                    <i class="fa-solid fa-table" style="color: #059669;"></i> 2. Bảng Tra Cứu Tốc Độ Thực Tế
-                </h4>
-                <table style="font-size: 0.32em; margin: 0; width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden;">
-                    <thead>
-                        <tr style="background: #059669; color: #ffffff;">
-                            <th style="padding: 5px 8px; background: #059669; color: #fff;">Quy Mô Dữ Liệu $N$</th>
-                            <th style="padding: 5px 8px; background: #047857; color: #fff; text-align: center;">Giá Trị $\alpha(N)$</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>$N = 1 \dots 3$</td>
-                            <td style="text-align: center; font-weight: 700;">$\alpha(N) = 1$</td>
-                        </tr>
-                        <tr>
-                            <td>$N = 4 \dots 7$</td>
-                            <td style="text-align: center; font-weight: 700;">$\alpha(N) = 2$</td>
-                        </tr>
-                        <tr>
-                            <td>$N = 8 \dots 2047$</td>
-                            <td style="text-align: center; font-weight: 700;">$\alpha(N) = 3$</td>
-                        </tr>
-                        <tr style="background: #fef3c7; color: #78350f; font-weight: 800;">
-                            <td>$N = 2048 \dots 2^{64}$ <br><span style="font-size: 0.85em; color: #b45309;">(Vượt xa giới hạn địa chỉ 64-bit)</span></td>
-                            <td style="text-align: center; font-size: 1.1em; color: #b45309;">$\alpha(N) \le 4$</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <!-- Cohesive Bottom Banner -->
+        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 5px solid #059669; border-radius: 8px; padding: 10px 16px; font-size: 0.37em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 12px;">
+            <i class="fa-solid fa-circle-check" style="font-size: 1.25em; color: #059669; flex-shrink: 0;"></i>
+            <span><strong>TỔNG KẾT THỰC TIỄN:</strong> Do $\alpha(N) \le 4$ trong hầu hết ứng dụng, cấu trúc DSU thường được đánh giá là đạt hiệu năng tiệm cận <strong>$\mathcal{O}(1)$</strong>.</span>
         </div>
 
-    </div>
-
-    <!-- Bottom Full Width System Architect Guarantee Banner -->
-    <div style="width: 100%; margin-top: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #059669; border-radius: 6px; padding: 6px 14px; font-size: 0.35em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-circle-check" style="font-size: 1.2em; color: #059669; flex-shrink: 0;"></i>
-        <span><strong>KẾT LUẬN THỰC TẾ:</strong> Với mọi quy mô dữ liệu thực tế ($N < 2^{65536}$), hàm $\alpha(N) \le 4$. Do đó trong kỹ thuật, chi phí khấu hao <strong>$O(\alpha(N))$ được coi là tiệm cận thời gian hằng số $O(1)$!</strong></span>
     </div>
 
     <aside class="notes">
-        Hàm ngược Ackermann alpha(N) là kết quả phân tích lý thuyết quan trọng. Với mọi quy mô dữ liệu thực tế, giá trị alpha(N) không vượt quá 4, cho thấy hiệu năng tiệm cận hằng số của DSU khi kết hợp cả hai kỹ thuật tối ưu.
-    </aside>
-</section>
-
-<!-- ==================== SLIDE_18.HTML ==================== -->
-<section data-transition="slide">
-    <!-- Top Badge -->
-    <div class="badge badge-gold" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN III: CẤU TRÚC UNION-FIND (DSU)</div>
-    <h3 style="font-size: 0.82em; margin: 0 0 8px 0; color: #0f172a; font-weight: 700;">Bảng Mô Phỏng Vết (Trace Table) Từng Bước Thực Thi DSU</h3>
-
-    <!-- Main Trace Table -->
-    <div style="width: 100%; margin-bottom: 8px;">
-        <table style="font-size: 0.34em; margin: 0; width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; text-align: left;">
-            <thead>
-                <tr style="background: #0284c7; color: #ffffff;">
-                    <th style="padding: 6px 8px; width: 6%; text-align: center; background: #0284c7; color: #fff;">Bước</th>
-                    <th style="padding: 6px 10px; width: 18%; background: #0369a1; color: #fff;">Thao Tác Tác Động</th>
-                    <th style="padding: 6px 10px; width: 25%; background: #0284c7; color: #fff;">Mảng <code>parent[]</code> Sau Bước</th>
-                    <th style="padding: 6px 10px; width: 22%; background: #0284c7; color: #fff;">Mảng <code>rank[]</code></th>
-                    <th style="padding: 6px 10px; background: #0284c7; color: #fff;">Phân Tích Chi Tiết Mechanism</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="text-align: center; font-weight: 700; color: #64748b;">0</td>
-                    <td style="font-family: 'Fira Code', monospace; color: #0284c7; font-weight: 700;">Init(7)</td>
-                    <td style="font-family: 'Fira Code', monospace;">[0, 1, 2, 3, 4, 5, 6]</td>
-                    <td style="font-family: 'Fira Code', monospace;">[0, 0, 0, 0, 0, 0, 0]</td>
-                    <td>Khởi tạo 7 tập hợp độc lập (mỗi nút tự làm gốc của chính nó).</td>
-                </tr>
-                <tr>
-                    <td style="text-align: center; font-weight: 700; color: #64748b;">1</td>
-                    <td style="font-family: 'Fira Code', monospace; color: #0284c7; font-weight: 700;">union(0, 1)</td>
-                    <td style="font-family: 'Fira Code', monospace;">[0, 0, 2, 3, 4, 5, 6]</td>
-                    <td style="font-family: 'Fira Code', monospace;">[1, 0, 0, 0, 0, 0, 0]</td>
-                    <td>Gộp nút 1 dưới gốc 0. <code>rank[0]</code> tăng từ 0 lên 1.</td>
-                </tr>
-                <tr>
-                    <td style="text-align: center; font-weight: 700; color: #64748b;">2</td>
-                    <td style="font-family: 'Fira Code', monospace; color: #0284c7; font-weight: 700;">union(1, 2)</td>
-                    <td style="font-family: 'Fira Code', monospace;">[0, 0, 0, 3, 4, 5, 6]</td>
-                    <td style="font-family: 'Fira Code', monospace;">[1, 0, 0, 0, 0, 0, 0]</td>
-                    <td><code>find(1)=0, find(2)=2</code>. Treo 2 dưới gốc 0 (Rank 0 giữ nguyên 1).</td>
-                </tr>
-                <tr>
-                    <td style="text-align: center; font-weight: 700; color: #64748b;">3</td>
-                    <td style="font-family: 'Fira Code', monospace; color: #0284c7; font-weight: 700;">union(2, 3)</td>
-                    <td style="font-family: 'Fira Code', monospace;">[0, 0, 0, 0, 4, 5, 6]</td>
-                    <td style="font-family: 'Fira Code', monospace;">[1, 0, 0, 0, 0, 0, 0]</td>
-                    <td><code>find(2)=0, find(3)=3</code>. Treo 3 dưới gốc 0.</td>
-                </tr>
-                <!-- Highlight Path Compression Row -->
-                <tr style="background: #e0f2fe;">
-                    <td style="text-align: center; font-weight: 800; color: #0369a1;">4</td>
-                    <td style="font-family: 'Fira Code', monospace; color: #0369a1; font-weight: 800;">connected(0,3)</td>
-                    <td style="font-family: 'Fira Code', monospace; font-weight: 700; color: #0369a1;">[0, 0, 0, 0, 4, 5, 6]</td>
-                    <td style="font-family: 'Fira Code', monospace;">[1, 0, 0, 0, 0, 0, 0]</td>
-                    <td style="color: #0369a1; font-weight: 700;"><i class="fa-solid fa-bolt" style="margin-right: 4px;"></i> Trả về True. Path Compression đưa nút 3 nối thẳng vào gốc 0!</td>
-                </tr>
-                <tr>
-                    <td style="text-align: center; font-weight: 700; color: #64748b;">5</td>
-                    <td style="font-family: 'Fira Code', monospace; color: #0284c7; font-weight: 700;">union(4, 5)</td>
-                    <td style="font-family: 'Fira Code', monospace;">[0, 0, 0, 0, 4, 4, 6]</td>
-                    <td style="font-family: 'Fira Code', monospace;">[1, 0, 0, 0, 1, 0, 0]</td>
-                    <td>Gộp 5 vào gốc 4. <code>rank[4]</code> tăng thành 1.</td>
-                </tr>
-                <!-- Highlight Rank Tie Row -->
-                <tr style="background: #f3e8ff;">
-                    <td style="text-align: center; font-weight: 800; color: #6b21a8;">6</td>
-                    <td style="font-family: 'Fira Code', monospace; color: #6b21a8; font-weight: 800;">union(3, 5)</td>
-                    <td style="font-family: 'Fira Code', monospace; font-weight: 700; color: #6b21a8;">[0, 0, 0, 0, 0, 4, 6]</td>
-                    <td style="font-family: 'Fira Code', monospace; font-weight: 700; color: #6b21a8;">[2, 0, 0, 0, 1, 0, 0]</td>
-                    <td style="color: #6b21a8; font-weight: 700;"><i class="fa-solid fa-layer-group" style="margin-right: 4px;"></i> <code>find(3)=0, find(5)=4</code>. Cùng Rank=1 $\implies$ Treo 4 vào 0, <code>rank[0]</code> lên 2!</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Bottom Key Insight Banner -->
-    <div style="width: 100%; margin-top: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #059669; border-radius: 6px; padding: 6px 14px; font-size: 0.35em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-lightbulb" style="font-size: 1.2em; color: #059669; flex-shrink: 0;"></i>
-        <span><strong>ĐIỂM SÁNG KĨ THUẬT:</strong> Nhờ Path Compression, sau mỗi phép truy vấn <code>find()</code>, các nút trên đường đi lập tức được nối thẳng về Gốc Đại Diện 0, giúp giảm mạnh chiều cao của cây đối với các lần truy vấn tiếp theo!</span>
-    </div>
-
-    <aside class="notes">
-        Bảng vết này minh họa chi tiết quá trình biến đổi trạng thái của mảng parent và rank trong DSU. Hãy chú ý bước 4 và bước 6: Ngay khi hàm connected hoặc union được gọi, cơ chế nén đường đi lập tức đưa các nút về kết nối trực tiếp với nút gốc đại diện 0.
+        Kính thưa Thầy và các bạn, ở Slide 17, chúng ta cùng phân tích độ phức tạp của DSU:
+        1. Về mặt lý thuyết: Robert Tarjan đã chứng minh khi kết hợp Union by Rank và Path Compression, chi phí khấu hao mỗi thao tác đạt O(alpha(N)).
+        2. Về hàm ngược Ackermann: Do hàm Ackermann tăng rất nhanh, hàm ngược alpha(N) tăng cực kỳ chậm.
+        3. Nhìn vào bảng tra cứu: Ở các quy mô dữ liệu thực tế (kể cả 2^64), alpha(N) thường không vượt quá 4.
+        4. Vì vậy, trong kỹ thuật phần mềm, DSU thường được đánh giá là tiệm cận hiệu năng O(1).
     </aside>
 </section>
 
 <!-- ==================== SLIDE_19.HTML ==================== -->
-<section data-transition="slide">
-    <!-- Top Badge -->
-    <div class="badge badge-gold" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN III: CẤU TRÚC UNION-FIND (DSU)</div>
-    <h3 style="font-size: 0.82em; margin: 0 0 8px 0; color: #0f172a; font-weight: 700;">Bẫy Cài Đặt, Union by Size & Thuật Toán Kruskal (MST)</h3>
-
-    <!-- 2-Column Light Layout (NO DARK BOXES!) -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; text-align: left; align-items: stretch;">
+<section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 590px; display: flex; flex-direction: column; justify-content: space-between;">
         
-        <!-- Left Column: Traps Warning + Union by Size -->
-        <div style="display: flex; flex-direction: column; gap: 8px; justify-content: space-between;">
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 12px;">
+            <div class="badge" style="font-size: 0.42em; padding: 4px 18px; margin-bottom: 4px; display: inline-block;">PHẦN III — CẤU TRÚC UNION-FIND (DSU)</div>
+            <h2 style="font-size: 0.94em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Ứng Dụng Kinh Điển: Thuật Toán Kruskal (MST)</span>
+            </h2>
+        </div>
+
+        <!-- 2-Column Balanced Layout: ALGORITHM LOGIC (Left) & COMPLEXITY BREAKDOWN (Right) -->
+        <div style="display: grid; grid-template-columns: 1.05fr 1.15fr; gap: 18px; width: 100%; align-items: stretch; flex-grow: 1; margin-bottom: 10px;">
             
-            <!-- Trap Warning Box -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #dc2626; border-radius: 8px; padding: 10px 12px;">
-                <div style="color: #dc2626; font-size: 0.36em; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
-                    <i class="fa-solid fa-triangle-exclamation"></i> 1. Cảnh Báo Bẫy Cài Đặt (Implementation Trap)
+            <!-- Cột 1: Nguyên Lý Giải Thuật & Vai Trò DSU -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-sitemap" style="color: #0284c7;"></i> Nguyên Lý Giải Thuật (Principles)
+                        </h4>
+                        <span style="font-size: 0.33em; color: #0369a1; font-weight: 700; background: #f0f9ff; border: 1px solid #bae6fd; padding: 2px 8px; border-radius: 4px;">Greedy Strategy</span>
+                    </div>
+
+                    <!-- 3 Academic Concept Blocks -->
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #0284c7; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">1. Bài toán Cây khung nhỏ nhất (MST):</strong> Tìm tập hợp gồm đúng $V - 1$ cạnh kết nối toàn bộ $V$ đỉnh sao cho <strong>tổng trọng số là nhỏ nhất</strong> và <strong>không tạo chu trình</strong>.
+                        </div>
+
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #7c3aed; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">2. Chiến lược Tham lam (Greedy Choice):</strong> Lần lượt duyệt qua các cạnh theo thứ tự trọng số từ nhỏ nhất đến lớn nhất để xem xét nạp vào cây khung.
+                        </div>
+
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #059669; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">3. Vai trò cốt lõi của DSU (Phát hiện chu trình):</strong>
+                            <br>• Nếu hai đỉnh $u, v$ có <code>find(u) == find(v)</code>: Bỏ qua (Đã liên thông $\to$ Tạo chu trình kín).
+                            <br>• Nếu <code>find(u) != find(v)</code>: Kết nạp cạnh vào MST và hợp nhất hai cây bằng <code>union(u, v)</code>.
+                        </div>
+                    </div>
                 </div>
-                <div style="font-size: 0.29em; color: #334155; line-height: 1.45;">
-                    <strong style="color: #dc2626;">LỖI SAI ĐIỂN HÌNH:</strong> Gán trực tiếp cha không qua <code>find()</code>:
-                </div>
-                <div style="background: #fff1f2; border: 1px solid #fecdd3; padding: 4px 8px; border-radius: 4px; margin: 4px 0; font-family: 'Fira Code', monospace; color: #991b1b; font-size: 0.28em;">
-                    parent[a] = b; // SAI (Cắt đứt nhánh cây dưới a!)
-                </div>
-                <div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 4px 8px; border-radius: 4px; font-family: 'Fira Code', monospace; color: #047857; font-size: 0.28em;">
-                    parent[find(a)] = find(b); // ĐÚNG (Luôn gán trên gốc!)
+
+                <!-- Theory Note -->
+                <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: 8px 10px; font-size: 0.33em; color: #0369a1; line-height: 1.45;">
+                    <i class="fa-solid fa-shield-halved" style="color: #0284c7; margin-right: 6px;"></i> <strong>Đảm bảo tính phi chu trình:</strong> Nhờ cơ chế gộp tập hợp rời rạc, DSU bảo toàn cấu trúc cây tại mọi bước lặp.
                 </div>
             </div>
 
-            <!-- Union by Size Light Box -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #0284c7; border-radius: 8px; padding: 10px 12px;">
-                <div style="color: #0284c7; font-size: 0.36em; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
-                    <i class="fa-solid fa-layer-group"></i> 2. Kỹ Thuật Union by Size (Giải Pháp Thay Thế)
+            <!-- Cột 2: Phân Tích Độ Phức Tạp & Hiệu Năng Toàn Cục -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-chart-pie" style="color: #059669;"></i> Phân Tích Độ Phức Tạp (Complexity)
+                        </h4>
+                        <span style="font-size: 0.33em; color: #065f46; font-weight: 700; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 2px 8px; border-radius: 4px;">Two-Phase Analysis</span>
+                    </div>
+
+                    <!-- 2 Phases Breakdown -->
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #d97706; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">Pha 1 — Sắp xếp danh sách cạnh:</strong> Sắp xếp toàn bộ $E$ cạnh theo thứ tự trọng số tăng dần, tốn chi phí <strong>$\mathcal{O}(E \log E)$</strong>.
+                        </div>
+
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #059669; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">Pha 2 — Duyệt & Hợp nhất DSU:</strong> Thực hiện tối đa $2E$ lần truy vấn <code>find()</code> và $V - 1$ lần gộp <code>union()</code>, chi phí đạt <strong>$\mathcal{O}(E \cdot \alpha(V))$</strong>.
+                        </div>
+
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #7c3aed; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">Phân tích điểm nghẽn (Bottleneck):</strong> Vì $\alpha(V) \le 4$, chi phí pha 2 gần như tuyến tính $\approx \mathcal{O}(E)$. Điểm nghẽn thuật toán hoàn toàn nằm ở <strong>Pha sắp xếp cạnh</strong>.
+                        </div>
+                    </div>
                 </div>
-                <div style="font-size: 0.28em; color: #334155; line-height: 1.4; margin-bottom: 4px;">
-                    Duy trì mảng <code>sz[i]</code> (số phần tử). Treo cây có <strong>size nhỏ hơn</strong> vào dưới cây có <strong>size lớn hơn</strong>.
-                </div>
-                <!-- Clean Light Code Box (NO DARK BACKGROUND!) -->
-                <div style="background: #f8fafc; border: 1px solid #cbd5e1; color: #0f172a; border-radius: 6px; padding: 6px 10px; font-family: 'Fira Code', monospace; font-size: 0.27em; line-height: 1.45;">
-                    <span style="color: #0284c7;">if</span> (sz[a] &lt; sz[b]) swap(a, b);<br>
-                    parent[b] = a;<br>
-                    sz[a] += sz[b];
+
+                <!-- Complexity Summary Pill -->
+                <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; padding: 8px 12px; font-size: 0.35em; color: #065f46; display: flex; align-items: center; justify-content: space-between;">
+                    <span><i class="fa-solid fa-calculator" style="margin-right: 6px;"></i> Tổng độ phức tạp thuật toán:</span>
+                    <strong style="font-size: 1.15em;">$\mathcal{O}(E \log E) \equiv \mathcal{O}(E \log V)$</strong>
                 </div>
             </div>
 
         </div>
 
-        <!-- Right Column: Kruskal's Algorithm Detail Card -->
-        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #7c3aed; border-radius: 8px; padding: 10px 14px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-                <div style="color: #7c3aed; font-size: 0.38em; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-                    <i class="fa-solid fa-diagram-project"></i> 3. Thuật Toán Kruskal — Tìm Cây Khung Nhỏ Nhất (MST)
-                </div>
-
-                <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.29em; color: #334155; line-height: 1.45;">
-                    <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 4px; padding: 5px 8px;">
-                        <strong style="color: #6b21a8;">Bước 1 (Sắp Xếp):</strong> Sắp xếp danh sách $E$ cạnh theo trọng số tăng dần. Chi phí: <strong>$O(E \log E)$</strong>.
-                    </div>
-                    <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 4px; padding: 5px 8px;">
-                        <strong style="color: #6b21a8;">Bước 2 (Kiểm Tra Chu Trình):</strong> Duyệt qua từng cạnh $(u, v, w)$:
-                        <ul style="margin: 2px 0 0 0; padding-left: 14px; font-size: 0.95em;">
-                            <li>Nếu <code>find(u) != find(v)</code>: Thêm cạnh vào MST và gộp <code>union(u, v)</code>.</li>
-                            <li>Nếu <code>find(u) == find(v)</code>: Bỏ qua (Tránh tạo chu trình đóng kín!).</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 4px; padding: 5px 8px; font-size: 0.28em; color: #166534; font-weight: 700; text-align: center; margin-top: 6px;">
-                <i class="fa-solid fa-check-circle" style="color: #059669; margin-right: 4px;"></i> DSU hỗ trợ phát hiện chu trình trong thời gian $O(\alpha(V)) \approx O(1)$!
-            </div>
+        <!-- Cohesive Bottom Banner -->
+        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 5px solid #059669; border-radius: 8px; padding: 10px 16px; font-size: 0.37em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 12px;">
+            <i class="fa-solid fa-circle-check" style="font-size: 1.25em; color: #059669; flex-shrink: 0;"></i>
+            <span><strong>Ý NGHĨA KỸ THUẬT:</strong> Nhờ DSU hỗ trợ kiểm tra liên thông trong thời gian $\mathcal{O}(\alpha(V))$, thuật toán Kruskal loại bỏ hoàn toàn thao tác duyệt đồ thị tốn kém, trở thành lựa chọn tối ưu hàng đầu cho các bài toán đồ thị thưa.</span>
         </div>
 
-    </div>
-
-    <!-- Bottom Mathematical Guarantee Banner -->
-    <div style="width: 100%; margin-top: 8px; background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #2563eb; border-radius: 6px; padding: 6px 14px; font-size: 0.35em; color: #1e40af; text-align: left; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-calculator" style="font-size: 1.2em; color: #2563eb; flex-shrink: 0;"></i>
-        <span><strong>TỔNG CHI PHÍ THUẬT TOÁN KRUSKAL:</strong> Nhờ DSU kiểm tra liên thông trong $O(\alpha(V)) \approx O(1)$, tổng thời gian của Kruskal đạt <strong>$O(E \log E)$</strong> (chi phí chủ yếu phụ thuộc vào bước sắp xếp cạnh)!</span>
     </div>
 
     <aside class="notes">
-        Một sai lầm rất phổ biến khi lập trình Union-Find là gán trực tiếp parent[a] = b thay vì gọi find(a). Phép gán sai này sẽ cắt đứt toàn bộ cây con treo dưới a. Lưu ý luôn thực hiện thao tác trên nút gốc đại diện. Ngoài ra thuật toán Kruskal ứng dụng DSU để tìm Cây khung nhỏ nhất cực kỳ hiệu quả.
+        Kính thưa Thầy và các bạn, ở Slide 19, chúng ta đến với ứng dụng kinh điển nhất của DSU: Thuật toán Kruskal tìm Cây khung nhỏ nhất:
+        1. Về nguyên lý giải thuật: Kruskal áp dụng chiến lược tham lam, ưu tiên chọn cạnh có trọng số nhỏ nhất. Thách thức lớn nhất là kiểm tra xem cạnh mới có tạo chu trình hay không.
+        2. DSU giải quyết trọn vẹn thách thức này: Chỉ cần gọi find(u) và find(v). Nếu khác gốc, ta nạp cạnh vào cây khung và gộp lại bằng union(u, v).
+        3. Về phân tích độ phức tạp: Thuật toán gồm 2 pha. Pha 1 sắp xếp cạnh tốn O(E log E). Pha 2 duyệt và kiểm tra bằng DSU chỉ tốn O(E * alpha(V)) gần như tuyến tính.
+        4. Kết luận: Điểm nghẽn duy nhất là bước sắp xếp. DSU giúp thao tác phát hiện chu trình đạt hiệu năng tức thời, cực kỳ tối ưu trên đồ thị thưa.
     </aside>
 </section>
 
 <!-- ==================== SLIDE_20.HTML ==================== -->
-<section data-transition="zoom">
-    <!-- Top Badge -->
-    <div class="badge badge-gold" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN IV: THỰC NGHIỆM & ĐÁNH GIÁ</div>
-    <h3 style="font-size: 0.82em; margin: 0 0 8px 0; color: #0f172a; font-weight: 700;">Bảng Đối Sánh Chi Tiết Hiệu Năng & Chi Phí</h3>
-
-    <!-- Table 1: String & Prefix Search Comparison -->
-    <div style="width: 100%; margin-bottom: 10px;">
-        <div style="font-size: 0.34em; font-weight: 800; color: #0284c7; text-align: left; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
-            <i class="fa-solid fa-tree"></i> Bảng 1: So Sánh Bài Toán Tìm Kiếm & Chuỗi (String & Prefix Search)
+<section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 590px; display: flex; flex-direction: column; justify-content: space-between;">
+        
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 12px;">
+            <div class="badge" style="font-size: 0.42em; padding: 4px 18px; margin-bottom: 4px; display: inline-block;">PHẦN IV — THỰC NGHIỆM & ĐÁNH GIÁ</div>
+            <h2 style="font-size: 0.94em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Bảng Đối Sánh: Cấu Trúc Tổng Quát vs Chuyên Biệt</span>
+            </h2>
         </div>
-        <table style="font-size: 0.36em; margin: 0; width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden;">
-            <thead>
-                <tr style="background: #0284c7; color: #ffffff;">
-                    <th style="padding: 6px 10px; background: #0284c7; color: #fff;">Tiêu Chí So Sánh</th>
-                    <th style="padding: 6px 10px; background: #0369a1; color: #fff;">Trie (Cây Tiền Tố)</th>
-                    <th style="padding: 6px 10px; background: #0284c7; color: #fff;">Hash Table (Bảng Băm)</th>
-                    <th style="padding: 6px 10px; background: #0284c7; color: #fff;">Balanced BST</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="font-weight: 700;">Exact Lookup</td>
-                    <td>$O(L)$ worst-case</td>
-                    <td>$O(L)$ trung bình</td>
-                    <td>$O(L \log N)$</td>
-                </tr>
-                <tr style="background: #e0f2fe;">
-                    <td style="font-weight: 800; color: #0369a1;"><i class="fa-solid fa-bolt" style="color: #0284c7; margin-right: 4px;"></i> Prefix Match</td>
-                    <td style="font-weight: 800; color: #0369a1;">$O(L)$ Tối ưu</td>
-                    <td>$O(N \cdot L)$ Quét Lại</td>
-                    <td>$O(L \log N)$</td>
-                </tr>
-                <tr style="background: #e0f2fe;">
-                    <td style="font-weight: 800; color: #0369a1;"><i class="fa-solid fa-list-check" style="color: #0284c7; margin-right: 4px;"></i> Autocomplete List</td>
-                    <td style="font-weight: 800; color: #0369a1;">$O(L + K)$</td>
-                    <td style="color: #dc2626; font-weight: 700;">Không hỗ trợ</td>
-                    <td>$O(L \log N + K)$</td>
-                </tr>
-                <tr>
-                    <td style="font-weight: 700;">RAM Consumption</td>
-                    <td style="color: #d97706; font-weight: 700;">Lớn nhất $O(N \cdot L \cdot |\Sigma|)$</td>
-                    <td>Thấp $O(N \cdot L)$</td>
-                    <td>Vừa phải $O(N \cdot L)$</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 
-    <!-- Table 2: Dynamic Graph Connectivity Comparison -->
-    <div style="width: 100%; margin-bottom: 8px;">
-        <div style="font-size: 0.34em; font-weight: 800; color: #7c3aed; text-align: left; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
-            <i class="fa-solid fa-diagram-project"></i> Bảng 2: So Sánh Bài Toán Liên Thông Đồ Thị (Dynamic Connectivity)
+        <!-- 2-Column Spacious Balanced Layout -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; width: 100%; align-items: stretch; flex-grow: 1; margin-bottom: 10px;">
+            
+            <!-- Cột 1: Bài toán Tìm Kiếm & Chuỗi (String & Prefix) -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-tree" style="color: #0284c7;"></i> Bài Toán Xử Lý Chuỗi & Tiền Tố
+                        </h4>
+                        <span style="font-size: 0.33em; color: #0369a1; font-weight: 700; background: #f0f9ff; border: 1px solid #bae6fd; padding: 2px 8px; border-radius: 4px;">Hash Table vs Trie</span>
+                    </div>
+
+                    <!-- Comparison Rows -->
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #0284c7; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">Tra cứu chính xác (Exact Lookup):</strong>
+                            <br>• <em>Hash Table:</em> Chi phí trung bình $\mathcal{O}(L)$, phụ thuộc chất lượng hàm băm.
+                            <br>• <em>Trie:</em> Chi phí ổn định $\mathcal{O}(L)$, không bị ảnh hưởng bởi va chạm.
+                        </div>
+
+                        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-left: 3px solid #2563eb; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #1e40af; line-height: 1.45;">
+                            <strong style="color: #1e3a8a;">Tìm kiếm tiền tố & Gợi ý (Prefix / Autocomplete):</strong>
+                            <br>• <em>Hash Table:</em> Phải duyệt quét toàn bộ dữ liệu $\mathcal{O}(N \cdot L)$.
+                            <br>• <em>Trie:</em> Chỉ tốn $\mathcal{O}(L)$ để tiếp cận nhánh và $\mathcal{O}(K)$ để lấy kết quả.
+                        </div>
+
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #d97706; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">Đánh đổi tài nguyên:</strong> Trie tiêu hao nhiều bộ nhớ RAM hơn để đổi lại thời gian phản hồi tức thì cho người dùng.
+                        </div>
+                    </div>
+                </div>
+
+                <div style="font-size: 0.33em; color: #0284c7; border-top: 1px solid #e2e8f0; padding-top: 6px; font-weight: 600;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 4px;"></i> Phù hợp nhất cho: Thanh tìm kiếm (Search Bar), Bộ định tuyến mạng.
+                </div>
+            </div>
+
+            <!-- Cột 2: Bài toán Liên Thông Đồ Thị (Dynamic Connectivity) -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #7c3aed; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-diagram-project" style="color: #7c3aed;"></i> Bài Toán Liên Thông Đồ Thị Động
+                        </h4>
+                        <span style="font-size: 0.33em; color: #6b21a8; font-weight: 700; background: #faf5ff; border: 1px solid #e9d5ff; padding: 2px 8px; border-radius: 4px;">BFS/DFS vs DSU</span>
+                    </div>
+
+                    <!-- Comparison Rows -->
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #7c3aed; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">Đặc thù bài toán ứng dụng:</strong>
+                            <br>• <em>BFS / DFS:</em> Phù hợp đồ thị tĩnh (đã cố định toàn bộ các cạnh).
+                            <br>• <em>Union-Find (DSU):</em> Tối ưu cho đồ thị động (các cạnh liên tục được bổ sung).
+                        </div>
+
+                        <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-left: 3px solid #9333ea; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #581c87; line-height: 1.45;">
+                            <strong style="color: #3b0764;">Truy vấn kiểm tra liên thông (Connected Check):</strong>
+                            <br>• <em>BFS / DFS:</em> Duyệt lại đồ thị mỗi lần kiểm tra, chi phí $\mathcal{O}(V + E)$.
+                            <br>• <em>Union-Find (DSU):</em> Chỉ tốn thời gian tiệm cận $\mathcal{O}(1)$ khấu hao.
+                        </div>
+
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #059669; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">Bộ nhớ phụ trợ:</strong> DSU chỉ cần duy trì mảng 1D phẳng $\mathcal{O}(V)$, nhẹ hơn đáng kể so với danh sách kề $\mathcal{O}(V + E)$.
+                        </div>
+                    </div>
+                </div>
+
+                <div style="font-size: 0.33em; color: #7c3aed; border-top: 1px solid #e2e8f0; padding-top: 6px; font-weight: 600;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 4px;"></i> Phù hợp nhất cho: Thuật toán Kruskal (MST), Phân cụm mạng xã hội.
+                </div>
+            </div>
+
         </div>
-        <table style="font-size: 0.36em; margin: 0; width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden;">
-            <thead>
-                <tr style="background: #7c3aed; color: #ffffff;">
-                    <th style="padding: 6px 10px; background: #7c3aed; color: #fff;">Tiêu Chí Đồ Thị</th>
-                    <th style="padding: 6px 10px; background: #6b21a8; color: #fff;">Union-Find (DSU)</th>
-                    <th style="padding: 6px 10px; background: #7c3aed; color: #fff;">Duyệt Đồ Thị (BFS / DFS)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="font-weight: 700;">Phù Hợp Mô Hình</td>
-                    <td style="font-weight: 800; color: #6b21a8;">Đồ Thị Động (Dynamic Graph - Thêm Cạnh Liên Tục)</td>
-                    <td>Đồ Thị Tĩnh (Static Graph - Đã Cố Định Cạnh)</td>
-                </tr>
-                <tr style="background: #f3e8ff;">
-                    <td style="font-weight: 800; color: #6b21a8;"><i class="fa-solid fa-link" style="color: #7c3aed; margin-right: 4px;"></i> Connected Check</td>
-                    <td style="font-weight: 800; color: #6b21a8;">$O(\alpha(N)) \approx O(1)$ Khấu hao</td>
-                    <td style="color: #dc2626;">$O(V + E)$ Mỗi Lần Truy Vấn</td>
-                </tr>
-                <tr>
-                    <td style="font-weight: 700;">Bộ Nhớ Phụ Trợ</td>
-                    <td style="font-weight: 700; color: #059669;">$O(N)$ (Chỉ Cần Mảng 1D Nhẹ)</td>
-                    <td>$O(V + E)$ (Danh Sách Kề / Ma Trận Kề)</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 
-    <!-- Bottom Summary Insights Banner -->
-    <div style="width: 100%; margin-top: 6px; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #059669; border-radius: 6px; padding: 6px 12px; font-size: 0.34em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-circle-check" style="font-size: 1.2em; color: #059669; flex-shrink: 0;"></i>
-        <span><strong>NHẬN XÉT TỔNG KẾT:</strong> Trie thể hiện ưu thế rõ rệt ở bài toán Tiền Tố (Prefix Search), trong khi DSU đạt hiệu quả cao ở bài toán Liên Thông Động (Dynamic Connectivity). Cả hai đều giải quyết tốt các điểm nghẽn mà cấu trúc tổng quát thường gặp phải!</span>
+        <!-- Cohesive Bottom Banner -->
+        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 5px solid #059669; border-radius: 8px; padding: 10px 16px; font-size: 0.37em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 12px;">
+            <i class="fa-solid fa-circle-check" style="font-size: 1.25em; color: #059669; flex-shrink: 0;"></i>
+            <span><strong>TỔNG KẾT:</strong> Các cấu trúc dữ liệu chuyên biệt (Trie, DSU) giải quyết hiệu quả các bài toán đặc thù mà cấu trúc tổng quát thường gặp giới hạn về chi phí tính toán hoặc độ trễ phản hồi.</span>
+        </div>
+
     </div>
 
     <aside class="notes">
-        Bảng đối sánh này tóm tắt bức tranh kiến trúc tổng thể. Không có cấu trúc dữ liệu nào tối ưu cho mọi bài toán. Trie và Union-Find được thiết kế nhằm giải quyết hiệu quả các bài toán chuyên biệt mà các cấu trúc tổng quát gặp giới hạn về độ phức tạp.
+        Kính thưa Thầy và các bạn, ở Slide 20, chúng ta nhìn lại bức tranh đối sánh hiệu năng:
+        1. Ở bài toán chuỗi và tiền tố: Hash Table tra cứu chính xác rất tốt, nhưng với bài toán tìm tiền tố hay gợi ý tự động (autocomplete), Trie vượt trội hoàn toàn vì không phải duyệt lại toàn bộ dữ liệu.
+        2. Ở bài toán liên thông đồ thị: BFS và DFS phù hợp cho đồ thị tĩnh, nhưng nếu đồ thị liên tục thêm cạnh, DSU kiểm tra liên thông tiệm cận O(1) chỉ bằng mảng 1 chiều gọn nhẹ.
+        3. Kết luận: Mỗi cấu trúc sinh ra để giải quyết một điểm nghẽn riêng biệt. Việc hiểu rõ sự khác biệt này là tiền đề cho phần lựa chọn cấu trúc dữ liệu tiếp theo.
     </aside>
 </section>
 
 <!-- ==================== SLIDE_21.HTML ==================== -->
-<section data-transition="slide">
-    <!-- Top Badge -->
-    <div class="badge badge-gold" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN IV: THỰC NGHIỆM & ĐÁNH GIÁ</div>
-    <h3 style="font-size: 0.82em; margin: 0 0 6px 0; color: #0f172a; font-weight: 700;">Technical Decision Framework — Hướng Dẫn Chọn Cấu Trúc Dữ Liệu</h3>
-
-    <!-- Decision Tree Diagram Card -->
-    <div class="glass-card" style="padding: 8px 12px; background: #ffffff; margin-bottom: 8px; border-top: 3px solid #0284c7;">
-        <div style="font-size: 0.32em; font-weight: 800; color: #0f172a; margin-bottom: 4px; text-align: left;">
-            <i class="fa-solid fa-diagram-next" style="color: #0284c7; margin-right: 6px;"></i> Sơ Đồ Cây Quyết Định (Decision Flowchart):
-        </div>
-
-        <svg viewBox="0 0 720 120" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', sans-serif;">
-            <defs>
-                <marker id="arr-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
-                    <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0284c7" />
-                </marker>
-                <marker id="arr-grn" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
-                    <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669" />
-                </marker>
-                <marker id="arr-purp" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
-                    <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#7c3aed" />
-                </marker>
-            </defs>
-
-            <!-- Top Root Node: Primary Question -->
-            <rect x="230" y="6" width="260" height="28" rx="6" fill="#f8fafc" stroke="#d97706" stroke-width="2"/>
-            <text x="360" y="24" fill="#92400e" font-size="9" text-anchor="middle" font-weight="800">Mẫu Truy Vấn Hệ Thống Đòi Hỏi Gì?</text>
-
-            <!-- Branch Lines -->
-            <line x1="260" y1="34" x2="120" y2="60" stroke="#0284c7" stroke-width="1.8" marker-end="url(#arr-blue)"/>
-            <line x1="360" y1="34" x2="360" y2="60" stroke="#059669" stroke-width="1.8" marker-end="url(#arr-grn)"/>
-            <line x1="460" y1="34" x2="600" y2="60" stroke="#7c3aed" stroke-width="1.8" marker-end="url(#arr-purp)"/>
-
-            <!-- Level 1: Query Characteristics -->
-            <rect x="40" y="60" width="160" height="24" rx="4" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
-            <text x="120" y="75" fill="#0369a1" font-size="8" text-anchor="middle" font-weight="700">Tra cứu khóa chính xác O(1)</text>
-
-            <rect x="280" y="60" width="160" height="24" rx="4" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
-            <text x="360" y="75" fill="#047857" font-size="8" text-anchor="middle" font-weight="700">Gợi ý tiền tố / Chuỗi O(L)</text>
-
-            <rect x="520" y="60" width="160" height="24" rx="4" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.5"/>
-            <text x="600" y="75" fill="#6b21a8" font-size="8" text-anchor="middle" font-weight="700">Động & Đồ thị liên thông O(α)</text>
-
-            <!-- Arrows to Solution -->
-            <line x1="120" y1="84" x2="120" y2="96" stroke="#0284c7" stroke-width="1.5" marker-end="url(#arr-blue)"/>
-            <line x1="360" y1="84" x2="360" y2="96" stroke="#059669" stroke-width="1.5" marker-end="url(#arr-grn)"/>
-            <line x1="600" y1="84" x2="600" y2="96" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arr-purp)"/>
-
-            <!-- Level 2: Recommended Data Structures -->
-            <rect x="40" y="96" width="160" height="22" rx="4" fill="#0284c7"/>
-            <text x="120" y="110.5" fill="#ffffff" font-size="8.5" text-anchor="middle" font-weight="800">Hash Table / BST</text>
-
-            <rect x="280" y="96" width="160" height="22" rx="4" fill="#059669"/>
-            <text x="360" y="110.5" fill="#ffffff" font-size="8.5" text-anchor="middle" font-weight="800">Trie / Radix Tree</text>
-
-            <rect x="520" y="96" width="160" height="22" rx="4" fill="#7c3aed"/>
-            <text x="600" y="110.5" fill="#ffffff" font-size="8.5" text-anchor="middle" font-weight="800">Union-Find (DSU)</text>
-        </svg>
-    </div>
-
-    <!-- 3 Detailed Option Comparison Cards -->
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; text-align: left;">
+<section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 590px; display: flex; flex-direction: column; justify-content: space-between;">
         
-        <!-- Option 1: Hash Table -->
-        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #0284c7; border-radius: 6px; padding: 8px 10px;">
-            <div style="color: #0284c7; font-size: 0.35em; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
-                <i class="fa-solid fa-hashtag"></i> 1. Hash Table / BST
-            </div>
-            <ul style="font-size: 0.28em; color: #334155; margin: 0; padding-left: 14px; line-height: 1.4;">
-                <li><strong>Ưu điểm:</strong> Lookup $O(1)$ trung bình, cài đặt đơn giản có sẵn trong thư viện chuẩn.</li>
-                <li><strong>Hạn chế:</strong> Không tìm được chuỗi theo tiền tố (Prefix) hay gộp nhóm đồ thị.</li>
-            </ul>
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 12px;">
+            <div class="badge" style="font-size: 0.42em; padding: 4px 18px; margin-bottom: 4px; display: inline-block;">PHẦN IV — THỰC NGHIỆM & ĐÁNH GIÁ</div>
+            <h2 style="font-size: 0.94em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Khung Ra Quyết Định Lựa Chọn Cấu Trúc Dữ Liệu</span>
+            </h2>
         </div>
 
-        <!-- Option 2: Trie Tree -->
-        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #059669; border-radius: 6px; padding: 8px 10px;">
-            <div style="color: #059669; font-size: 0.35em; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
-                <i class="fa-solid fa-tree"></i> 2. Trie (Prefix Tree)
+        <!-- 3-Column Large Balanced Layout -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; width: 100%; align-items: stretch; flex-grow: 1; margin-bottom: 10px;">
+            
+            <!-- Cột 1: Tra cứu chính xác -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 10px; padding: 16px 16px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="font-size: 0.33em; color: #0284c7; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Tình Huống 1</div>
+                    <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0 0 8px 0;">
+                        <i class="fa-solid fa-key" style="color: #0284c7; margin-right: 6px;"></i> Tra Cứu Khóa Chính Xác
+                    </h4>
+                    
+                    <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: 8px 10px; margin-bottom: 10px;">
+                        <span style="font-size: 0.32em; color: #0369a1; display: block; font-weight: 600;">Lựa chọn khuyến nghị:</span>
+                        <strong style="font-size: 0.46em; color: #0284c7;">Hash Table / BST</strong>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.34em; color: #334155; line-height: 1.45;">
+                        <div>
+                            <strong style="color: #0f172a;">Ưu điểm chính:</strong> Tốc độ truy vấn $\mathcal{O}(1)$ trung bình, tiết kiệm RAM, hỗ trợ sẵn trong thư viện chuẩn (STL / Collection).
+                        </div>
+                        <div>
+                            <strong style="color: #0f172a;">Ứng dụng điển hình:</strong> Lưu trữ phiên đăng nhập (Session), bảng tra cứu mã ID, hệ thống bộ nhớ đệm (Cache).
+                        </div>
+                    </div>
+                </div>
+
+                <div style="font-size: 0.32em; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 6px;">
+                    <i class="fa-solid fa-check" style="color: #0284c7; margin-right: 4px;"></i> Đơn giản, dễ triển khai, độ phức tạp thấp.
+                </div>
             </div>
-            <ul style="font-size: 0.28em; color: #334155; margin: 0; padding-left: 14px; line-height: 1.4;">
-                <li><strong>Ưu điểm:</strong> Autocomplete, IP Routing $O(L)$, tốc độ không bị ảnh hưởng bởi $N$.</li>
-                <li><strong>Hạn chế:</strong> Tiêu tốn bộ nhớ RAM (cần tối ưu bằng Array/Hash Map).</li>
-            </ul>
+
+            <!-- Cột 2: Gợi ý tiền tố -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 10px; padding: 16px 16px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="font-size: 0.33em; color: #059669; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Tình Huống 2</div>
+                    <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0 0 8px 0;">
+                        <i class="fa-solid fa-font" style="color: #059669; margin-right: 6px;"></i> Tiền Tố & Gợi Ý Từ Khóa
+                    </h4>
+
+                    <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; padding: 8px 10px; margin-bottom: 10px;">
+                        <span style="font-size: 0.32em; color: #065f46; display: block; font-weight: 600;">Lựa chọn khuyến nghị:</span>
+                        <strong style="font-size: 0.46em; color: #059669;">Trie / Radix Tree</strong>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.34em; color: #334155; line-height: 1.45;">
+                        <div>
+                            <strong style="color: #0f172a;">Ưu điểm chính:</strong> Thời gian tìm kiếm $\mathcal{O}(L)$ phụ thuộc vào độ dài chuỗi, hoàn toàn không phụ thuộc vào quy mô dữ liệu $N$.
+                        </div>
+                        <div>
+                            <strong style="color: #0f172a;">Ứng dụng điển hình:</strong> Thanh tìm kiếm gợi ý từ (Search Autocomplete), bảng định tuyến mạng IP Router, kiểm tra chính tả.
+                        </div>
+                    </div>
+                </div>
+
+                <div style="font-size: 0.32em; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 6px;">
+                    <i class="fa-solid fa-check" style="color: #059669; margin-right: 4px;"></i> Tối ưu hóa mạnh cho bài toán chuỗi tiền tố.
+                </div>
+            </div>
+
+            <!-- Cột 3: Quản lý nhóm & liên thông -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #7c3aed; border-radius: 10px; padding: 16px 16px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="font-size: 0.33em; color: #7c3aed; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Tình Huống 3</div>
+                    <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0 0 8px 0;">
+                        <i class="fa-solid fa-diagram-project" style="color: #7c3aed; margin-right: 6px;"></i> Nhóm & Liên Thông Động
+                    </h4>
+
+                    <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 6px; padding: 8px 10px; margin-bottom: 10px;">
+                        <span style="font-size: 0.32em; color: #6b21a8; display: block; font-weight: 600;">Lựa chọn khuyến nghị:</span>
+                        <strong style="font-size: 0.46em; color: #7c3aed;">Union-Find (DSU)</strong>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.34em; color: #334155; line-height: 1.45;">
+                        <div>
+                            <strong style="color: #0f172a;">Ưu điểm chính:</strong> Thao tác gộp nhóm và phát hiện chu trình tiệm cận $\mathcal{O}(1)$, cấu trúc siêu nhẹ trên mảng phẳng một chiều.
+                        </div>
+                        <div>
+                            <strong style="color: #0f172a;">Ứng dụng điển hình:</strong> Thuật toán Kruskal (MST), kết nối mạng xã hội thời gian thực, thuật toán phân cụm dữ liệu.
+                        </div>
+                    </div>
+                </div>
+
+                <div style="font-size: 0.32em; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 6px;">
+                    <i class="fa-solid fa-check" style="color: #7c3aed; margin-right: 4px;"></i> Tối ưu phần cứng nhờ mảng liên tục trong RAM.
+                </div>
+            </div>
+
         </div>
 
-        <!-- Option 3: Union-Find -->
-        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #7c3aed; border-radius: 8px; padding: 8px 10px;">
-            <div style="color: #7c3aed; font-size: 0.35em; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
-                <i class="fa-solid fa-diagram-project"></i> 3. Union-Find (DSU)
-            </div>
-            <ul style="font-size: 0.28em; color: #334155; margin: 0; padding-left: 14px; line-height: 1.4;">
-                <li><strong>Ưu điểm:</strong> Quản lý tập hợp liên thông $O(\alpha(N))$, tối ưu hóa cho thuật toán Kruskal MST.</li>
-                <li><strong>Hạn chế:</strong> Không hỗ trợ tách nhóm (*Split/Disconnect*) trừ khi dùng DSU Rollback.</li>
-            </ul>
+        <!-- Cohesive Bottom Banner -->
+        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 5px solid #059669; border-radius: 8px; padding: 10px 16px; font-size: 0.37em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 12px;">
+            <i class="fa-solid fa-compass" style="font-size: 1.25em; color: #059669; flex-shrink: 0;"></i>
+            <span><strong>NGUYÊN TẮC ÁP DỤNG:</strong> Ưu tiên bắt đầu từ cấu trúc dữ liệu cơ bản có sẵn; chỉ áp dụng cấu trúc chuyên biệt khi bài toán xuất hiện yêu cầu nghiệp vụ đặc thù về tiền tố hoặc liên thông động.</span>
         </div>
 
-    </div>
-
-    <!-- Bottom Golden Rule Banner -->
-    <div style="width: 100%; margin-top: 8px; background: #fffbeb; border: 1px solid #fde68a; border-left: 4px solid #d97706; border-radius: 6px; padding: 6px 14px; font-size: 0.34em; color: #78350f; text-align: left; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-lightbulb" style="font-size: 1.2em; color: #d97706; flex-shrink: 0;"></i>
-        <span><strong>NGUYÊN TẮC THIẾT KẾ:</strong> Ưu tiên cấu trúc đơn giản như Hash Table cho các bài toán tra cứu chính xác. Cân nhắc triển khai Trie hoặc DSU khi bài toán đòi hỏi xử lý chuyên biệt về <u>Prefix Matching</u> hoặc <u>Dynamic Connectivity</u>!</span>
     </div>
 
     <aside class="notes">
-        Dựa trên khung ra quyết định này, chúng ta cần cân nhắc kỹ lưỡng khi lựa chọn cấu trúc dữ liệu. Hãy phân tích mẫu truy vấn, đo đạc quy mô dữ liệu và tài nguyên bộ nhớ trước khi quyết định.
+        Kính thưa Thầy và các bạn, ở Slide 21, em xin đại diện nhóm tổng kết Khung ra quyết định lựa chọn Cấu trúc dữ liệu:
+        1. Tình huống 1: Khi bài toán chỉ cần tra cứu chính xác theo khóa, hãy ưu tiên dùng Hash Table hoặc BST vì tính đơn giản và có sẵn trong thư viện chuẩn.
+        2. Tình huống 2: Khi bài toán cần tìm kiếm tiền tố hay gợi ý từ khóa thời gian thực, Trie là lựa chọn sáng giá vì tốc độ phụ thuộc độ dài từ, không bị chậm khi dữ liệu phình to.
+        3. Tình huống 3: Khi cần quản lý nhóm liên tục thay đổi và phát hiện chu trình đồ thị, DSU là giải pháp tối ưu nhất với chi phí tiệm cận O(1) trên mảng phẳng.
+        4. Nguyên tắc chung: Luôn chọn cấu trúc dựa trên dạng truy vấn đặc thù của hệ thống.
     </aside>
 </section>
 
 <!-- ==================== SLIDE_22.HTML ==================== -->
-<section data-transition="slide">
-    <!-- Top Badge -->
-    <div class="badge badge-gold" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN V: TỔNG KẾT & BÀI HỌC KIẾN TRÚC</div>
-    <h3 style="font-size: 0.82em; margin: 0 0 8px 0; color: #0f172a; font-weight: 700;">Bài Học Cốt Lõi Về Kiến Trúc Hệ Thống</h3>
-
-    <!-- Asymmetric 2-Column Light Architectural Layout -->
-    <div style="display: grid; grid-template-columns: 1fr 1.25fr; gap: 12px; width: 100%; align-items: stretch;">
+<section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 590px; display: flex; flex-direction: column; justify-content: space-between;">
         
-        <!-- Left Column: Bright Light Hero Card (Clean White & Blue Tint) -->
-        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 8px; padding: 12px 14px; text-align: left; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-                <div style="font-size: 0.33em; color: #0284c7; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px;">
-                    <i class="fa-solid fa-compass-drafting" style="margin-right: 5px;"></i> Triết Lý Thiết Kế System Design
-                </div>
-                <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0 0 6px 0; line-height: 1.35;">
-                    "Mẫu Truy Vấn (Query Pattern) Quyết Định Cấu Trúc Dữ Liệu!"
-                </h4>
-                <p style="font-size: 0.3em; color: #334155; line-height: 1.45; margin: 0;">
-                    Không có cấu trúc dữ liệu nào tối ưu cho mọi trường hợp. Sự lựa chọn phù hợp xuất phát từ việc thấu hiểu mô hình truy vấn đặc thù của hệ thống.
-                </p>
-            </div>
-
-            <!-- Light Speed Equations Sub-Box -->
-            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px 10px; margin-top: 10px;">
-                <div style="font-size: 0.3em; color: #475569; font-weight: 700; margin-bottom: 6px;">
-                    <i class="fa-solid fa-chart-line" style="color: #0284c7; margin-right: 5px;"></i> Độ Phức Tạp Đạt Được:
-                </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: center;">
-                    <div style="background: #ffffff; border-radius: 4px; padding: 6px 4px; border: 1px solid #bae6fd;">
-                        <span style="font-size: 0.28em; color: #0284c7; display: block; font-weight: 700;">Trie Prefix</span>
-                        <strong style="font-size: 0.4em; color: #059669;">$O(L)$</strong>
-                    </div>
-                    <div style="background: #ffffff; border-radius: 4px; padding: 6px 4px; border: 1px solid #ddd6fe;">
-                        <span style="font-size: 0.28em; color: #7c3aed; display: block; font-weight: 700;">DSU Connect</span>
-                        <strong style="font-size: 0.4em; color: #059669;">$O(\alpha(N))$</strong>
-                    </div>
-                </div>
-            </div>
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 12px;">
+            <div class="badge" style="font-size: 0.42em; padding: 4px 18px; margin-bottom: 4px; display: inline-block;">PHẦN V — TỔNG KẾT & BÀI HỌC KIẾN TRÚC</div>
+            <h2 style="font-size: 0.94em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Bài Học Cốt Lõi Về Thiết Kế Hệ Thống</span>
+            </h2>
         </div>
 
-        <!-- Right Column: 3 Clean Horizontal Stacked Architectural Cards (Small Discreet Inline Icons) -->
-        <div style="display: flex; flex-direction: column; gap: 8px; text-align: left; justify-content: space-between;">
+        <!-- 3 Horizontal Stretched Takeaway Cards -->
+        <div style="display: flex; flex-direction: column; gap: 12px; width: 100%; justify-content: space-between; flex-grow: 1; margin-bottom: 10px;">
             
-            <!-- Layer 1 -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #0284c7; border-radius: 6px; padding: 9px 12px;">
-                <h5 style="margin: 0 0 3px 0; color: #0284c7; font-size: 0.37em; font-weight: 800; display: flex; align-items: center;">
-                    <i class="fa-solid fa-brain" style="font-size: 0.9em; margin-right: 6px; color: #0284c7;"></i>
-                    1. Chuyển Đổi Tư Duy (Query Pattern First)
-                </h5>
-                <p style="margin: 0; font-size: 0.3em; color: #334155; line-height: 1.4;">
-                    Xác định <em>"Mẫu truy vấn chủ đạo là gì?"</em> (Prefix Search $\implies$ Trie, Dynamic Connectivity $\implies$ DSU) thay vì lưu trữ dữ liệu theo thói quen.
+            <!-- Lesson 1 -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 5px solid #0284c7; border-radius: 10px; padding: 14px 18px; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                    <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-compass-drafting" style="color: #0284c7;"></i> 1. Lấy Mẫu Truy Vấn Làm Trung Tâm (Query-Driven Design)
+                    </h4>
+                    <span style="font-size: 0.32em; color: #0369a1; background: #f0f9ff; border: 1px solid #bae6fd; padding: 2px 8px; border-radius: 4px; font-weight: 700;">Tư Duy Thiết Kế</span>
+                </div>
+                <p style="font-size: 0.35em; color: #334155; line-height: 1.5; margin: 0;">
+                    Không lựa chọn cấu trúc dữ liệu theo thói quen hay sự quen thuộc. Cấu trúc lưu trữ cần được định hình trực tiếp bởi <strong>mẫu truy vấn chủ đạo</strong> và <strong>tần suất sử dụng thực tế</strong> của hệ thống (như tìm kiếm tiền tố hay kiểm tra liên thông đồ thị).
                 </p>
             </div>
 
-            <!-- Layer 2 -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #d97706; border-radius: 6px; padding: 9px 12px;">
-                <h5 style="margin: 0 0 3px 0; color: #b45309; font-size: 0.37em; font-weight: 800; display: flex; align-items: center;">
-                    <i class="fa-solid fa-scale-balanced" style="font-size: 0.9em; margin-right: 6px; color: #d97706;"></i>
-                    2. Đánh Đổi Có Ý Thức (Trade-off Mastery)
-                </h5>
-                <p style="margin: 0; font-size: 0.3em; color: #334155; line-height: 1.4;">
-                    Chấp nhận đánh đổi tài nguyên bộ nhớ hoặc tính tổng quát để tối ưu hóa hiệu năng cho các truy vấn trọng tâm trên quy mô dữ liệu lớn.
+            <!-- Lesson 2 -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 5px solid #d97706; border-radius: 10px; padding: 14px 18px; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                    <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-scale-balanced" style="color: #d97706;"></i> 2. Cân Bằng Đánh Đổi Tài Nguyên (Resource Trade-off)
+                    </h4>
+                    <span style="font-size: 0.32em; color: #92400e; background: #fefce8; border: 1px solid #fef08a; padding: 2px 8px; border-radius: 4px; font-weight: 700;">Đánh Đổi Kỹ Thuật</span>
+                </div>
+                <p style="font-size: 0.35em; color: #334155; line-height: 1.5; margin: 0;">
+                    Mỗi giải pháp đều có sự thỏa hiệp. Việc chấp nhận tiêu hao thêm bộ nhớ RAM (như cấu trúc Trie) để giảm độ trễ phản hồi cho hàng triệu người dùng xuống dưới vài mili-giây là một quyết định kỹ thuật hoàn toàn hợp lý trong các hệ thống quy mô lớn.
                 </p>
             </div>
 
-            <!-- Layer 3 -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #7c3aed; border-radius: 6px; padding: 9px 12px;">
-                <h5 style="margin: 0 0 3px 0; color: #7c3aed; font-size: 0.37em; font-weight: 800; display: flex; align-items: center;">
-                    <i class="fa-solid fa-award" style="font-size: 0.9em; margin-right: 6px; color: #7c3aed;"></i>
-                    3. Năng Lực Thiết Kế Hệ Thống
-                </h5>
-                <p style="margin: 0; font-size: 0.3em; color: #334155; line-height: 1.4;">
-                    Lấp đầy những khoảng trống kỹ thuật của các thư viện container chuẩn (STL / Java Collections) khi đối mặt bài toán hiệu năng cao.
+            <!-- Lesson 3 -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 5px solid #059669; border-radius: 10px; padding: 14px 18px; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                    <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-microchip" style="color: #059669;"></i> 3. Tối Ưu Hóa Thân Thiện Với Phần Cứng (Hardware-Aware)
+                    </h4>
+                    <span style="font-size: 0.32em; color: #065f46; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 2px 8px; border-radius: 4px; font-weight: 700;">Hiệu Năng Vật Lý</span>
+                </div>
+                <p style="font-size: 0.35em; color: #334155; line-height: 1.5; margin: 0;">
+                    Giải thuật tốt cần đồng hành cùng phần cứng phù hợp. Những cấu trúc dữ liệu phẳng hóa trên mảng một chiều liên tục (như mảng <code>parent[]</code> của DSU) tận dụng tối đa <strong>CPU Cache Locality</strong>, cho tốc độ xử lý nhanh hơn đáng kể so với việc cấp phát con trỏ rời rạc.
                 </p>
             </div>
 
         </div>
 
-    </div>
+        <!-- Cohesive Bottom Banner -->
+        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 5px solid #059669; border-radius: 8px; padding: 10px 16px; font-size: 0.37em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 12px;">
+            <i class="fa-solid fa-graduation-cap" style="font-size: 1.25em; color: #059669; flex-shrink: 0;"></i>
+            <span><strong>THÔNG ĐIỆP BÁO CÁO:</strong> Hiểu rõ bản chất giải thuật và đặc tính phần cứng là nền tảng cốt lõi để các kỹ sư phần mềm xây dựng nên những hệ thống có hiệu năng cao và mở rộng bền vững.</span>
+        </div>
 
-    <!-- Bottom Full Width Summary Banner -->
-    <div style="width: 100%; margin-top: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #059669; border-radius: 6px; padding: 6px 14px; font-size: 0.35em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-circle-check" style="font-size: 1.1em; color: #059669; flex-shrink: 0;"></i>
-        <span><strong>TỔNG KẾT KIẾN TRÚC:</strong> Trie và Union-Find là minh chứng cho nguyên lý thiết kế: chuyên biệt hóa cấu trúc dữ liệu theo đúng mẫu hình truy vấn để đạt hiệu năng tối ưu trên quy mô lớn!</span>
     </div>
 
     <aside class="notes">
-        Bài học lớn nhất của Chương 15 không chỉ là cách cài đặt một cây Trie hay mảng Union-Find, mà là tư duy đánh đổi trong thiết kế phần mềm. Thấu hiểu các đặc tính này sẽ giúp chúng ta xây dựng nên những hệ thống xử lý truy vấn với hiệu năng và độ ổn định cao.
+        Kính thưa Thầy và các bạn, ở Slide 22, em xin đại diện nhóm đúc kết 3 bài học kỹ thuật quan trọng nhất của chuyên đề:
+        1. Bài học thứ nhất: Xuất phát từ mẫu truy vấn. Đừng chọn cấu trúc dữ liệu theo thói quen, hãy nhìn vào dạng truy vấn thường xuyên nhất của hệ thống.
+        2. Bài học thứ hai: Làm chủ sự đánh đổi. Trong các hệ thống lớn, việc đầu tư thêm bộ nhớ để lấy tốc độ phản hồi tức thì cho người dùng là đánh đổi hoàn toàn xứng đáng.
+        3. Bài học thứ ba: Tối ưu phần cứng. Các cấu trúc dữ liệu phẳng trên mảng như DSU tận dụng tối đa CPU Cache, mang lại tốc độ vượt bậc so với cấu trúc con trỏ phân tán.
+        Đó chính là tư duy cốt lõi để xây dựng các hệ thống hiệu năng cao.
     </aside>
 </section>
 
 <!-- ==================== SLIDE_23.HTML ==================== -->
-<section data-transition="zoom">
-    <!-- Top Badge -->
-    <div class="badge badge-gold" style="font-size: 0.38em; padding: 4px 14px; margin-bottom: 6px;">KẾT THÚC BÁO CÁO & PHÁT TRIỂN NÂNG CAO</div>
-    
-    <!-- Top Grid: Advanced Extensions Summary -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; text-align: left; margin-top: 4px;">
-        <div class="glass-card" style="border-top: 3px solid #0284c7; padding: 10px 14px; background: #ffffff;">
-            <h4 style="color: #0284c7; font-size: 0.38em; font-weight: 800; margin: 0 0 4px 0;">
-                <i class="fa-solid fa-tree" style="margin-right: 4px;"></i> Cấu Trúc Trie Nâng Cao
-            </h4>
-            <ul style="font-size: 0.3em; color: #334155; margin: 0; padding-left: 14px; line-height: 1.45;">
-                <li><strong>Radix Tree (Patricia Trie):</strong> Nén các chuỗi nút đơn thành một cạnh $\implies$ Giảm số node và tối ưu bộ nhớ.</li>
-                <li><strong>Suffix Tree:</strong> Hỗ trợ tìm kiếm chuỗi con (*Substring search*) trong $O(L)$, ứng dụng trong xử lý văn bản và sinh tin học.</li>
-            </ul>
-        </div>
-
-        <div class="glass-card" style="border-top: 3px solid #7c3aed; padding: 10px 14px; background: #ffffff;">
-            <h4 style="color: #7c3aed; font-size: 0.38em; font-weight: 800; margin: 0 0 4px 0;">
-                <i class="fa-solid fa-rotate-left" style="margin-right: 4px;"></i> Cấu Trúc DSU Nâng Cao
-            </h4>
-            <ul style="font-size: 0.3em; color: #334155; margin: 0; padding-left: 14px; line-height: 1.45;">
-                <li><strong>DSU with Rollback:</strong> Dùng Stack lưu lịch sử thay đổi thay vì Path Compression $\implies$ Hỗ trợ hoàn tác (Undo) thao tác hợp nhất.</li>
-                <li><strong>Persistent DSU:</strong> Cho phép truy vấn và duy trì các phiên bản trạng thái tập hợp trong quá khứ.</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Middle Hero Thank You Section (Generous Padding & Line-Height so 'CẢM' NEVER clips!) -->
-    <div style="margin: 16px 0 12px 0; background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%); border: 2px solid #bae6fd; border-radius: 12px; padding: 22px 24px 18px 24px; box-shadow: 0 4px 16px rgba(2,132,199,0.08);">
-        <h2 style="font-size: 1.15em; margin: 0 0 10px 0; font-weight: 800; line-height: 1.45; padding-top: 4px;">
-            <span class="text-gradient" style="background: linear-gradient(135deg, #dc2626 0%, #d97706 50%, #2563eb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; padding: 4px 0;">
-                CẢM ƠN THẦY VÀ CÁC BẠN ĐÃ LẮNG NGHE!
-            </span>
-        </h2>
+<section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 590px; display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
         
-        <div style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; color: #ffffff; padding: 5px 18px; border-radius: 20px; font-size: 0.36em; font-weight: 700; margin-top: 4px;">
-            <i class="fa-solid fa-comments" style="font-size: 1.1em; color: #7dd3fc;"></i>
-            <span>Q&A SESSION — SẴN SÀNG GIẢI ĐÁP MỌI CÂU HỎI THẢO LUẬN</span>
+        <!-- Top Badge -->
+        <div style="text-align: center; margin-top: 6px;">
+            <div class="badge" style="font-size: 0.44em; padding: 5px 22px; display: inline-block;">KẾT THÚC BÁO CÁO CHUYÊN ĐỀ</div>
         </div>
-    </div>
+        
+        <!-- Main Grand Hero Thank You & Q&A Card -->
+        <div style="width: 100%; max-width: 1100px; background: linear-gradient(135deg, #ffffff 0%, #f0fdfa 50%, #eff6ff 100%); border: 2px solid #93c5fd; border-radius: 18px; padding: 36px 40px; text-align: center; box-shadow: 0 8px 24px rgba(37,99,235,0.08); display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 14px; margin: 10px 0;">
+            
+            <div style="font-size: 0.44em; font-weight: 700; color: #0284c7; text-transform: uppercase; letter-spacing: 1px;">
+                Chuyên Đề: Cấu Trúc Dữ Liệu Chuyên Biệt — Trie & Union-Find (DSU)
+            </div>
 
-    <!-- Bottom Gratitude Callout -->
-    <div style="width: 100%; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 12px; font-size: 0.33em; color: #475569; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;">
-        <i class="fa-solid fa-heart" style="color: #ef4444; font-size: 1.1em;"></i>
-        <span>Trân trọng cảm ơn <strong>GVHD: Thầy Vũ Đình Bảo (T-Bao)</strong> đã tận tình hướng dẫn nhóm hoàn thành chuyên đề này!</span>
+            <h2 style="font-size: 1.55em; margin: 4px 0; font-weight: 900; line-height: 1.35; letter-spacing: 0.5px;">
+                <span class="text-gradient" style="background: linear-gradient(135deg, #dc2626 0%, #ea580c 40%, #2563eb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; padding: 4px 0;">
+                    CẢM ƠN THẦY VÀ<br>CÁC BẠN ĐÃ LẮNG NGHE!
+                </span>
+            </h2>
+            
+            <p style="font-size: 0.44em; color: #475569; margin: 0; font-weight: 500;">
+                Phần trình bày chuyên đề của Nhóm 15 đến đây là kết thúc.
+            </p>
+
+            <div style="display: inline-flex; align-items: center; gap: 14px; background: linear-gradient(135deg, #0284c7 0%, #1d4ed8 100%); color: #ffffff; padding: 12px 36px; border-radius: 9999px; font-size: 0.48em; font-weight: 800; box-shadow: 0 4px 16px rgba(2,132,199,0.3); margin-top: 6px;">
+                <i class="fa-solid fa-comments" style="font-size: 1.2em; color: #bae6fd;"></i>
+                <span>PHIÊN THẢO LUẬN & HỎI ĐÁP (Q&A SESSION)</span>
+            </div>
+
+            <div style="font-size: 0.38em; color: #64748b; font-style: italic; margin-top: 4px;">
+                Nhóm rất mong nhận được những góp ý, nhận xét và câu hỏi thảo luận từ Thầy cùng các bạn!
+            </div>
+        </div>
+
+        <!-- Bottom Presenters Bar -->
+        <div style="display: flex; justify-content: center; gap: 16px; width: 100%; max-width: 1100px; margin-bottom: 6px;">
+            <div style="flex: 1; background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #0284c7; border-radius: 8px; padding: 8px 14px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                <div style="font-size: 0.32em; color: #0284c7; font-weight: 800;"><i class="fa-solid fa-crown" style="margin-right: 4px;"></i> Trưởng Nhóm</div>
+                <div style="font-size: 0.38em; font-weight: 700; color: #0f172a; margin-top: 2px;">Huỳnh Thị Thùy Trang</div>
+                <div style="font-size: 0.3em; color: #64748b;">MSSV: 25110371</div>
+            </div>
+
+            <div style="flex: 1; background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #7c3aed; border-radius: 8px; padding: 8px 14px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                <div style="font-size: 0.32em; color: #7c3aed; font-weight: 800;"><i class="fa-solid fa-user" style="margin-right: 4px;"></i> Thành Viên</div>
+                <div style="font-size: 0.38em; font-weight: 700; color: #0f172a; margin-top: 2px;">Lê Thị Tuyết Nhi</div>
+                <div style="font-size: 0.3em; color: #64748b;">MSSV: 25110283</div>
+            </div>
+
+            <div style="flex: 1; background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #059669; border-radius: 8px; padding: 8px 14px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                <div style="font-size: 0.32em; color: #059669; font-weight: 800;"><i class="fa-solid fa-user" style="margin-right: 4px;"></i> Thành Viên</div>
+                <div style="font-size: 0.38em; font-weight: 700; color: #0f172a; margin-top: 2px;">Mai Thanh Trà</div>
+                <div style="font-size: 0.3em; color: #64748b;">MSSV: 25110372</div>
+            </div>
+        </div>
+
     </div>
 
     <aside class="notes">
-        Slide tổng kết các biến thể nâng cao mở rộng cho Trie và DSU như Radix Tree, Suffix Tree, DSU Rollback và Persistent DSU. Nhóm xin chân thành cảm ơn Thầy Vũ Đình Bảo và các bạn đã chú ý lắng nghe, sau đây nhóm xin chuyển sang phần Q&A và thảo luận!
+        Kính thưa Thầy và các bạn, bài báo cáo chuyên đề Chương 15 của Nhóm 15 đến đây xin phép được khép lại. Nhóm xin chân thành cảm ơn Thầy và các bạn đã chú ý lắng nghe, sau đây nhóm xin chuyển sang phiên Q&A thảo luận!
     </aside>
 </section>
         </div>
@@ -3852,7 +3824,6 @@
     "slide_15.html",
     "slide_16.html",
     "slide_17.html",
-    "slide_18.html",
     "slide_19.html",
     "slide_20.html",
     "slide_21.html",

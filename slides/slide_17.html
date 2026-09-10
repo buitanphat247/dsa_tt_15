@@ -1,82 +1,120 @@
-<section data-transition="slide">
-    <!-- Top Badge -->
-    <div class="badge badge-gold" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN III: CẤU TRÚC UNION-FIND (DSU)</div>
-    <h3 style="font-size: 0.82em; margin: 0 0 6px 0; color: #0f172a; font-weight: 700;">Phân Tích Độ Phức Tạp & Hàm Ngược Ackermann $\alpha(N)$</h3>
-
-    <!-- Sub-header Callout -->
-    <div style="width: 100%; background: #f0f9ff; border: 1px solid #bae6fd; border-left: 4px solid #0284c7; border-radius: 6px; padding: 6px 12px; margin-bottom: 10px; font-size: 0.34em; color: #0369a1; text-align: left;">
-        <i class="fa-solid fa-square-root-variable" style="color: #0284c7; margin-right: 6px;"></i>
-        <strong>KẾT QUẢ ĐỘ PHỨC TẠP:</strong> Khi kết hợp <u>Union by Rank</u> + <u>Path Compression</u>, chi phí khấu hao mỗi thao tác <code>find()</code> và <code>union()</code> đạt <strong>$O(\alpha(N))$</strong> — tiệm cận thời gian hằng số!
-    </div>
-
-    <!-- 2-Column Asymmetric Layout -->
-    <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 12px; width: 100%; text-align: left; align-items: stretch;">
+<section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 590px; display: flex; flex-direction: column; justify-content: space-between;">
         
-        <!-- Left Column: Math Intuition Card -->
-        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #7c3aed; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-                <h4 style="color: #7c3aed; font-size: 0.38em; font-weight: 800; margin: 0 0 6px 0; display: flex; align-items: center; gap: 6px;">
-                    <i class="fa-solid fa-infinity"></i> 1. Trực Giác Hàm $\alpha(N)$
-                </h4>
-                <div style="font-size: 0.29em; color: #334155; line-height: 1.45;">
-                    <p style="margin: 0 0 6px 0;">
-                        <strong>Hàm Ackermann $A(m, n)$:</strong> Là hàm toán học có tốc độ tăng trưởng cực kỳ nhanh (vượt xa hàm lũy thừa tầng $2^{2^{.^{.}}}$).
-                    </p>
-                    <p style="margin: 0;">
-                        <strong>Hàm ngược $\alpha(N)$:</strong> Ngược lại, là hàm có tốc độ tăng trưởng cực kỳ chậm trong lý thuyết độ phức tạp!
-                    </p>
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 12px;">
+            <div class="badge" style="font-size: 0.42em; padding: 4px 18px; margin-bottom: 4px; display: inline-block;">PHẦN III — CẤU TRÚC UNION-FIND (DSU)</div>
+            <h2 style="font-size: 0.94em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Độ Phức Tạp & Hàm Ngược Ackermann $\alpha(N)$</span>
+            </h2>
+        </div>
+
+        <!-- 2-Column Balanced Layout: MATHEMATICAL THEORY (Left) & BENCHMARK TABLE (Right) -->
+        <div style="display: grid; grid-template-columns: 1.05fr 1.15fr; gap: 18px; width: 100%; align-items: stretch; flex-grow: 1; margin-bottom: 10px;">
+            
+            <!-- Cột 1: Bản Chất Toán Học (Mathematical Foundation) -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #7c3aed; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-calculator" style="color: #7c3aed;"></i> Bản Chất Toán Học (Theory)
+                        </h4>
+                        <span style="font-size: 0.33em; color: #6b21a8; font-weight: 700; background: #faf5ff; border: 1px solid #e9d5ff; padding: 2px 8px; border-radius: 4px;">Định Lý Tarjan (1975)</span>
+                    </div>
+
+                    <!-- 3 Logical Concept Blocks -->
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #7c3aed; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">1. Định lý Tarjan (1975):</strong> Khi kết hợp đồng thời <em>Union by Rank</em> và <em>Path Compression</em>, chi phí khấu hao cho mỗi thao tác đạt <strong>$\mathcal{O}(\alpha(N))$</strong>.
+                        </div>
+
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #0284c7; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">2. Hàm Ackermann $A(m, n)$ :</strong> Là hàm toán học có tốc độ tăng trưởng rất nhanh (vượt xa các hàm đa thức và hàm mũ thông thường).
+                        </div>
+
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #059669; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">3. Hàm ngược $\alpha(N)$ :</strong> Có tốc độ tăng trưởng <strong>cực kỳ chậm</strong> trong khoa học máy tính — giá trị gần như không đổi khi $N$ tăng quy mô.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deep Context Note -->
+                <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 6px; padding: 8px 10px; font-size: 0.33em; color: #6b21a8; line-height: 1.45;">
+                    <i class="fa-solid fa-atom" style="color: #7c3aed; margin-right: 6px;"></i> Để $\alpha(N) = 5$, quy mô $N$ cần đạt tới $2^{65536}$ — một ngưỡng vượt quá các giới hạn tính toán thực tế.
                 </div>
             </div>
 
-            <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 6px; padding: 6px 8px; font-size: 0.27em; color: #6b21a8; font-weight: 600; margin-top: 8px;">
-                <i class="fa-solid fa-microchip" style="color: #7c3aed; margin-right: 4px;"></i> Để $\alpha(N) = 5$, quy mô $N$ phải vượt ngưỡng $2^{65536}$ (vượt xa mọi giới hạn phần cứng và không gian địa chỉ vật lý)!
+            <!-- Cột 2: Bảng Tra Cứu Tốc Độ Thực Tế (Benchmark Values) -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-table-list" style="color: #059669;"></i> Tra Cứu Thực Tế (Benchmark Values)
+                        </h4>
+                        <span style="font-size: 0.33em; color: #065f46; font-weight: 700; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 2px 8px; border-radius: 4px;">Thực Nghiệm</span>
+                    </div>
+
+                    <!-- Clean Modern Table -->
+                    <div style="overflow: hidden; border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 10px;">
+                        <table style="font-size: 0.35em; margin: 0; width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: #0f172a; color: #ffffff;">
+                                    <th style="padding: 7px 10px; text-align: left; border-bottom: 2px solid #1e293b;">Quy Mô Dữ Liệu $N$</th>
+                                    <th style="padding: 7px 10px; text-align: center; border-bottom: 2px solid #1e293b;">Giá Trị $\alpha(N)$</th>
+                                    <th style="padding: 7px 10px; text-align: right; border-bottom: 2px solid #1e293b;">Đánh Giá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: #ffffff; border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 6px 10px; font-weight: 600; color: #0f172a;">$N = 1 \dots 3$</td>
+                                    <td style="padding: 6px 10px; text-align: center; font-weight: 700; color: #059669;">$\alpha(N) = 1$</td>
+                                    <td style="padding: 6px 10px; text-align: right; color: #64748b;">Tức thì</td>
+                                </tr>
+                                <tr style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 6px 10px; font-weight: 600; color: #0f172a;">$N = 4 \dots 7$</td>
+                                    <td style="padding: 6px 10px; text-align: center; font-weight: 700; color: #059669;">$\alpha(N) = 2$</td>
+                                    <td style="padding: 6px 10px; text-align: right; color: #64748b;">Tức thì</td>
+                                </tr>
+                                <tr style="background: #ffffff; border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 6px 10px; font-weight: 600; color: #0f172a;">$N = 8 \dots 2047$</td>
+                                    <td style="padding: 6px 10px; text-align: center; font-weight: 700; color: #059669;">$\alpha(N) = 3$</td>
+                                    <td style="padding: 6px 10px; text-align: right; color: #64748b;">Tối ưu cao</td>
+                                </tr>
+                                <tr style="background: #fefce8; border-bottom: none;">
+                                    <td style="padding: 7px 10px; font-weight: 700; color: #854d0e;">
+                                        $N = 2048 \dots 2^{64}$<br>
+                                        <span style="font-size: 0.85em; color: #a16207; font-weight: 500;">(Vượt ngưỡng địa chỉ 64-bit)</span>
+                                    </td>
+                                    <td style="padding: 7px 10px; text-align: center; font-size: 1.15em; font-weight: 800; color: #854d0e;">$\alpha(N) \le 4$</td>
+                                    <td style="padding: 7px 10px; text-align: right; font-weight: 700; color: #854d0e;">Thực tế ứng dụng</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Bound Pill -->
+                <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; padding: 8px 12px; font-size: 0.35em; color: #065f46; display: flex; align-items: center; justify-content: space-between;">
+                    <span><i class="fa-solid fa-gauge-high" style="margin-right: 6px;"></i> Giới hạn thực tế:</span>
+                    <strong style="font-size: 1.15em;">$\alpha(N) \le 4$ trong phần lớn bài toán</strong>
+                </div>
             </div>
+
         </div>
 
-        <!-- Right Column: Practical Benchmark Growth Table -->
-        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-                <h4 style="color: #059669; font-size: 0.38em; font-weight: 800; margin: 0 0 6px 0; display: flex; align-items: center; gap: 6px;">
-                    <i class="fa-solid fa-table" style="color: #059669;"></i> 2. Bảng Tra Cứu Tốc Độ Thực Tế
-                </h4>
-                <table style="font-size: 0.32em; margin: 0; width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden;">
-                    <thead>
-                        <tr style="background: #059669; color: #ffffff;">
-                            <th style="padding: 5px 8px; background: #059669; color: #fff;">Quy Mô Dữ Liệu $N$</th>
-                            <th style="padding: 5px 8px; background: #047857; color: #fff; text-align: center;">Giá Trị $\alpha(N)$</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>$N = 1 \dots 3$</td>
-                            <td style="text-align: center; font-weight: 700;">$\alpha(N) = 1$</td>
-                        </tr>
-                        <tr>
-                            <td>$N = 4 \dots 7$</td>
-                            <td style="text-align: center; font-weight: 700;">$\alpha(N) = 2$</td>
-                        </tr>
-                        <tr>
-                            <td>$N = 8 \dots 2047$</td>
-                            <td style="text-align: center; font-weight: 700;">$\alpha(N) = 3$</td>
-                        </tr>
-                        <tr style="background: #fef3c7; color: #78350f; font-weight: 800;">
-                            <td>$N = 2048 \dots 2^{64}$ <br><span style="font-size: 0.85em; color: #b45309;">(Vượt xa giới hạn địa chỉ 64-bit)</span></td>
-                            <td style="text-align: center; font-size: 1.1em; color: #b45309;">$\alpha(N) \le 4$</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <!-- Cohesive Bottom Banner -->
+        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 5px solid #059669; border-radius: 8px; padding: 10px 16px; font-size: 0.37em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 12px;">
+            <i class="fa-solid fa-circle-check" style="font-size: 1.25em; color: #059669; flex-shrink: 0;"></i>
+            <span><strong>TỔNG KẾT THỰC TIỄN:</strong> Do $\alpha(N) \le 4$ trong hầu hết ứng dụng, cấu trúc DSU thường được đánh giá là đạt hiệu năng tiệm cận <strong>$\mathcal{O}(1)$</strong>.</span>
         </div>
 
-    </div>
-
-    <!-- Bottom Full Width System Architect Guarantee Banner -->
-    <div style="width: 100%; margin-top: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #059669; border-radius: 6px; padding: 6px 14px; font-size: 0.35em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-circle-check" style="font-size: 1.2em; color: #059669; flex-shrink: 0;"></i>
-        <span><strong>KẾT LUẬN THỰC TẾ:</strong> Với mọi quy mô dữ liệu thực tế ($N < 2^{65536}$), hàm $\alpha(N) \le 4$. Do đó trong kỹ thuật, chi phí khấu hao <strong>$O(\alpha(N))$ được coi là tiệm cận thời gian hằng số $O(1)$!</strong></span>
     </div>
 
     <aside class="notes">
-        Hàm ngược Ackermann alpha(N) là kết quả phân tích lý thuyết quan trọng. Với mọi quy mô dữ liệu thực tế, giá trị alpha(N) không vượt quá 4, cho thấy hiệu năng tiệm cận hằng số của DSU khi kết hợp cả hai kỹ thuật tối ưu.
+        Kính thưa Thầy và các bạn, ở Slide 17, chúng ta cùng phân tích độ phức tạp của DSU:
+        1. Về mặt lý thuyết: Robert Tarjan đã chứng minh khi kết hợp Union by Rank và Path Compression, chi phí khấu hao mỗi thao tác đạt O(alpha(N)).
+        2. Về hàm ngược Ackermann: Do hàm Ackermann tăng rất nhanh, hàm ngược alpha(N) tăng cực kỳ chậm.
+        3. Nhìn vào bảng tra cứu: Ở các quy mô dữ liệu thực tế (kể cả 2^64), alpha(N) thường không vượt quá 4.
+        4. Vì vậy, trong kỹ thuật phần mềm, DSU thường được đánh giá là tiệm cận hiệu năng O(1).
     </aside>
 </section>

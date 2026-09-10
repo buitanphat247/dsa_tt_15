@@ -1,170 +1,163 @@
 <section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
-    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 600px; display: flex; flex-direction: column; justify-content: space-between;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 580px; display: flex; flex-direction: column; justify-content: space-between;">
         
         <!-- Header -->
-        <div style="text-align: center; margin-bottom: 8px;">
-            <div class="badge" style="font-size: 0.40em; padding: 4px 18px; margin-bottom: 4px; display: inline-block;">PHẦN III: DISJOINT-SET UNION (DSU)</div>
-            <h2 style="font-size: 0.94em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
-                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Disjoint-Set Forest: Biểu Diễn Mảng Cha<br>(Parent-Pointer Representation)</span>
+        <div style="text-align: center; margin-bottom: 12px;">
+            <div class="badge" style="font-size: 0.42em; padding: 4px 18px; margin-bottom: 4px; display: inline-block;">PHẦN III — CẤU TRÚC UNION-FIND (DISJOINT-SET UNION)</div>
+            <h2 style="font-size: 0.92em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Disjoint-Set Forest: Biểu Diễn Mảng Cha (Parent-Pointer)</span>
             </h2>
         </div>
 
-        <!-- Cohesive 2-Column Layout (Unified & Seamless) -->
-        <div style="display: grid; grid-template-columns: 1.05fr 1.25fr; gap: 16px; width: 100%; margin-bottom: 10px; align-items: stretch; flex-grow: 1;">
+        <!-- 2-Column Main Content (Ultra-Clean & Streamlined) -->
+        <div style="display: grid; grid-template-columns: 1fr 1.25fr; gap: 18px; width: 100%; align-items: stretch; flex-grow: 1;">
             
-            <!-- Column 1: Theoretical Foundation & Formal Operations -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 10px; padding: 14px 16px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+            <!-- Column 1: Nguyên lý & Thao tác cốt lõi (Tối giản chữ, tập trung ý chính) -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
                 <div>
-                    <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0 0 10px 0; display: flex; align-items: center; gap: 8px;">
-                        <i class="fa-solid fa-book-bookmark" style="color: #0284c7;"></i> Nguyên Lý Disjoint-Set Forest (CLRS)
+                    <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-sitemap" style="color: #0284c7;"></i> Mô Hình Cây Hướng Gốc (Up-Tree)
                     </h4>
 
-                    <!-- Concept 1: Set Partition -->
-                    <div style="margin-bottom: 10px;">
-                        <div style="font-size: 0.36em; font-weight: 700; color: #0f172a; margin-bottom: 2px;">
-                            1. Phân Hoạch Tập Hợp &amp; Phần Tử Đại Diện (Set Partition &amp; Canonical Root)
+                    <!-- 3 Quy tắc biểu diễn cốt lõi -->
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;">
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0284c7; border-radius: 6px; padding: 8px 12px; font-size: 0.38em; color: #0f172a;">
+                            <strong>Nút con:</strong> Trỏ lên cha trực tiếp $\to$ <code>parent[u] = v</code>
                         </div>
-                        <div style="font-size: 0.33em; color: #334155; line-height: 1.45;">
-                            Tập vũ trụ $U = \{0, 1, \dots, N-1\}$ được phân rã thành các <strong>lớp tương đương rời rạc</strong> ($S_i \cap S_j = \emptyset$). Mỗi tập con $S_i$ được định danh bởi duy nhất một <strong>Phần tử đại diện (Canonical Representative / Root)</strong>.
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #059669; border-radius: 6px; padding: 8px 12px; font-size: 0.38em; color: #0f172a;">
+                            <strong>Nút gốc (Root):</strong> Tự trỏ chính nó $\to$ <strong style="color: #059669;"><code>parent[r] == r</code></strong>
+                            <div style="font-size: 0.9em; color: #64748b; margin-top: 2px;">(Đóng vai trò là <strong>Đại diện duy nhất</strong> của nhóm)</div>
+                        </div>
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #7c3aed; border-radius: 6px; padding: 8px 12px; font-size: 0.38em; color: #0f172a;">
+                            <strong>Khởi tạo:</strong> Mỗi nút tự là 1 nhóm $\to$ <code>parent[i] = i</code>
                         </div>
                     </div>
 
-                    <!-- Concept 2: Parent Pointers -->
-                    <div style="margin-bottom: 10px;">
-                        <div style="font-size: 0.36em; font-weight: 700; color: #0f172a; margin-bottom: 2px;">
-                            2. Biểu Diễn Con Trỏ Cha (Parent-Pointer Invariant)
+                    <!-- 2 Thao tác cốt lõi -->
+                    <div style="background: #f1f5f9; border-radius: 8px; padding: 10px 14px; font-size: 0.37em; color: #0f172a; line-height: 1.6;">
+                        <div style="font-weight: 800; color: #0f172a; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-gears" style="color: #0284c7;"></i> 2 Thao Tác Cốt Lõi:
                         </div>
-                        <ul style="font-size: 0.33em; color: #334155; margin: 0; padding-left: 14px; line-height: 1.45;">
-                            <li><strong>Nút Gốc (Root Node):</strong> Điểm bất động đại số $\iff \mathbf{\text{parent}[r] == r}$.</li>
-                            <li><strong>Nút Con (Descendant):</strong> Lưu chỉ số nút cha trực tiếp $\mathbf{\text{parent}[u] = v}$ ($v \in U$).</li>
-                        </ul>
-                    </div>
-
-                    <!-- Concept 3: Operations -->
-                    <div>
-                        <div style="font-size: 0.36em; font-weight: 700; color: #0f172a; margin-bottom: 2px;">
-                            3. Hai Phép Toán ADT Cốt Lõi (Core ADT Operations)
-                        </div>
-                        <div style="font-size: 0.33em; color: #334155; line-height: 1.45;">
-                            • $\mathbf{\text{Find}(u)}$: Truy vết ngược chuỗi con trỏ cha để tìm Root đại diện của $u$.<br>
-                            • $\mathbf{\text{Union}(u, v)}$: Hợp nhất hai lớp tương đương: $\mathbf{\text{parent}[\text{Find}(u)] = \text{Find}(v)}$.<br>
-                            • <strong>Truy vấn tương đương (Equivalence Query):</strong> $u \sim v \iff \mathbf{\text{Find}(u) == \text{Find}(v)}$.
-                        </div>
+                        <div>• <strong style="color: #0284c7;">Find(u):</strong> Leo ngược chuỗi cha tìm nút Root đại diện.</div>
+                        <div>• <strong style="color: #059669;">Union(u, v):</strong> Gán <code>parent[Find(u)] = Find(v)</code> để gộp nhóm.</div>
                     </div>
                 </div>
 
-                <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: 6px 10px; font-size: 0.32em; color: #0369a1; font-weight: 700;">
-                    <i class="fa-solid fa-shield-halved" style="margin-right: 4px;"></i> <strong>Tính chất bất biến:</strong> Cấu trúc luôn là Đồ thị có hướng phi chu trình (DAG) hội tụ về Root.
+                <!-- Truy vấn liên thông -->
+                <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 8px 12px; font-size: 0.37em; color: #1d4ed8; text-align: center; font-weight: 700; margin-top: 10px;">
+                    Kiểm tra liên thông: $u \sim v \iff \mathbf{\text{Find}(u) == \text{Find}(v)}$
                 </div>
             </div>
 
             <!-- Column 2: Memory Mapping & Visual Disjoint-Set Forest -->
-            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 10px; padding: 14px 16px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
                 <div>
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
                         <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
-                            <i class="fa-solid fa-network-wired" style="color: #059669;"></i> Ánh Xạ Mảng 1D <code>parent[]</code> $\longleftrightarrow$ Disjoint-Set Forest
+                            <i class="fa-solid fa-table" style="color: #059669;"></i> Biểu Diễn Mảng 1D <code>parent[]</code>
                         </h4>
-                        <span style="font-size: 0.31em; color: #059669; font-weight: 700; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 2px 8px; border-radius: 4px;">Không Gian $\Theta(N)$</span>
+                        <span style="font-size: 0.33em; color: #059669; font-weight: 700; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 2px 10px; border-radius: 4px;">Bộ Nhớ $\Theta(N)$</span>
                     </div>
 
                     <!-- Array Table -->
-                    <table style="width: 100%; border-collapse: collapse; font-size: 0.34em; text-align: center; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; margin-bottom: 8px; color: #0f172a;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.39em; text-align: center; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; margin-bottom: 10px; color: #0f172a;">
                         <thead>
-                            <tr style="background: #f1f5f9; color: #0f172a; font-weight: 800;">
-                                <th style="padding: 6px 8px; background: #e2e8f0; width: 22%;">Phần Tử $u \in U$</th>
-                                <th style="padding: 6px 8px; border-left: 1px solid #cbd5e1;">0</th>
-                                <th style="padding: 6px 8px; border-left: 1px solid #cbd5e1;">1</th>
-                                <th style="padding: 6px 8px; border-left: 1px solid #cbd5e1;">2</th>
-                                <th style="padding: 6px 8px; border-left: 1px solid #cbd5e1;">3</th>
-                                <th style="padding: 6px 8px; border-left: 1px solid #cbd5e1;">4</th>
+                            <tr style="background: #f1f5f9; font-weight: 800;">
+                                <th style="padding: 8px 10px; background: #e2e8f0; width: 24%;">Chỉ số $u$</th>
+                                <th style="padding: 8px 10px; border-left: 1px solid #cbd5e1;">0</th>
+                                <th style="padding: 8px 10px; border-left: 1px solid #cbd5e1;">1</th>
+                                <th style="padding: 8px 10px; border-left: 1px solid #cbd5e1;">2</th>
+                                <th style="padding: 8px 10px; border-left: 1px solid #cbd5e1;">3</th>
+                                <th style="padding: 8px 10px; border-left: 1px solid #cbd5e1;">4</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr style="font-weight: 700;">
-                                <th style="padding: 6px 8px; background: #f8fafc; border-top: 1px solid #cbd5e1;"><code>parent[u]</code></th>
-                                <td style="padding: 6px 8px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1; background: #ecfdf5; color: #065f46; font-weight: 800;">0 (Root)</td>
-                                <td style="padding: 6px 8px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1;">0</td>
-                                <td style="padding: 6px 8px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1;">0</td>
-                                <td style="padding: 6px 8px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1;">4</td>
-                                <td style="padding: 6px 8px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1; background: #eff6ff; color: #1e40af; font-weight: 800;">4 (Root)</td>
+                                <th style="padding: 8px 10px; background: #f8fafc; border-top: 1px solid #cbd5e1;"><code>parent[u]</code></th>
+                                <td style="padding: 8px 10px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1; background: #ecfdf5; color: #065f46; font-weight: 800;">0 (Root)</td>
+                                <td style="padding: 8px 10px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1; color: #065f46;">0</td>
+                                <td style="padding: 8px 10px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1; color: #065f46;">0</td>
+                                <td style="padding: 8px 10px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1; color: #1e40af;">4</td>
+                                <td style="padding: 8px 10px; border-left: 1px solid #cbd5e1; border-top: 1px solid #cbd5e1; background: #eff6ff; color: #1e40af; font-weight: 800;">4 (Root)</td>
                             </tr>
                         </tbody>
                     </table>
 
                     <!-- Up-Tree SVG Graphic -->
-                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 6px 12px; margin-bottom: 6px;">
-                        <svg viewBox="0 0 320 72" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', sans-serif;">
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 12px; margin-bottom: 10px;">
+                        <svg viewBox="0 0 320 80" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', sans-serif;">
                             <defs>
-                                <marker id="m-grn-13" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                                <marker id="m-grn-13" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
                                     <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
                                 </marker>
-                                <marker id="m-blu-13" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                                <marker id="m-blu-13" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
                                     <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0284c7"/>
                                 </marker>
                             </defs>
 
                             <!-- Sub-Tree 1 (Root 0) -->
-                            <rect x="15" y="4" width="130" height="64" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1" stroke-dasharray="3 3"/>
-                            <text x="80" y="14" fill="#065f46" font-size="6.5" font-weight="800" text-anchor="middle">Lớp tương đương $S_1 = \{0, 1, 2\}$ (Root = 0)</text>
+                            <rect x="10" y="4" width="140" height="72" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1.2" stroke-dasharray="3 3"/>
+                            <text x="80" y="15" fill="#065f46" font-size="7.5" font-weight="800" text-anchor="middle">Nhóm S₁ = {0, 1, 2} (Root = 0)</text>
                             
                             <!-- Root 0 -->
-                            <circle cx="80" cy="28" r="9" fill="#059669"/>
-                            <text x="80" y="31" fill="#ffffff" font-size="7.5" font-weight="800" text-anchor="middle">0</text>
-                            <!-- Child 1 & 2 -->
-                            <line x1="45" y1="53" x2="71" y2="35" stroke="#059669" stroke-width="1.6" marker-end="url(#m-grn-13)"/>
-                            <line x1="115" y1="53" x2="89" y2="35" stroke="#059669" stroke-width="1.6" marker-end="url(#m-grn-13)"/>
-                            <circle cx="45" cy="55" r="7" fill="#ffffff" stroke="#059669" stroke-width="1.4"/>
-                            <text x="45" y="57.5" fill="#0f172a" font-size="6.5" font-weight="800" text-anchor="middle">1</text>
-                            <circle cx="115" cy="55" r="7" fill="#ffffff" stroke="#059669" stroke-width="1.4"/>
-                            <text x="115" y="57.5" fill="#0f172a" font-size="6.5" font-weight="800" text-anchor="middle">2</text>
+                            <circle cx="80" cy="32" r="10" fill="#059669"/>
+                            <text x="80" y="35.5" fill="#ffffff" font-size="9" font-weight="800" text-anchor="middle">0</text>
+                            
+                            <!-- Child 1 & 2 pointing UP to Root 0 -->
+                            <line x1="45" y1="58" x2="70" y2="40" stroke="#059669" stroke-width="1.8" marker-end="url(#m-grn-13)"/>
+                            <line x1="115" y1="58" x2="90" y2="40" stroke="#059669" stroke-width="1.8" marker-end="url(#m-grn-13)"/>
+                            
+                            <circle cx="45" cy="62" r="8" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+                            <text x="45" y="65" fill="#0f172a" font-size="7.5" font-weight="800" text-anchor="middle">1</text>
+                            <circle cx="115" cy="62" r="8" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+                            <text x="115" y="65" fill="#0f172a" font-size="7.5" font-weight="800" text-anchor="middle">2</text>
 
                             <!-- Sub-Tree 2 (Root 4) -->
-                            <rect x="175" y="4" width="130" height="64" rx="6" fill="#f0f9ff" stroke="#7dd3fc" stroke-width="1" stroke-dasharray="3 3"/>
-                            <text x="240" y="14" fill="#0369a1" font-size="6.5" font-weight="800" text-anchor="middle">Lớp tương đương $S_2 = \{3, 4\}$ (Root = 4)</text>
+                            <rect x="170" y="4" width="140" height="72" rx="6" fill="#f0f9ff" stroke="#7dd3fc" stroke-width="1.2" stroke-dasharray="3 3"/>
+                            <text x="240" y="15" fill="#0369a1" font-size="7.5" font-weight="800" text-anchor="middle">Nhóm S₂ = {3, 4} (Root = 4)</text>
                             
                             <!-- Root 4 -->
-                            <circle cx="240" cy="28" r="9" fill="#0284c7"/>
-                            <text x="240" y="31" fill="#ffffff" font-size="7.5" font-weight="800" text-anchor="middle">4</text>
-                            <!-- Child 3 -->
-                            <line x1="240" y1="51" x2="240" y2="39" stroke="#0284c7" stroke-width="1.6" marker-end="url(#m-blu-13)"/>
-                            <circle cx="240" cy="55" r="7" fill="#ffffff" stroke="#0284c7" stroke-width="1.4"/>
-                            <text x="240" y="57.5" fill="#0f172a" font-size="6.5" font-weight="800" text-anchor="middle">3</text>
+                            <circle cx="240" cy="32" r="10" fill="#0284c7"/>
+                            <text x="240" y="35.5" fill="#ffffff" font-size="9" font-weight="800" text-anchor="middle">4</text>
+                            
+                            <!-- Child 3 pointing UP to Root 4 -->
+                            <line x1="240" y1="56" x2="240" y2="44" stroke="#0284c7" stroke-width="1.8" marker-end="url(#m-blu-13)"/>
+                            <circle cx="240" cy="62" r="8" fill="#ffffff" stroke="#0284c7" stroke-width="1.6"/>
+                            <text x="240" y="65" fill="#0f172a" font-size="7.5" font-weight="800" text-anchor="middle">3</text>
                         </svg>
                     </div>
 
-                    <!-- Structured Equivalence Result Block -->
-                    <div style="display: flex; justify-content: space-around; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 4px 8px; font-size: 0.32em; color: #0f172a; margin-bottom: 6px;">
-                        <div>$\text{Find}(1) = \text{Find}(2) = 0 \implies 1, 2 \in S_1$</div>
+                    <!-- Query Result -->
+                    <div style="display: flex; justify-content: space-around; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 7px 12px; font-size: 0.36em; color: #0f172a;">
+                        <div><strong style="color: #059669;">Find(1) == Find(2) == 0</strong> $\implies$ Cùng nhóm $S_1$</div>
                         <div style="color: #cbd5e1; font-weight: bold;">|</div>
-                        <div>$\text{Find}(3) = 4 \implies 3 \in S_2 \ (1 \not\sim 3)$</div>
+                        <div><strong style="color: #0284c7;">Find(3) == 4</strong> $\implies$ Khác nhóm $S_2$</div>
                     </div>
                 </div>
 
-                <div style="font-size: 0.31em; color: #0f172a; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 10px;">
-                    <strong>Tối ưu phần cứng:</strong> Mảng nguyên liên tục khai thác triệt để <strong>CPU Spatial Locality</strong>, loại bỏ hoàn toàn overhead con trỏ động (<code>Node*</code>) và phân mảnh bộ nhớ heap.
+                <!-- Hardware Advantage Pill (Súc tích, 1 dòng) -->
+                <div style="font-size: 0.34em; color: #065f46; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; padding: 7px 12px; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px;">
+                    <i class="fa-solid fa-bolt" style="color: #059669;"></i>
+                    <span><strong>Ưu thế phần cứng:</strong> Mảng liên tục khai thác tối đa <strong>CPU Spatial Locality</strong>, không tốn con trỏ động <code>Node*</code>.</span>
                 </div>
             </div>
 
         </div>
 
-        <!-- Cohesive Bottom Summary -->
-        <div style="width: 100%; background: #f8fafc; border: 1px solid #cbd5e1; border-left: 5px solid #2563eb; border-radius: 8px; padding: 8px 16px; font-size: 0.36em; color: #0f172a; text-align: left; display: flex; align-items: center; gap: 12px; line-height: 1.45;">
-            <i class="fa-solid fa-diagram-project" style="font-size: 1.3em; color: #2563eb; flex-shrink: 0;"></i>
-            <span><strong>TỔNG KẾT MÔ HÌNH:</strong> Biểu diễn <strong>Disjoint-Set Forest</strong> ánh xạ bài toán kết nối động thành <strong>so sánh hai số nguyên đại diện</strong> ($\text{Find}(u) == \text{Find}(v)$), cho phép thực thi trực tiếp trên mảng <code>parent[]</code> với hiệu năng vượt trội.</span>
-        </div>
-
     </div>
 
     <aside class="notes">
-        Kính thưa Thầy và các bạn, đây là slide nền tảng về cấu trúc Disjoint-Set Forest theo chuẩn giáo trình thuật toán CLRS:
-        1. Về mặt lý thuyết:
-           - Ta phân hoạch tập hợp vũ trụ thành các lớp tương đương rời rạc. Mỗi tập con được định danh bởi một Canonical Representative (Root).
-           - Cấu trúc sử dụng cơ chế con trỏ cha (Parent Pointers): Mỗi nút con lưu chỉ số nút cha trực tiếp, riêng nút gốc là điểm bất động đại số tự trỏ vào chính nó: parent[r] == r.
-           - Hai phép toán ADT cốt lõi: Find(u) để truy vết nút gốc đại diện, và Union(u, v) để hợp nhất hai lớp tương đương bằng cách gán parent[Find(u)] = Find(v). Hai phần tử thuộc cùng tập khi và chỉ khi Find(u) == Find(v).
-        2. Biểu diễn trực quan trên mảng 1D parent[]:
-           - Thay vì dùng con trỏ động Node*, toàn bộ rừng cây được nén phẳng vào một mảng số nguyên 1 chiều parent[].
-           - Ví dụ trên bảng: Lớp tương đương S1 gồm các phần tử {0, 1, 2} có gốc là 0, Lớp tương đương S2 gồm {3, 4} có gốc là 4.
-           - Việc sử dụng mảng phẳng liên tục mang lại độ phức tạp không gian tối ưu Theta(N) và tận dụng tối đa CPU Spatial Locality.
+        Kính thưa Thầy và các bạn, đây là slide nền tảng về cấu trúc Disjoint-Set Forest trên mảng 1D:
+        1. Mô hình Up-Tree:
+           - Nút con trỏ ngược lên nút cha: parent[u] = v.
+           - Nút gốc (Root) tự trỏ vào chính nó: parent[r] == r, đóng vai trò là Phần tử đại diện cho cả nhóm.
+           - Ban đầu: Mỗi nút tự là 1 nhóm độc lập: parent[i] = i.
+        2. Hai thao tác cốt lõi:
+           - Find(u): Lần theo chuỗi cha để tìm nút Root đại diện.
+           - Union(u, v): Gán parent[Find(u)] = Find(v) để hợp nhất 2 nhóm.
+           - Kiểm tra liên thông: Hai phần tử thuộc cùng nhóm khi và chỉ khi Find(u) == Find(v).
+        3. Biểu diễn trực quan trên mảng 1D parent[]:
+           - Nhóm S1 {0, 1, 2} có gốc là 0; Nhóm S2 {3, 4} có gốc là 4.
+           - Cấu trúc mảng liên tục giúp tối ưu không gian Theta(N) và tăng tốc độ đọc nhờ CPU Spatial Locality.
     </aside>
 </section>

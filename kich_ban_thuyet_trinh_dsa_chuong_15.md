@@ -19,7 +19,7 @@
 | Diễn giả | Slide | Nội dung trọng tâm | Mục tiêu nhận thức của người nghe | Thời lượng |
 | :--- | :--- | :--- | :--- | :--- |
 | **Lê Thị Tuyết Nhi** | Slide 00 – 11 *(12 slide)* | Đặt vấn đề, Giới hạn CSDL tổng quát, Memory Locality, Cấu trúc Trie & Phân tích Child Containers | Hiểu vì sao Hash Table thất bại ở Prefix Search, nắm vững cấu trúc hình học Trie, cơ chế cờ `is_end_of_word` và đánh đổi bộ nhớ CPU Cache. | **~7.5 phút** |
-| **Mai Thanh Trà** | Slide 12 – 20 *(9 slide)* | Dynamic Connectivity, ADT Disjoint-Set, Nguy cơ suy biến cây, Union by Rank, Path Compression, Ackermann $\alpha(N)$, Trace Table & Kruskal MST | Hiểu cơ chế Up-Tree trên mảng 1D, vì sao kết hợp Rank + Path Compression đạt tốc độ tiệm cận $O(1)$, và ứng dụng Kruskal tìm cây khung. | **~6.5 phút** |
+| **Mai Thanh Trà** | Slide 12 – 20 *(8 slide)* | Dynamic Connectivity, ADT Disjoint-Set, Nguy cơ suy biến cây, Union by Rank, Path Compression, Ackermann $\alpha(N)$ & Kruskal MST | Hiểu cơ chế Up-Tree trên mảng 1D, vì sao kết hợp Rank + Path Compression đạt tốc độ tiệm cận $O(1)$, và ứng dụng Kruskal tìm cây khung. | **~6.0 phút** |
 | **Huỳnh Thị Thùy Trang** | Slide 21 – 23 *(4 slide)* | Technical Decision Framework, Bài học Kiến trúc Hệ thống, Biến thể nâng cao (Radix Tree, TST, Rollback DSU) & Điều phối Q&A | Nắm trọn khung tư duy chọn CSDL theo Query Pattern, nguyên lý Trade-off và sẵn sàng phản biện học thuật với Giảng viên. | **~4.0 phút** |
 | **Cả nhóm** | Q&A | Trả lời chất vấn của Giảng viên & Sinh viên | Thể hiện tư duy phản biện, chiều sâu cài đặt mã nguồn C++ và tối ưu phần cứng. | **~5.0 phút** |
 
@@ -411,116 +411,107 @@
 
 ---
 
-### 📍 SLIDE 16: TỐI ƯU HÓA 2: NÉN ĐƯỜNG ĐI (PATH COMPRESSION)
+### 📍 SLIDE 16: KỸ THUẬT 2: PATH COMPRESSION
 * **Thời lượng:** 50 giây.
-* **Hành động trình chiếu:** Chuyển Slide 16. Nhấn mạnh dòng lệnh C++ đệ quy 1 dòng và sơ đồ biến đổi cây nhiều tầng thành cây phẳng 1 tầng.
+* **Hành động trình chiếu:** Chuyển Slide 16. Nhấn mạnh 2 cột: Cài đặt C++ (bên trái) và Lý thuyết giải thuật (bên phải).
 
 > 🧠 **BỔ NGHĨA DÀNH CHO NGƯỜI THUYẾT TRÌNH (Hiểu bản chất):**
-> * **Dòng mã đệ quy tinh gọn:**  
+> * **Cài đặt C++ tinh gọn (1 dòng đệ quy):**  
 >   `int find(int i) { if (parent[i] == i) return i; return parent[i] = find(parent[i]); }`
-> * **Cơ chế hoạt động:** Trong quá trình hàm `find(i)` đi từ nút $i$ lên gốc $R$, khi đệ quy quay lui trở về (Unwinding), nó gán lại con trỏ `parent` của **tất cả các nút đã đi qua trỏ trực tiếp về $R$**!
-> * **Kết quả:** Toàn bộ nhánh cây nhiều tầng bị kéo phẳng hoàn toàn thành cây 1 tầng duy nhất. Tất cả các nút con đều nối thẳng vào Gốc.
-> * **Hiệu quả:** Lần gọi `find()` đầu tiên trên nhánh có thể tốn vài bước, nhưng từ lần gọi thứ hai trở đi trên bất kỳ nút nào của nhánh đó, thời gian chỉ tốn đúng **$O(1)$**!
+> * **2 Pha đệ quy (Two-pass Recursion):**
+>   * *Pha 1 (Lần ngược - Find root):* Lần theo chuỗi cha cho tới khi gặp nút gốc (`parent[i] == i`).
+>   * *Pha 2 (Quay lui & Gán - Collapsing):* Khi ngăn xếp hàm mở cuộn, kết quả gốc được gán trực tiếp cho `parent[i]` của mọi nút trên đường duyệt.
+> * **3 Trụ cột lý thuyết:**
+>   1. *Làm phẳng cây (Tree Flattening):* Chiều cao toàn bộ nhánh cây giảm tức thì về $1$.
+>   2. *Tính tự thích nghi (Self-Adjusting):* Tự động tái cân bằng và tối ưu cấu trúc ngay trong lúc đọc dữ liệu (Read-time Optimization) mà không tốn chi phí phụ.
+>   3. *Phân tích khấu hao (Amortized Cost):* Lần gọi đầu tiên có thể tốn $O(H)$, nhưng toàn bộ các lần gọi `find()` tiếp theo trên các nút đó đều đạt thời gian tức thì **$O(1)$**!
 
 **🎙️ Lời thoại thuyết minh (Trà):**
-> *"Nếu Union by Rank đã đưa độ phức tạp về $O(\log N)$, thì kỹ thuật thứ hai — **Path Compression (Nén đường đi)** — đóng vai trò then chốt trong việc tối ưu hóa hiệu năng truy vấn!*
+> *"Nếu Union by Rank khống chế chiều cao cây ở mức $O(\log N)$, thì kỹ thuật tối ưu tiếp theo — **Path Compression** — đóng vai trò then chốt giúp giải thuật bứt phá hiệu năng!*
 >
-> *Cơ chế này được cài đặt rất tinh gọn trong C++:*
+> *Về mặt cài đặt, kỹ thuật này được hiện thực hóa vô cùng tinh gọn trong C++:*
 > `return parent[i] = find(parent[i]);`
 >
-> *Cơ chế hoạt động vô cùng tinh xảo: Trong quá trình đệ quy đi tìm Nút Gốc, trên đường quay lui trở về, thuật toán sẽ **bẻ thẳng toàn bộ các nút đã đi qua để nối trực tiếp vào Nút Gốc**!*
-> * Cấu trúc cây nhiều tầng được làm phẳng đáng kể, giảm chiều cao cây về mức tối thiểu.
-> * Tất cả các thao tác `find()` kế tiếp trên các nút này sẽ chạm tới Gốc trong đúng 1 bước nhảy — đạt chi phí **$O(1)$ trực tiếp**!
+> *Đoạn mã này hoạt động mượt mà qua hai pha đệ quy:*
+> * **Pha 1:** Duyệt ngược lên để tìm ra Nút Gốc đại diện.
+> * **Pha 2:** Khi đệ quy quay lui mở cuộn, kết quả Nút Gốc được gán trực tiếp vào mảng `parent[]` của từng nút trung gian trên đường đi.
 >
-> *Đây chính là cơ chế tự tối ưu cấu trúc dữ liệu theo thời gian thực (Self-adjusting data structure)!"*
+> *Về mặt lý thuyết, cơ chế này mang lại 3 giá trị học thuật cốt lõi:*
+> * Thứ nhất, **Làm phẳng cây (Tree Flattening):** Biến đổi toàn bộ chuỗi nút sâu thành cây có chiều cao bằng 1, tất cả các nút con đều nối thẳng vào Gốc.
+> * Thứ hai, **Tính tự thích nghi (Self-Adjusting):** Cấu trúc cây tự động tối ưu hóa chính nó ngay trong quá trình đọc dữ liệu mà không tốn bất kỳ thao tác phụ nào.
+> * Thứ ba, **Chi phí khấu hao:** Sau lần gọi đầu tiên, mọi thao tác `find()` kế tiếp trên các nút này đều đạt tốc độ tức thì **$O(1)$**!
+>
+> *Sự kết hợp giữa **Union by Rank** và **Path Compression** giúp mọi thao tác trên DSU đạt hiệu năng tối ưu, **tiệm cận $O(1)$**!"*
 
 ---
 
-### 📍 SLIDE 17: PHÂN TÍCH ĐỘ PHỨC TẠP & HÀM NGƯỢC ACKERMANN $\alpha(N)$
-* **Thời lượng:** 50 giây.
-* **Hành động trình chiếu:** Chuyển Slide 17. Chỉ vào Bảng tra cứu giá trị $N \le 2^{64} \implies \alpha(N) \le 4$.
+### 📍 SLIDE 17: ĐỘ PHỨC TẠP & HÀM NGƯỢC ACKERMANN $\alpha(N)$
+* **Thời lượng:** 45 giây.
+* **Hành động trình chiếu:** Chuyển Slide 17. Nhấn mạnh 2 cột: Bản chất toán học (bên trái) và Bảng tra cứu thực nghiệm (bên phải).
 
 > 🧠 **BỔ NGHĨA DÀNH CHO NGƯỜI THUYẾT TRÌNH (Hiểu bản chất):**
-> * **Định lý Tarjan (1975):** Khi kết hợp đồng thời cả *Union by Rank* và *Path Compression*, chi phí trung bình (amortized cost) cho mỗi thao tác là **$O(\alpha(N))$**, trong đó $\alpha(N)$ là **Hàm ngược Ackermann (Inverse Ackermann function)**.
+> * **Định lý Tarjan (1975):** Khi kết hợp đồng thời cả *Union by Rank* và *Path Compression*, chi phí khấu hao (amortized cost) cho mỗi thao tác là **$O(\alpha(N))$**, trong đó $\alpha(N)$ là **Hàm ngược Ackermann (Inverse Ackermann function)**.
 > * **Ý nghĩa thực tế của $\alpha(N)$:**
 >   * Hàm Ackermann $A(m, n)$ là một trong những hàm tăng nhanh nhất toán học. Do đó hàm ngược $\alpha(N)$ là hàm tăng **chậm nhất** từng được biết đến!
->   * Để $\alpha(N) = 5$, số phần tử $N$ phải vượt quá $2^{65536}$ — vượt xa mọi giới hạn bộ nhớ vật lý và không gian địa chỉ 64-bit.
->   * Vì vậy, với mọi bài toán trong thế giới thực và trên mọi siêu máy tính, **$\alpha(N) \le 4$**. Trong thực tế kỹ thuật, ta hoàn toàn coi DSU chạy với **thời gian hằng số $O(1)$**!
+>   * Để $\alpha(N) = 5$, số phần tử $N$ phải vượt quá $2^{65536}$ — vượt xa tổng số nguyên tử trong vũ trụ quan sát được ($\approx 10^{80}$).
+>   * Vì vậy, ở hầu hết các quy mô dữ liệu thông dụng, **$\alpha(N) \le 4$**. Trong kỹ thuật phần mềm, DSU thường được đánh giá là tiệm cận hiệu năng **$O(1)$**!
 
 **🎙️ Lời thoại thuyết minh (Trà):**
 > *"Khi kết hợp đồng thời cả hai kỹ thuật: Union by Rank và Path Compression, chúng ta đạt được kết quả độ phức tạp kinh điển được nhà khoa học máy tính Robert Tarjan chứng minh vào năm 1975: **$O(\alpha(N))$** cho mỗi thao tác.*
 >
-> *Trong đó, $\alpha(N)$ là **Hàm ngược Ackermann** — hàm số có tốc độ tăng trưởng cực kỳ chậm trong lý thuyết độ phức tạp!*
-> * Để hàm $\alpha(N)$ đạt tới giá trị bằng 5, quy mô dữ liệu $N$ phải vượt ngưỡng $2^{65536}$ — vượt xa mọi giới hạn dung lượng phần cứng và không gian địa chỉ!
-> * Do đó, trong mọi hệ thống tính toán và cơ sở dữ liệu thực tế, **$\alpha(N)$ không bao giờ vượt quá 4**.
+> *Trong đó, $\alpha(N)$ là **Hàm ngược Ackermann** — hàm số có tốc độ tăng trưởng cực kỳ chậm trong khoa học máy tính!*
+> * Để $\alpha(N)$ đạt tới giá trị bằng 5, quy mô dữ liệu $N$ phải vượt ngưỡng $2^{65536}$ — một ngưỡng vượt quá các giới hạn tính toán thực tế.
+> * Nhìn vào bảng tra cứu bên phải, ngay cả khi quy mô dữ liệu lên tới $2^{64}$, giá trị $\alpha(N)$ vẫn **không vượt quá 4**.
 >
-> *Do đó, trong thực tế kỹ thuật, chi phí khấu hao $O(\alpha(N))$ được xem là tiệm cận thời gian hằng số $O(1)$ đối với mọi quy mô dữ liệu thực tế!*"
+> *Vì vậy, trong kỹ thuật phần mềm, cấu trúc DSU thường được đánh giá là đạt hiệu năng tiệm cận **$O(1)$** trong hầu hết các trường hợp ứng dụng. Và ngay sau đây, chúng ta sẽ bước sang một trong những ứng dụng thực tế kinh điển nhất của DSU: Thuật toán Kruskal tìm Cây khung nhỏ nhất!*"
 
 ---
 
-### 📍 SLIDE 18: WORKED EXAMPLE: BẢNG TRACE MÔ PHỎNG DSU
+### 📍 SLIDE 19: ỨNG DỤNG KINH ĐIỂN: THUẬT TOÁN KRUSKAL (MST)
 * **Thời lượng:** 50 giây.
-* **Hành động trình chiếu:** Chuyển Slide 18. Dùng bút laser chỉ vào từng dòng của Bảng Trace Table, đặc biệt là 2 dòng highlight: Bước 4 (Xanh) và Bước 6 (Tím).
+* **Hành động trình chiếu:** Chuyển Slide 19. Nhấn mạnh 2 cột: Nguyên lý giải thuật tham lam & vai trò DSU (bên trái) và Phân tích độ phức tạp 2 pha (bên phải).
 
 > 🧠 **BỔ NGHĨA DÀNH CHO NGƯỜI THUYẾT TRÌNH (Hiểu bản chất):**
-> * **Giải thích từng bước chạy vết (Trace):**
->   * *Bước 0:* 6 nút độc lập $0..5$, `parent = [0,1,2,3,4,5]`, `rank = [0,0,0,0,0,0]`.
->   * *Bước 1, 2, 3:* `union(0,1)`, `union(2,3)`, `union(1,2)` ghép dần các nhóm lại.
->   * *Bước 4 (Highlight Xanh - Path Compression):* Gọi `connected(0, 3)`. Trong hàm `find(3)`, nút 3 được nén nối thẳng về Gốc 0. `parent[3]` lập tức đổi thành 0!
->   * *Bước 6 (Highlight Tím - Tăng Rank):* `union(3, 5)` gộp 2 nhóm có cùng `rank = 1` $\to$ `rank[0]` tăng lên thành 2.
+> * **Bài toán Cây khung nhỏ nhất (MST):** Tìm đồ thị con chứa đủ $V$ đỉnh, đúng $V - 1$ cạnh với tổng trọng số nhỏ nhất và không chứa chu trình.
+> * **Chiến lược Tham lam (Greedy Strategy):** Luôn ưu tiên xem xét kết nạp các cạnh có trọng số nhẹ nhất trước.
+> * **Vai trò đột phá của DSU (Phát hiện chu trình tức thì):**
+>   * Khi xem xét cạnh $(u, v)$, nếu `find(u) == find(v)`: Hai đỉnh đã chung một tập hợp, việc thêm cạnh sẽ tạo chu trình kín $\to$ Bỏ qua.
+>   * Nếu `find(u) != find(v)`: Hai đỉnh thuộc hai cây rời rạc $\to$ Thêm cạnh vào cây khung và gộp lại bằng `union(u, v)`.
+> * **Phân tích 2 pha:** Pha 1 sắp xếp cạnh tốn $O(E \log E)$. Pha 2 duyệt và kiểm tra bằng DSU chỉ tốn $O(E \cdot \alpha(V)) \approx O(E)$. Điểm nghẽn nằm ở bước sắp xếp, còn DSU đã giải quyết triệt để khâu kiểm tra liên thông.
 
 **🎙️ Lời thoại thuyết minh (Trà):**
-> *"Để minh họa trực quan quá trình tự biến đổi này, xin mời Thầy và các bạn quan sát Bảng mô phỏng vết (Trace Table) trên Slide 18:*
+> *"Ứng dụng kinh điển và tiêu biểu nhất của DSU chính là **Thuật toán Kruskal** giải quyết bài toán Cây khung nhỏ nhất (Minimum Spanning Tree - MST):*
 >
-> * Ban đầu ở **Bước 0**, ta có 6 phần tử độc lập với `parent[i] = i` và toàn bộ `rank = 0`.
-> * Hãy chú ý ở **Bước 4 (Dòng màu xanh dương)**: Khi ta gọi lệnh kiểm tra liên thông `connected(0, 3)`, hàm `find(3)` được kích hoạt. Nhờ cơ chế **Path Compression**, con trỏ của nút 3 lập tức được nén nối thẳng về Gốc 0 (`parent[3] = 0`).
-> * Và ở **Bước 6 (Dòng màu tím)**: Khi thực hiện `union(3, 5)`, vì hai nhóm có cùng Rank bằng 1, thuật toán chọn Gốc 0 làm đại diện chung và tự động nâng `rank[0]` lên mức 2.
+> *Về mặt nguyên lý giải thuật:*
+> * Mục tiêu của bài toán là tìm một cây khung kết nối đủ $V$ đỉnh với tổng trọng số nhỏ nhất và tuyệt đối không tạo chu trình.
+> * Kruskal vận hành theo **Chiến lược Tham lam (Greedy)**: Ưu tiên chọn các cạnh có trọng số nhỏ nhất trước.
+> * Thách thức lớn nhất là làm sao biết cạnh mới có tạo chu trình kín hay không? DSU giải quyết trọn vẹn câu hỏi này: Nếu `find(u) != find(v)`, cạnh an toàn để nạp vào MST và ta hợp nhất hai nhóm bằng `union(u, v)`.
 >
-> *Bảng Trace đã chứng minh rõ ràng cơ chế tự động giữ phẳng cây và bảo toàn chiều cao tối ưu của thuật toán DSU!"*
+> *Về phân tích độ phức tạp:*
+> * Thuật toán gồm hai pha: Pha 1 sắp xếp danh sách cạnh tốn **$O(E \log E)$**.
+> * Pha 2 duyệt và kiểm tra chu trình bằng DSU chỉ tốn **$O(E \cdot \alpha(V))$** — gần như tuyến tính!
+>
+> *Nhờ cấu trúc DSU, điểm nghẽn hiệu năng chỉ còn nằm ở bước sắp xếp cạnh, biến Kruskal thành một giải thuật cực kỳ nhanh và tối ưu trên đồ thị thưa!"*
 
 ---
 
-### 📍 SLIDE 19: BẪY CÀI ĐẶT, UNION BY SIZE & THUẬT TOÁN KRUSKAL (MST)
-* **Thời lượng:** 55 giây.
-* **Hành động trình chiếu:** Chuyển Slide 19. Chỉ vào hộp cảnh báo "Bẫy Rank sau nén", công thức Union by Size và ứng dụng Kruskal.
-
-> 🧠 **BỔ NGHĨA DÀNH CHO NGƯỜI THUYẾT TRÌNH (Hiểu bản chất):**
-> * **Bẫy cài đặt kinh điển (Trap):** Khi dùng Path Compression, chiều cao thực tế của cây bị giảm đi (ép phẳng), nhưng ta **không cập nhật lại mảng `rank[]`** vì làm thế sẽ mất thêm thời gian. Vì vậy, `rank` lúc này chỉ là *Upper Bound (chặn trên)* chứ không còn là chiều cao thực tế nữa!
-> * **Biến thể Union by Size:** Thay vì quản lý `rank`, ta lưu mảng `size[]` đếm số lượng phần tử của cây. Có một mẹo cực hay trong C++: Lưu `size` dạng số âm ngay trong mảng `parent[]` (nếu `parent[root] < 0` thì `-parent[root]` chính là size của cây) $\to$ Tiết kiệm thêm 1 mảng phụ!
-> * **Thuật toán Kruskal:** Thuật toán kinh điển tìm Cây khung nhỏ nhất (Minimum Spanning Tree - MST). Sắp xếp $E$ cạnh tốn $O(E \log E)$. Sau đó duyệt qua từng cạnh, dùng DSU để kiểm tra xem 2 đỉnh có tạo thành chu trình hay không (`find(u) != find(v)`). Nếu không tạo chu trình thì gọi `union(u, v)`. Nhờ DSU chạy $O(1)$, tổng thời gian Kruskal đạt mức tối ưu $O(E \log E)$!
-
-**🎙️ Lời thoại thuyết minh (Trà):**
-> *"Khi lập trình DSU trong thực tế, có một bẫy kỹ thuật rất quan trọng cần lưu ý:*
-> * Sau khi Path Compression ép phẳng cây, chiều cao thực tế đã giảm xuống, nhưng mảng `rank` **không hề được cập nhật lại** vì chi phí tính toán lại chiều cao rất đắt. Do đó, `rank` chỉ đóng vai trò là một chặn trên xấp xỉ.
-> * Một phương án thay thế rất được ưa chuộng là **Union by Size** — theo dõi trực tiếp số lượng phần tử của mỗi cây, thậm chí có thể lưu trực tiếp số âm vào mảng `parent` để tiết kiệm tối đa bộ nhớ RAM.
->
-> *Và ứng dụng đỉnh cao nhất của DSU chính là **Thuật toán Kruskal** tìm Cây khung nhỏ nhất (MST) trên đồ thị:*
-> * Ta sắp xếp $E$ cạnh theo trọng số tăng dần: Tốn $O(E \log E)$.
-> * Sau đó duyệt từng cạnh, dùng `find()` của DSU để phát hiện chu trình trong $O(1)$. Nếu hai đỉnh chưa liên thông, ta nạp cạnh đó vào cây khung bằng lệnh `union()`.
->
-> *Nhờ DSU, thuật toán Kruskal vận hành với tốc độ cực nhanh $O(E \log E)$!"*
-
----
-
-### 📍 SLIDE 20: BẢNG ĐỐI SÁNH HIỆU NĂNG DSU VS GRAPH BFS/DFS
+### 📍 SLIDE 20: BẢNG ĐỐI SÁNH: CẤU TRÚC TỔNG QUÁT VS CHUYÊN BIỆT
 * **Thời lượng:** 40 giây.
-* **Hành động trình chiếu:** Chuyển Slide 20. Đối chiếu các cột DSU vs Graph BFS/DFS vs Ma trận kề. Kết thúc Phần II và chuyển giao diễn giả.
+* **Hành động trình chiếu:** Chuyển Slide 20. Đối chiếu 2 cột: Bài toán chuỗi (bên trái) và Bài toán liên thông động (bên phải). Kết thúc Phần II và chuyển giao diễn giả.
 
 > 🧠 **BỔ NGHĨA DÀNH CHO NGƯỜI THUYẾT TRÌNH (Hiểu bản chất):**
 > * **So sánh toàn diện:**
->   * *Đồ thị BFS/DFS:* Thêm cạnh $O(1)$, nhưng truy vấn liên thông tốn $O(V + E)$, bộ nhớ $O(V + E)$.
->   * *Ma trận kề (Adjacency Matrix):* Truy vấn liên thông vẫn tốn $O(V)$, bộ nhớ tốn kém $O(V^2)$.
->   * *DSU:* Thêm cạnh $O(\alpha(V)) \approx O(1)$, Truy vấn liên thông $O(\alpha(V)) \approx O(1)$, Bộ nhớ siêu nhẹ đúng $O(V)$!
+>   * *Bài toán Chuỗi & Tiền tố:* Hash Table tra cứu chính xác tốt, nhưng với tìm kiếm tiền tố hay gợi ý từ khóa (autocomplete), Trie vượt trội vì chi phí phụ thuộc độ dài chuỗi $O(L)$, không phụ thuộc tổng số từ $N$.
+>   * *Bài toán Liên thông đồ thị:* BFS/DFS phù hợp đồ thị tĩnh ($O(V + E)$ mỗi lần duyệt), trong khi DSU tối ưu cho đồ thị động (thêm cạnh liên tục) với chi phí tiệm cận $O(1)$ trên mảng 1D nhẹ $O(V)$.
 
 **🎙️ Lời thoại thuyết minh (Trà):**
-> *"Nhìn vào Bảng đối sánh tổng hợp trên Slide 20, chúng ta thấy rõ hiệu quả nổi bật của DSU trong bài toán liên thông:*
-> * Nếu dùng **BFS hay DFS**, mỗi thao tác truy vấn liên thông tiêu tốn $O(V + E)$ thời gian.
-> * Nếu dùng **Ma trận kề**, bộ nhớ bị lãng phí tới $O(V^2)$ và thời gian vẫn là $O(V)$.
-> * Trong khi đó, **DSU thể hiện ưu thế vượt trội**: Thêm cạnh tốn $O(1)$, truy vấn liên thông tốn $O(1)$, và bộ nhớ chỉ tiêu tốn đúng một mảng tuyến tính $O(V)$!
+> *"Nhìn vào Bảng đối sánh tổng hợp trên Slide 20, chúng ta thấy rõ vai trò của từng cấu trúc dữ liệu:*
+> * Ở bài toán chuỗi và tiền tố: Hash Table tra cứu chính xác rất nhanh, nhưng khi cần tìm kiếm tiền tố hay tự động gợi ý từ (autocomplete), **Trie mang lại lợi thế vượt trội** khi không phải duyệt quét lại toàn bộ dữ liệu.
+> * Ở bài toán liên thông đồ thị: Nếu như BFS hay DFS phải duyệt lại toàn bộ đồ thị với chi phí $O(V + E)$, thì **DSU kiểm tra liên thông với chi phí tiệm cận $O(1)$** trên một mảng một chiều vô cùng gọn nhẹ.
 >
-> *Đó là ưu điểm thiết kế của Cấu trúc Union-Find.*
+> *Mỗi cấu trúc chuyên biệt được thiết kế để giải quyết hiệu quả một dạng bài toán đặc thù.*
 >
-> *Sau đây, để đúc kết lại toàn bộ bài học, giới thiệu Khung quyết định thiết kế hệ thống và các biến thể nâng cao, em xin kính mời bạn **Huỳnh Thị Thùy Trang** tiếp tục phần thuyết trình!"*
+> *Sau đây, để đúc kết lại toàn bộ chuyên đề và giới thiệu Khung ra quyết định lựa chọn Cấu trúc Dữ liệu, em xin kính mời bạn **Huỳnh Thị Thùy Trang** tiếp tục phần trình bày!"*
 
 ---
 
@@ -530,71 +521,65 @@
 
 ---
 
-### 📍 SLIDE 21: TECHNICAL DECISION FRAMEWORK
+### 📍 SLIDE 21: KHUNG RA QUYẾT ĐỊNH LỰA CHỌN CẤU TRÚC DỮ LIỆU
 * **Thời lượng:** 55 giây.
-* **Hành động trình chiếu:** Trang bước lên tự tin, mỉm cười chào Thầy và các bạn. Bật Slide 21. Chỉ vào Sơ đồ phân nhánh Cây Quyết Định (Decision Tree).
+* **Hành động trình chiếu:** Trang bước lên tự tin, mỉm cười chào Thầy và các bạn. Bật Slide 21. Quét qua 3 cột lựa chọn kỹ thuật.
 
 > 🧠 **BỔ NGHĨA DÀNH CHO NGƯỜI THUYẾT TRÌNH (Hiểu bản chất):**
-> * **Khung tư duy kỹ thuật (Decision Framework):** Khi đối mặt với một bài toán thực tế, làm sao kỹ sư biết nên dùng cấu trúc dữ liệu nào?
->   1. *Bài toán yêu cầu tra cứu từ khóa chính xác (Exact Key Lookup)?* $\to$ **Hash Table** (nhanh nhất, $O(1)$).
->   2. *Bài toán cần tìm kiếm theo tiền tố chuỗi, gợi ý từ khóa (Prefix / Autocomplete)?* $\to$ **Trie** ($O(L)$).
->   3. *Bài toán cần quản lý tập hợp động, kiểm tra liên thông, chu trình đồ thị (Dynamic Connectivity / Cycles)?* $\to$ **Union-Find / DSU** ($O(\alpha(N))$).
->   4. *Bài toán cần tìm đường đi ngắn nhất hoặc duyệt đồ thị tĩnh có hướng (Shortest Path / Directed Graph)?* $\to$ **Graph BFS/DFS / Dijkstra**.
+> * **Khung tư duy kỹ thuật (Decision Framework):**
+>   1. *Cần tra cứu khóa chính xác (Exact Key Lookup)?* $\to$ **Hash Table / BST** (đơn giản, nhanh, ít tốn RAM).
+>   2. *Cần tìm kiếm tiền tố, gợi ý từ khóa (Prefix / Autocomplete)?* $\to$ **Trie / Radix Tree** ($O(L)$, độc lập quy mô $N$).
+>   3. *Cần gộp nhóm động, kiểm tra liên thông, phát hiện chu trình (Dynamic Connectivity)?* $\to$ **Union-Find (DSU)** ($O(\alpha(N)) \approx O(1)$).
 
 **🎙️ Lời thoại thuyết minh (Trang):**
-> *"Xin cảm ơn phần trình bày rất sâu sắc của bạn Thanh Trà.*
+> *"Xin cảm ơn phần trình bày rất chi tiết của bạn Thanh Trà.*
 >
-> *Kính chào Thầy Vũ Đình Bảo cùng toàn thể các bạn, em tên là Huỳnh Thị Thùy Trang. Em xin phép được đại diện nhóm trình bày phần tổng kết chuyên đề với trọng tâm: **Khung Quyết Định Kỹ Thuật (Technical Decision Framework) và Kiến Trúc Hệ Thống**.*
+> *Kính chào Thầy Vũ Đình Bảo cùng toàn thể các bạn, em tên là Huỳnh Thị Thùy Trang. Em xin phép đại diện nhóm trình bày phần tổng kết chuyên đề với trọng tâm: **Khung Ra Quyết Định Lựa Chọn Cấu Trúc Dữ Liệu và Bài Học Kiến Trúc Hệ Thống**.*
 >
-> *Một kỹ sư phần mềm xuất sắc không phải là người biết nhiều cấu trúc dữ liệu phức tạp, mà là người biết **chính xác khi nào nên dùng cấu trúc nào**.*
+> *Một kỹ sư phần mềm giỏi không phải là người cố gắng dùng cấu trúc phức tạp nhất, mà là người biết **lựa chọn cấu trúc phù hợp nhất cho từng bài toán**.*
 >
-> *Trên Slide 21 là Sơ đồ cây quyết định được nhóm chúng em đúc kết:*
-> * Nếu bài toán chỉ yêu cầu tra cứu từ khóa chính xác mà không quan tâm thứ tự $\to$ Hãy chọn **Hash Table** để đạt $O(1)$ đơn giản và tối ưu bộ nhớ.
-> * Nếu bài toán yêu cầu xử lý chuỗi, tìm kiếm tiền tố hoặc tự động gợi ý từ $\to$ **Trie** là giải pháp chuyên biệt rất phù hợp.
-> * Nếu bài toán thuộc dạng quan hệ tương đương, gộp nhóm động hoặc phát hiện chu trình trên đồ thị vô hướng $\to$ Hãy chọn **Union-Find (DSU)** để đạt chi phí khấu hao tiệm cận $O(1)$.
-> * Còn nếu bài toán yêu cầu tìm đường đi ngắn nhất hoặc xử lý đồ thị có hướng phức tạp $\to$ Khi đó chúng ta mới cần đến **BFS, DFS hoặc Dijkstra**."*
+> *Trên Slide 21 là 3 tình huống kỹ thuật điển hình:*
+> * **Tình huống 1:** Khi bài toán chỉ yêu cầu tra cứu khóa chính xác $\to$ Hãy ưu tiên **Hash Table hoặc BST** vì tính đơn giản, tiết kiệm RAM và có sẵn trong thư viện chuẩn.
+> * **Tình huống 2:** Khi cần tìm kiếm tiền tố hoặc gợi ý từ khóa thời gian thực $\to$ **Trie** là lựa chọn sáng giá với tốc độ $O(L)$ không bị suy giảm khi dữ liệu phình to.
+> * **Tình huống 3:** Khi bài toán cần gộp nhóm động và phát hiện chu trình $\to$ Hãy chọn **Union-Find (DSU)** để đạt hiệu năng tiệm cận $O(1)$ trên mảng phẳng liên tục."*
 
 ---
 
-### 📍 SLIDE 22: BÀI HỌC CỐT LÕI VỀ KIẾN TRÚC HỆ THỐNG
+### 📍 SLIDE 22: BÀI HỌC CỐT LÕI VỀ THIẾT KẾ HỆ THỐNG
 * **Thời lượng:** 50 giây.
-* **Hành động trình chiếu:** Chuyển Slide 22. Nhấn mạnh 3 khối bài học cốt lõi: Query Pattern, Trade-offs và Hardware-awareness.
+* **Hành động trình chiếu:** Chuyển Slide 22. Nhấn mạnh 3 bài học thực tế: Mẫu truy vấn, Đánh đổi tài nguyên và Thân thiện phần cứng.
 
 > 🧠 **BỔ NGHĨA DÀNH CHO NGƯỜI THUYẾT TRÌNH (Hiểu bản chất):**
-> * **3 Định luật Kiến trúc:**
->   1. **"Query Pattern Drives Structure":** Cấu trúc dữ liệu phải phục vụ mẫu truy vấn của người dùng, không phải chiều ngược lại.
->   2. **"No Free Lunch — Time vs Space Trade-off":** Đổi không gian lấy thời gian (như Trie tốn RAM để đổi lấy tra cứu $O(L)$) hoặc nén dữ liệu để tiết kiệm RAM.
->   3. **"Hardware Awareness":** Viết code trong thế kỷ 21 phải hiểu CPU Cache, Spatial Locality và Pointer Chasing.
+> * **3 Bài học kỹ thuật:**
+>   1. *Query-Driven Design:* Cấu trúc dữ liệu phải phục vụ mẫu truy vấn thường xuyên nhất của hệ thống.
+>   2. *Resource Trade-off:* Cân bằng giữa không gian bộ nhớ và thời gian phản hồi người dùng.
+>   3. *Hardware-Aware:* Tối ưu cấu trúc mảng liên tục để tận dụng CPU Cache Locality.
 
 **🎙️ Lời thoại thuyết minh (Trang):**
-> *"Từ việc nghiên cứu chuyên sâu Chương 15, nhóm chúng em xin đúc kết **3 bài học kiến trúc cốt lõi** mang tính nền tảng cho mọi kỹ sư phần mềm:*
+> *"Từ quá trình nghiên cứu chuyên sâu Chương 15, nhóm chúng em xin đúc kết **3 bài học thiết kế hệ thống cốt lõi**:*
 >
-> 1. **Thứ nhất: Mẫu Truy Vấn Quyết Định Cấu Trúc Dữ Liệu!** Không có cấu trúc dữ liệu nào là 'tốt nhất' cho mọi tình huống. Hiệu năng cao chỉ đạt được khi hình học của cấu trúc dữ liệu phù hợp chặt chẽ với luồng truy vấn của bài toán.
-> 2. **Thứ hai: Quy luật Đánh đổi (Trade-off) Không Thể Tránh Khỏi!** Để đạt được tốc độ tìm kiếm tiền tố $O(L)$, Trie đã chấp nhận đánh đổi thêm bộ nhớ con trỏ. Kỹ sư giỏi là người biết cân bằng giữa giới hạn phần cứng và yêu cầu thời gian phản hồi của sản phẩm.
-> 3. **Thứ ba: Tư duy Tối ưu Phần cứng (Hardware-awareness)!** Lý thuyết Big-O là chưa đủ. Một cấu trúc dữ liệu thực chiến phải tận dụng được CPU Cache Locality và giảm thiểu hiện tượng Pointer Chasing trên bộ nhớ RAM."*
+> 1. **Thứ nhất: Lấy Mẫu Truy Vấn Làm Trung Tâm!** Cấu trúc dữ liệu không nên chọn theo thói quen, mà cần xuất phát từ dạng truy vấn xuất hiện nhiều nhất trong bài toán nghiệp vụ.
+> 2. **Thứ hai: Cân Bằng Đánh Đổi Tài Nguyên!** Việc đầu tư thêm bộ nhớ RAM (như cấu trúc Trie) để đổi lấy thời gian phản hồi tức thì cho người dùng là một đánh đổi hoàn toàn hợp lý trong các hệ thống quy mô lớn.
+> 3. **Thứ ba: Tối Ưu Hóa Thân Thiện Với Phần Cứng!** Các cấu trúc dữ liệu phẳng hóa trên mảng liên tục (như mảng của DSU) tận dụng tối đa CPU Cache Locality, giúp hệ thống vận hành với tốc độ vượt bậc so với việc cấp phát con trỏ rời rạc.*
+>
+> *Đó chính là nền tảng tư duy để xây dựng nên những giải pháp phần mềm vừa đảm bảo hiệu năng cao, vừa mở rộng bền vững!"*
 
 ---
 
-### 📍 SLIDE 23: CẤU TRÚC NÂNG CAO & LỜI KẾT Q&A
-* **Thời lượng:** 55 giây.
-* **Hành động trình chiếu:** Chuyển Slide 23. Điểm qua các biến thể mở rộng (Radix Tree, TST, Persistent DSU). Cúi đầu cảm ơn và mời Thầy cùng cả lớp đặt câu hỏi phản biện.
+### 📍 SLIDE 23: LỜI KẾT BÁO CÁO & PHIÊN HỎI ĐÁP (Q&A SESSION)
+* **Thời lượng:** 40 giây.
+* **Hành động trình chiếu:** Chuyển Slide 23. Cả nhóm cùng đứng nghiêm túc, Trang tươi cười cúi đầu cảm ơn và mời Thầy cùng cả lớp bước vào phiên thảo luận.
 
-> 🧠 **BỔ NGHĨA DÀNH CHO NGƯỜI THUYẾT TRÌNH (Hiểu bản chất):**
-> * **Mở rộng kiến thức nâng cao (Gây ấn tượng mạnh với Giảng viên):**
->   * *Radix Tree (Compressed Trie):* Nén các nút đơn thành chuỗi dài (được dùng trong Linux Kernel IP Routing).
->   * *Ternary Search Tree (TST):* Mỗi nút chỉ có 3 nhánh (`<`, `=`, `>`), kết hợp sức mạnh của BST và Trie, tiết kiệm 80% RAM.
->   * *Aho-Corasick:* Kết hợp Trie + KMP để tìm kiếm đồng thời hàng ngàn từ khóa trong văn bản.
->   * *Rollback DSU / Persistent DSU:* Cho phép quay ngược lịch sử thao tác gộp (Undo `union`) trong các bài toán đồ thị động nâng cao.
+> 🧠 **BỔ NGHĨA DÀNH CHO NGƯỜI THUYẾT TRÌNH (Tâm thế chủ trì Q&A):**
+> * Giữ tinh thần cầu thị, tự tin, lắng nghe kỹ câu hỏi của Thầy và các bạn trước khi phân công thành viên trả lời.
+> * Các câu hỏi dự phòng chuyên sâu về Trie và DSU đã được chuẩn bị đầy đủ ở phần bên dưới.
 
 **🎙️ Lời thoại thuyết minh (Trang):**
-> *"Để mở rộng nghiên cứu sau chuyên đề hôm nay, chúng ta có thể tiếp cận những biến thể nâng cao rất mạnh mẽ:*
-> * Với Trie: Chúng ta có **Radix Tree** nén các chuỗi nút đơn được sử dụng trong Linux Kernel; **Ternary Search Tree (TST)** tiết kiệm tới 80% bộ nhớ; hay thuật toán **Aho-Corasick** tìm kiếm đồng thời hàng ngàn từ khóa trong văn bản.
-> * Với DSU: Chúng ta có **Rollback DSU** và **Persistent DSU** cho phép quay lui thời gian và truy vấn lịch sử đồ thị trong các hệ thống phức tạp.
+> *"Kính thưa Thầy cùng toàn thể các bạn sinh viên,*
 >
-> *Kính thưa Thầy Vũ Đình Bảo cùng toàn thể các bạn sinh viên,*
-> *Bài báo cáo chuyên đề Chương 15 của Nhóm DASA230179_06 đến đây xin phép được khép lại. Nhóm em xin chân thành cảm ơn Thầy và các bạn đã chú ý lắng nghe!*
+> *Bài báo cáo chuyên đề Chương 15: Cấu Trúc Dữ Liệu Chuyên Biệt (Trie & Union-Find) của Nhóm 15 đến đây xin phép được khép lại. Nhóm chúng em xin chân thành cảm ơn Thầy và các bạn đã dành thời gian chú ý lắng nghe!*
 >
-> *Sau đây, nhóm chúng em rất mong nhận được những nhận xét đóng góp quý báu và các câu hỏi phản biện từ Thầy và cả lớp ạ!"*
+> *Sau đây, nhóm rất mong nhận được những nhận xét đóng góp quý báu và các câu hỏi thảo luận, phản biện từ Thầy cùng toàn thể các bạn ạ!"*
 
 ---
 
