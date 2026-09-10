@@ -1,128 +1,143 @@
-<section data-transition="slide">
-    <div class="badge badge-amber" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">ĐÁNH ĐỔI BỘ NHỚ & HIỆU NĂNG</div>
-    <h3 style="font-size: 0.78em; margin: 0 0 6px 0; color: #0f172a; font-weight: 700;">Phân Tích Đánh Đổi Child Container: Fixed Array vs Hash Map vs Vector</h3>
-
-    <!-- 3 Detailed Container Structural Cards -->
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; margin-top: 4px;">
+<section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 600px; display: flex; flex-direction: column; justify-content: space-between;">
         
-        <!-- 1. Fixed Array [26] -->
-        <div class="glass-card" style="text-align: left; border-top: 4px solid #ef4444; padding: 6px 8px; background: #ffffff;">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-                <h4 style="color: #dc2626; font-size: 0.38em; font-weight: 800; margin: 0;">
-                    <i class="fa-solid fa-table-cells"></i> Fixed Array <code>[26]</code>
-                </h4>
-                <span style="font-size: 0.28em; background: #fee2e2; color: #991b1b; padding: 1px 5px; border-radius: 4px; font-weight: 700;">Thời gian O(1)</span>
-            </div>
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 6px;">
+            <div class="badge" style="font-size: 0.38em; padding: 4px 16px; margin-bottom: 4px; display: inline-block;">PHẦN II: CẤU TRÚC TRIE (PREFIX TREE)</div>
+            <h2 style="font-size: 0.92em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">3 Chiến Lược Lưu Nút Con Trong Trie: Fixed Array vs Hash Map vs Vector</span>
+            </h2>
+        </div>
 
-            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px; margin-bottom: 4px; font-size: 0.26em; color: #475569;">
-                <strong>RAM mỗi Nút:</strong> <code>26 × 8B = 208 Bytes</code> cố định.<br>
-                <div style="display: flex; gap: 2px; margin-top: 3px;">
-                    <span style="background: #ef4444; color: #fff; padding: 0 3px; border-radius: 2px; font-weight: bold;">'a'</span>
-                    <span style="background: #cbd5e1; color: #64748b; padding: 0 3px; border-radius: 2px;">null</span>
-                    <span style="background: #cbd5e1; color: #64748b; padding: 0 3px; border-radius: 2px;">null</span>
-                    <span style="background: #cbd5e1; color: #64748b; padding: 0 3px; border-radius: 2px;">...</span>
-                    <span style="background: #cbd5e1; color: #64748b; padding: 0 3px; border-radius: 2px;">null (x25)</span>
+        <!-- 3 Standardized Cards (Ưu Điểm - Nhược Điểm - Phù Hợp) -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; width: 100%; margin-bottom: 8px;">
+            
+            <!-- 1. Fixed Array [26] -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #ef4444; border-radius: 10px; padding: 10px 12px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                        <h4 style="color: #0f172a; font-size: 0.39em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-table-cells" style="color: #ef4444;"></i> 1. Fixed Array <code>children[26]</code>
+                        </h4>
+                        <span style="font-size: 0.28em; background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; padding: 2px 6px; border-radius: 4px; font-weight: 700;">$O(1)$ Direct</span>
+                    </div>
+
+                    <!-- Visual Memory Layout Box -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px 8px; margin-bottom: 6px; font-size: 0.28em; color: #0f172a;">
+                        <div style="font-weight: 700; margin-bottom: 2px;">26 con trỏ $\times$ 8B = 208B riêng cho mảng trên 64-bit:</div>
+                        <div style="font-family: monospace; font-size: 0.95em; color: #0f172a; background: #ffffff; border: 1px solid #cbd5e1; padding: 2px 6px; border-radius: 3px;">
+                            [ 'a' ➔ Ptr | null | null | ... x25 null ]
+                        </div>
+                    </div>
+
+                    <ul style="font-size: 0.30em; color: #0f172a; margin: 0; padding-left: 14px; line-height: 1.45;">
+                        <li><strong>Ưu điểm:</strong> Tra cứu cực nhanh $O(1)$ trực tiếp qua chỉ số mảng <code>c - 'a'</code>.</li>
+                        <li><strong>Nhược điểm:</strong> Lãng phí khi node có ít nhánh (ví dụ 1/26 child $\to \sim 96\%$ con trỏ là <code>null</code>); chỉ cố định cho alphabet nhỏ (<code>a-z</code>).</li>
+                        <li><strong>Phù hợp:</strong> Lập trình thi đấu, ứng dụng xác định trước chỉ dùng bảng chữ cái tiếng Anh <code>a-z</code>.</li>
+                    </ul>
                 </div>
             </div>
 
-            <ul style="font-size: 0.28em; color: #334155; margin: 0; padding-left: 12px; line-height: 1.35;">
-                <li><strong style="color: #166534;">Tốc độ:</strong> $O(1)$ trực tiếp qua phép tính chỉ số <code>c - 'a'</code>.</li>
-                <li><strong style="color: #991b1b;">Lãng phí:</strong> Trống ~95% con trỏ (chứa <code>null</code>).</li>
-                <li><strong style="color: #991b1b;">Nhược điểm:</strong> Chỉ hỗ trợ 26 ký tự ASCII Anh.</li>
-            </ul>
-        </div>
+            <!-- 2. Hash Map unordered_map -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 10px; padding: 10px 12px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                        <h4 style="color: #0f172a; font-size: 0.39em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-hashtag" style="color: #0284c7;"></i> 2. Hash Map <code>unordered_map</code>
+                        </h4>
+                        <span style="font-size: 0.28em; background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; padding: 2px 6px; border-radius: 4px; font-weight: 700;">Alphabet Lớn</span>
+                    </div>
 
-        <!-- 2. Hash Map unordered_map -->
-        <div class="glass-card" style="text-align: left; border-top: 4px solid #0284c7; padding: 6px 8px; background: #ffffff;">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-                <h4 style="color: #0284c7; font-size: 0.38em; font-weight: 800; margin: 0;">
-                    <i class="fa-solid fa-hashtag"></i> Hash Map <code>unordered_map</code>
-                </h4>
-                <span style="font-size: 0.28em; background: #e0f2fe; color: #0369a1; padding: 1px 5px; border-radius: 4px; font-weight: 700;">Đa Ngôn Ngữ</span>
-            </div>
+                    <!-- Visual Memory Layout Box -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px 8px; margin-bottom: 6px; font-size: 0.28em; color: #0f172a;">
+                        <div style="font-weight: 700; margin-bottom: 2px;">Overhead: bucket array + hash node + allocator:</div>
+                        <div style="font-family: monospace; font-size: 0.95em; color: #0f172a; background: #ffffff; border: 1px solid #cbd5e1; padding: 2px 6px; border-radius: 3px;">
+                            { 'a': Ptr1, 'd': Ptr2, 'x': Ptr3 }
+                        </div>
+                    </div>
 
-            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px; margin-bottom: 4px; font-size: 0.26em; color: #475569;">
-                <strong>RAM mỗi Nút:</strong> Co giãn linh hoạt theo số con.<br>
-                <div style="display: flex; gap: 2px; margin-top: 3px;">
-                    <span style="background: #0284c7; color: #fff; padding: 0 4px; border-radius: 2px; font-weight: bold;">'a' ➔ Ptr1</span>
-                    <span style="background: #0284c7; color: #fff; padding: 0 4px; border-radius: 2px; font-weight: bold;">'d' ➔ Ptr2</span>
+                    <ul style="font-size: 0.30em; color: #0f172a; margin: 0; padding-left: 14px; line-height: 1.45;">
+                        <li><strong>Ưu điểm:</strong> Tra cứu trung bình $O(1)$; linh hoạt với tập ký tự lớn/Unicode nếu dùng kiểu khóa phù hợp (<code>char32_t</code>, <code>string</code>).</li>
+                        <li><strong>Nhược điểm:</strong> Overhead cao (mảng bucket, cấp phát động phân mảnh, hằng số thời gian hàm băm).</li>
+                        <li><strong>Phù hợp:</strong> Cần tra cứu trung bình $O(1)$ với alphabet lớn hoặc không cố định trước.</li>
+                    </ul>
                 </div>
             </div>
 
-            <ul style="font-size: 0.28em; color: #334155; margin: 0; padding-left: 12px; line-height: 1.35;">
-                <li><strong style="color: #166534;">Tốc độ:</strong> $O(1)$ trung bình (Chi phí Hash function).</li>
-                <li><strong style="color: #166534;">Lợi thế:</strong> Hỗ trợ Unicode, Tiếng Việt UTF-8.</li>
-                <li><strong style="color: #991b1b;">Overhead:</strong> Tốn bộ nhớ duy trì bảng Hash Table.</li>
-            </ul>
-        </div>
+            <!-- 3. Sorted Vector -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 10px; padding: 10px 12px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                        <h4 style="color: #0f172a; font-size: 0.39em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-list-ol" style="color: #059669;"></i> 3. Sorted <code>std::vector</code>
+                        </h4>
+                        <span style="font-size: 0.28em; background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; padding: 2px 6px; border-radius: 4px; font-weight: 700;">Gọn Bộ Nhớ</span>
+                    </div>
 
-        <!-- 3. Sorted Vector -->
-        <div class="glass-card" style="text-align: left; border-top: 4px solid #059669; padding: 6px 8px; background: #ffffff;">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-                <h4 style="color: #059669; font-size: 0.38em; font-weight: 800; margin: 0;">
-                    <i class="fa-solid fa-list-ol"></i> Sorted <code>std::vector</code>
-                </h4>
-                <span style="font-size: 0.28em; background: #d1fae5; color: #047857; padding: 1px 5px; border-radius: 4px; font-weight: 700;">RAM Tối Ưu</span>
-            </div>
+                    <!-- Visual Memory Layout Box -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px 8px; margin-bottom: 6px; font-size: 0.28em; color: #0f172a;">
+                        <div style="font-weight: 700; margin-bottom: 2px;">24B cho object vector + bộ nhớ cho child thực tế:</div>
+                        <div style="font-family: monospace; font-size: 0.95em; color: #0f172a; background: #ffffff; border: 1px solid #cbd5e1; padding: 2px 6px; border-radius: 3px;">
+                            [ ('a', Ptr), ('r', Ptr), ('t', Ptr) ]
+                        </div>
+                    </div>
 
-            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px; margin-bottom: 4px; font-size: 0.26em; color: #475569;">
-                <strong>RAM mỗi Nút:</strong> Mảng liên tục (Contiguous RAM).<br>
-                <div style="display: flex; gap: 2px; margin-top: 3px;">
-                    <span style="background: #059669; color: #fff; padding: 0 4px; border-radius: 2px; font-weight: bold;">['a', Ptr]</span>
-                    <span style="background: #059669; color: #fff; padding: 0 4px; border-radius: 2px; font-weight: bold;">['r', Ptr]</span>
+                    <ul style="font-size: 0.30em; color: #0f172a; margin: 0; padding-left: 14px; line-height: 1.45;">
+                        <li><strong>Ưu điểm:</strong> Tiết kiệm bộ nhớ nhất khi node có ít nhánh; mảng liên tục tận dụng tốt <strong>Cache Locality</strong>.</li>
+                        <li><strong>Nhược điểm:</strong> Tra cứu $O(\log k)$ qua Binary Search; chèn phần tử tốn $O(k)$ do dịch mảng.</li>
+                        <li><strong>Phù hợp:</strong> Từ điển lớn cần tối ưu dung lượng RAM trên thiết bị tài nguyên thấp (Mobile/Embedded).</li>
+                    </ul>
                 </div>
             </div>
 
-            <ul style="font-size: 0.28em; color: #334155; margin: 0; padding-left: 12px; line-height: 1.35;">
-                <li><strong style="color: #166534;">Bộ nhớ:</strong> Gọn nhẹ, tận dụng tốt Cache Locality.</li>
-                <li><strong style="color: #991b1b;">Tốc độ:</strong> $O(\log |\Sigma|)$ dùng <code>std::lower_bound</code>.</li>
-                <li><strong style="color: #166534;">Lợi thế:</strong> Duyệt danh sách con theo thứ tự ABC.</li>
-            </ul>
         </div>
 
-    </div>
+        <!-- High-Contrast Comparison Table (Matching Slide 05 Clean Theme) -->
+        <div style="width: 100%; margin-bottom: 8px; overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.33em; text-align: left; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden; color: #0f172a;">
+                <thead>
+                    <tr style="background: #f1f5f9; color: #0f172a; border-bottom: 2px solid #cbd5e1; font-weight: 800;">
+                        <th style="padding: 7px 12px; color: #0f172a; width: 25%;">Tiêu Chí Đánh Đổi</th>
+                        <th style="padding: 7px 12px; color: #0f172a; width: 25%;">Fixed Array <code>children[26]</code></th>
+                        <th style="padding: 7px 12px; color: #0f172a; width: 25%;">Hash Map <code>unordered_map</code></th>
+                        <th style="padding: 7px 12px; color: #0f172a; width: 25%;">Sorted <code>std::vector</code></th>
+                    </tr>
+                </thead>
+                <tbody style="color: #0f172a;">
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 7px 12px; font-weight: 700; color: #0f172a; background: #f8fafc;">Độ Phức Tạp Tra Cứu</td>
+                        <td style="padding: 7px 12px; color: #0f172a; font-weight: 700;">$O(1)$ trực tiếp (chỉ số mảng)</td>
+                        <td style="padding: 7px 12px; color: #0f172a;">$O(1)$ trung bình (kèm hàm băm)</td>
+                        <td style="padding: 7px 12px; color: #0f172a;">$O(\log k)$ (Binary Search)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e2e8f0; background: #f8fafc;">
+                        <td style="padding: 7px 12px; font-weight: 700; color: #0f172a; background: #f8fafc;">Chi Phí Bộ Nhớ Nút</td>
+                        <td style="padding: 7px 12px; color: #0f172a;">$208\text{B}$ riêng cho mảng con trỏ (64-bit)</td>
+                        <td style="padding: 7px 12px; color: #0f172a;">Cao, phụ thuộc số bucket/phần tử</td>
+                        <td style="padding: 7px 12px; color: #0f172a; font-weight: 700;">Overhead nhỏ ($24\text{B}$) + $O(k)$ cho $k$ child</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 7px 12px; font-weight: 700; color: #0f172a; background: #f8fafc;">Khả Năng Mở Rộng Tập Ký Tự</td>
+                        <td style="padding: 7px 12px; color: #0f172a;">Cố định alphabet nhỏ (a-z)</td>
+                        <td style="padding: 7px 12px; color: #0f172a; font-weight: 700;">Linh hoạt với alphabet lớn / Unicode</td>
+                        <td style="padding: 7px 12px; color: #0f172a;">Linh hoạt theo kiểu khóa (Key)</td>
+                    </tr>
+                    <tr style="background: #f8fafc;">
+                        <td style="padding: 7px 12px; font-weight: 700; color: #0f172a; background: #f8fafc;">Tính Cục Bộ Cache (Cache Locality)</td>
+                        <td style="padding: 7px 12px; color: #0f172a;">Kém (đa số con trỏ là <code>null</code>)</td>
+                        <td style="padding: 7px 12px; color: #0f172a;">Kém (phân mảnh heap do node băm)</td>
+                        <td style="padding: 7px 12px; color: #0f172a; font-weight: 700;">Rất tốt (mảng phần tử liên tục)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <!-- Technical Comparison Matrix Table -->
-    <div style="width: 100%; margin-top: 6px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden;">
-        <table style="width: 100%; border-collapse: collapse; font-size: 0.3em; text-align: left;">
-            <thead>
-                <tr style="background: #f1f5f9; border-bottom: 1px solid #cbd5e1; color: #0f172a; font-weight: 800;">
-                    <th style="padding: 5px 8px;">Tiêu Chí So Sánh</th>
-                    <th style="padding: 5px 8px; color: #dc2626;">Fixed Array <code>[26]</code></th>
-                    <th style="padding: 5px 8px; color: #0284c7;">Hash Map <code>unordered_map</code></th>
-                    <th style="padding: 5px 8px; color: #059669;">Sorted <code>std::vector</code></th>
-                </tr>
-            </thead>
-            <tbody style="color: #334155;">
-                <tr style="border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 4px 8px; font-weight: 700; background: #f8fafc;">Độ Phức Tạp Tra Cứu</td>
-                    <td style="padding: 4px 8px; color: #166534; font-weight: 700;">$O(1)$ (Chỉ số mảng trực tiếp)</td>
-                    <td style="padding: 4px 8px; color: #166534;">$O(1)$ Trung bình (Có thể đụng độ)</td>
-                    <td style="padding: 4px 8px; color: #c2410c;">$O(\log |\Sigma|)$ Binary Search</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 4px 8px; font-weight: 700; background: #f8fafc;">RAM Chi Phí Mỗi Nút Rỗng</td>
-                    <td style="padding: 4px 8px; color: #dc2626; font-weight: 700;">208 Bytes ($26 \times 8$B con trỏ)</td>
-                    <td style="padding: 4px 8px;">~24–32 Bytes base overhead</td>
-                    <td style="padding: 4px 8px; color: #166534; font-weight: 700;">0–24 Bytes (Tùy capacity)</td>
-                </tr>
-                <tr>
-                    <td style="padding: 4px 8px; font-weight: 700; background: #f8fafc;">Phạm Vi Ứng Dụng</td>
-                    <td style="padding: 4px 8px;">Từ điển Anh nhỏ (a-z)</td>
-                    <td style="padding: 4px 8px; color: #0284c7; font-weight: 700;">Từ điển Đa ngôn ngữ / Unicode</td>
-                    <td style="padding: 4px 8px; color: #059669; font-weight: 700;">Bộ từ quy mô lớn cần tối ưu RAM</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Practical Production Advice Callout -->
-    <div style="width: 100%; margin-top: 6px; background: #fffbe6; border: 1px solid #ffe58f; border-left: 4px solid #d4b106; border-radius: 6px; padding: 5px 12px; font-size: 0.32em; color: #73510d; text-align: left; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-scale-balanced" style="font-size: 1.2em; color: #d4b106; flex-shrink: 0;"></i>
-        <span><strong>KHUYÊN DÙNG SẢN PHẨM THỰC TẾ:</strong> Trong các ứng dụng thực tế (Search Suggestion, Unicode), <strong>Hash Map (unordered_map)</strong> hoặc <strong>Sorted Vector</strong> thường được ưu tiên nhằm tối ưu hóa việc sử dụng bộ nhớ RAM!</span>
     </div>
 
     <aside class="notes">
-        Slide 10 phân tích chi tiết sự đánh đổi Child Container giữa Mảng cố định, Hash Map và Vector. Mảng cố định cho tốc độ O(1) trực tiếp nhưng chiếm 208 bytes mỗi nút. Trong thực tế, Hash Map hoặc Vector là lựa chọn cân bằng bộ nhớ tốt hơn.
+        Kính thưa Thầy và các bạn, việc lựa chọn cấu trúc lưu trữ con trong Trie phụ thuộc vào đặc thù bài toán:
+        1. Fixed Array children[26]: Cho tốc độ O(1) nhanh nhất qua phép tính c - 'a', nhưng tốn 208B mỗi nút (lãng phí ~96% RAM khi node chỉ có 1 con).
+        2. unordered_map: Giúp hỗ trợ tập ký tự lớn/Unicode khi dùng kiểu khóa phù hợp, tra cứu O(1) trung bình nhưng tốn overhead mảng bucket và phân mảnh heap.
+        3. Sorted vector: Giải pháp tiết kiệm bộ nhớ nhất cho node ít nhánh (chỉ 24B overhead cơ sở), mảng liên tục tận dụng tối đa CPU Cache Locality.
     </aside>
 </section>

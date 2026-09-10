@@ -1,119 +1,71 @@
-<section data-transition="slide">
-    <div class="badge badge-purple" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN III — UNION-FIND (DSU)</div>
-    <h3 style="font-size: 0.78em; margin: 0 0 6px 0; color: #0f172a; font-weight: 700;">Bài Toán Kết Nối Động (Dynamic Connectivity)</h3>
-
-    <!-- Top Grid: 2 Operation Cards + SVG Dynamic Connectivity Diagram -->
-    <div style="display: grid; grid-template-columns: 1.1fr 1.2fr; gap: 10px; width: 100%; margin-top: 4px; align-items: stretch;">
+<section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 600px; display: flex; flex-direction: column; justify-content: space-between;">
         
-        <!-- Left Column: 2 Core ADT Operations -->
-        <div style="display: flex; flex-direction: column; gap: 6px; text-align: left;">
-            <div class="glass-card" style="border-left: 4px solid #0284c7; padding: 6px 8px; background: #ffffff;">
-                <h4 style="color: #0284c7; font-size: 0.36em; font-weight: 800; margin: 0 0 2px 0;">
-                    <i class="fa-solid fa-link"></i> 1. Thao Tác <code>union(u, v)</code>
-                </h4>
-                <p style="font-size: 0.28em; color: #334155; margin: 0; line-height: 1.35;">
-                    Thêm một cạnh nối giữa $u$ và $v$. Gộp 2 tập hợp rời rạc chứa $u$ và $v$ thành một tập hợp duy nhất.
-                </p>
-                <span style="font-size: 0.25em; color: #475569; font-weight: 600; margin-top: 2px; display: block;">
-                    <i class="fa-solid fa-lightbulb" style="color: var(--accent-gold);"></i>  <strong>Thực tế:</strong> Hai người dùng bấm "Kết bạn" trên mạng xã hội.
-                </span>
-            </div>
-
-            <div class="glass-card" style="border-left: 4px solid #7c3aed; padding: 6px 8px; background: #ffffff;">
-                <h4 style="color: #6b21a8; font-size: 0.36em; font-weight: 800; margin: 0 0 2px 0;">
-                    <i class="fa-solid fa-circle-question"></i> 2. Thao Tác <code>connected(u, v)</code>
-                </h4>
-                <p style="font-size: 0.28em; color: #334155; margin: 0; line-height: 1.35;">
-                    Kiểm tra $u$ và $v$ có thuộc <strong>cùng thành phần liên thông</strong> (có đường đi bất kỳ) không? Trả về <code>true/false</code>.
-                </p>
-                <span style="font-size: 0.25em; color: #475569; font-weight: 600; margin-top: 2px; display: block;">
-                    <i class="fa-solid fa-lightbulb" style="color: var(--accent-gold);"></i>  <strong>Thực tế:</strong> Kiểm tra hai tài khoản có mối quan hệ bạn bè gián tiếp?
-                </span>
-            </div>
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 8px;">
+            <div class="badge" style="font-size: 0.44em; padding: 5px 18px; margin-bottom: 6px; display: inline-block;">PHẦN III — CẤU TRÚC UNION-FIND (DISJOINT SET UNION - DSU)</div>
+            <h2 style="font-size: 0.88em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Đặt Vấn Đề: Bài Toán Kết Nối Động<br>(Dynamic Connectivity)</span>
+            </h2>
         </div>
 
-        <!-- Right Column: Perfectly Encapsulated SVG Dynamic Connectivity Graphic -->
-        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 6px 8px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div style="font-size: 0.3em; font-weight: 700; color: #0f172a; display: flex; justify-content: space-between; align-items: center;">
-                <span><i class="fa-solid fa-diagram-project" style="color: #7c3aed;"></i> Sơ Đồ Thành Phần Liên Thông (Connected Components)</span>
-            </div>
-
-            <!-- ViewBox 400x135: Perfect Rounded Dashed Rectangles Encapsulating All Nodes & Text -->
-            <svg viewBox="0 0 400 135" style="width: 100%; height: auto; font-family: 'Be Vietnam Pro', sans-serif;">
-                
-                <!-- Component A Outer Dashed Box: {0, 1, 2, 4} -->
-                <rect x="15" y="6" width="190" height="116" rx="14" fill="#f3e8ff" stroke="#c084fc" stroke-width="1.8" stroke-dasharray="4,3"/>
-                <text x="110" y="24" fill="#6b21a8" font-size="7.5" font-weight="800" text-anchor="middle">Tập hợp A: {0, 1, 2, 4}</text>
-
-                <!-- Edges in Component A -->
-                <line x1="42" y1="58" x2="110" y2="58" stroke="#7c3aed" stroke-width="2.2"/>
-                <line x1="110" y1="58" x2="178" y2="58" stroke="#7c3aed" stroke-width="2.2"/>
-                <line x1="110" y1="58" x2="110" y2="98" stroke="#7c3aed" stroke-width="2.2"/>
-
-                <!-- Nodes in Component A -->
-                <circle cx="42" cy="58" r="11" fill="#7c3aed"/><text x="42" y="61.5" fill="#fff" font-size="8" font-weight="800" text-anchor="middle">0</text>
-                <circle cx="110" cy="58" r="11" fill="#7c3aed"/><text x="110" y="61.5" fill="#fff" font-size="8" font-weight="800" text-anchor="middle">1</text>
-                <circle cx="178" cy="58" r="11" fill="#7c3aed"/><text x="178" y="61.5" fill="#fff" font-size="8" font-weight="800" text-anchor="middle">2</text>
-                <circle cx="110" cy="98" r="11" fill="#7c3aed"/><text x="110" y="101.5" fill="#fff" font-size="8" font-weight="800" text-anchor="middle">4</text>
-
-                <!-- Component B Outer Dashed Box: {3, 5, 6} -->
-                <rect x="225" y="6" width="160" height="116" rx="14" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.8" stroke-dasharray="4,3"/>
-                <text x="305" y="24" fill="#0369a1" font-size="7.5" font-weight="800" text-anchor="middle">Tập hợp B: {3, 5, 6}</text>
-
-                <!-- Edges in Component B -->
-                <line x1="265" y1="75" x2="345" y2="48" stroke="#0284c7" stroke-width="2.2"/>
-                <line x1="265" y1="75" x2="345" y2="102" stroke="#0284c7" stroke-width="2.2"/>
-
-                <!-- Nodes in Component B -->
-                <circle cx="265" cy="75" r="11" fill="#0284c7"/><text x="265" y="78.5" fill="#fff" font-size="8" font-weight="800" text-anchor="middle">3</text>
-                <circle cx="345" cy="48" r="11" fill="#0284c7"/><text x="345" y="51.5" fill="#fff" font-size="8" font-weight="800" text-anchor="middle">5</text>
-                <circle cx="345" cy="102" r="11" fill="#0284c7"/><text x="345" y="105.5" fill="#fff" font-size="8" font-weight="800" text-anchor="middle">6</text>
-            </svg>
-
-            <!-- Bottom Query Result Badges -->
-            <div style="font-size: 0.26em; color: #475569; display: flex; justify-content: space-around; background: #f8fafc; border-radius: 4px; padding: 3px 6px; margin-top: 2px;">
-                <span style="color: #059669; font-weight: 700;"><i class="fa-solid fa-circle-check" style="color: #059669;"></i>  <code>connected(0, 4) == true</code></span>
-                <span style="color: #dc2626; font-weight: 700;"><i class="fa-solid fa-circle-xmark" style="color: #dc2626;"></i>  <code>connected(1, 5) == false</code></span>
-            </div>
+        <!-- Problem Motivation Callout (Đặt vấn đề thực tế dẫn dắt vào bài toán) -->
+        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-left: 6px solid #7c3aed; border-radius: 8px; padding: 14px 20px; text-align: left; font-size: 0.41em; color: #0f172a; line-height: 1.5; margin-bottom: 12px;">
+            <strong style="color: #6b21a8; text-transform: uppercase;"><i class="fa-solid fa-circle-nodes" style="margin-right: 8px;"></i> Bối Cảnh Bài Toán:</strong> Giả sử hệ thống quản lý mạng lưới $N$ đối tượng (bạn bè Facebook, máy tính trong mạng LAN, hoặc các hòn đảo). Ta liên tục nhận được 2 luồng yêu cầu xen kẽ theo thời gian thực: <strong>(1) Nối 2 đối tượng lại với nhau</strong> (<code>union</code>) và <strong>(2) Kiểm tra xem 2 đối tượng bất kỳ có đường đi đến nhau hay không</strong> (<code>connected</code>).
         </div>
 
-    </div>
+        <!-- High-Contrast Comparison Table (Clean Black Text Theme) -->
+        <div style="width: 100%; margin-bottom: 12px; overflow-x: auto; flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.40em; text-align: left; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden; color: #0f172a; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                <thead>
+                    <tr style="background: #f1f5f9; color: #0f172a; border-bottom: 2px solid #cbd5e1; font-weight: 800;">
+                        <th style="padding: 12px 16px; width: 26%;">Phương Pháp Tiếp Cận</th>
+                        <th style="padding: 12px 16px; width: 20%;">Thời Gian <code>union(u, v)</code></th>
+                        <th style="padding: 12px 16px; width: 22%;">Thời Gian <code>connected(u, v)</code></th>
+                        <th style="padding: 12px 16px; width: 32%;">Đánh Giá Hiệu Năng Thực Tế</th>
+                    </tr>
+                </thead>
+                <tbody style="color: #0f172a;">
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 12px 16px; font-weight: 700; background: #f8fafc;">
+                            <i class="fa-solid fa-diagram-project" style="color: #64748b; margin-right: 6px;"></i> Duyệt Đồ Thị (BFS / DFS)
+                        </td>
+                        <td style="padding: 12px 16px; color: #0f172a;">$O(1)$ (Thêm cạnh)</td>
+                        <td style="padding: 12px 16px; color: #0f172a; font-weight: 700;">$O(V + E)$ (Duyệt lại đồ thị)</td>
+                        <td style="padding: 12px 16px; color: #0f172a;">Gặp $Q$ truy vấn $\to O(Q \cdot (V+E))$ quá chậm, dễ bị TLE.</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e2e8f0; background: #f8fafc;">
+                        <td style="padding: 12px 16px; font-weight: 700; background: #f8fafc;">
+                            <i class="fa-solid fa-table-list" style="color: #64748b; margin-right: 6px;"></i> Mảng Trực Tiếp (Quick-Find)
+                        </td>
+                        <td style="padding: 12px 16px; color: #0f172a; font-weight: 700;">$O(N)$ (Quét đổi ID cả mảng)</td>
+                        <td style="padding: 12px 16px; color: #0f172a; font-weight: 700;">$O(1)$ (So sánh <code>id[u] == id[v]</code>)</td>
+                        <td style="padding: 12px 16px; color: #0f172a;">Thao tác gộp nhóm tốn $O(N)$, không đáp ứng được $N$ lớn.</td>
+                    </tr>
+                    <tr style="background: #f1f5f9; border-top: 2px solid #0284c7; font-weight: 700;">
+                        <td style="padding: 14px 16px; color: #0f172a; font-weight: 800;">
+                            <i class="fa-solid fa-bolt" style="color: #0284c7; margin-right: 6px;"></i> Union-Find (DSU) Tối Ưu
+                        </td>
+                        <td style="padding: 14px 16px; color: #0f172a; font-weight: 800;">$O(\alpha(N))$ (Khấu hao)</td>
+                        <td style="padding: 14px 16px; color: #0f172a; font-weight: 800;">$O(\alpha(N))$ (Khấu hao)</td>
+                        <td style="padding: 14px 16px; color: #0f172a; font-weight: 800;">Tối ưu tuyệt đối: cả 2 thao tác gần như $O(1)$ tức thời trên mảng phẳng!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <!-- Comparison Table: Why Graph BFS/DFS Fails for Dynamic Connectivity -->
-    <div style="width: 100%; margin-top: 6px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden;">
-        <table style="width: 100%; border-collapse: collapse; font-size: 0.29em; text-align: left;">
-            <thead>
-                <tr style="background: #f1f5f9; border-bottom: 1px solid #cbd5e1; color: #0f172a; font-weight: 800;">
-                    <th style="padding: 4px 8px;">Phương Pháp Giải Thích</th>
-                    <th style="padding: 4px 8px;">Thời Gian <code>union(u, v)</code></th>
-                    <th style="padding: 4px 8px;">Thời Gian <code>connected(u, v)</code></th>
-                    <th style="padding: 4px 8px;">Đánh Giá Hiệu Năng Thực Tế</th>
-                </tr>
-            </thead>
-            <tbody style="color: #334155;">
-                <tr style="border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 4px 8px; font-weight: 700; color: #dc2626; background: #f8fafc;">Duyệt Đồ Thị Tĩnh (BFS / DFS)</td>
-                    <td style="padding: 4px 8px; color: #166534; font-weight: 700;">$O(1)$ (Chỉ thêm cạnh)</td>
-                    <td style="padding: 4px 8px; color: #dc2626; font-weight: 700;">$O(V + E)$ (Duyệt lại đồ thị)</td>
-                    <td style="padding: 4px 8px; color: #dc2626;"><strong>HẠN CHẾ:</strong> Chi phí $O(V + E)$ quá lớn khi phải xử lý số lượng truy vấn liên tục trong thời gian thực.</td>
-                </tr>
-                <tr>
-                    <td style="padding: 4px 8px; font-weight: 700; color: #059669; background: #f8fafc;">Union-Find (DSU) Tối Ưu</td>
-                    <td style="padding: 4px 8px; color: #166534; font-weight: 700;">$O(\alpha(N)) \approx O(1)$ Gần hằng số</td>
-                    <td style="padding: 4px 8px; color: #166534; font-weight: 700;">$O(\alpha(N)) \approx O(1)$ Gần hằng số</td>
-                    <td style="padding: 4px 8px; color: #059669; font-weight: 600;"><strong>Tối ưu kết nối liên tục:</strong> Cấu trúc mảng gọn nhẹ, locality tốt; sau khi nén đường đi, các lần <code>find()</code> tiếp theo đạt $O(1)$.</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <!-- Presenter Key Takeaway Banner -->
+        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 6px solid #059669; border-radius: 8px; padding: 14px 20px; font-size: 0.40em; color: #14532d; text-align: left; display: flex; align-items: center; gap: 14px; line-height: 1.5;">
+            <i class="fa-solid fa-circle-check" style="font-size: 1.3em; color: #059669; flex-shrink: 0;"></i>
+            <span><strong style="color: #059669; text-transform: uppercase;">BẢN CHẤT KIẾN TRÚC:</strong> Với đồ thị tĩnh, BFS/DFS là giải pháp tổng quát. Nhưng với <strong>đồ thị động (cạnh thêm mới liên tục)</strong>, Union-Find (DSU) là cấu trúc duy nhất duy trì liên thông với chi phí $O(\alpha(N)) \approx O(1)$ mà không cần duyệt lại đồ thị.</span>
+        </div>
 
-    <!-- Bottom Full Width Summary Callout -->
-    <div style="width: 100%; margin-top: 6px; background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #ef4444; border-radius: 6px; padding: 5px 12px; font-size: 0.31em; color: #991b1b; text-align: left; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2em; color: #ef4444; flex-shrink: 0;"></i>
-        <span><strong>VÌ SAO BFS/DFS KHÔNG TỐI ƯU?</strong> Trên đồ thị biến đổi liên tục (Dynamic), mỗi truy vấn <code>connected</code> phải duyệt lại $O(V+E)$, gây tắc nghẽn nghiêm trọng khi dữ liệu tăng. Union-Find được thiết kế chuyên biệt để duy trì các thành phần liên thông với chi phí khấu hao tiệm cận $O(1)$.</span>
     </div>
 
     <aside class="notes">
-        Slide 12 khởi đầu Phần III giới thiệu bài toán Dynamic Connectivity với 2 thao tác union và connected. Giải thích vì sao BFS/DFS không tối ưu trên đồ thị động và tại sao Union-Find là giải pháp hiệu quả với chi phí tiệm cận O(1).
+        Kính thưa Thầy và các bạn, bước sang Phần III, chúng ta bắt đầu bằng việc đặt vấn đề:
+        1. Bối cảnh thực tế: Trong mạng xã hội hay mạng máy tính, các kết nối liên tục được hình thành theo thời gian thực. Ta cần giải quyết 2 câu hỏi xen kẽ: Nối 2 người lại (union) và Kiểm tra 2 người có quen nhau gián tiếp không (connected).
+        2. Nếu dùng BFS/DFS thông thường: Mỗi lần kiểm tra phải duyệt lại toàn bộ đồ thị tốn O(V+E). Khi có hàng triệu kết nối động, hệ thống sẽ bị tê liệt.
+        3. Do đó, cấu trúc Union-Find (DSU) ra đời nhằm đưa chi phí cả 2 thao tác gộp nhóm và truy vấn xuống O(alpha(N)) tiệm cận hằng số O(1).
     </aside>
 </section>

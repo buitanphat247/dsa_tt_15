@@ -1,0 +1,92 @@
+<section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 600px; display: flex; flex-direction: column; justify-content: space-between;">
+        
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 8px;">
+            <div class="badge" style="font-size: 0.44em; padding: 5px 18px; margin-bottom: 6px; display: inline-block;">PHẦN III — CẤU TRÚC UNION-FIND (DISJOINT SET UNION - DSU)</div>
+            <h2 style="font-size: 0.96em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Đặt Vấn Đề: Tại Sao Cần Cấu Trúc Dữ Liệu<br>Union-Find (DSU)?</span>
+            </h2>
+        </div>
+
+        <!-- Topic Transition Callout -->
+        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-left: 6px solid #0284c7; border-radius: 8px; padding: 12px 18px; text-align: left; font-size: 0.40em; color: #0f172a; line-height: 1.5; margin-bottom: 10px;">
+            <strong style="color: #0284c7; text-transform: uppercase;"><i class="fa-solid fa-compass" style="margin-right: 8px;"></i> Chuyển Tiếp Chủ Đề:</strong> Nếu <strong>Cây Trie</strong> là lời giải tối ưu cho bài toán tra cứu tiền tố chuỗi, thì <strong>Union-Find (DSU)</strong> là cấu trúc chuyên biệt giải quyết bài toán <strong>Quản lý các tập hợp rời rạc & Duy trì tính liên thông động</strong>.
+        </div>
+
+        <!-- 3 Real-World Problem Motivation Cards (Grid 3 Columns) -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; width: 100%; margin-bottom: 10px; align-items: stretch; flex-grow: 1;">
+            
+            <!-- Problem 1: Social Network -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #0284c7; border-radius: 10px; padding: 16px 16px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.48em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-users" style="color: #0284c7;"></i> 1. Mạng Xã Hội
+                        </h4>
+                        <span style="font-size: 0.35em; background: #f1f5f9; color: #0284c7; border: 1px solid #bae6fd; padding: 3px 8px; border-radius: 4px; font-weight: 700;">Bạn Bè / Nhóm</span>
+                    </div>
+                    <p style="font-size: 0.40em; color: #0f172a; margin: 0 0 10px 0; line-height: 1.45;">
+                        Hàng triệu người dùng liên tục kết bạn (kết nối 2 đỉnh mới).
+                    </p>
+                </div>
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 12px; font-size: 0.38em; color: #0f172a; line-height: 1.45;">
+                    <strong style="color: #0284c7;">Câu hỏi:</strong> Người $A$ và người $B$ có nằm chung một mạng lưới bạn bè gián tiếp hay không?
+                </div>
+            </div>
+
+            <!-- Problem 2: Infrastructure / Grid -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #7c3aed; border-radius: 10px; padding: 16px 16px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.48em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-network-wired" style="color: #7c3aed;"></i> 2. Mạng Hạ Tầng
+                        </h4>
+                        <span style="font-size: 0.35em; background: #f1f5f9; color: #6b21a8; border: 1px solid #e9d5ff; padding: 3px 8px; border-radius: 4px; font-weight: 700;">LAN / Lưới Điện</span>
+                    </div>
+                    <p style="font-size: 0.40em; color: #0f172a; margin: 0 0 10px 0; line-height: 1.45;">
+                        Các trạm phát sóng / máy tính liên tục thiết lập đường truyền mới.
+                    </p>
+                </div>
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 12px; font-size: 0.38em; color: #0f172a; line-height: 1.45;">
+                    <strong style="color: #6b21a8;">Câu hỏi:</strong> Tín hiệu có truyền được từ trạm $X$ sang trạm $Y$ không? Có tạo vòng lặp thừa không?
+                </div>
+            </div>
+
+            <!-- Problem 3: Kruskal Algorithm -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #059669; border-radius: 10px; padding: 16px 16px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.48em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-tree" style="color: #059669;"></i> 3. Cây Khung Nhỏ Nhất
+                        </h4>
+                        <span style="font-size: 0.35em; background: #f1f5f9; color: #047857; border: 1px solid #a7f3d0; padding: 3px 8px; border-radius: 4px; font-weight: 700;">Kruskal MST</span>
+                    </div>
+                    <p style="font-size: 0.40em; color: #0f172a; margin: 0 0 10px 0; line-height: 1.45;">
+                        Duyệt các cạnh theo trọng số tăng dần để xây dựng cây khung.
+                    </p>
+                </div>
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 12px; font-size: 0.38em; color: #0f172a; line-height: 1.45;">
+                    <strong style="color: #047857;">Câu hỏi:</strong> Thêm cạnh $(u, v)$ có tạo chu trình không? Nếu chưa cùng tập hợp thì gộp lại!
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Core Bottleneck & Challenge Banner -->
+        <div style="width: 100%; background: #f8fafc; border: 1px solid #cbd5e1; border-left: 6px solid #0f172a; border-radius: 8px; padding: 12px 18px; font-size: 0.41em; color: #0f172a; text-align: left; display: flex; align-items: center; gap: 12px; line-height: 1.5;">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.25em; color: #0f172a; flex-shrink: 0;"></i>
+            <span><strong>THÁCH THỨC KỸ THUẬT:</strong> Các kết nối diễn ra <strong>liên tục và biến động theo thời gian thực (Dynamic)</strong>. Nếu mỗi lần kiểm tra đều phải chạy lại BFS/DFS tốn $O(V + E)$, hệ thống sẽ bị nghẽn (TLE). Chúng ta cần một cấu trúc dữ liệu cho phép <strong>Gộp nhanh</strong> và <strong>Truy vấn nhanh trong $O(1)$</strong>!</span>
+        </div>
+
+    </div>
+
+    <aside class="notes">
+        Kính thưa Thầy và các bạn, bước sang Phần III, chúng ta bắt đầu bằng câu hỏi: "Tại sao chúng ta cần cấu trúc Union-Find (DSU)?"
+        1. 3 Bài toán thực tế:
+           - Mạng xã hội: Kiểm tra 2 người có nằm trong cùng một mạng lưới bạn bè gián tiếp hay không.
+           - Mạng lưới hạ tầng: Kiểm tra 2 trạm có thông mạch không khi các đường dây liên tục được xây mới.
+           - Thuật toán Kruskal: Kiểm tra việc thêm cạnh có tạo chu trình trong cây khung nhỏ nhất (MST) hay không.
+        2. Thách thức lớn nhất: Các kết nối diễn ra liên tục theo thời gian thực. Nếu dùng BFS/DFS duyệt lại đồ thị O(V+E) thì sẽ bị quá tải ngay lập tức. DSU chính là chìa khóa để giải quyết bài toán này với chi phí tiệm cận O(1).
+    </aside>
+</section>

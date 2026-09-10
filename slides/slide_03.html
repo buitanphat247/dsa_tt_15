@@ -1,79 +1,103 @@
-<section data-transition="convex">
-    <div class="badge" style="font-size: 0.4em; padding: 3px 12px; margin-bottom: 4px;">NGUYÊN LÝ VÀNG THIẾT KẾ</div>
-    <h3 style="font-size: 0.88em; margin: 0 0 10px 0; color: #0f172a; font-weight: 700;">
-        Query Pattern First — Structure Second
-    </h3>
-
-    <!-- Short Punchy Full Width Callout -->
-    <div style="width: 100%; background: #ecfdf5; border: 1px solid #a7f3d0; border-left: 5px solid #059669; border-radius: 8px; padding: 10px 16px; text-align: center; margin-bottom: 12px;">
-        <span style="font-size: 0.46em; color: #065f46; font-weight: 700; line-height: 1.3; white-space: nowrap;">
-            <i class="fa-solid fa-quote-left" style="color: #059669; margin-right: 6px;"></i>
-            Phân tích thao tác lặp lại nhiều nhất trước — Chọn cấu trúc chuyên biệt phù hợp!
-        </span>
-    </div>
-
-    <!-- 2 Full Width Executive Cards -->
-    <div style="width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; text-align: left;">
+<section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 600px; display: flex; flex-direction: column; justify-content: space-between;">
         
-        <!-- Left: Trie -->
-        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-                <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <div style="background: #e0f2fe; color: #0284c7; width: 26px; height: 26px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.58em;">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </div>
-                        <h4 style="color: #0f172a; font-size: 0.56em; margin: 0; font-weight: 700;">Cây Tiền Tố (Trie)</h4>
-                    </div>
-                    <span style="background: #f0f9ff; color: #0284c7; border: 1px solid #bae6fd; padding: 2px 8px; border-radius: 10px; font-size: 0.34em; font-weight: 700;">CHUYÊN SEARCH TIỀN TỐ</span>
-                </div>
-
-                <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.36em; color: #334155;">
-                    <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 6px; padding: 6px 10px;">
-                        <strong style="color: #9f1239;"><i class="fa-solid fa-minus-circle" style="margin-right: 4px;"></i> Sự đánh đổi:</strong> Tốn thêm bộ nhớ RAM để lưu các nút con & con trỏ.
-                    </div>
-                    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 6px 10px;">
-                        <strong style="color: #166534;"><i class="fa-solid fa-plus-circle" style="margin-right: 4px;"></i> Lợi ích thu được:</strong> Tìm kiếm tiền tố trong thời gian $O(L)$, độc lập với tổng số lượng từ $N$ trong từ điển.
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin-top: 8px; background: #f0f9ff; border-left: 3px solid #0284c7; padding: 5px 8px; border-radius: 4px; font-size: 0.35em; color: #0369a1; font-weight: 600;">
-                <i class="fa-solid fa-check" style="color: #0284c7; margin-right: 4px;"></i> Ứng dụng: Autocomplete bàn phím, Gợi ý công cụ tìm kiếm
-            </div>
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 6px;">
+            <div class="badge" style="font-size: 0.38em; padding: 4px 16px; margin-bottom: 6px; display: inline-block;">NGUYÊN LÝ THIẾT KẾ CẤU TRÚC DỮ LIỆU</div>
+            <h2 style="font-size: 0.95em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Ưu Tiên Mẫu Truy Vấn Trước — Thiết Kế Cấu Trúc Sau</span>
+            </h2>
         </div>
 
-        <!-- Right: Union-Find (DSU) -->
-        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #7c3aed; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-                <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <div style="background: #f3e8ff; color: #7c3aed; width: 26px; height: 26px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.58em;">
-                            <i class="fa-solid fa-link"></i>
+        <!-- Golden Rule Banner (Crystal Clear for Presenter) -->
+        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 5px solid #059669; border-radius: 8px; padding: 8px 16px; text-align: left; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+            <i class="fa-solid fa-compass-drafting" style="color: #059669; font-size: 1.2em; flex-shrink: 0;"></i>
+            <span style="font-size: 0.35em; color: #065f46; font-weight: 600; line-height: 1.45;">
+                <strong style="color: #047857; text-transform: uppercase;">Nguyên lý cốt lõi:</strong> Muốn hệ thống đạt tốc độ xử lý tối đa, ta phải xác định <strong>thao tác nào được gọi nhiều nhất (Mẫu truy vấn trọng tâm)</strong>, sau đó thiết kế cấu trúc dữ liệu chuyên biệt phục vụ tối ưu cho đúng thao tác đó.
+            </span>
+        </div>
+
+        <!-- 2 Detailed Comparison Cards -->
+        <div style="width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: left; margin-bottom: 10px; align-items: stretch;">
+            
+            <!-- Left: Trie -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #0284c7; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+                <div>
+                    <!-- Card Header -->
+                    <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="background: #e0f2fe; color: #0284c7; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.58em; flex-shrink: 0;">
+                                <i class="fa-solid fa-tree"></i>
+                            </div>
+                            <h4 style="color: #0f172a; font-size: 0.50em; margin: 0; font-weight: 700;">1. Cây Tiền Tố (Trie / Prefix Tree)</h4>
                         </div>
-                        <h4 style="color: #0f172a; font-size: 0.56em; margin: 0; font-weight: 700;">Union-Find (DSU)</h4>
+                        <span style="background: #f0f9ff; color: #0284c7; border: 1px solid #bae6fd; padding: 3px 8px; border-radius: 8px; font-size: 0.30em; font-weight: 700; white-space: nowrap;">CHUYÊN: TÌM TIỀN TỐ</span>
                     </div>
-                    <span style="background: #f3e8ff; color: #6b21a8; border: 1px solid #e9d5ff; padding: 2px 8px; border-radius: 10px; font-size: 0.34em; font-weight: 700;">CHUYÊN GỘP & LIÊN THÔNG</span>
+
+                    <!-- 2 Focus Boxes -->
+                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.35em; line-height: 1.5;">
+                        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 9px 12px; color: #0f172a;">
+                            <strong style="color: #166534;"><i class="fa-solid fa-bolt" style="margin-right: 4px;"></i> Tối ưu hóa cốt lõi:</strong> Ghép các tiền tố trùng nhau $\implies$ Tìm kiếm từ khóa chỉ mất $O(L)$ (chỉ tính theo độ dài từ $L$, từ điển có $1$ tỷ từ vẫn nhanh tức thì).
+                        </div>
+                        <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 8px; padding: 9px 12px; color: #0f172a;">
+                            <strong style="color: #9f1239;"><i class="fa-solid fa-scale-unbalanced" style="margin-right: 4px;"></i> Chấp nhận đánh đổi (Trade-off):</strong> Tiêu tốn nhiều bộ nhớ RAM hơn để lưu mảng con trỏ cho mỗi nút.
+                        </div>
+                    </div>
                 </div>
 
-                <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.36em; color: #334155;">
-                    <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 6px; padding: 6px 10px;">
-                        <strong style="color: #9f1239;"><i class="fa-solid fa-minus-circle" style="margin-right: 4px;"></i> Sự đánh đổi:</strong> Từ bỏ khả năng xóa liên kết và không liệt kê chi tiết các phần tử.
-                    </div>
-                    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 6px 10px;">
-                        <strong style="color: #166534;"><i class="fa-solid fa-plus-circle" style="margin-right: 4px;"></i> Lợi ích thu được:</strong> Gộp nhóm & kiểm tra liên thông tiệm cận $O(\alpha(N)) \approx O(1)$ với mảng <code>parent[]</code> gọn nhẹ.
-                    </div>
+                <!-- Footer Applications -->
+                <div style="margin-top: 10px; background: #f0f9ff; border-left: 4px solid #0284c7; padding: 8px 12px; border-radius: 6px; font-size: 0.34em; color: #0369a1; font-weight: 600; line-height: 1.4;">
+                    <i class="fa-solid fa-laptop-code" style="color: #0284c7; margin-right: 4px;"></i>
+                    <strong>Ứng dụng thực tế:</strong> Gợi ý tìm kiếm (Autocomplete), Định tuyến mạng IP, Kiểm tra chính tả.
                 </div>
             </div>
 
-            <div style="margin-top: 8px; background: #f3e8ff; border-left: 3px solid #7c3aed; padding: 5px 8px; border-radius: 4px; font-size: 0.35em; color: #6b21a8; font-weight: 600;">
-                <i class="fa-solid fa-check" style="color: #7c3aed; margin-right: 4px;"></i> Ứng dụng: Mạng xã hội, Thuật toán cây bao trùm nhỏ nhất Kruskal
+            <!-- Right: Union-Find (DSU) -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #7c3aed; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+                <div>
+                    <!-- Card Header -->
+                    <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="background: #f3e8ff; color: #7c3aed; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.58em; flex-shrink: 0;">
+                                <i class="fa-solid fa-diagram-project"></i>
+                            </div>
+                            <h4 style="color: #0f172a; font-size: 0.50em; margin: 0; font-weight: 700;">2. Tập Hợp Rời Rạc (Union-Find / DSU)</h4>
+                        </div>
+                        <span style="background: #f3e8ff; color: #6b21a8; border: 1px solid #e9d5ff; padding: 3px 8px; border-radius: 8px; font-size: 0.30em; font-weight: 700; white-space: nowrap;">CHUYÊN: LIÊN THÔNG ĐỘNG</span>
+                    </div>
+
+                    <!-- 2 Focus Boxes -->
+                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.35em; line-height: 1.5;">
+                        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 9px 12px; color: #0f172a;">
+                            <strong style="color: #166534;"><i class="fa-solid fa-bolt" style="margin-right: 4px;"></i> Tối ưu hóa cốt lõi:</strong> Quản lý nhóm trên mảng phẳng <code>parent[]</code> $\implies$ Kiểm tra 2 phần tử có liên thông hay không trong $O(\alpha(N)) \approx O(1)$ gần như ngay lập tức.
+                        </div>
+                        <div style="background: #fff5f5; border: 1px solid #fecdd3; border-radius: 8px; padding: 9px 12px; color: #0f172a;">
+                            <strong style="color: #9f1239;"><i class="fa-solid fa-scale-unbalanced" style="margin-right: 4px;"></i> Chấp nhận đánh đổi (Trade-off):</strong> Chỉ hỗ trợ gộp nhóm và tìm nhóm, không hỗ trợ tách nhóm hay duyệt từng phần tử.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Applications -->
+                <div style="margin-top: 10px; background: #f3e8ff; border-left: 4px solid #7c3aed; padding: 8px 12px; border-radius: 6px; font-size: 0.34em; color: #6b21a8; font-weight: 600; line-height: 1.4;">
+                    <i class="fa-solid fa-network-wired" style="color: #7c3aed; margin-right: 4px;"></i>
+                    <strong>Ứng dụng thực tế:</strong> Thuật toán Kruskal tìm cây khung nhỏ nhất (MST), Phân cụm mạng xã hội.
+                </div>
             </div>
+
+        </div>
+
+        <!-- Bottom Simple Takeaway Banner -->
+        <div style="width: 100%; background: #eff6ff; border: 1px solid #bfdbfe; border-left: 5px solid #2563eb; border-radius: 8px; padding: 8px 16px; display: flex; align-items: center; gap: 10px; font-size: 0.35em; font-weight: 600; color: #1e3a8a; text-align: left; line-height: 1.45;">
+            <i class="fa-solid fa-lightbulb" style="color: #2563eb; font-size: 1.25em; flex-shrink: 0;"></i>
+            <span><strong style="color: #1d4ed8; text-transform: uppercase;">QUY TẮC ĐÁNH ĐỔI (TRADE-OFF):</strong> Không có cấu trúc dữ liệu nào toàn năng cho mọi bài toán — Muốn đạt tốc độ cực hạn $O(1)$ hay $O(L)$, ta phải chấp nhận hy sinh các chức năng không cần thiết để tối ưu cho đúng bài toán trọng tâm.</span>
         </div>
 
     </div>
 
     <aside class="notes">
-        Trong thiết kế hệ thống, việc xác định mẫu truy vấn chiếm ưu thế (dominant query pattern) là yếu tố quyết định. Cấu trúc chuyên biệt tối ưu hiệu năng bằng cách giản lược các chức năng không cần thiết để tập trung tài nguyên cho tác vụ trọng tâm.
+        Kính thưa Thầy và các bạn, nguyên lý "Ưu tiên Mẫu Truy Vấn" là tư duy cốt lõi của kỹ sư phần mềm:
+        1. Thay vì cố dùng một cấu trúc tổng quát cho mọi thứ, ta phân tích xem hệ thống cần thao tác gì nhiều nhất.
+        2. Nếu cần tìm tiền tố nhanh: Chọn Trie, chấp nhận tốn thêm RAM để lấy tốc độ O(L).
+        3. Nếu cần kiểm tra liên thông nhóm: Chọn Union-Find, chấp nhận không duyệt danh sách để lấy tốc độ O(1).
     </aside>
 </section>

@@ -1,108 +1,121 @@
-<section data-transition="slide">
-    <div class="badge badge-purple" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN CỨNG & BỘ NHỚ</div>
-    <h3 style="font-size: 0.78em; margin: 0 0 6px 0; color: #0f172a; font-weight: 700;">Phân Tích Chi Tiết: Memory Locality & Tác Động Phần CỨng CPU Cache</h3>
-
-    <!-- Top Architecture Banner with Flex Vertical Alignment -->
-    <div style="width: 100%; background: #f1f5f9; border: 1px solid #cbd5e1; border-left: 4px solid #6366f1; border-radius: 6px; padding: 6px 12px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; font-size: 0.33em; color: #1e293b; text-align: left; line-height: 1.3;">
-        <i class="fa-solid fa-microchip" style="color: #6366f1; flex-shrink: 0;"></i>
-        <span><strong>Bản chất phần cứng:</strong> CPU (3-5 GHz) nhanh gấp 100 lần RAM. Để tránh CPU đứng chờ RAM (Stall), kiến trúc máy tính dùng <strong>Cache Line (64 Bytes)</strong> để nạp sẵn dữ liệu lân cận vào bộ đệm L1/L2/L3.</span>
-    </div>
-
-    <!-- Main Comparison Grid -->
-    <div style="width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: left;">
+<section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 600px; display: flex; flex-direction: column; justify-content: space-between;">
         
-        <!-- Left: Pointer Chasing -->
-        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #ef4444; border-radius: 8px; padding: 8px 10px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-                <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 4px; margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between;">
-                    <div style="display: flex; align-items: center; gap: 6px;">
-                        <div style="background: #fef2f2; color: #ef4444; width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.5em; flex-shrink: 0;">
-                            <i class="fa-solid fa-link-slash"></i>
-                        </div>
-                        <h4 style="color: #9f1239; font-size: 0.44em; margin: 0; font-weight: 700;">Con Trỏ Phân Tán (Pointer Chasing)</h4>
-                    </div>
-                    <span style="background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; padding: 1px 5px; border-radius: 6px; font-size: 0.29em; font-weight: 700;"><i class="fa-solid fa-circle-xmark" style="color: #dc2626;"></i>  HIGH CACHE MISSES</span>
-                </div>
-
-                <!-- Visual RAM diagram -->
-                <div style="background: #fff1f2; border: 1px dashed #fca5a5; border-radius: 6px; padding: 4px; margin-bottom: 5px; display: flex; align-items: center; justify-content: space-around;">
-                    <div style="background: #ffffff; border: 1px solid #fca5a5; border-radius: 4px; padding: 2px 4px; text-align: center; font-size: 0.28em; font-family: monospace; color: #9f1239;">
-                        0x10A0<br><span style="color: #e11d48; font-weight: bold;">Node A</span>
-                    </div>
-                    <i class="fa-solid fa-arrows-split-up-and-left" style="font-size: 0.32em; color: #ef4444;"></i>
-                    <div style="background: #ffffff; border: 1px solid #fca5a5; border-radius: 4px; padding: 2px 4px; text-align: center; font-size: 0.28em; font-family: monospace; color: #9f1239;">
-                        0x40F2<br><span style="color: #e11d48; font-weight: bold;">Node B</span>
-                    </div>
-                    <i class="fa-solid fa-arrows-split-up-and-left" style="font-size: 0.32em; color: #ef4444;"></i>
-                    <div style="background: #ffffff; border: 1px solid #fca5a5; border-radius: 4px; padding: 2px 4px; text-align: center; font-size: 0.28em; font-family: monospace; color: #9f1239;">
-                        0x89C1<br><span style="color: #e11d48; font-weight: bold;">Node C</span>
-                    </div>
-                </div>
-
-                <ul style="font-size: 0.32em; color: #334155; margin: 0; padding-left: 14px; line-height: 1.4;">
-                    <li><strong>Cấu trúc đại diện:</strong> BST, Linked List, Trie Nodes, Hash Table Chaining.</li>
-                    <li><strong>Cơ chế RAM:</strong> Mỗi nút được cấp phát động (<code>malloc/new</code>) rải rác trên Heap.</li>
-                    <li><strong>Nguyên nhân chậm:</strong> Truy cập <code>node->left</code> bị <strong>Cache Miss</strong> $\implies$ CPU đứng chờ RAM <strong>~200 chu kỳ clock (100ns)</strong> mỗi lần nhảy.</li>
-                    <li><strong>Cache Hit Ratio:</strong> Thấp ($\approx 15\% - 25\%$).</li>
-                </ul>
-            </div>
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 6px;">
+            <div class="badge badge-purple" style="font-size: 0.38em; padding: 4px 16px; margin-bottom: 8px; display: inline-block;">NGUYÊN LÝ THIẾT KẾ HỆ THỐNG</div>
+            <h2 style="font-size: 0.95em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.4;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 6px; padding-bottom: 4px;">Nguyên Lý Tính Cục Bộ Bộ Nhớ (Locality of Reference)</span>
+            </h2>
         </div>
 
-        <!-- Right: Continuous Array Locality -->
-        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 8px; padding: 8px 10px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-                <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 4px; margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between;">
-                    <div style="display: flex; align-items: center; gap: 6px;">
-                        <div style="background: #ecfdf5; color: #059669; width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.5em; flex-shrink: 0;">
-                            <i class="fa-solid fa-layer-group"></i>
-                        </div>
-                        <h4 style="color: #065f46; font-size: 0.44em; margin: 0; font-weight: 700;">Mảng Liên Tục (Spatial Locality)</h4>
-                    </div>
-                    <span style="background: #d1fae5; color: #047857; border: 1px solid #a7f3d0; padding: 1px 5px; border-radius: 6px; font-size: 0.29em; font-weight: 700;"><i class="fa-solid fa-bolt" style="color: var(--accent-gold);"></i>  TỐI ƯU CACHE HIT</span>
-                </div>
-
-                <!-- Visual Simulation Diagram -->
-                <div style="background: #ecfdf5; border: 2px solid #10b981; border-radius: 6px; padding: 4px; margin-bottom: 5px; position: relative;">
-                    <div style="position: absolute; top: -7px; right: 6px; background: #059669; color: #ffffff; font-size: 0.25em; padding: 1px 5px; border-radius: 4px; font-weight: 700;">
-                        1 CACHE LINE (64 BYTES = 16 INT)
-                    </div>
-                    <div style="display: flex; gap: 3px; justify-content: center;">
-                        <div style="flex: 1; background: #ffffff; border: 1px solid #6ee7b7; border-radius: 3px; padding: 2px 1px; text-align: center; font-size: 0.27em; font-family: monospace; color: #065f46;">
-                            0x1000<br><strong style="color: #059669;">arr[0]</strong>
-                        </div>
-                        <div style="flex: 1; background: #ffffff; border: 1px solid #6ee7b7; border-radius: 3px; padding: 2px 1px; text-align: center; font-size: 0.27em; font-family: monospace; color: #065f46;">
-                            0x1004<br><strong style="color: #059669;">arr[1]</strong>
-                        </div>
-                        <div style="flex: 1; background: #ffffff; border: 1px solid #6ee7b7; border-radius: 3px; padding: 2px 1px; text-align: center; font-size: 0.27em; font-family: monospace; color: #065f46;">
-                            0x1008<br><strong style="color: #059669;">arr[2]</strong>
-                        </div>
-                        <div style="flex: 1; background: #ffffff; border: 1px solid #6ee7b7; border-radius: 3px; padding: 2px 1px; text-align: center; font-size: 0.27em; font-family: monospace; color: #065f46;">
-                            0x100C<br><strong style="color: #059669;">arr[3]</strong>
-                        </div>
-                    </div>
-                </div>
-
-                <ul style="font-size: 0.32em; color: #334155; margin: 0; padding-left: 14px; line-height: 1.4;">
-                    <li><strong>Cấu trúc đại diện:</strong> Union-Find (<code>parent[]</code>, <code>rank[]</code>), Flat Array.</li>
-                    <li><strong>Cơ chế RAM:</strong> Cấp phát 1 khối bộ nhớ liên tục kề nhau trên RAM.</li>
-                    <li><strong>Lợi thế tốc độ:</strong> Đọc <code>arr[0]</code> nạp luôn các phần tử lân cận trong Cache Line $\implies$ Các truy cập sau có độ trễ rất thấp (~1-2ns ở L1).</li>
-                    <li><strong>Cache Hit Ratio:</strong> Rất cao đối với các truy cập tuần tự / cục bộ.</li>
-                </ul>
-            </div>
+        <!-- Top Core Principle Banner (Easy to Explain) -->
+        <div style="width: 100%; background: #f8fafc; border: 1px solid #cbd5e1; border-left: 5px solid #6366f1; border-radius: 8px; padding: 8px 16px; text-align: left; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+            <i class="fa-solid fa-microchip" style="color: #6366f1; font-size: 1.25em; flex-shrink: 0;"></i>
+            <span style="font-size: 0.35em; color: #0f172a; line-height: 1.45;">
+                <strong style="color: #4338ca; text-transform: uppercase;">Nguyên lý cơ bản:</strong> Khi CPU đọc một ô nhớ, nó sẽ nạp luôn cả <strong>khối nhớ lân cận (Spatial Locality)</strong> vào bộ nhớ đệm CPU Cache để tái sử dụng tức thì trong các thao tác kế tiếp.
+            </span>
         </div>
 
-    </div>
+        <!-- Main Comparison Grid: Pointer-Linked vs Contiguous Array -->
+        <div style="width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; text-align: left; margin-bottom: 10px; align-items: stretch;">
+            
+            <!-- Left: Pointer-Linked (Trie, BST, Linked List) -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #ef4444; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+                <div>
+                    <!-- Header -->
+                    <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="background: #fef2f2; color: #ef4444; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.58em; flex-shrink: 0;">
+                                <i class="fa-solid fa-link-slash"></i>
+                            </div>
+                            <h4 style="color: #0f172a; font-size: 0.48em; margin: 0; font-weight: 700;">1. Cấu Trúc Liên Kết Con Trỏ (Trie, BST)</h4>
+                        </div>
+                        <span style="background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; padding: 3px 8px; border-radius: 8px; font-size: 0.30em; font-weight: 700; white-space: nowrap;">BỘ NHỚ PHÂN TÁN</span>
+                    </div>
 
-    <!-- Bottom Latency Metrics Table Banner with Flex Alignment -->
-    <div style="width: 100%; margin-top: 6px; background: #f8fafc; border: 1px solid #cbd5e1; border-top: 2px solid #0284c7; border-radius: 6px; padding: 6px 12px; text-align: left; display: flex; align-items: center; justify-content: space-between; font-size: 0.32em; line-height: 1.3;">
-        <span><i class="fa-solid fa-stopwatch" style="color: #0284c7; margin-right: 4px;"></i><strong>Bảng thông số độ trễ bộ nhớ:</strong></span>
-        <span><i class="fa-solid fa-bolt" style="color: var(--accent-gold);"></i>  <strong>L1 Cache:</strong> 1-2 ns</span>
-        <span><i class="fa-solid fa-bolt" style="color: var(--accent-gold);"></i>  <strong>L2 Cache:</strong> 3-5 ns</span>
-        <span><i class="fa-solid fa-bolt" style="color: var(--accent-gold);"></i>  <strong>L3 Cache:</strong> 10-20 ns</span>
-        <span>🐢 <strong>Main RAM:</strong> 50-100 ns (Chậm gấp 50-100 lần L1!)</span>
+                    <!-- Visual Diagram -->
+                    <div style="background: #fff1f2; border: 1px dashed #fca5a5; border-radius: 8px; padding: 8px 10px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-around;">
+                        <div style="background: #ffffff; border: 1px solid #fca5a5; border-radius: 6px; padding: 4px 8px; text-align: center; font-size: 0.31em; color: #0f172a;">
+                            Địa chỉ A<br><strong style="color: #e11d48;">Nút u</strong>
+                        </div>
+                        <i class="fa-solid fa-arrow-right-long" style="font-size: 0.38em; color: #ef4444;"></i>
+                        <div style="background: #ffffff; border: 1px solid #fca5a5; border-radius: 6px; padding: 4px 8px; text-align: center; font-size: 0.31em; color: #0f172a;">
+                            Địa chỉ B<br><strong style="color: #e11d48;">Nút v</strong>
+                        </div>
+                        <i class="fa-solid fa-arrow-right-long" style="font-size: 0.38em; color: #ef4444;"></i>
+                        <div style="background: #ffffff; border: 1px solid #fca5a5; border-radius: 6px; padding: 4px 8px; text-align: center; font-size: 0.31em; color: #0f172a;">
+                            Địa chỉ C<br><strong style="color: #e11d48;">Nút w</strong>
+                        </div>
+                    </div>
+
+                    <!-- Bullet Points (Clear and Simple for Presenting) -->
+                    <ul style="font-size: 0.35em; color: #0f172a; margin: 0; padding-left: 16px; line-height: 1.6;">
+                        <li><strong>Cách lưu trữ:</strong> Mỗi nút được cấp phát động độc lập trên bộ nhớ Heap, nằm ở các địa chỉ rải rác, không liền kề.</li>
+                        <li><strong>Cách truy xuất:</strong> CPU phải nhảy qua từng con trỏ (<em>Pointer Chasing</em>) để đi đến nút tiếp theo.</li>
+                        <li><strong>Hạn chế phần cứng:</strong> Dễ gây trượt bộ nhớ đệm (<strong>Cache Miss</strong>) $\implies$ CPU phải dừng chờ RAM nạp dữ liệu.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right: Contiguous Flat Array (Union-Find) -->
+            <div style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 5px solid #059669; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+                <div>
+                    <!-- Header -->
+                    <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="background: #ecfdf5; color: #059669; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.58em; flex-shrink: 0;">
+                                <i class="fa-solid fa-table-cells"></i>
+                            </div>
+                            <h4 style="color: #0f172a; font-size: 0.48em; margin: 0; font-weight: 700;">2. Cấu Trúc Mảng Phẳng (Union-Find)</h4>
+                        </div>
+                        <span style="background: #d1fae5; color: #047857; border: 1px solid #a7f3d0; padding: 3px 8px; border-radius: 8px; font-size: 0.30em; font-weight: 700; white-space: nowrap;">BỘ NHỚ LIÊN TỤC</span>
+                    </div>
+
+                    <!-- Visual Diagram -->
+                    <div style="background: #ecfdf5; border: 2px solid #10b981; border-radius: 8px; padding: 8px 10px; margin-bottom: 10px; position: relative;">
+                        <div style="position: absolute; top: -9px; right: 10px; background: #059669; color: #ffffff; font-size: 0.28em; padding: 2px 8px; border-radius: 6px; font-weight: 700;">
+                            1 KHỐI NHỚ LIỀN KỀ LIÊN TỤC
+                        </div>
+                        <div style="display: flex; gap: 6px; justify-content: center;">
+                            <div style="flex: 1; background: #ffffff; border: 1px solid #6ee7b7; border-radius: 4px; padding: 4px 2px; text-align: center; font-size: 0.31em; color: #0f172a;">
+                                Vị trí 0<br><strong style="color: #059669;">parent[0]</strong>
+                            </div>
+                            <div style="flex: 1; background: #ffffff; border: 1px solid #6ee7b7; border-radius: 4px; padding: 4px 2px; text-align: center; font-size: 0.31em; color: #0f172a;">
+                                Vị trí 1<br><strong style="color: #059669;">parent[1]</strong>
+                            </div>
+                            <div style="flex: 1; background: #ffffff; border: 1px solid #6ee7b7; border-radius: 4px; padding: 4px 2px; text-align: center; font-size: 0.31em; color: #0f172a;">
+                                Vị trí 2<br><strong style="color: #059669;">parent[2]</strong>
+                            </div>
+                            <div style="flex: 1; background: #ffffff; border: 1px solid #6ee7b7; border-radius: 4px; padding: 4px 2px; text-align: center; font-size: 0.31em; color: #0f172a;">
+                                Vị trí 3<br><strong style="color: #059669;">parent[3]</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bullet Points (Clear and Simple for Presenting) -->
+                    <ul style="font-size: 0.35em; color: #0f172a; margin: 0; padding-left: 16px; line-height: 1.6;">
+                        <li><strong>Cách lưu trữ:</strong> Toàn bộ mảng <code>parent[]</code> và <code>rank[]</code> nằm gọn trong một dải ô nhớ liên tục trên RAM.</li>
+                        <li><strong>Cách truy xuất:</strong> Tính địa chỉ trực tiếp theo công thức chỉ số mảng trong thời gian thực $O(1)$.</li>
+                        <li><strong>Ưu thế vượt trội:</strong> Tận dụng tối đa **Spatial Locality** $\implies$ Khi đọc <code>parent[0]</code>, CPU Cache tự động nạp sẵn các phần tử kế cận.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Simple Key Takeaway Banner -->
+        <div style="width: 100%; background: #eff6ff; border: 1px solid #bfdbfe; border-left: 5px solid #2563eb; border-radius: 8px; padding: 8px 16px; display: flex; align-items: center; gap: 10px; font-size: 0.35em; font-weight: 600; color: #1e3a8a; line-height: 1.45;">
+            <i class="fa-solid fa-lightbulb" style="color: #2563eb; font-size: 1.25em; flex-shrink: 0;"></i>
+            <span><strong style="color: #1d4ed8; text-transform: uppercase;">KẾT LUẬN THUYẾT TRÌNH:</strong> Lý thuyết Big-O coi mọi phép đọc bộ nhớ đều là $O(1)$. Nhưng trong thực tế phần cứng máy tính, <strong>Mảng phẳng (như Union-Find)</strong> chạy nhanh hơn cấu trúc <strong>Con trỏ liên kết (như Trie/BST)</strong> nhờ tận dụng tối đa bộ nhớ đệm CPU Cache.</span>
+        </div>
+
     </div>
 
     <aside class="notes">
-        Trên lý thuyết tiệm cận, hai giải thuật cùng Big-O chưa chắc chạy bằng nhau trong thực tế. Union-Find có lợi thế thực thi lớn vì mảng parent nằm liên tục trên RAM, tận dụng hiệu quả cơ chế nạp Cache Line của phần cứng.
+        Kính thưa Thầy và các bạn, slide này giải thích lý do vì sao cấu trúc dữ liệu mảng phẳng (như Union-Find) lại có hiệu năng thực tế vượt trội so với cấu trúc cây liên kết con trỏ:
+        1. Về mặt lý thuyết Big-O, cả hai đều có thao tác O(1).
+        2. Nhưng trên phần cứng thực tế, CPU luôn nạp dữ liệu theo khối Cache Line. Khi dữ liệu nằm liên tục trên mảng phẳng (Union-Find), CPU nạp 1 lần là dùng được nhiều phần tử (Spatial Locality).
+        3. Ngược lại, cấu trúc con trỏ (Trie/BST) cấp phát rải rác trên Heap, khiến CPU phải nhảy con trỏ liên tục và dễ bị nghẽn do Cache Miss.
     </aside>
 </section>

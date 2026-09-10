@@ -1,70 +1,89 @@
-<section data-transition="slide">
-    <div class="badge badge-sky" style="font-size: 0.36em; padding: 3px 12px; margin-bottom: 4px;">PHẦN II — CÂY TIỀN TỐ (TRIE)</div>
-    <h3 style="font-size: 0.78em; margin: 0 0 6px 0; color: #0f172a; font-weight: 700;">Bài Toán Autocomplete & So Sánh Hiệu Năng Big-O</h3>
+<section data-transition="slide" style="width: 100% !important; max-width: 100% !important; padding: 0 10px !important;">
+    <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 600px; display: flex; flex-direction: column; justify-content: space-between;">
+        
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 6px;">
+            <div class="badge" style="font-size: 0.38em; padding: 4px 16px; margin-bottom: 6px; display: inline-block;">PHẦN II — CẤU TRÚC DỮ LIỆU TRIE (PREFIX TREE)</div>
+            <h2 style="font-size: 0.95em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Bài Toán Autocomplete & Đối Sánh Độ Phức Tạp Big-O</span>
+            </h2>
+        </div>
 
-    <p style="font-size: 0.35em; color: #475569; margin: 0 0 8px 0;">
-        Cho từ điển $N$ từ khóa. Với tiền tố $P$ (độ dài $L$), hệ thống cần trả về $K$ từ gợi ý bắt đầu bằng $P$.
-    </p>
+        <!-- Problem Formulation Box (Clear Variable Definitions) -->
+        <div style="width: 100%; background: #f8fafc; border: 1px solid #cbd5e1; border-left: 5px solid #0284c7; border-radius: 8px; padding: 8px 16px; text-align: left; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 0.35em; color: #0f172a; line-height: 1.45;">
+            <div>
+                <strong style="color: #0284c7; text-transform: uppercase;"><i class="fa-solid fa-calculator" style="margin-right: 6px;"></i> Tham số bài toán:</strong>
+                Từ điển gồm <strong>$N$</strong> từ khóa (độ dài trung bình <strong>$L$</strong>). Người dùng nhập tiền tố $P$ ($|P| = L$), cần trả về <strong>$K$</strong> từ gợi ý phù hợp nhất.
+            </div>
+            <span style="background: #e0f2fe; color: #0369a1; padding: 3px 10px; border-radius: 6px; font-weight: 700; white-space: nowrap;">$K \le N$</span>
+        </div>
 
-    <!-- 100% Full-Width Table Container -->
-    <div style="width: 100%; margin-top: 4px; overflow-x: auto;">
-        <table style="width: 100%; font-size: 0.34em; border-collapse: collapse; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden; text-align: left;">
-            <thead>
-                <tr style="background: #f1f5f9; color: #0f172a; border-bottom: 2px solid #cbd5e1;">
-                    <th style="padding: 7px 10px; width: 22%; font-weight: 700;">Cấu trúc dữ liệu</th>
-                    <th style="padding: 7px 10px; font-weight: 700;">Tra cứu chính xác</th>
-                    <th style="padding: 7px 10px; font-weight: 700;">Tra cứu tiền tố</th>
-                    <th style="padding: 7px 10px; font-weight: 700;">Liệt kê $K$ từ gợi ý</th>
-                    <th style="padding: 7px 10px; font-weight: 700;">Nhận xét thực tế</th>
-                </tr>
-            </thead>
-            <tbody style="color: #334155;">
-                <tr style="border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 6px 10px;"><strong>Unsorted Array</strong></td>
-                    <td style="padding: 6px 10px;">$O(N \cdot L)$</td>
-                    <td style="padding: 6px 10px;">$O(N \cdot L)$</td>
-                    <td style="padding: 6px 10px;">$O(N \cdot L)$</td>
-                    <td style="padding: 6px 10px; color: #ef4444; font-weight: 600;">Quét toàn bộ mảng (Rất chậm)</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #e2e8f0; background: #f8fafc;">
-                    <td style="padding: 6px 10px;"><strong>Sorted Array</strong></td>
-                    <td style="padding: 6px 10px;">$O(L \log N)$</td>
-                    <td style="padding: 6px 10px;">$O(L \log N)$</td>
-                    <td style="padding: 6px 10px;">$O(L \log N + K)$</td>
-                    <td style="padding: 6px 10px; color: #d97706; font-weight: 600;">Chèn mới tốn $O(N)$ đắt đỏ</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 6px 10px;"><strong>Hash Table</strong></td>
-                    <td style="padding: 6px 10px;">$O(L)$ <span style="font-size: 0.85em; color: #64748b;">(tb)</span></td>
-                    <td style="padding: 6px 10px; color: #ef4444; font-weight: 600;">$O(N \cdot L)$</td>
-                    <td style="padding: 6px 10px; color: #ef4444; font-weight: 600;">Không hỗ trợ</td>
-                    <td style="padding: 6px 10px; color: #ef4444; font-weight: 600;">Không duy trì trật tự tiền tố</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #e2e8f0; background: #f8fafc;">
-                    <td style="padding: 6px 10px;"><strong>Balanced BST</strong></td>
-                    <td style="padding: 6px 10px;">$O(L \log N)$</td>
-                    <td style="padding: 6px 10px;">$O(L \log N)$</td>
-                    <td style="padding: 6px 10px;">$O(L \log N + K)$</td>
-                    <td style="padding: 6px 10px; color: #d97706; font-weight: 600;">Phải so sánh chuỗi đắt đỏ</td>
-                </tr>
-                <tr style="background: #f0f9ff; font-weight: 700; border-top: 2px solid #0284c7;">
-                    <td style="padding: 7px 10px; color: #0284c7;"><i class="fa-solid fa-tree" style="color: #0284c7; margin-right: 4px;"></i> Trie (Cây Tiền Tố)</td>
-                    <td style="padding: 7px 10px; color: #0284c7;">$O(L)$</td>
-                    <td style="padding: 7px 10px; color: #0284c7;">$O(L)$</td>
-                    <td style="padding: 7px 10px; color: #0284c7;">$O(L + K)$</td>
-                    <td style="padding: 7px 10px; color: #0284c7; font-weight: 700;">Tối ưu tiền tố, độc lập với $N$</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <!-- Full-Width High-Contrast Comparison Table -->
+        <div style="width: 100%; overflow-x: auto; margin-bottom: 10px;">
+            <table style="width: 100%; font-size: 0.35em; border-collapse: collapse; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px; overflow: hidden; text-align: left;">
+                <thead>
+                    <tr style="background: #f1f5f9; color: #0f172a; border-bottom: 2px solid #cbd5e1;">
+                        <th style="padding: 10px 14px; width: 25%; font-weight: 800; color: #0f172a;">Cấu Trúc Dữ Liệu</th>
+                        <th style="padding: 10px 14px; font-weight: 800; color: #0f172a;">Tìm Chính Xác</th>
+                        <th style="padding: 10px 14px; font-weight: 800; color: #0f172a;">Tìm Tiền Tố</th>
+                        <th style="padding: 10px 14px; font-weight: 800; color: #0f172a;">Lấy $K$ Gợi Ý</th>
+                        <th style="padding: 10px 14px; font-weight: 800; color: #0f172a;">Đánh Giá & Lý Do Thực Tế</th>
+                    </tr>
+                </thead>
+                <tbody style="color: #0f172a;">
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 9px 14px; font-weight: 700; color: #0f172a;">Mảng Chưa Sắp Xếp (Unsorted Array)</td>
+                        <td style="padding: 9px 14px; color: #0f172a;">$O(N \cdot L)$</td>
+                        <td style="padding: 9px 14px; color: #0f172a;">$O(N \cdot L)$</td>
+                        <td style="padding: 9px 14px; color: #0f172a;">$O(N \cdot L)$</td>
+                        <td style="padding: 9px 14px; color: #0f172a;">Không có thứ tự $\implies$ Phải quét toàn bộ $N$ từ</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e2e8f0; background: #f8fafc;">
+                        <td style="padding: 9px 14px; font-weight: 700; color: #0f172a;">Mảng Đã Sắp Xếp (Sorted Array)</td>
+                        <td style="padding: 9px 14px; color: #0f172a;">$O(L \log N)$</td>
+                        <td style="padding: 9px 14px; color: #0f172a;">$O(L \log N)$</td>
+                        <td style="padding: 9px 14px; color: #0f172a;">$O(L \log N + K)$</td>
+                        <td style="padding: 9px 14px; color: #0f172a;">Tìm nhanh bằng Binary Search nhưng chèn từ mới tốn $O(N \cdot L)$</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e2e8f0;">
+                        <td style="padding: 9px 14px; font-weight: 700; color: #0f172a;">Bảng Băm (Hash Table)</td>
+                        <td style="padding: 9px 14px; color: #0f172a;">$O(L)$ <span style="font-size: 0.85em; color: #64748b;">(kỳ vọng)</span></td>
+                        <td style="padding: 9px 14px; color: #0f172a;">$O(N \cdot L)$</td>
+                        <td style="padding: 9px 14px; color: #0f172a;">$O(N \cdot L)$</td>
+                        <td style="padding: 9px 14px; color: #0f172a;">Hàm băm làm mất thứ tự tiền tố $\implies$ Phải duyệt cả từ điển</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e2e8f0; background: #f8fafc;">
+                        <td style="padding: 9px 14px; font-weight: 700; color: #0f172a;">Cây BST Cân Bằng (AVL / Red-Black)</td>
+                        <td style="padding: 9px 14px; color: #0f172a;">$O(L \log N)$</td>
+                        <td style="padding: 9px 14px; color: #0f172a;">$O(L \log N)$</td>
+                        <td style="padding: 9px 14px; color: #0f172a;">$O(L \log N + K)$</td>
+                        <td style="padding: 9px 14px; color: #0f172a;">Cần $\log N$ lần so sánh nút, mỗi lần so sánh chuỗi tốn $O(L)$</td>
+                    </tr>
+                    <tr style="background: #e0f2fe; border-top: 2px solid #0284c7; font-weight: 700;">
+                        <td style="padding: 10px 14px; color: #0f172a; font-weight: 800;">
+                            <i class="fa-solid fa-tree" style="color: #0284c7; margin-right: 6px;"></i> Cây Tiền Tố (Trie / Prefix Tree)
+                        </td>
+                        <td style="padding: 10px 14px; color: #0f172a; font-weight: 800;">$O(L)$</td>
+                        <td style="padding: 10px 14px; color: #0f172a; font-weight: 800;">$O(L)$</td>
+                        <td style="padding: 10px 14px; color: #0f172a; font-weight: 800;">$O(L + K)$</td>
+                        <td style="padding: 10px 14px; color: #0f172a; font-weight: 800;">Tối ưu tuyệt đối: Tốn $O(L)$ tìm nút + $O(K)$ lấy gợi ý, độc lập $N$</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <!-- Bottom Full Width Banner with Flex Alignment -->
-    <div style="width: 100%; margin-top: 6px; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #166534; border-radius: 6px; padding: 6px 12px; display: flex; align-items: center; gap: 6px; font-size: 0.35em; font-weight: 700; color: #14532d; text-align: left; line-height: 1.3;">
-        <i class="fa-solid fa-circle-check" style="color: #166534; flex-shrink: 0;"></i>
-        <span><span style="color: #166534;">ĐÁNH GIÁ:</span> Trie đạt thời gian $O(L)$ cho tra cứu tiền tố — chi phí chỉ phụ thuộc vào độ dài chuỗi $L$, không phụ thuộc vào kích thước từ điển $N$!</span>
+        <!-- Bottom Takeaway Banner (Simple & Powerful) -->
+        <div style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 5px solid #059669; border-radius: 8px; padding: 10px 16px; display: flex; align-items: center; gap: 10px; font-size: 0.36em; font-weight: 600; color: #065f46; text-align: left; line-height: 1.45;">
+            <i class="fa-solid fa-circle-check" style="color: #059669; font-size: 1.25em; flex-shrink: 0;"></i>
+            <span><strong style="color: #047857; text-transform: uppercase;">KẾT LUẬN THUYẾT TRÌNH:</strong> Cây Trie là cấu trúc dữ liệu duy nhất đạt độ phức tạp $O(L + K)$ cho Autocomplete — trong đó $O(L)$ để đi tới nút tiền tố và $O(K)$ để lấy $K$ từ gợi ý, loại bỏ hoàn toàn sự phụ thuộc vào quy mô $N$ của từ điển.</span>
+        </div>
+
     </div>
 
     <aside class="notes">
-        Trong các tính năng như gợi ý từ khi gõ phím, hệ thống đòi hỏi phản hồi với độ trễ thấp. Trie giải quyết hiệu quả bài toán tiền tố với chi phí chỉ phụ thuộc vào độ dài từ khóa L mà không phụ thuộc vào quy mô dữ liệu N.
+        Kính thưa Thầy và các bạn, bảng so sánh này chỉ ra lý do vì sao Trie là lựa chọn số 1 cho tính năng gợi ý từ (Autocomplete):
+        1. Bảng băm (Hash Table) tuy tìm chính xác nhanh O(L), nhưng hàm băm làm mất thứ tự tiền tố, muốn gợi ý từ phải quét sạch từ điển O(N*L).
+        2. Cây BST cân bằng tuy có thứ tự, nhưng ở mỗi nút phân nhánh phải so sánh cả chuỗi O(L), dẫn đến tổng thời gian O(L log N).
+        3. Duy nhất Cây Trie đạt O(L + K): Đúng L bước để tới nút tiền tố, sau đó duyệt lấy K từ gợi ý trong O(K). Dù từ điển có 1 triệu từ hay 1 tỷ từ (N), tốc độ vẫn không đổi.
     </aside>
 </section>

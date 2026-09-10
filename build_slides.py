@@ -6,6 +6,7 @@ index_path = os.path.join(workspace, 'index.html')
 
 slides_html = []
 slide_files = sorted(glob.glob(os.path.join(slides_dir, 'slide_*.html')))
+slide_filenames = [os.path.basename(sf) for sf in slide_files]
 
 for sf in slide_files:
     fname = os.path.basename(sf)
@@ -14,6 +15,9 @@ for sf in slide_files:
         slides_html.append(f'<!-- ==================== {fname.upper()} ==================== -->\n{content}')
 
 all_slides_content = '\n\n'.join(slides_html)
+
+import json
+slide_files_json = json.dumps(slide_filenames, indent=4)
 
 full_html = f"""<!DOCTYPE html>
 <html lang="vi">
@@ -101,12 +105,16 @@ full_html = f"""<!DOCTYPE html>
             border-color: var(--accent-cyan);
         }}
 
-        /* Gradient Text (High Contrast on Light Theme) */
+        /* Gradient Text (High Contrast on Light Theme - With padding to prevent Vietnamese accent clipping) */
         .text-gradient {{
             background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            display: inline-block;
+            padding-top: 6px;
+            padding-bottom: 4px;
+            line-height: 1.3;
         }}
 
         .text-gradient-purple {{
@@ -114,6 +122,10 @@ full_html = f"""<!DOCTYPE html>
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            display: inline-block;
+            padding-top: 6px;
+            padding-bottom: 4px;
+            line-height: 1.3;
         }}
 
         .text-gradient-gold {{
@@ -121,6 +133,10 @@ full_html = f"""<!DOCTYPE html>
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            display: inline-block;
+            padding-top: 6px;
+            padding-bottom: 4px;
+            line-height: 1.3;
         }}
 
         /* Badges - Light Theme Crisp */
@@ -278,9 +294,7 @@ full_html = f"""<!DOCTYPE html>
 
     <div class="reveal">
         <div class="slides">
-
 {all_slides_content}
-
         </div>
     </div>
 
@@ -290,20 +304,80 @@ full_html = f"""<!DOCTYPE html>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.min.js"></script>
 
+    <!-- Mermaid CDN for Diagram Rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
     <script>
-        Reveal.initialize({{
-            width: 1280,
-            height: 720,
-            margin: 0.04,
-            minScale: 0.2,
-            maxScale: 1.5,
-            controls: true,
-            progress: true,
-            center: true,
-            hash: true,
-            transition: 'slide',
-            plugins: [ RevealHighlight, RevealNotes, RevealMath.KaTeX ]
-        }});
+        // Danh sách các file slide trong thư mục slides/
+        const SLIDE_FILES = {slide_files_json};
+
+        async function initPresentation() {{
+            const slidesContainer = document.querySelector('.reveal .slides');
+            
+            // Cấu hình Mermaid theme
+            mermaid.initialize({{
+                startOnLoad: false,
+                theme: 'neutral',
+                securityLevel: 'loose',
+                themeVariables: {{
+                    fontFamily: 'Be Vietnam Pro, Inter, sans-serif',
+                    fontSize: '13px',
+                    primaryColor: '#e0f2fe',
+                    primaryTextColor: '#0f172a',
+                    primaryBorderColor: '#0284c7',
+                    lineColor: '#0284c7',
+                    secondaryColor: '#f8fafc',
+                    tertiaryColor: '#ffffff'
+                }}
+            }});
+
+            // Nếu chạy trên Web Server (Live Server, http:// hoặc https://), tự động fetch trực tiếp từ slides/
+            if (window.location.protocol.startsWith('http')) {{
+                try {{
+                    const promises = SLIDE_FILES.map(async file => {{
+                        const res = await fetch(`slides/${{file}}?t=${{Date.now()}}`);
+                        if (!res.ok) throw new Error(`HTTP ${{res.status}} loading ${{file}}`);
+                        return await res.text();
+                    }});
+                    const loadedContents = await Promise.all(promises);
+                    slidesContainer.innerHTML = loadedContents.join('\\n\\n');
+
+                    // Kích hoạt các thẻ <script> bên trong slide được load động
+                    slidesContainer.querySelectorAll('script').forEach(oldScript => {{
+                        const newScript = document.createElement('script');
+                        Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                        newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                        oldScript.parentNode.replaceChild(newScript, oldScript);
+                    }});
+                }} catch (err) {{
+                    console.warn('Live dynamic loading failed, fallback to pre-rendered slides:', err);
+                }}
+            }}
+
+            // Render Mermaid diagrams
+            try {{
+                await mermaid.run({{ nodes: document.querySelectorAll('.mermaid') }});
+            }} catch (mErr) {{
+                console.warn('Mermaid rendering warning:', mErr);
+            }}
+
+            // Khởi tạo Reveal.js
+            Reveal.initialize({{
+                width: 1280,
+                height: 720,
+                margin: 0.04,
+                minScale: 0.2,
+                maxScale: 1.5,
+                controls: true,
+                progress: true,
+                center: true,
+                hash: true,
+                transition: 'slide',
+                plugins: [ RevealHighlight, RevealNotes, RevealMath.KaTeX ]
+            }});
+        }}
+
+        initPresentation();
     </script>
 </body>
 </html>
@@ -312,4 +386,4 @@ full_html = f"""<!DOCTYPE html>
 with open(index_path, 'w', encoding='utf-8') as f:
     f.write(full_html)
 
-print(f"Successfully rebuilt White Theme {index_path} from {len(slide_files)} split slide files!")
+print(f"Successfully configured Live Dynamic Loading for {index_path}!")
