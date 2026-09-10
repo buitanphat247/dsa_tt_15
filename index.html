@@ -3154,121 +3154,97 @@
     <div style="width: 100%; max-width: 1240px; margin: 0 auto; min-height: 590px; display: flex; flex-direction: column; justify-content: space-between;">
         
         <!-- Header -->
-        <div style="text-align: center; margin-bottom: 6px;">
-            <div class="badge" style="font-size: 0.44em; padding: 4px 18px; margin-bottom: 2px; display: inline-block;">PHẦN III — CẤU TRÚC UNION-FIND (DSU)</div>
-            <h2 style="font-size: 1.05em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.25;">
-                <span class="text-gradient" style="display: inline-block; padding-top: 2px; padding-bottom: 2px;">
-                    Kỹ Thuật 1: Union by Rank (Gộp Theo Độ Sâu Ước Lượng)
-                </span>
+        <div style="text-align: center; margin-bottom: 12px;">
+            <div class="badge" style="font-size: 0.42em; padding: 4px 18px; margin-bottom: 4px; display: inline-block;">PHẦN III — CẤU TRÚC UNION-FIND (DSU)</div>
+            <h2 style="font-size: 0.94em; margin: 0; color: #0f172a; font-weight: 800; line-height: 1.35;">
+                <span class="text-gradient" style="display: inline-block; padding-top: 4px; padding-bottom: 4px;">Kỹ Thuật 1: Union by Rank</span>
             </h2>
         </div>
 
         <!-- 2-Column Balanced Layout: CODE (Left) & THEORY (Right) -->
-        <div style="display: grid; grid-template-columns: 1fr 1.22fr; gap: 14px; width: 100%; align-items: stretch; flex-grow: 1; margin-bottom: 8px;">
+        <div style="display: grid; grid-template-columns: 1.05fr 1.15fr; gap: 18px; width: 100%; align-items: stretch; flex-grow: 1; margin-bottom: 10px;">
             
             <!-- Cột 1: Cài Đặt Code C++ (Code Implementation) -->
-            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 12px; padding: 12px 14px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #0284c7; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
                 <div>
-                    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; margin-bottom: 8px;">
-                        <h4 style="color: #0f172a; font-size: 0.46em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
-                            <i class="fa-solid fa-code" style="color: #0284c7;"></i> Cài Đặt Chuẩn C++
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-code" style="color: #0284c7;"></i> Cài Đặt C++ (Implementation)
                         </h4>
-                        <span style="font-size: 0.34em; color: #0369a1; font-weight: 700; background: #e0f2fe; border: 1px solid #bae6fd; padding: 2px 8px; border-radius: 4px;">Code Chuẩn CLRS</span>
+                        <span style="font-size: 0.33em; color: #0284c7; font-weight: 700; background: #eff6ff; border: 1px solid #bfdbfe; padding: 2px 8px; border-radius: 4px;">C++ Code</span>
                     </div>
 
-                    <!-- Clean Code Snippet -->
-                    <div style="background: #0f172a; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; border: 1px solid #1e293b;">
-                        <pre style="background: transparent; box-shadow: none; margin: 0; padding: 0; overflow: visible;"><code class="language-cpp" data-trim data-noescape style="background: transparent; color: #f8fafc; font-size: 0.72em; font-family: 'Fira Code', monospace; line-height: 1.42; padding: 0;">void unionByRank(int u, int v) {
+                    <!-- Clean Code Snippet without any scrollbars -->
+                    <div style="background: #0f172a; border-radius: 8px; padding: 12px 14px; margin-bottom: 12px; border: 1px solid #1e293b;">
+                        <pre style="background: transparent; box-shadow: none; margin: 0; padding: 0; overflow: visible;"><code class="language-cpp" data-trim data-noescape style="background: transparent; color: #f8fafc; font-size: 0.74em; font-family: 'Fira Code', monospace; line-height: 1.45; padding: 0;">void unionByRank(int u, int v) {
     int rootU = find(u);
     int rootV = find(v);
-    if (rootU == rootV) return; // Đã cùng tập hợp
+    if (rootU == rootV) return;
 
-    // Cây thấp hơn làm con của cây cao hơn
     if (rank[rootU] < rank[rootV]) {
         parent[rootU] = rootV;
     } else if (rank[rootU] > rank[rootV]) {
         parent[rootV] = rootU;
     } else {
         parent[rootV] = rootU;
-        rank[rootU]++; // Chỉ tăng khi 2 cây bằng nhau!
+        rank[rootU]++; // Tăng rank khi 2 cây bằng nhau
     }
 }</code></pre>
                     </div>
 
                     <!-- Code Note -->
-                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0284c7; border-radius: 6px; padding: 6px 10px; font-size: 0.39em; color: #1e293b; line-height: 1.42;">
-                        <strong style="color: #0284c7;">Khởi tạo ban đầu:</strong> Mọi phần tử đều có <code>parent[i] = i</code> và độ sâu ước lượng <code>rank[i] = 0</code>.
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #0284c7; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                        <strong style="color: #0f172a;">Khởi tạo ban đầu:</strong> Mảng <code>parent[i] = i</code> và mảng <code>rank[i] = 0</code> với mọi $i \in \{0, \dots, N-1\}$.
                     </div>
                 </div>
 
-                <div style="font-size: 0.37em; color: #047857; font-weight: 700; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; padding: 5px 10px; display: flex; align-items: center; justify-content: space-between;">
-                    <span><i class="fa-solid fa-bolt" style="margin-right: 4px;"></i> Thời gian bước gộp:</span>
-                    <span style="font-size: 1.1em;">$\mathcal{O}(1)$</span>
+                <div style="font-size: 0.33em; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 6px;">
+                    <i class="fa-solid fa-check" style="color: #059669; margin-right: 4px;"></i> Thuật toán chạy trong thời gian $O(1)$ tại bước gộp sau khi có Root.
                 </div>
             </div>
 
-            <!-- Cột 2: Lý Thuyết Giải Thuật Dễ Hiểu (Algorithm Theory) -->
-            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 12px; padding: 12px 14px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04);">
-                
-                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; margin-bottom: 8px;">
-                    <h4 style="color: #0f172a; font-size: 0.46em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
-                        <i class="fa-solid fa-lightbulb" style="color: #059669;"></i> Bản Chất Lý Thuyết & Nguyên Lý
-                    </h4>
-                    <span style="font-size: 0.34em; color: #065f46; font-weight: 700; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 2px 8px; border-radius: 4px;">Dễ Hiểu — Trực Quan</span>
-                </div>
-
-                <!-- 3 Theoretical Pillars (Detailed & Intuitive) -->
-                <div style="display: flex; flex-direction: column; gap: 8px; flex: 1; justify-content: space-between;">
-                    
-                    <!-- Pillar 1: Bản chất Rank -->
-                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0284c7; border-radius: 6px; padding: 7px 10px; font-size: 0.38em; color: #1e293b; line-height: 1.42;">
-                        <div style="font-weight: 800; color: #0284c7; margin-bottom: 2px;">
-                            <i class="fa-solid fa-ruler-vertical"></i> 1. Rank là gì? Tại sao gọi là "Ước lượng chiều cao"?
-                        </div>
-                        <div>
-                            <code>rank[u]</code> chính là <strong>cận trên của chiều cao cây (Upper Bound)</strong> tại gốc $u$. Khởi đầu mỗi nút đứng một mình có $\text{rank} = 0$.
-                        </div>
+            <!-- Cột 2: Lý Thuyết Giải Thuật (Algorithm Theory) -->
+            <div style="min-width: 0; background: #ffffff; border: 1px solid #cbd5e1; border-top: 4px solid #059669; border-radius: 10px; padding: 16px 18px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <h4 style="color: #0f172a; font-size: 0.44em; font-weight: 800; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-book-open" style="color: #059669;"></i> Lý Thuyết Giải Thuật (Theory)
+                        </h4>
+                        <span style="font-size: 0.33em; color: #065f46; font-weight: 700; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 2px 8px; border-radius: 4px;">Heuristic</span>
                     </div>
 
-                    <!-- Pillar 2: Quy luật gộp 3 trường hợp -->
-                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #059669; border-radius: 6px; padding: 7px 10px; font-size: 0.38em; color: #1e293b; line-height: 1.42;">
-                        <div style="font-weight: 800; color: #059669; margin-bottom: 2px;">
-                            <i class="fa-solid fa-scale-balanced"></i> 2. Quy tắc gộp thông minh (Luôn gắn cây lùn vào cây cao):
+                    <!-- 3 Theoretical Pillars -->
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
+                        <!-- Pillar 1: Definition of Rank -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #059669; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">1. Khái niệm Rank:</strong> <code>rank[u]</code> là cận trên của chiều cao cây (Upper Bound of Tree Height) tại gốc $u$.
                         </div>
-                        <ul style="margin: 0; padding-left: 18px;">
-                            <li><strong>Khác rank:</strong> Cây thấp gắn làm con cây cao $\implies$ <em>Chiều cao cây lớn không hề bị tăng!</em></li>
-                            <li><strong>Cùng rank:</strong> Gán cây nào cũng được, và <em>duy nhất lúc này</em> rank mới tăng $+1$.</li>
-                        </ul>
-                    </div>
 
-                    <!-- Pillar 3: Chứng minh toán học O(log N) -->
-                    <div style="background: #fdf4ff; border: 1px solid #f5d0fe; border-left: 4px solid #c026d3; border-radius: 6px; padding: 7px 10px; font-size: 0.38em; color: #1e293b; line-height: 1.42;">
-                        <div style="font-weight: 800; color: #a21caf; margin-bottom: 2px;">
-                            <i class="fa-solid fa-square-root-variable"></i> 3. Chứng minh toán học: Tại sao luôn đảm bảo $\mathcal{O}(\log N)$?
+                        <!-- Pillar 2: Core Invariant -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #0284c7; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">2. Nguyên lý gộp:</strong> Luôn gán gốc của cây có rank nhỏ hơn làm con của cây có rank lớn hơn. Chiều cao chỉ tăng $+1$ khi hai cây có cùng rank.
                         </div>
-                        <div>
-                            Để rank tăng lên $k$, cần gộp 2 cây cùng rank $k-1$. Cây rank $k$ cần <strong>ít nhất $2^k$ nút</strong>:
-                            <div style="text-align: center; margin: 3px 0; font-weight: 700; color: #86198f;">
-                                $2^k \le N \implies k \le \log_2 N \implies \mathbf{\text{Chiều cao } H \le \lfloor \log_2 N \rfloor}$
-                            </div>
+
+                        <!-- Pillar 3: Mathematical Proof -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #7c3aed; border-radius: 4px; padding: 8px 10px; font-size: 0.35em; color: #334155; line-height: 1.45;">
+                            <strong style="color: #0f172a;">3. Định lý chặn chiều cao:</strong> Một cây có rank $k$ cần tối thiểu $2^k$ nút để hình thành $\implies 2^k \le N \implies \mathbf{H \le \lfloor \log_2 N \rfloor}$.
                         </div>
                     </div>
-
                 </div>
 
                 <!-- Complexity Summary Box -->
-                <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; padding: 6px 12px; font-size: 0.39em; color: #065f46; display: flex; align-items: center; justify-content: space-between; margin-top: 6px;">
-                    <span><i class="fa-solid fa-chart-line" style="margin-right: 6px;"></i> Chiều cao tối đa mọi thao tác:</span>
-                    <strong style="font-size: 1.15em; color: #047857;">$\mathcal{O}(\log N)$</strong>
+                <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; padding: 8px 12px; font-size: 0.35em; color: #065f46; display: flex; align-items: center; justify-content: space-between;">
+                    <span><i class="fa-solid fa-chart-line" style="margin-right: 6px;"></i> Độ phức tạp thao tác:</span>
+                    <strong style="font-size: 1.15em;">$\mathcal{O}(\log N)$</strong>
                 </div>
             </div>
 
         </div>
 
         <!-- Cohesive Bottom Transition -->
-        <div style="width: 100%; background: #eff6ff; border: 1px solid #bfdbfe; border-left: 5px solid #2563eb; border-radius: 8px; padding: 10px 18px; font-size: 0.41em; color: #1e40af; text-align: left; display: flex; align-items: center; gap: 12px; line-height: 1.45;">
-            <i class="fa-solid fa-arrow-right-long" style="font-size: 1.3em; color: #2563eb; flex-shrink: 0;"></i>
-            <span><strong>ĐỊNH HƯỚNG TỐI ƯU TIẾP THEO:</strong> Union by Rank đã triệt tiêu hoàn toàn nguy cơ cây suy biến thành chuỗi thẳng ($O(N)$), giữ chiều cao $\le \mathcal{O}(\log N)$. Để chạm tới tốc độ <strong>tiệm cận $O(1)$</strong>, ta sẽ kết hợp thêm <strong>Path Compression</strong> (Slide 16).</span>
+        <div style="width: 100%; background: #eff6ff; border: 1px solid #bfdbfe; border-left: 5px solid #2563eb; border-radius: 8px; padding: 10px 16px; font-size: 0.37em; color: #1e40af; text-align: left; display: flex; align-items: center; gap: 12px;">
+            <i class="fa-solid fa-arrow-right-long" style="font-size: 1.25em; color: #2563eb; flex-shrink: 0;"></i>
+            <span><strong>ĐỊNH HƯỚNG TỐI ƯU TIẾP THEO:</strong> Union by Rank đảm bảo chiều cao cây không quá $\mathcal{O}(\log N)$. Để đạt tốc độ <strong>tiệm cận hằng số $\mathcal{O}(1)$</strong>, giải thuật sẽ kết hợp thêm <strong>Path Compression</strong> (Slide 16).</span>
         </div>
 
     </div>
